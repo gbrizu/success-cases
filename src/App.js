@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import SelectListClients from './components/selectListClients/selectListClients';
 
 function App() {
+  const opciones = ['1','2'];
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +19,7 @@ function App() {
         >
           Learn React
         </a>
+        <SelectListClients options={opciones}/>
       </header>
     </div>
   );
