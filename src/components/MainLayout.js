@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 function MainLayout() {
   return (
-    <Container maxWidth='xl' sx={{ bgcolor: '#cfe8fc' }}>
+    <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
 
       <div id="TITLE">
-        <Box sx={{ bgcolor: 'red', height: '10vh' }} />
+        <Box  sx={{ bgcolor: 'red', height: '12vh' }} />
+        
       </div>
 
       <div id="SEARCH BODY">
@@ -40,7 +41,9 @@ function MainLayout() {
               <Button variant="contained" size="large" sx={
                 {
                   height: '5rem',
-                  marginTop: '10rem'
+                  marginTop: '15rem',
+                  marginLeft:'13rem',
+
                 }
               }>Create new Success Case</Button></Link>
 
@@ -48,7 +51,7 @@ function MainLayout() {
         </Grid>
 
         <div id="TABLE">
-          <Box sx={{ bgcolor: 'yellow', height: '30vh', marginTop: '2rem' }} />
+          <Box sx={{ bgcolor: 'yellow', height: '32.3vh', marginTop: '2rem' }} />
         </div>
       </div>
     </Container>
