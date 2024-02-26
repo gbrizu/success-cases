@@ -1,0 +1,38 @@
+version:"3.8"
+services:
+  front:
+    container_name: front
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+     - /app/node_modules
+
+  db:
+  container_name: db
+  image: postgres:13
+  ports:
+    - "5432:5432"
+  environment:
+    POSTGRES_USER: postgress
+    POSTGRES_PASSWORD: 123
+    POSTGRES_DB: postgress
+
+  volumes:
+    - ./pgdata:/var/lib/postgresql/data
+  
+  networks:
+    - test
+
+  restart: always
+
+networks:
+  test:
+
+volumes:
+  pgdata:
