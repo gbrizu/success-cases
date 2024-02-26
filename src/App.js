@@ -1,27 +1,19 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import SelectListClients from './components/selectListClients/selectListClients';
+import MainLayout from './components/MainLayout';
+import MainLayout2 from './components/MainLayout2';
 
 function App() {
   const opciones = ['1','2'];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <SelectListClients options={opciones}/>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout />} />
+        <Route path="layout2" element={<MainLayout2 />} />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
