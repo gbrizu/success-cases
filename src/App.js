@@ -1,14 +1,20 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import DataTable from './components/dataTable/dataTable';
+import MainLayout from './components/MainLayout';
+import MainLayout2 from './components/MainLayout2';
 
 function App() {
+  const options = ['1','2'];
   return (
-    <div className="App">
-      <header className="App-header">
-        <DataTable></DataTable>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout />} />
+        <Route path="layout2" element={<MainLayout2 />} />
+      </Routes>
+    </BrowserRouter>
+
+
   );
 }
 
