@@ -1,22 +1,27 @@
-import { Box, Button, Container, Grid } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Button, Container, FormControlLabel, Grid, IconButton, Switch, TextField, Tooltip, Typography } from "@mui/material";
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+
 //Este layout es para probar el routing!!!!
 function MainLayout2() {
   return (
-    <Container maxWidth='l'  sx={{ bgcolor: 'blue' }}>
-      
+    <Container maxWidth='l' sx={{ bgcolor: 'blue' }}>
+
       <div id="TITLE">
-        <Box  sx={{ bgcolor: 'red', height: '12vh' }} />
-        
+     
+        <Typography variant="h3" gutterBottom>
+            New Success Case
+        </Typography>
+
       </div>
       <div id="SEARCH BODY">
-        <Grid container justifyContent="center" spacing={15} sx={{
+
+        <Grid container justifyContent="center" spacing={0} sx={{
           justifyContent: "flex-start"
         }}>
-          
+
           <Grid key={1} item sx={
             {
-              width: '50%'
+              width: '20%'
             }
           }>
             <Box
@@ -27,30 +32,48 @@ function MainLayout2() {
 
               }}
             />
+
           </Grid>
 
           <Grid key={2} item
 
             sx={
               {
-                width: '50%'
+                width: '20%'
               }
             }>
 
-            <Link to="/">
-              <Button variant="contained" size="large" sx={
-                {
-                  height: '5rem',
-                  marginTop: '15rem',
-                  marginLeft:'13rem',
-                }
-              }>Create new Success Case 2</Button></Link>
+            <FormControlLabel
+              value="top"
+              control={<Switch color="primary" />}
+              label="Make Public"
+              labelPlacement="top"
+            />
+            <Tooltip title={<h1 style={{ color: "black" }}>If the Make Public option is turned on, any person will be able to see the Client
+              field, if it is OFF, then the Client field will only be displayed to the Success Case creator</h1>}>
+              <IconButton>
+                <HelpOutlineIcon />
+              </IconButton>
+            </Tooltip>
+
+
+            <Button variant="contained" size="large" sx={
+              {
+                height: '2rem',
+                marginTop: '28rem',
+                marginLeft: '10rem',
+
+
+              }
+            }>Create</Button>
+
+
+
           </Grid>
         </Grid>
 
-        <div id="TABLE">
-          <Box sx={{ bgcolor: 'yellow', height: '32.3vh', marginTop: '2rem' }} />
-        </div>
+
+
       </div>
     </Container>
   );
