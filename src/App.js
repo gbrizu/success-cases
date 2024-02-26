@@ -14,6 +14,7 @@ function App() {
 
       </Routes>
     </BrowserRouter>
+    <SelectListClients options={opciones}/>
   );
 }
 
