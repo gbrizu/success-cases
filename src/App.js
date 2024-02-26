@@ -1,9 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import SelectListClients from './components/selectListClients/selectListClients';
 import MainLayout from './components/MainLayout';
 import MainLayout2 from './components/MainLayout2';
 
 function App() {
+  const options = ['1','2'];
   return (
     <BrowserRouter>
       <Routes>
@@ -12,6 +14,7 @@ function App() {
 
       </Routes>
     </BrowserRouter>
+    <SelectListClients options={options}/>
   );
 }
 
