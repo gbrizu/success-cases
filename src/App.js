@@ -5,7 +5,7 @@ import MainLayout from './components/MainLayout';
 import MainLayout2 from './components/MainLayout2';
 
 function App() {
-  const opciones = ['1','2'];
+  const options = ['1','2'];
   return (
     <BrowserRouter>
       <Routes>
@@ -14,7 +14,7 @@ function App() {
 
       </Routes>
     </BrowserRouter>
-    <SelectListClients options={opciones}/>
+    <SelectListClients options={options}/>
   );
 }
 
