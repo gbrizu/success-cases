@@ -2,14 +2,26 @@ import React from "react";
 import {
   Button,
   Container,
+  FormControl,
   FormControlLabel,
   Grid,
   IconButton,
+  Input,
+  InputAdornment,
   Switch,
+  TextField,
   Tooltip,
   Typography,
 } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import OfferingSelect from "./selectListOfferings/selectListOfferings";
+import SelectListClients from "./selectListClients/selectListClients";
+import MultipleSelect from "../Componentes/selectListIndustry/selectListIndustry";
+import FormInfoInput from "./BasicFormInfo";
+import { AccountCircle } from "@mui/icons-material";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+
 
 function MainLayout2() {
   return (
@@ -42,13 +54,49 @@ function MainLayout2() {
               </h1>
             }
           >
-            <IconButton>
+            <IconButton sx={{marginTop: '3.5rem'}}>
               <HelpOutlineIcon />
             </IconButton>
           </Tooltip>
         </Grid>
 
         <Grid item xs={12}>
+            <OfferingSelect></OfferingSelect>
+            <SelectListClients options={["Mercado Libre", "Pedidos ya"]}></SelectListClients>
+            <MultipleSelect></MultipleSelect>
+            <FormInfoInput
+              customStyleClass={"form-margin"}
+              label={'Date'}
+              customInput={
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker variant="standard" />
+                </LocalizationProvider>}
+            ></FormInfoInput>
+            <FormInfoInput
+              customStyleClass={"form-margin"}
+              label={'Project contact'}
+              customInput={
+                <FormControl variant="standard">
+                  <Input
+                    id="input-with-icon-adornment"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <AccountCircle />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+
+              }
+            ></FormInfoInput>
+            <FormInfoInput
+              customStyleClass={"form-margin"}
+              label={'Avg. Team size *'}
+              width={300}
+              customInput={<TextField inputProps={{ type: 'number'}} />
+            }
+            ></FormInfoInput>
+
           <Button
             variant="contained"
             size="large"
