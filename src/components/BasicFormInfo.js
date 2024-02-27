@@ -5,8 +5,8 @@ function FormInfoInput({ label, customInput, customStyleClass }) {
   return (
     <>
       <div className={`${customStyleClass}`}>
-        <Grid container spacing={10}>
-          <Grid item l={5} wrap="nowrap">
+        <Grid container spacing={10} wrap="nowrap">
+          <Grid item l={5} >
             <Typography variant="h6" gutterBottom>
               {label}
             </Typography>

@@ -17,7 +17,7 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import OfferingSelect from "./selectListOfferings/selectListOfferings";
 import SelectListClients from "./selectListClients/selectListClients";
-import MultipleSelect from "../Componentes/selectListIndustry/selectListIndustry";
+import MultipleSelect from "./selectListIndustry";
 import FormInfoInput from "./BasicFormInfo";
 import { AccountCircle } from "@mui/icons-material";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -25,13 +25,13 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 function MainLayout2() {
   return (
-    <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
+    <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh", }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography
             variant="h3"
             gutterBottom
-            sx={{ marginLeft: "auto", marginRight: "auto", marginTop: "3rem" }}
+            sx={{ marginLeft: "24rem ", marginRight: "auto", marginTop: "3rem", }}
           >
             New Success Case
           </Typography>
@@ -43,7 +43,8 @@ function MainLayout2() {
             control={<Switch color="primary" />}
             label="Make Public"
             labelPlacement="top"
-            sx={{ marginLeft: "auto", marginRight: "auto", marginTop: "2rem" }}
+
+            sx={{ marginLeft: "48rem ", marginRight: "auto", marginTop: "2rem" }}
           />
           <Tooltip
             title={
@@ -54,56 +55,72 @@ function MainLayout2() {
               </h1>
             }
           >
-            <IconButton sx={{marginTop: '3.5rem'}}>
+            <IconButton sx={{ marginTop: '3.4rem' }}>
               <HelpOutlineIcon />
             </IconButton>
           </Tooltip>
         </Grid>
 
         <Grid item xs={12}>
-            <OfferingSelect></OfferingSelect>
-            <SelectListClients options={["Mercado Libre", "Pedidos ya"]}></SelectListClients>
-            <MultipleSelect></MultipleSelect>
-            <FormInfoInput
-              customStyleClass={"form-margin"}
-              label={'Date'}
-              customInput={
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker variant="standard" />
-                </LocalizationProvider>}
-            ></FormInfoInput>
-            <FormInfoInput
-              customStyleClass={"form-margin"}
-              label={'Project contact'}
-              customInput={
-                <FormControl variant="standard">
-                  <Input
-                    id="input-with-icon-adornment"
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <AccountCircle />
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
+          <OfferingSelect></OfferingSelect>
+        </Grid>
 
-              }
-            ></FormInfoInput>
-            <FormInfoInput
-              customStyleClass={"form-margin"}
-              label={'Avg. Team size *'}
-              width={300}
-              customInput={<TextField inputProps={{ type: 'number'}} />
+        <Grid item xs={12}>
+          <SelectListClients options={["Mercado Libre", "Pedidos ya"]}></SelectListClients>
+        </Grid>
+
+        <Grid item xs={12}>
+          <MultipleSelect></MultipleSelect>
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormInfoInput
+            customStyleClass={"form-margin"}
+            label={'Date'}
+            customInput={
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker variant="standard" />
+              </LocalizationProvider>
             }
-            ></FormInfoInput>
+          ></FormInfoInput>
+        </Grid>
 
+        <Grid item xs={12}>
+          <FormInfoInput
+            customStyleClass={"form-margin"}
+            label={'Project contact'}
+            customInput={
+              <FormControl variant="standard">
+                <Input
+                  id="input-with-icon-adornment"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            }
+          ></FormInfoInput>
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormInfoInput
+            customStyleClass={"form-margin"}
+            label={'Avg. Team size *'}
+            width={300}
+            customInput={<TextField inputProps={{ type: 'number' }} />}
+          ></FormInfoInput>
+        </Grid>
+
+        <Grid item xs={12}>
           <Button
             variant="contained"
             size="large"
             sx={{
-              height: "2rem",
+              height: "2.5rem",
               marginTop: { xs: "1rem", md: "4rem" },
-              marginLeft: "auto",
+              marginLeft: "35rem",
               marginRight: "auto",
             }}
           >
