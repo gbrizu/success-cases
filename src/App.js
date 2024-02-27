@@ -11,10 +11,9 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />} />
         <Route path="layout2" element={<MainLayout2 />} />
-
       </Routes>
     </BrowserRouter>
-    <SelectListClients options={options}/>
+    
   );
 }
 
