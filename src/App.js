@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import SelectListClients from './components/selectListClients/selectListClients';
 import MainLayout from './components/MainLayout';
 import MainLayout2 from './components/MainLayout2';
 
@@ -13,7 +12,6 @@ function App() {
         <Route path="layout2" element={<MainLayout2 />} />
       </Routes>
     </BrowserRouter>
-    
   );
 }
 
