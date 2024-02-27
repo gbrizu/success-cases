@@ -1,80 +1,68 @@
-import { Box, Button, Container, FormControlLabel, Grid, IconButton, Switch, TextField, Tooltip, Typography } from "@mui/material";
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import React from "react";
+import {
+  Button,
+  Container,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  Switch,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
-//Este layout es para probar el routing!!!!
 function MainLayout2() {
   return (
-    <Container maxWidth='l' sx={{ bgcolor: 'blue' }}>
-
-      <div id="TITLE">
-     
-        <Typography variant="h3" gutterBottom>
+    <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography
+            variant="h3"
+            gutterBottom
+            sx={{ marginLeft: "auto", marginRight: "auto", marginTop: "3rem" }}
+          >
             New Success Case
-        </Typography>
-
-      </div>
-      <div id="SEARCH BODY">
-
-        <Grid container justifyContent="center" spacing={0} sx={{
-          justifyContent: "flex-start"
-        }}>
-
-          <Grid key={1} item sx={
-            {
-              width: '20%'
-            }
-          }>
-            <Box
-              sx={{
-                bgcolor: 'green',
-                height: '50vh',
-                marginTop: '2rem'
-
-              }}
-            />
-
-          </Grid>
-
-          <Grid key={2} item
-
-            sx={
-              {
-                width: '20%'
-              }
-            }>
-
-            <FormControlLabel
-              value="top"
-              control={<Switch color="primary" />}
-              label="Make Public"
-              labelPlacement="top"
-            />
-            <Tooltip title={<h1 style={{ color: "black" }}>If the Make Public option is turned on, any person will be able to see the Client
-              field, if it is OFF, then the Client field will only be displayed to the Success Case creator</h1>}>
-              <IconButton>
-                <HelpOutlineIcon />
-              </IconButton>
-            </Tooltip>
-
-
-            <Button variant="contained" size="large" sx={
-              {
-                height: '2rem',
-                marginTop: '28rem',
-                marginLeft: '10rem',
-
-
-              }
-            }>Create</Button>
-
-
-
-          </Grid>
+          </Typography>
         </Grid>
 
+        <Grid item xs={12}>
+          <FormControlLabel
+            value="top"
+            control={<Switch color="primary" />}
+            label="Make Public"
+            labelPlacement="top"
+            sx={{ marginLeft: "auto", marginRight: "auto", marginTop: "2rem" }}
+          />
+          <Tooltip
+            title={
+              <h1 style={{ color: "black" }}>
+                If the Make Public option is turned on, any person will be able
+                to see the Client field. If it is OFF, then the Client field
+                will only be displayed to the Success Case creator
+              </h1>
+            }
+          >
+            <IconButton>
+              <HelpOutlineIcon />
+            </IconButton>
+          </Tooltip>
+        </Grid>
 
-
-      </div>
+        <Grid item xs={12}>
+          <Button
+            variant="contained"
+            size="large"
+            sx={{
+              height: "2rem",
+              marginTop: { xs: "1rem", md: "4rem" },
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            Create
+          </Button>
+        </Grid>
+      </Grid>
     </Container>
   );
 }
