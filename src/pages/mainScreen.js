@@ -38,7 +38,7 @@ function MainScreen() {
               }
             }>
 
-            <Link to="/layout2">
+            <Link to="/NewSuccessCases">
               <Button variant="contained" size="large" sx={
                 {
                   height: '5rem',

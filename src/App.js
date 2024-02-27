@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainScreen />} />
-          <Route path="layout2" element={<CreateSuccessCaseScreen />} />
+          <Route path="NewSuccessCases" element={<CreateSuccessCaseScreen />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
