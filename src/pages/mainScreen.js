@@ -1,13 +1,14 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
+import { UserContext } from "../App";
+import { useContext } from "react";
 
-function MainLayout() {
+function MainScreen() {
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
 
       <div id="TITLE">
         <Box  sx={{ bgcolor: 'red', height: '12vh' }} />
-        
       </div>
 
       <div id="SEARCH BODY">
@@ -58,4 +59,4 @@ function MainLayout() {
   );
 }
 
-export default MainLayout;
+export default MainScreen;
