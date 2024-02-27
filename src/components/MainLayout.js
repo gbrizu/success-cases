@@ -1,5 +1,6 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
+import SelectListProjectType from "../components/selectListProjectType/selectListProjectType"
 
 function MainLayout() {
   return (
@@ -50,6 +51,7 @@ function MainLayout() {
           </Grid>
         </Grid>
 
+<SelectListProjectType />
         <div id="TABLE">
           <Box sx={{ bgcolor: 'yellow', height: '32.3vh', marginTop: '2rem' }} />
         </div>
