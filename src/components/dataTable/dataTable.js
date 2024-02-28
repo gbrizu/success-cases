@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { Link } from "react-router-dom";
 
-function DataTable() {
+function DataTable({rows}) {
     const renderDetailsButton = (params) => {
         return (
             <IconButton>
@@ -35,15 +35,6 @@ function DataTable() {
         }
     ];
 
-    // Dummy data
-    const rows = [
-        { id: 1, client: "a", industry: "a", projectType: "a", referrer: "a", date: '   01/01/2024' },
-        { id: 2, client: "b", industry: "b", projectType: "b", referrer: "b", date: '   02/01/2024' },
-        { id: 3, client: "c", industry: "c", projectType: "c", referrer: "c", date: '   03/01/2024' },
-        { id: 4, client: "d", industry: "d", projectType: "d", referrer: "d", date: '   04/01/2024' },
-        { id: 5, client: "e", industry: "e", projectType: "e", referrer: "e", date: '   05/01/2024' },
-        { id: 6, client: "f", industry: "f", projectType: "f", referrer: "f", date: '   06/01/2024' },
-    ];
     
     return (
         <div style={{ height: 400 }}>
