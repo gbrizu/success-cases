@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.labelDetails {
+  text-align: right;
+  font-weight: bold;
+}
+
+.valueDetails {
+  text-align: left;
+}
