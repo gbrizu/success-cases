@@ -4,12 +4,9 @@ import { Link } from "react-router-dom";
 function MainLayout() {
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
-
       <div id="TITLE">
         <Box  sx={{ bgcolor: 'red', height: '12vh' }} />
-        
       </div>
-
       <div id="SEARCH BODY">
         <Grid container justifyContent="center" spacing={15} sx={{
           justifyContent: "flex-start"
