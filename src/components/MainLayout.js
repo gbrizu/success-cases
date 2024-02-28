@@ -1,13 +1,11 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import BasicTitle from "./basicTitle/basicTitle";
-import SelectListProjectType from "../components/selectListProjectType/selectListProjectType"
+
 
 function MainLayout() {
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
       <div id="TITLE">
-        <BasicTitle basictitle = {"Success Cases"}/>
         <Box  sx={{ bgcolor: 'red', height: '12vh' }} />
       </div>
       <div id="SEARCH BODY">
@@ -50,7 +48,6 @@ function MainLayout() {
           </Grid>
         </Grid>
 
-<SelectListProjectType />
         <div id="TABLE">
           <Box sx={{ bgcolor: 'yellow', height: '32.3vh', marginTop: '2rem' }} />
         </div>
