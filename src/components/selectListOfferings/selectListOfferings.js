@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 
 const ITEM_HEIGHT = 48;
@@ -46,7 +46,7 @@ export default function OfferingSelect() {
     <div>
       <Grid container spacing={2}>
         <Grid style={{alignItems:"center", display:"flex"}} item xs={4}>
-          <label style={{fontSize:"25px"}}>Offering</label>
+          <Typography variant="h5">Offering</Typography>
         </Grid>
         <Grid item xs={8}>
           <FormControl sx={{ m: 1, width: 300 }}>
