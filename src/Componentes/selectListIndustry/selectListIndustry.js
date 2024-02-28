@@ -6,6 +6,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Grid } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { Typography } from '@mui/material';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -51,7 +52,7 @@ export default function MultipleSelect() {
   return (
     <Grid container spacing={2}>
       <Grid item xs={4} style={{ display: 'flex', alignItems: 'center' }}>
-      <InputLabel style={{ color: 'black', fontSize: '20px' }}>Industry</InputLabel>
+      <Typography variant = "h6">Industry</Typography>
       </Grid>
       <Grid item xs={8}>
     <div>
