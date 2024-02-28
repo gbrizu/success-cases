@@ -12,8 +12,7 @@ function App() {
         <Route path="layout2" element={<MainLayout2 />} />
       </Routes>
     </BrowserRouter>
-
-
+    
   );
 }
 
