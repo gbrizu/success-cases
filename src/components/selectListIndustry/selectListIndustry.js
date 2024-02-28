@@ -2,7 +2,7 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import MultipleSelect from './MultipleSelect'; // Ajusta la ruta según la ubicación real del componente
+import MultipleSelect from './MultipleSelect'; 
 
 const Item = styled(Grid)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -18,11 +18,9 @@ export default function App() {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Item>
-            {/* Incluye tu componente MultipleSelect aquí */}
             <MultipleSelect />
           </Item>
         </Grid>
-        {/* Agrega más elementos Grid según sea necesario */}
       </Grid>
     </Box>
   );
