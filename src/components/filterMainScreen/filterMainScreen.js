@@ -1,8 +1,8 @@
 import Grid from "@mui/system/Unstable_Grid/Grid";
 import SelectListClients from "../selectListClients/selectListClients";
-import MultipleSelect from "../selectListIndustry";
+import MultipleSelect from "../selectListIndustry/selectListIndustry";
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
-import "./filterMainScreen.css"
+// import "./filterMainScreen.css"
 
 function FilterMainScreen() {
 
@@ -11,30 +11,39 @@ function FilterMainScreen() {
     ]
 
     return (
-        <Grid container spacing={2}>
-            {/* <div className="wrapper"> */}
-            <Grid item xs={8}>
+        <div>
+            <Grid container spacing={2} className="wrapperGrid" margin={0.5}>
+
+                <Grid item xs={12}>
+                    <SelectListClients options={clientsOptions}></SelectListClients>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <MultipleSelect></MultipleSelect>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <SelectListProjectType></SelectListProjectType>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <p>Date</p>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <p>Project contact *</p>
+                </Grid>
+
+            </Grid>
+
+            <div className="wrapperDiv">
                 <SelectListClients options={clientsOptions}></SelectListClients>
-            </Grid>
-
-            <Grid item xs={8}>
                 <MultipleSelect></MultipleSelect>
-            </Grid>
-
-            <Grid item xs={8}>
                 <SelectListProjectType></SelectListProjectType>
-            </Grid>
-
-            <Grid item xs={8}>
                 <p>Date</p>
-            </Grid>
-
-            <Grid item xs={8}>
                 <p>Project contact *</p>
-            </Grid>
-
-            {/* </div> */}
-        </Grid>
+            </div>
+        </div>
     );
 }
 export default FilterMainScreen
