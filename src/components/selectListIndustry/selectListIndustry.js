@@ -3,6 +3,10 @@ import { Theme, useTheme } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Grid } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { Typography } from '@mui/material';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -46,13 +50,21 @@ export default function MultipleSelect() {
   };
 
   return (
+    <Grid container spacing={2}>
+      <Grid item xs={4} style={{ display: 'flex', alignItems: 'center' }}>
+      <Typography variant = "h6">Industry</Typography>
+      </Grid>
+      <Grid item xs={8}>
     <div>
-      <FormControl variant = "standard" sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel>Name</InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
+          multiple
           value={personName}
           onChange={handleChange}
+          input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
           {names.map((name) => (
@@ -67,5 +79,7 @@ export default function MultipleSelect() {
         </Select>
       </FormControl>
     </div>
-  );
-}
+    </Grid>
+    </Grid>
+  )
+};
