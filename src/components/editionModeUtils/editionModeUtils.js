@@ -5,23 +5,23 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function EditionUtils() {
 
-const buttonStyle = { margin: '0.5rem', height:'3.5rem',borderRadius:'48%',minWidth:'10rem',minHeight: '3.5rem', fontFamily: 'Arial',border: '2px solid',}
+    const buttonStyle = { margin: '0.5rem', height: '3.5rem', borderRadius: '48%', minWidth: '10rem', minHeight: '3.5rem', fontFamily: 'Arial', border: '2px solid', }
 
-const buttonContainerStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    marginLeft:'3rem',
-    
-    
+    const buttonContainerStyle = {
+        display: 'flex',
+        alignItems: 'center',
+        marginLeft: '1.5rem',
 
-};
 
-const iconStyle = {
-    fontSize: '3.5rem',
-    marginBottom: '1rem',
-};
 
-    
+    };
+
+    const iconStyle = {
+        fontSize: '3.5rem',
+        
+    };
+
+
     return (
         <>
             < div class="contenedor"  >
@@ -29,7 +29,7 @@ const iconStyle = {
                     + Pages
                 </Typography>
                 <div>
-                    <Button  style={buttonStyle} variant="outlined" >Success Case</Button>
+                    <Button style={buttonStyle} variant="outlined" >Success Case</Button>
                 </div>
                 <div>
                     <Button style={buttonStyle} variant="outlined" >Challenges </Button>
@@ -41,20 +41,24 @@ const iconStyle = {
                     <Button style={buttonStyle} variant="outlined" >Technologies</Button>
                 </div>
                 <Box sx={buttonContainerStyle}>
-                    <Button>
-                        <SaveIcon sx={iconStyle} />
+                   
+                <Button>
+                        <VisibilityIcon sx={iconStyle} />
+
+                        <Typography>
+                            View
+                        </Typography>
                     </Button>
-                    <Typography>
-                        Save
-                    </Typography>
+                   
                 </Box>
                 <Box sx={buttonContainerStyle}>
-                    <Button>
-                        <VisibilityIcon sx={iconStyle} />
+                <Button>
+                        <SaveIcon sx={iconStyle} />
+
+                        <Typography>
+                            Save
+                        </Typography>
                     </Button>
-                    <Typography>
-                        Visibility
-                    </Typography>
                 </Box>
             </div>
         </>
