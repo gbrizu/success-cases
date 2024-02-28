@@ -1,8 +1,12 @@
-import * as React from "react";
-import { useTheme } from "@mui/material/styles";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import * as React from 'react';
+import { useTheme } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { Grid, Typography } from '@mui/material';
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -14,7 +18,9 @@ const MenuProps = {
     },
   },
 };
+
 const names = ["Mobile", "Web", "Integration", "Development"];
+
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -23,6 +29,7 @@ function getStyles(name, personName, theme) {
         : theme.typography.fontWeightMedium,
   };
 }
+
 export default function OfferingSelect() {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
@@ -37,28 +44,34 @@ export default function OfferingSelect() {
   };
   return (
     <div>
-      <label style={{ marginRight: "100px" }} id="label1">
-        Offering
-      </label>
-      <FormControl variant="standard" sx={{ m: 1, width: 300 }}>
-        <Select
-          labelId="offerings-label"
-          id="offerings"
-          value={personName}
-          onChange={handleChange}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+      <Grid container spacing={2}>
+        <Grid style={{alignItems:"center", display:"flex"}} item xs={4}>
+          <Typography variant="h5">Offering</Typography>
+        </Grid>
+        <Grid item xs={8}>
+          <FormControl sx={{ m: 1, width: 300 }}>
+            <InputLabel id="demo-multiple-name-label">Select Offering</InputLabel>
+            <Select
+              labelId="demo-multiple-name-label"
+              id="demo-multiple-name"
+              value={personName}
+              onChange={handleChange}
+              input={<OutlinedInput label="Select Offering" />}
+              MenuProps={MenuProps}
             >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+              {names.map((name) => (
+                <MenuItem
+                  key={name}
+                  value={name}
+                  style={getStyles(name, personName, theme)}
+                >
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+    </Grid>
+    </Grid>
     </div>
-  );
-}
+      );
+    }
