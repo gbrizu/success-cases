@@ -1,19 +1,21 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-//Este layout es para probar el routing!!!!
-function MainLayout2() {
+import { UserContext } from "../App";
+import { useContext } from "react";
+
+function MainScreen() {
   return (
-    <Container maxWidth='l'  sx={{ bgcolor: 'blue' }}>
+    <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
       
       <div id="TITLE">
-        <Box  sx={{ bgcolor: 'red', height: '12vh' }} />
-        
+      <Box sx={{ bgcolor: 'red', height: '12vh',display: 'flex', alignItems: 'center' }}>
+            <img src='/globant_logo.png' alt='' width='190' height='60' alignItem = 'center' />
+        </Box>
       </div>
       <div id="SEARCH BODY">
         <Grid container justifyContent="center" spacing={15} sx={{
           justifyContent: "flex-start"
         }}>
-          
           <Grid key={1} item sx={
             {
               width: '50%'
@@ -37,14 +39,16 @@ function MainLayout2() {
               }
             }>
 
-            <Link to="/">
+            <Link to="/NewSuccessCases">
               <Button variant="contained" size="large" sx={
                 {
                   height: '5rem',
                   marginTop: '15rem',
                   marginLeft:'13rem',
+
                 }
-              }>Create new Success Case 2</Button></Link>
+              }>Create new Success Case</Button></Link>
+
           </Grid>
         </Grid>
 
@@ -56,4 +60,4 @@ function MainLayout2() {
   );
 }
 
-export default MainLayout2;
+export default MainScreen;
