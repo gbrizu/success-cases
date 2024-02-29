@@ -1,6 +1,6 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import SearchButton from "./button/searchButton";
+
 
 function MainLayout() {
   return (
@@ -26,7 +26,7 @@ function MainLayout() {
               }}
               
             />
-            <SearchButton />
+           
           </Grid>
 
           <Grid key={2} item
