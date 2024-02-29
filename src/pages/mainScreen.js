@@ -1,70 +1,42 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import { UserContext } from "../App";
-import { useContext } from "react";
-
-<<<<<<< HEAD:src/components/MainLayout.js
-
 function MainLayout() {
-=======
-function MainScreen() {
->>>>>>> b7bb8dfabd0e7b7f0c97f4e51791b428b075b41c:src/pages/mainScreen.js
   return (
-    <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
-      
+    <Container maxWidth='l' sx={{ bgcolor: '#CFE8FC' }}>
       <div id="TITLE">
-      <Box sx={{ bgcolor: 'red', height: '12vh',display: 'flex', alignItems: 'center' }}>
-            <img src='/globant_logo.png' alt='' width='190' height='60' alignItem = 'center' />
-        </Box>
+        <Box  sx={{ bgcolor: 'red', height: '8.1rem', marginBottom:'1.5rem'}} />
       </div>
       <div id="SEARCH BODY">
-        <Grid container justifyContent="center" spacing={15} sx={{
-          justifyContent: "flex-start"
+        <Grid container spacing={2} sx={{
+          justifyContent: "center"
         }}>
-          <Grid key={1} item sx={
-            {
-              width: '50%'
-            }
-          }>
+          <Grid item xs={12} md={6}>
             <Box
               sx={{
                 bgcolor: 'green',
-                height: '50vh',
-                marginTop: '2rem'
-                
+                height: '20rem',
+                marginTop: '2rem',
+                width: { xs: '100%', md: '100%' },
               }}
               
             />
            
           </Grid>
-
-          <Grid key={2} item
-
-            sx={
-              {
-                width: '50%'
-              }
-            }>
-
-            <Link to="/NewSuccessCases">
-              <Button variant="contained" size="large" sx={
-                {
-                  height: '5rem',
-                  marginTop: '15rem',
-                  marginLeft:'13rem',
-
-                }
-              }>Create new Success Case</Button></Link>
-
+          <Grid item xs={12} md={6}>
+            <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
+              <Link to="/layout2">
+                <Button variant="contained" size="large">
+                  Create new Success Case
+                </Button>
+              </Link>
+            </Box>
           </Grid>
         </Grid>
-
         <div id="TABLE">
-          <Box sx={{ bgcolor: 'yellow', height: '32.3vh', marginTop: '2rem' }} />
+          <Box sx={{ bgcolor: 'yellow', height: '21.8rem', mt: '2rem' }} />
         </div>
       </div>
     </Container>
   );
 }
-
-export default MainScreen;
+export default MainLayout;
