@@ -6,8 +6,11 @@ import { useContext } from "react";
 function MainScreen() {
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
+      
       <div id="TITLE">
-        <Box  sx={{ bgcolor: 'red', height: '12vh' }} />
+      <Box sx={{ bgcolor: 'red', height: '12vh',display: 'flex', alignItems: 'center' }}>
+            <img src='/globant_logo.png' alt='' width='190' height='60' alignItem = 'center' />
+        </Box>
       </div>
       <div id="SEARCH BODY">
         <Grid container justifyContent="center" spacing={15} sx={{
