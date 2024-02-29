@@ -1,12 +1,10 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import DataTable from "./dataTable/dataTable";
-import SelectListClients from "./selectListClients/selectListClients";
-import MultipleSelect from "./selectListIndustry/selectListIndustry";
-import SelectListProjectType from "./selectListProjectType/selectListProjectType";
 import FilterMainScreen from "./filterMainScreen/filterMainScreen";
 import CreateButton from "./button/createButton";
 import BasicTitle from "./basicTitle/basicTitle";
+
 
 function MainLayout() {
   const enzo = [{ id:1, client: "Martina Laventure", industry: "UCU", projectType: "project", referrer: "Martina Laventure", date: "MM/DD/YYYY"},

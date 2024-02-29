@@ -7,8 +7,16 @@ import SelectListClients from "../selectListClients/selectListClients";
 import MultipleSelect from "../selectListIndustry/selectListIndustry";
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
 import { margin } from '@mui/system';
+import successCaseServerCalls from "../../services/successCaseServerCalls";
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function FilterMainScreen() {
+
+    
+    
+    const [clients, setClients] = useState(successCaseServerCalls.getClients());
+
 
     // Dummy data for selectListItems
     const clientsOptions = [
@@ -31,7 +39,7 @@ function FilterMainScreen() {
         <div>
             <Grid container spacing={2} margin={1}>
                 <Grid item xs={12}>
-                    <SelectListClients options={clientsOptions}></SelectListClients>
+                    <SelectListClients options={clients}></SelectListClients>
                 </Grid>
 
                 <Grid item xs={12}>
