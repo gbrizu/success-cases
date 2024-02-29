@@ -48,39 +48,33 @@ export default function SelectListProjectType() {
       typeof value === 'string' ? value.split(',') : value,
     );
   };
+  
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-    <Grid container spacing={2} alignItems="center">
-      <Grid item xs={4}>
-        <Typography variant="h6"  gutterBottom>
-          Project Type
-        </Typography>
-      </Grid>
-      <Grid item xs={8}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Project type</InputLabel>
-          <Select
-            labelId="demo-multiple-name-label"
-            id="demo-multiple-name"
-            value={projectType}
-            onChange={handleChange}
-            MenuProps={MenuProps}
+    <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
+    <Typography variant="h6" style={{ marginRight: "4rem" }}>Project Type</Typography>
+    <FormControl >
+      <InputLabel id="demo-multiple-name-label">Project type</InputLabel>
+      <Select
+        labelId="demo-multiple-name-label"
+        id="demo-multiple-name"
+        value={projectType}
+        onChange={handleChange}
+        MenuProps={MenuProps}
+      >
+        {names.map((name) => (
+          <MenuItem
+            key={name}
+            value={name}
+            style={getStyles(name, projectType, theme)}
           >
-            {names.map((name) => (
-              <MenuItem
-                key={name}
-                value={name}
-                style={getStyles(name, projectType, theme)}
-              >
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-  </Box>
+            {name}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  </div>
+  
   
     );    
 }

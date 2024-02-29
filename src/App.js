@@ -1,15 +1,21 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import DataTable from './components/dataTable/dataTable';
-import MainLayout from './components/MainLayout';
-import MainLayout2 from './components/MainLayout2';
-import EditionUtils from './components/editionModeUtils/editionModeUtils';
-import CaseInfo from './components/caseInfo/caseInfo';
+import MainScreen from './pages/mainScreen';
+import { createContext } from 'react';
+import CreateSuccessCaseScreen from './pages/createSuccessCaseScreen';
+
+export const UserContext = createContext()
 
 function App() {
-  const options = ['1','2'];
   return (
-    <CaseInfo></CaseInfo>
+    <UserContext.Provider value={{ name: "Matias", lastName: "Crack" }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainScreen />} />
+          <Route path="NewSuccessCases" element={<CreateSuccessCaseScreen />} />
+        </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 

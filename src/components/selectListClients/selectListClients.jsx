@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import './selectListClients.css'
+import { Typography } from '@mui/material';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -21,14 +22,12 @@ export default function SelectListClients({ options }) {
   const theme = useTheme();
   const [personName, setPersonName] = useState([]);
 
-  //console.log('options =>', options)
-  //pull request despues de subir en la rama
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
     setPersonName(
-      // On autofill we get a stringified value.
+      
       typeof value === 'string' ? value.split(',') : value,
     );
   };
@@ -42,8 +41,8 @@ export default function SelectListClients({ options }) {
     };
   }
   return (  
-    <div>
-      <label className="clientlbl">Client</label>
+    <div style={{ display: "flex", alignItems: "center",marginBottom:'10px' }}>
+      <Typography variant = "h6" style={{ marginRight: "6rem" }}> Client</Typography> 
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select
@@ -61,11 +60,19 @@ export default function SelectListClients({ options }) {
               value={name}
               style={getStyles(name, personName, theme)}
             >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+              {options.map((name) => (
+                <MenuItem
+                  key={name}
+                  value={name}
+                  style={getStyles(name, personName, theme)}
+                >
+                  {name}
+                </MenuItem>
+              ))}
+              </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
     </div>
   );
 }

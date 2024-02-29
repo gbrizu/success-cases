@@ -44,34 +44,31 @@ export default function OfferingSelect() {
   };
   return (
     <div>
-      <Grid container spacing={2}>
-        <Grid style={{alignItems:"center", display:"flex"}} item xs={4}>
-          <Typography variant="h5">Offering</Typography>
-        </Grid>
-        <Grid item xs={8}>
-          <FormControl sx={{ m: 1, width: 300 }}>
-            <InputLabel id="demo-multiple-name-label">Select Offering</InputLabel>
-            <Select
-              labelId="demo-multiple-name-label"
-              id="demo-multiple-name"
-              value={personName}
-              onChange={handleChange}
-              input={<OutlinedInput label="Select Offering" />}
-              MenuProps={MenuProps}
-            >
-              {names.map((name) => (
-                <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, personName, theme)}
-                >
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-    </Grid>
-    </Grid>
+      <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
+  <Typography variant="h6" style={{ marginRight: "4.8rem" }}>Offering</Typography>
+  <FormControl sx={{ m: 1, width: 300 }}>
+    <InputLabel id="demo-multiple-name-label">Select Offering</InputLabel>
+    <Select
+      labelId="demo-multiple-name-label"
+      id="demo-multiple-name"
+      value={personName}
+      onChange={handleChange}
+      input={<OutlinedInput label="Select Offering" />}
+      MenuProps={MenuProps}
+    >
+      {names.map((name) => (
+        <MenuItem
+          key={name}
+          value={name}
+          style={getStyles(name, personName, theme)}
+        >
+          {name}
+        </MenuItem>
+      ))}
+    </Select>
+  </FormControl>
+</div>
+
     </div>
       );
     }
