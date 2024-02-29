@@ -9,8 +9,7 @@ import CaseInfo from './components/caseInfo/caseInfo';
 function App() {
   const options = ['1','2'];
   return (
-    <CaseInfo>CaseInfo</CaseInfo>
-    
+    <CaseInfo></CaseInfo>
   );
 }
 
