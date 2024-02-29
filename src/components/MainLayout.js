@@ -10,28 +10,24 @@ function MainLayout() {
       </div>
 
       <div id="SEARCH BODY">
-        <Grid container justifyContent="center" spacing={15} sx={{
-          justifyContent: "flex-start"
+        <Grid container spacing={2} sx={{
+          justifyContent: "center"
         }}>
-          <Grid key={1} item sx={
-            {
-              width: '50%'
-            }
-          }>
+          <Grid item xs={12} md={6}>
             <Box
               sx={{
                 bgcolor: 'green',
                 height: '20rem',
-                marginTop: '2rem'
-
+                marginTop: '2rem',
+                width: { xs: '100%', md: '100%' }, 
               }}
             />
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <Box sx={{ textAlign: 'center' }}>
+            <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
               <Link to="/layout2">
-                <Button variant="contained" size="large" sx={{ mt: { xs: '2rem', md: '15rem' } }}>
+                <Button variant="contained" size="large">
                   Create new Success Case
                 </Button>
               </Link>
