@@ -5,9 +5,14 @@ function MainLayout2() {
   return (
     <Container maxWidth='l'  sx={{ bgcolor: 'blue' }}>
       
-      <div id="TITLE">
-        <Box  sx={{ bgcolor: 'red', height: '12vh' }} />
-        
+      <div id="TITLE"> 
+
+        <Box  sx={{ bgcolor: 'red', height: '12vh' }}>
+
+          <img src="/globant_logo.png" alt="" width="190" height="60"/>
+
+        </Box>
+                
       </div>
       <div id="SEARCH BODY">
         <Grid container justifyContent="center" spacing={15} sx={{
