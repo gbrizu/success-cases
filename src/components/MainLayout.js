@@ -5,10 +5,10 @@ function MainLayout() {
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc', minHeight: '67.5rem'}}>
       <div id="TITLE">
-        <Box sx={{ bgcolor: 'red', height: '8.1rem', marginBottom:'3rem'}} />
+        <Box sx={{ bgcolor: 'red', height: '8.1rem', marginBottom:'1.5rem'}} />
       </div>
 
-      <div id="SEARCH BODY" sx={{ padding: '2rem' }}>
+      <div id="SEARCH BODY" sx={{ margin: '1.5rem' }}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <Box sx={{ bgcolor: 'green', height: { xs: '13.5rem', md: '18rem' } }} />
