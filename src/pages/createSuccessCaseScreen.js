@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Container,
@@ -21,8 +21,15 @@ import OfferingSelect from "../components/selectListOfferings/selectListOffering
 import SelectListClients from "../components/selectListClients/selectListClients";
 import MultipleSelect from "../components/selectListIndustry";
 import FormInfoInput from "../components/BasicFormInfo";
+import { ProcessContextProvider } from "../context/process.context";
 
 function CreateSuccessCaseScreen() {
+  const { nextStep } = useContext(ProcessContextProvider);
+
+  const submitHandler = () => {
+    nextStep();
+  }
+
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
       <Grid container spacing={2}>
@@ -123,7 +130,7 @@ function CreateSuccessCaseScreen() {
 
           <Grid item xs={12}>
             <FormInfoInput
-            marginRight={'0.3rem'}
+              marginRight={'0.3rem'}
               customStyleClass={"form-margin"}
               label={"Avg. Team size *"}
               width={300}
@@ -141,7 +148,9 @@ function CreateSuccessCaseScreen() {
               marginTop: { xs: "1rem", md: "4rem" },
               marginLeft: "35rem",
               marginRight: "auto",
+              marginBottom: "200px",
             }}
+            onClick={submitHandler}
           >
             Create
           </Button>
