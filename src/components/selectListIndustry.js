@@ -19,6 +19,12 @@ const MenuProps = {
   },
 };
 
+const names = [
+  'Entertainment',
+  'Healthcare',
+  'Banking',
+  'Education',
+];
 
 function getStyles(name, personName, theme) {
   return {
@@ -29,7 +35,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelect({options}) {
+export default function MultipleSelect() {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
@@ -44,36 +50,31 @@ export default function MultipleSelect({options}) {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={4} style={{ display: 'flex', alignItems: 'center' }}>
-      <Typography variant = "h6">Industry</Typography>
-      </Grid>
-      <Grid item xs={8}>
-    <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel>Name</InputLabel>
-        <Select
-          labelId="demo-multiple-name-label"
-          id="demo-multiple-name"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput label="Name" />}
-          MenuProps={MenuProps}
-        >
-          {options.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
-    </Grid>
-    </Grid>
+    <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
+    <Typography variant="h6" style={{ marginRight: "4.6rem" }}>Industry</Typography>
+    <FormControl sx={{ m: 1, width: 300 }}>
+      <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+      <Select
+        labelId="demo-multiple-name-label"
+        id="demo-multiple-name"
+        multiple
+        value={personName}
+        onChange={handleChange}
+        input={<OutlinedInput label="Name" />}
+        MenuProps={MenuProps}
+      >
+        {names.map((name) => (
+          <MenuItem
+            key={name}
+            value={name}
+            style={getStyles(name, personName, theme)}
+          >
+            {name}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  </div>
+  
   )
 };
