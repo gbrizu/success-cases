@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 function MainLayout() {
   return (
-    <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc', minHeight: '67.5rem' }}>
+    <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc', minHeight: '67.5rem'}}>
       <div id="TITLE">
-        <Box sx={{ bgcolor: 'red', height: '8.1rem'}} />
+        <Box sx={{ bgcolor: 'red', height: '8.1rem', marginBottom:'3rem'}} />
       </div>
 
       <div id="SEARCH BODY" sx={{ padding: '2rem' }}>
