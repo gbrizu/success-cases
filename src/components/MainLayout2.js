@@ -6,7 +6,7 @@ function MainLayout2() {
     <Container maxWidth='l'  sx={{ bgcolor: 'blue' }}>
       
       <div id="TITLE">
-        <Box  sx={{ bgcolor: 'red', height: '12vh' }} />
+        <Box  sx={{ bgcolor: 'red', height: '12vh' }} /> 
         
       </div>
       <div id="SEARCH BODY">

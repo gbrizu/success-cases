@@ -4,6 +4,9 @@ import DataTable from "./dataTable/dataTable";
 import SelectListClients from "./selectListClients/selectListClients";
 import MultipleSelect from "./selectListIndustry/selectListIndustry";
 import SelectListProjectType from "./selectListProjectType/selectListProjectType";
+import FilterMainScreen from "./filterMainScreen/filterMainScreen";
+import CreateButton from "./button/createButton";
+import BasicTitle from "./basicTitle/basicTitle";
 
 function MainLayout() {
   const enzo = [{ id:1, client: "Martina Laventure", industry: "UCU", projectType: "project", referrer: "Martina Laventure", date: "MM/DD/YYYY"},
@@ -21,7 +24,7 @@ function MainLayout() {
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
       <div id="TITLE">
-        <Box  sx={{ bgcolor: 'red', height: '12vh' }} />
+        <BasicTitle basictitle={"Success cases"}/>
       </div>
       <div id="SEARCH BODY">
         <Grid container justifyContent="center" spacing={15} sx={{
@@ -32,9 +35,7 @@ function MainLayout() {
               width: '50%'
             }
           }>
-          <SelectListClients options = {client} />
-          <MultipleSelect options = {industry}/>
-          <SelectListProjectType options = {projectTypes} />
+          < FilterMainScreen />
           </Grid>
 
           <Grid key={2} item
@@ -44,16 +45,8 @@ function MainLayout() {
                 width: '50%'
               }
             }>
-
-            <Link to="/layout2">
-              <Button variant="contained" size="large" sx={
-                {
-                  height: '5rem',
-                  marginTop: '15rem',
-                  marginLeft:'13rem',
-
-                }
-              }>Create new Success Case</Button></Link>
+            
+            <CreateButton />
 
           </Grid>
         </Grid>
