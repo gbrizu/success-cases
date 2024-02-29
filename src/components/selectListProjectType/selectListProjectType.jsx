@@ -20,12 +20,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Entertainment',
-  'Healthcare',
-  'Banking',
-  'Education',
-];
 
 function getStyles(name, projectType, theme) {
   return {
@@ -36,7 +30,7 @@ function getStyles(name, projectType, theme) {
   };
 }
 
-export default function SelectListProjectType() {
+export default function SelectListProjectType({ options }) {
   const theme = useTheme();
   const [projectType, SetProjectType] = React.useState([]);
 
@@ -67,7 +61,7 @@ export default function SelectListProjectType() {
             onChange={handleChange}
             MenuProps={MenuProps}
           >
-            {names.map((name) => (
+            {options.map((name) => (
               <MenuItem
                 key={name}
                 value={name}
