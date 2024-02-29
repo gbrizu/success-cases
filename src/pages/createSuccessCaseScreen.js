@@ -75,6 +75,7 @@ function CreateSuccessCaseScreen() {
 
           <Grid item xs={12}>
             <FormInfoInput
+              marginRight={'6.9rem'}
               customStyleClass={"form-margin"}
               label={'Date'}
               customInput={
@@ -87,6 +88,7 @@ function CreateSuccessCaseScreen() {
 
           <Grid item xs={12}>
             <FormInfoInput
+              marginRight={'1.4rem'}
               customStyleClass={"form-margin"}
               label={'Project contact'}
               customInput={
@@ -106,6 +108,7 @@ function CreateSuccessCaseScreen() {
 
           <Grid item xs={12}>
             <FormInfoInput
+            marginRight={'0.3rem'}
               customStyleClass={"form-margin"}
               label={'Avg. Team size *'}
               width={300}

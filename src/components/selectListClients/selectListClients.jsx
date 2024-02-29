@@ -45,7 +45,7 @@ export default function SelectListClients({ options }) {
   }
   return (  
     <div style={{ display: "flex", alignItems: "center",marginBottom:'10px' }}>
-      <Typography variant = "h6" style={{ marginRight: "4rem" }}> Client</Typography> 
+      <Typography variant = "h6" style={{ marginRight: "6rem" }}> Client</Typography> 
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select

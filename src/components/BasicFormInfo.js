@@ -1,21 +1,14 @@
 import { Grid, Typography } from "@mui/material";
 
-function FormInfoInput({ label, customInput, customStyleClass }) {
+function FormInfoInput({ label, customInput, marginRight }) {
 
   return (
     <>
-      <div className={`${customStyleClass}`}>
-        <Grid container  wrap="nowrap">
-          <Grid item xl={2}>
-            <Typography variant="h6" marginTop={'1rem'} gutterBottom>
-              {label}
-            </Typography>
-          </Grid>
-          <Grid item>
-            {customInput}
-          </Grid>
-        </Grid>
-      </div>
+      
+      <div style={{ display: "flex", alignItems: "center",marginBottom:'10px' }}>
+      <Typography variant = "h6" style={{ marginRight: marginRight }}>  {label}</Typography> 
+      {customInput}
+    </div>
     </>
   )
 }
