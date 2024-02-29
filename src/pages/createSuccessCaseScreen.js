@@ -37,7 +37,7 @@ function CreateSuccessCaseScreen() {
           </Typography>
         </Grid>
 
-        <Grid item xs={12}>
+        <div>
           <FormControlLabel
             value="top"
             control={<Switch color="primary" />}
@@ -59,58 +59,60 @@ function CreateSuccessCaseScreen() {
               <HelpOutlineIcon />
             </IconButton>
           </Tooltip>
-        </Grid>
+        </div>
+        <Grid containerInput sx={{width:'inherit', marginLeft:'25rem',position:'relative'}}>
+          <Grid item xs={12}>
+            <OfferingSelect></OfferingSelect>
+          </Grid>
 
-        <Grid item xs={12}>
-          <OfferingSelect></OfferingSelect>
-        </Grid>
+          <Grid item xs={12}>
+            <SelectListClients options={["Mercado Libre", "Pedidos ya"]}></SelectListClients>
+          </Grid>
 
-        <Grid item xs={12}>
-          <SelectListClients options={["Mercado Libre", "Pedidos ya"]}></SelectListClients>
-        </Grid>
+          <Grid item xs={12}>
+            <MultipleSelect></MultipleSelect>
+          </Grid>
 
-        <Grid item xs={12}>
-          <MultipleSelect></MultipleSelect>
-        </Grid>
+          <Grid item xs={12}>
+            <FormInfoInput
+              customStyleClass={"form-margin"}
+              label={'Date'}
+              customInput={
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker variant="standard" />
+                </LocalizationProvider>
+              }
+            ></FormInfoInput>
+          </Grid>
 
-        <Grid item xs={12}>
-          <FormInfoInput
-            customStyleClass={"form-margin"}
-            label={'Date'}
-            customInput={
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker variant="standard" />
-              </LocalizationProvider>
-            }
-          ></FormInfoInput>
-        </Grid>
+          <Grid item xs={12}>
+            <FormInfoInput
+              customStyleClass={"form-margin"}
+              label={'Project contact'}
+              customInput={
+                <FormControl variant="standard">
+                  <Input
+                    id="input-with-icon-adornment"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <AccountCircle />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+              }
+            ></FormInfoInput>
+          </Grid>
 
-        <Grid item xs={12}>
-          <FormInfoInput
-            customStyleClass={"form-margin"}
-            label={'Project contact'}
-            customInput={
-              <FormControl variant="standard">
-                <Input
-                  id="input-with-icon-adornment"
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <AccountCircle />
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-            }
-          ></FormInfoInput>
-        </Grid>
+          <Grid item xs={12}>
+            <FormInfoInput
+              customStyleClass={"form-margin"}
+              label={'Avg. Team size *'}
+              width={300}
+              customInput={<TextField inputProps={{ type: 'number' }} />}
+            ></FormInfoInput>
+          </Grid>
 
-        <Grid item xs={12}>
-          <FormInfoInput
-            customStyleClass={"form-margin"}
-            label={'Avg. Team size *'}
-            width={300}
-            customInput={<TextField inputProps={{ type: 'number' }} />}
-          ></FormInfoInput>
         </Grid>
 
         <Grid item xs={12}>
