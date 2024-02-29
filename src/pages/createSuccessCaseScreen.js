@@ -16,22 +16,25 @@ import {
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AccountCircle } from "@mui/icons-material";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import OfferingSelect from "../components/selectListOfferings/selectListOfferings";
 import SelectListClients from "../components/selectListClients/selectListClients";
 import MultipleSelect from "../components/selectListIndustry";
 import FormInfoInput from "../components/BasicFormInfo";
 
-
 function CreateSuccessCaseScreen() {
   return (
-    <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh", }}>
+    <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography
             variant="h3"
             gutterBottom
-            sx={{ marginLeft: "24rem ", marginRight: "auto", marginTop: "3rem", }}
+            sx={{
+              marginLeft: "24rem ",
+              marginRight: "auto",
+              marginTop: "3rem",
+            }}
           >
             New Success Case
           </Typography>
@@ -43,8 +46,11 @@ function CreateSuccessCaseScreen() {
             control={<Switch color="primary" />}
             label="Make Public"
             labelPlacement="top"
-
-            sx={{ marginLeft: "48rem ", marginRight: "auto", marginTop: "2rem" }}
+            sx={{
+              marginLeft: "48rem ",
+              marginRight: "auto",
+              marginTop: "2rem",
+            }}
           />
           <Tooltip
             title={
@@ -55,29 +61,38 @@ function CreateSuccessCaseScreen() {
               </h1>
             }
           >
-            <IconButton sx={{ marginTop: '3.4rem' }}>
+            <IconButton sx={{ marginTop: "3.4rem" }}>
               <HelpOutlineIcon />
             </IconButton>
           </Tooltip>
         </div>
-        <Grid containerInput sx={{width:'inherit', marginLeft:'25rem',position:'relative'}}>
+        <Grid
+          containerInput
+          sx={{ width: "inherit", marginLeft: "25rem", position: "relative" }}
+        >
           <Grid item xs={12}>
-            <OfferingSelect></OfferingSelect>
+            <OfferingSelect
+              options={["Mobile", "Web", "Integration", "Development"]}
+            ></OfferingSelect>
           </Grid>
 
           <Grid item xs={12}>
-            <SelectListClients options={["Mercado Libre", "Pedidos ya"]}></SelectListClients>
+            <SelectListClients
+              options={["Mercado Libre", "Pedidos ya"]}
+            ></SelectListClients>
           </Grid>
 
           <Grid item xs={12}>
-            <MultipleSelect></MultipleSelect>
+            <MultipleSelect
+              options={["Entertainment", "Healthcare", "Banking", "Education"]}
+            ></MultipleSelect>
           </Grid>
 
           <Grid item xs={12}>
             <FormInfoInput
               marginRight={'6.9rem'}
               customStyleClass={"form-margin"}
-              label={'Date'}
+              label={"Date"}
               customInput={
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker variant="standard" />
@@ -90,7 +105,7 @@ function CreateSuccessCaseScreen() {
             <FormInfoInput
               marginRight={'1.4rem'}
               customStyleClass={"form-margin"}
-              label={'Project contact'}
+              label={"Project contact"}
               customInput={
                 <FormControl variant="standard">
                   <Input
@@ -110,12 +125,11 @@ function CreateSuccessCaseScreen() {
             <FormInfoInput
             marginRight={'0.3rem'}
               customStyleClass={"form-margin"}
-              label={'Avg. Team size *'}
+              label={"Avg. Team size *"}
               width={300}
-              customInput={<TextField inputProps={{ type: 'number' }} />}
+              customInput={<TextField inputProps={{ type: "number" }} />}
             ></FormInfoInput>
           </Grid>
-
         </Grid>
 
         <Grid item xs={12}>
