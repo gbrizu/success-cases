@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import './selectListClients.css'
-import { fontGrid } from '@mui/material/styles/cssUtils';
-import { Typography } from '@mui/material';
+import React, { useState } from "react";
+import { useTheme } from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import "./selectListClients.css";
+import { fontGrid } from "@mui/material/styles/cssUtils";
+import { Typography } from "@mui/material";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -31,7 +31,7 @@ export default function SelectListClients({ options }) {
     } = event;
     setPersonName(
       // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+      typeof value === "string" ? value.split(",") : value
     );
   };
 
@@ -43,15 +43,19 @@ export default function SelectListClients({ options }) {
           : theme.typography.fontWeightMedium,
     };
   }
-  return (  
-    <div style={{ display: "flex", alignItems: "center",marginBottom:'10px' }}>
-      <Typography variant = "h6" style={{ marginRight: "4rem" }}> Client</Typography> 
+  return (
+    <div
+      style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
+    >
+      <Typography variant="h6" style={{ marginRight: "4rem" }}>
+        {" "}
+        Client
+      </Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          multiple
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
