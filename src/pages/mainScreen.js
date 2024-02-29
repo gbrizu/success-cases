@@ -1,12 +1,21 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
+import { UserContext } from "../App";
+import { useContext } from "react";
 
+<<<<<<< HEAD:src/components/MainLayout.js
 
 function MainLayout() {
+=======
+function MainScreen() {
+>>>>>>> b7bb8dfabd0e7b7f0c97f4e51791b428b075b41c:src/pages/mainScreen.js
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
+      
       <div id="TITLE">
-        <Box  sx={{ bgcolor: 'red', height: '12vh' }} />
+      <Box sx={{ bgcolor: 'red', height: '12vh',display: 'flex', alignItems: 'center' }}>
+            <img src='/globant_logo.png' alt='' width='190' height='60' alignItem = 'center' />
+        </Box>
       </div>
       <div id="SEARCH BODY">
         <Grid container justifyContent="center" spacing={15} sx={{
@@ -37,7 +46,7 @@ function MainLayout() {
               }
             }>
 
-            <Link to="/layout2">
+            <Link to="/NewSuccessCases">
               <Button variant="contained" size="large" sx={
                 {
                   height: '5rem',
@@ -58,4 +67,4 @@ function MainLayout() {
   );
 }
 
-export default MainLayout;
+export default MainScreen;
