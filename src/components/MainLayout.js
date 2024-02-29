@@ -1,7 +1,6 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
-
 function MainLayout() {
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
