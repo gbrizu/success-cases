@@ -6,8 +6,8 @@ function MainLayout() {
     <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
       
       <div id="TITLE">
-      <Box sx={{ bgcolor: 'red', height: '12vh'}}>
-            <img src='/globant_logo.png' alt='' width='190' height='60' />
+      <Box sx={{ bgcolor: 'red', height: '12vh',display: 'flex', alignItems: 'center' }}>
+            <img src='/globant_logo.png' alt='' width='190' height='60' alignItem = 'center' />
         </Box>
       </div>
       <div id="SEARCH BODY">
