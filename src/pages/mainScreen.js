@@ -1,14 +1,11 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-
 function MainLayout() {
   return (
-    <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
-
+    <Container maxWidth='l' sx={{ bgcolor: '#CFE8FC' }}>
       <div id="TITLE">
         <Box  sx={{ bgcolor: 'red', height: '8.1rem', marginBottom:'1.5rem'}} />
       </div>
-
       <div id="SEARCH BODY">
         <Grid container spacing={2} sx={{
           justifyContent: "center"
@@ -19,11 +16,10 @@ function MainLayout() {
                 bgcolor: 'green',
                 height: '20rem',
                 marginTop: '2rem',
-                width: { xs: '100%', md: '100%' }, 
+                width: { xs: '100%', md: '100%' },
               }}
             />
           </Grid>
-
           <Grid item xs={12} md={6}>
             <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
               <Link to="/layout2">
@@ -34,7 +30,6 @@ function MainLayout() {
             </Box>
           </Grid>
         </Grid>
-
         <div id="TABLE">
           <Box sx={{ bgcolor: 'yellow', height: '21.8rem', mt: '2rem' }} />
         </div>
@@ -42,5 +37,4 @@ function MainLayout() {
     </Container>
   );
 }
-
 export default MainLayout;
