@@ -18,7 +18,9 @@ function MainLayout() {
                 marginTop: '2rem',
                 width: { xs: '100%', md: '100%' },
               }}
+              
             />
+           
           </Grid>
           <Grid item xs={12} md={6}>
             <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
