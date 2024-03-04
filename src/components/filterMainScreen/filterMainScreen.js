@@ -4,51 +4,58 @@ import FormInfoInput from "../BasicFormInfo";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import Grid from "@mui/system/Unstable_Grid/Grid";
 import SelectListClients from "../selectListClients/selectListClients";
-import MultipleSelect from "../selectListIndustry/selectListIndustry";
+import MultipleSelect from "../selectListIndustry";
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
 import { margin } from '@mui/system';
-import successCaseServerCalls from "../../services/successCaseServerCalls";
+import { getClients, getIndustries, getProyectsTypes, getContacts } from "../../services/successCaseServerCalls";
 import { useState } from 'react';
 import { useEffect } from 'react';
 
 function FilterMainScreen() {
 
+    const [clients, setClients] = useState([]);
+
+    const [type, setProjectType] = useState([]);
+
+    const [industries, setIndustries] = useState([]);
+
+    const [contact, setContact] = useState([]);
     
-    
-    const [clients, setClients] = useState(successCaseServerCalls.getClients());
 
-
-    // Dummy data for selectListItems
-    const clientsOptions = [
-        "one", "two", "three"
-    ]
-
-    const projectContactOptions = [
-        "pc1", "pc2", "abc"
-    ]
-
-    const industryOptions = [
-        "pc1", "pc2", "abc"
-    ]
-
-    const projectTypeOptions = [
-        "pc1", "pc2", "abc"
-    ]
+    useEffect ( () => {
+        getClients().then((result) => {
+                setClients(result);
+            });
+        getProyectsTypes().then((result) => {
+            setProjectType(result);
+        });
+        getIndustries().then((result) => {
+            setIndustries(result);
+        });
+        getContacts().then((result) => {
+            setContact(result);
+        });
+    },[])
 
     return (
         <div>
             <Grid container spacing={2} margin={1}>
                 <Grid item xs={12}>
-                    <SelectListClients options={clients}></SelectListClients>
+                    {(clients.length > 0) && (<SelectListClients options={clients}></SelectListClients>)}
                 </Grid>
 
                 <Grid item xs={12}>
-                    <MultipleSelect options={industryOptions}></MultipleSelect>
+                    <MultipleSelect options={industries}></MultipleSelect>
                 </Grid>
 
                 <Grid item xs={12}>
-                    <SelectListProjectType options = {projectTypeOptions}></SelectListProjectType>
+                    <SelectListProjectType options={type}></SelectListProjectType>
                 </Grid>
+
+                <Grid item xs={12}>
+                    
+                </Grid>
+
 
                 <Grid item xs={12}>
                     <FormInfoInput
@@ -69,15 +76,15 @@ function FilterMainScreen() {
                         width={300}
                         customInput={
                             <Autocomplete
-                            disablePortal
-                            id= "projectContactsAutoComplete"
-                            options = {projectContactOptions}
-                            sx={300}
-                            renderInput={(params) => <TextField {...params} label="Project contact"/>}
+                                disablePortal
+                                id="projectContactsAutoComplete"
+                                options={contact.map((option) => option.name)}
+                                sx={300}
+                                renderInput={(params) => <TextField {...params} label="Project contact" />}
                             />
                         }
                     ></FormInfoInput>
-                </Grid>
+                </Grid> 
 
             </Grid>
 

@@ -1,63 +1,39 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import { UserContext } from "../App";
-import { useContext } from "react";
+import DataTable from "../components/dataTable/dataTable";
+import FilterMainScreen from "../components/filterMainScreen/filterMainScreen";
+import CreateButton from "../components/button/createButton";
+import BasicTitle from "../components/basicTitle/basicTitle";
+
 
 function MainScreen() {
+  const enzo = [{ id:1, client: "Martina Laventure", industry: "UCU", projectType: "project", referrer: "Martina Laventure", date: "MM/DD/YYYY"},
+{ id:2, client: "Martin Laventure", industry: "UCU", projectType: "project", referrer: "Martin Laventure", date: "MM/DD/YYYY"},
+{ id:3, client: "Enzo Aparicio", industry: "UCU pde", projectType: "project challenge", referrer: "Enzo Aparicio", date: "MM/DD/YYYY"},
+{ id:4, client: "Lautaro Robayna", industry: "ORT", projectType: "project ort", referrer: "Lautaro Robayna", date: "MM/DD/YYYY"},
+{ id:5, client: "Ema Avarez", industry: "UM", projectType: "project um", referrer: "Ema Alvarez", date: "MM/DD/YYYY"}];
+
   return (
-    <Container maxWidth='l' sx={{ bgcolor: '#cfe8fc' }}>
-      
+    <Container maxWidth='l' sx={{ bgcolor: '#ffffff' }}>
       <div id="TITLE">
-      <Box sx={{ bgcolor: 'red', height: '12vh',display: 'flex', alignItems: 'center' }}>
-            <img src='/globant_logo.png' alt='' width='190' height='60' alignItem = 'center' />
-        </Box>
+        <BasicTitle basictitle={"Success cases"} />
       </div>
-      <div id="SEARCH BODY">
-        <Grid container justifyContent="center" spacing={15} sx={{
-          justifyContent: "flex-start"
-        }}>
-          <Grid key={1} item sx={
-            {
-              width: '50%'
-            }
-          }>
-            <Box
-              sx={{
-                bgcolor: 'green',
-                height: '50vh',
-                marginTop: '2rem'
-
-              }}
-            />
+      <div id="SEARCH_BODY">
+        <Grid container justifyContent="center" spacing={2} sx={{ justifyContent: "center" }}>
+          <Grid item xs={12} sm={6}>
+            <FilterMainScreen />
           </Grid>
-
-          <Grid key={2} item
-
-            sx={
-              {
-                width: '50%'
-              }
-            }>
-
-            <Link to="/NewSuccessCases">
-              <Button variant="contained" size="large" sx={
-                {
-                  height: '5rem',
-                  marginTop: '15rem',
-                  marginLeft:'13rem',
-
-                }
-              }>Create new Success Case</Button></Link>
-
+          <Grid item xs={12} sm={6}>
+            <CreateButton />
           </Grid>
         </Grid>
-
         <div id="TABLE">
-          <Box sx={{ bgcolor: 'yellow', height: '32.3vh', marginTop: '2rem' }} />
+          <DataTable rows={enzo} />
         </div>
       </div>
     </Container>
   );
+  
 }
 
 export default MainScreen;

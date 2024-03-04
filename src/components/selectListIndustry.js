@@ -19,13 +19,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Entertainment',
-  'Healthcare',
-  'Banking',
-  'Education',
-];
-
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -35,7 +28,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelect() {
+export default function MultipleSelect({options}) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
@@ -63,13 +56,13 @@ export default function MultipleSelect() {
         input={<OutlinedInput label="Name" />}
         MenuProps={MenuProps}
       >
-        {names.map((name) => (
+        {options.map((item) => (
           <MenuItem
-            key={name}
-            value={name}
-            style={getStyles(name, personName, theme)}
+            key={item.id}
+            value={item.id}
+            style={getStyles(item.name, personName, theme)}
           >
-            {name}
+            {item.name}
           </MenuItem>
         ))}
       </Select>

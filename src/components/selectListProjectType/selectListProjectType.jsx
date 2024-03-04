@@ -46,8 +46,8 @@ export default function SelectListProjectType({ options }) {
 
   return (
     <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
-    <Typography variant="h6" style={{ marginRight: "4rem" }}>Project Type</Typography>
-    <FormControl >
+    <Typography variant="h6" style={{ marginRight: "4.6rem" }}>Project Type</Typography>
+    <FormControl sx={{ m: 1, width: 300 }}>
       <InputLabel id="demo-multiple-name-label">Project type</InputLabel>
       <Select
         labelId="demo-multiple-name-label"
@@ -56,13 +56,13 @@ export default function SelectListProjectType({ options }) {
         onChange={handleChange}
         MenuProps={MenuProps}
       >
-        {names.map((name) => (
+        {options.map((item) => (
           <MenuItem
-            key={name}
-            value={name}
-            style={getStyles(name, projectType, theme)}
+            key={item.id}
+            value={item.id}
+            style={getStyles(item.name, projectType, theme)}
           >
-            {name}
+            {item.name}
           </MenuItem>
         ))}
       </Select>
