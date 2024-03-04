@@ -8,7 +8,7 @@ const axiosGet = (customUrl) => {
 }
 
 const axiosPost = (customUrl, body) => {
-    //TODO: Implementar
+    return axios.post(`${BASE_URL}${customUrl}`, body)
 }
 
 const getBaseAxiosGetWithResponseManage = (customUrl) => {
@@ -17,7 +17,17 @@ const getBaseAxiosGetWithResponseManage = (customUrl) => {
             return response.data;
         }).catch((error) => {
             console.log("Error:" + error)
-            return 
+            return error
+        })
+}
+
+const getBaseAxiosPostWithResponseManage = (customUrl, body) => {
+    return axiosPost(customUrl, body)
+        .then((response) => {
+            return response.data;
+        }).catch((error) => {
+            console.log("Error:" + error)
+            return error
         })
 }
 
@@ -44,12 +54,11 @@ export const getOfferings = () => {
 }
 
 export const getSuccessCases = (searchParams) => {
-    //return getBaseAxiosGetWithResponseManage('/SuccessCase/getByFilter')
-    //TODO: Implementar
+    return getBaseAxiosPostWithResponseManage('/SuccessCase/getByFilter', searchParams)
 }
 
 export const createSuccessCase = (successCase) => {
-    //TODO: Implementar
+    return getBaseAxiosPostWithResponseManage('/SuccessCase/new', successCase)
 }
 
 export const getSuccessCaseById = (id) => {
