@@ -1,7 +1,7 @@
 import { Grid, Button } from "@mui/material";
 import "../../App.css";
 
-export default function CaseDetails({ client }) {
+export default function CaseDetails({ client, backButton, nextButton }) {
   function backButton() {
     alert("This should go to cases list");
   }
