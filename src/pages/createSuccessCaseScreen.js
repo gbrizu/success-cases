@@ -24,9 +24,17 @@ import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
 
 function CreateSuccessCaseScreen() {
-  const { nextStep } = useContext(ProcessContextProvider);
+  const { nextStep, setSuccessCase } = useContext(ProcessContextProvider);
 
   const submitHandler = () => {
+    setSuccessCase({
+      offering: "Mobile",
+      client: "Mercado Libre",
+      industry: ["Entertainment", "Healthcare"],
+      date: "2022-12-12",
+      projectContact: "Juan Perez",
+      avgTeamSize: 5,
+    })
     nextStep();
   }
 

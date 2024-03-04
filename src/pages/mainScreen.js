@@ -1,7 +1,5 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import { UserContext } from "../App";
-import { useContext } from "react";
 
 function MainScreen() {
   return (

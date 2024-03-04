@@ -9,7 +9,8 @@ export default function SuccessCaseProcessCreationScreen() {
         {
             step: 0,
             component: <CreateSuccessCaseScreen />
-        }
+        },
+
     ]
 
     const currentScreen = screens.find(screen => screen.step === step);
