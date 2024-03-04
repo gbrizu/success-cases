@@ -9,6 +9,7 @@ export default function ProcessContext({ children }) {
     const [challengePage, setChallengePage] = useState(0);
     const [improvementsPage, setImprovementsPage] = useState(0);
     const [technologiePage, setTechnologiePage] = useState(0);
+    const [screen, setScreen] = useState('createPage');
 
     const newPageHandler = (type, content) => {
         if(type === 'successCase') {
@@ -26,18 +27,20 @@ export default function ProcessContext({ children }) {
         }
     }
 
-    const [step, setStep] = useState(0);
-
-    const nextStep = () => {
-        setStep(step + 1);
+    const navigate = (screen) => {
+        setScreen(screen);
     }
 
-    const previousStep = () => {
-        setStep(step - 1);
+    const saveProgress = (content) => { 
+        
+    }
+
+    const onSubmitSuccessCase = (content) => {
+
     }
 
     return (
-        <ProcessContextProvider.Provider value={{ step, nextStep, previousStep, setSuccessCase, successCase, newPageHandler }}>
+        <ProcessContextProvider.Provider value={{ screen, navigate, setSuccessCase, successCase, newPageHandler }}>
             { children }
         </ProcessContextProvider.Provider>
     )
