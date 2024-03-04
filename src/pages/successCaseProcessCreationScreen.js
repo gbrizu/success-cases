@@ -1,22 +1,23 @@
-import React, { useContext } from 'react'
-import CreateSuccessCaseScreen from './createSuccessCaseScreen'
-import { ProcessContextProvider } from '../context/process.context';
+// SuccessCaseProcessCreationScreen.js
+import React, { useContext } from "react";
+import CreateSuccessCaseScreen from "./createSuccessCaseScreen";
+import { ProcessContextProvider } from "../context/process.context";
+import SuccessCaseEditionMode from "./successCaseEditionMode";
+import ChallengesEditionMode from "./challengesEditionMode";
+import ImprovementsEditionMode from "./improvementsEditionMode";
+import TechnologiesEditionMode from "./technologiesEditionMode";
 
 export default function SuccessCaseProcessCreationScreen() {
-    const { step, nextStep, previousStep, setSuccessCase, successCase } = useContext(ProcessContextProvider);
+  const { step } = useContext(ProcessContextProvider);
 
-    const screens = [
-        {
-            step: 0,
-            component: <CreateSuccessCaseScreen />
-        }
-    ]
+  // Actualiza la lista de screens según tus necesidades
+  const screens = {
+    0: <CreateSuccessCaseScreen />,
+    1: <SuccessCaseEditionMode />,
+    2: <ChallengesEditionMode />,
+    3: <ImprovementsEditionMode />,
+    4: <TechnologiesEditionMode />,
+  };
 
-    const currentScreen = screens.find(screen => screen.step === step);
-
-    return (
-        <>
-            {currentScreen && currentScreen.component}
-        </>
-    )
+  return <>{screens[step]}</>;
 }

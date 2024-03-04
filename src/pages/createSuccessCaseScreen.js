@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useState } from "react";
 import {
   Button,
   Container,
@@ -24,11 +25,19 @@ import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
 
 function CreateSuccessCaseScreen() {
-  const { nextStep } = useContext(ProcessContextProvider);
+  const { nextStep, setSuccessCase } = useContext(ProcessContextProvider);
 
   const submitHandler = () => {
+    setSuccessCase({
+      offering: "Mobile",
+      client: "Mercado Libre",
+      industry: ["Entertainment", "Healthcare"],
+      date: new Date(),
+      projectContact: "John Doe",
+      teamSize: 5,
+    });
     nextStep();
-  }
+  };
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -41,6 +50,8 @@ function CreateSuccessCaseScreen() {
               marginLeft: "24rem ",
               marginRight: "auto",
               marginTop: "3rem",
+              fontWeight: "bold",
+              color: "#c42116",
             }}
           >
             New Success Case
@@ -97,7 +108,7 @@ function CreateSuccessCaseScreen() {
 
           <Grid item xs={12}>
             <FormInfoInput
-              marginRight={'6.9rem'}
+              marginRight={"6.9rem"}
               customStyleClass={"form-margin"}
               label={"Date"}
               customInput={
@@ -110,7 +121,7 @@ function CreateSuccessCaseScreen() {
 
           <Grid item xs={12}>
             <FormInfoInput
-              marginRight={'1.4rem'}
+              marginRight={"1.4rem"}
               customStyleClass={"form-margin"}
               label={"Project contact"}
               customInput={
@@ -130,7 +141,7 @@ function CreateSuccessCaseScreen() {
 
           <Grid item xs={12}>
             <FormInfoInput
-              marginRight={'0.3rem'}
+              marginRight={"0.3rem"}
               customStyleClass={"form-margin"}
               label={"Avg. Team size *"}
               width={300}
