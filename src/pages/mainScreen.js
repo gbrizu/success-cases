@@ -35,5 +35,4 @@ function MainScreen() {
   );
   
 }
-
-export default MainScreen;
+export default MainLayout;
