@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
 import DataTable from "../dataTable/dataTable";
-import CaseDetails from "../caseDetails/caseDetails";
+import CaseDetails from "../caseDetails/CaseDetails";
 import CaseInfo from "../caseInfo/caseInfo";
 
-function caseInfoScreen() {
+function CaseInfoScreen() {
     const [currentComponent,setCurrentComponent ] = useState("DataTable");
     const [currentCaseInfo, setCurrentCaseInfo] = useState(0);
 
@@ -39,4 +39,4 @@ function caseInfoScreen() {
     );
   }
    
-export default caseInfoScreen;
+export default CaseInfoScreen;
