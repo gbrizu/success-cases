@@ -1,5 +1,6 @@
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Container } from "@mui/material";
 import "../../App.css";
+import CaseDetailsInfo from "./caseDetailsInfo";
 
 export default function CaseDetails({ client }) {
   function backButton() {
@@ -10,89 +11,22 @@ export default function CaseDetails({ client }) {
     alert("This should go to case description");
   }
 
+  const infoList = [
+    {label: "Client", info: "Info"}
+  ]
+
   return (
-    <div>
+    <Container>
       <h1>Success Case Details</h1>
-      <Grid container rowSpacing={1.5} columnSpacing={3}>
-        <Grid item xs={6}>
-          <item>
-            <div className="labelDetails">Client</div>
-          </item>
-        </Grid>
-        <Grid item xs={6}>
-          <item>
-            <div className="valueDetails">{client.name}</div>
-          </item>
-        </Grid>
+      
+      <CaseDetailsInfo label={"Client"} info={"Info"}></CaseDetailsInfo>
+      <CaseDetailsInfo label={"Industry"} info={"Entretainment"}></CaseDetailsInfo>
+      <CaseDetailsInfo label={"Project type"} info={"Development"}></CaseDetailsInfo>
+      <CaseDetailsInfo label={"Offering"} info={"Modernization"}></CaseDetailsInfo>
+      <CaseDetailsInfo label={"Date"} info={"Dec 2022 - Nov 2023"}></CaseDetailsInfo>
+      <CaseDetailsInfo label={"Project contact"} info={"milton.rodriguez@globant.com"}></CaseDetailsInfo>
+      <CaseDetailsInfo label={"Avg. Team size"} info={"10"}></CaseDetailsInfo>
 
-        <Grid item xs={6}>
-          <item>
-            <div className="labelDetails">Industry</div>
-          </item>
-        </Grid>
-        <Grid item xs={6}>
-          <item>
-            <div className="valueDetails">{client.industry}</div>
-          </item>
-        </Grid>
-
-        <Grid item xs={6}>
-          <item>
-            <div className="labelDetails">Project type</div>
-          </item>
-        </Grid>
-        <Grid item xs={6}>
-          <item>
-            <div className="valueDetails">{client.projectType}</div>
-          </item>
-        </Grid>
-
-        <Grid item xs={6}>
-          <item>
-            <div className="labelDetails">Offering</div>
-          </item>
-        </Grid>
-        <Grid item xs={6}>
-          <item>
-            <div className="valueDetails">{client.offering}</div>
-          </item>
-        </Grid>
-
-        <Grid item xs={6}>
-          <item>
-            <div className="labelDetails">Date</div>
-          </item>
-        </Grid>
-        <Grid item xs={6}>
-          <item>
-            <div className="valueDetails">{client.dateRange}</div>
-          </item>
-        </Grid>
-
-        <Grid item xs={6}>
-          <item>
-            <div className="labelDetails">Project contact</div>
-          </item>
-        </Grid>
-        <Grid item xs={6}>
-          <item>
-            <div className="valueDetails">{client.mail}</div>
-          </item>
-        </Grid>
-
-        <Grid item xs={6}>
-          <item>
-            <div className="labelDetails">Avg. team size</div>
-          </item>
-        </Grid>
-        <Grid item xs={6}>
-          <item>
-            <div className="valueDetails">{client.teamSize}</div>
-          </item>
-        </Grid>
-      </Grid>
-
-      <br />
       <Button
         variant="contained"
         onClick={backButton}
@@ -107,6 +41,6 @@ export default function CaseDetails({ client }) {
       >
         Next
       </Button>
-    </div>
+    </Container>
   );
 }
