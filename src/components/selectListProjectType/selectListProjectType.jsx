@@ -46,7 +46,7 @@ export default function SelectListProjectType({ options }) {
 
   return (
     <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
-    <Typography variant="h6" style={{ marginRight: "4.6rem" }}>Project Type</Typography>
+    <Typography variant="h6" style={{ marginRight: "2rem" }}>Project Type</Typography>
     <FormControl sx={{ m: 1, width: 300 }}>
       <InputLabel id="demo-multiple-name-label">Project type</InputLabel>
       <Select

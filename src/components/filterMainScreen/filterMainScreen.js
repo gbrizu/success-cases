@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, TextField, InputAdornment } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import FormInfoInput from "../BasicFormInfo";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -10,6 +10,8 @@ import { margin } from '@mui/system';
 import { getClients, getIndustries, getProyectsTypes, getContacts } from "../../services/successCaseServerCalls";
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { AccountCircle } from "@mui/icons-material";
+import NextButton from '../button/nextButton';
 
 function FilterMainScreen() {
 
@@ -20,7 +22,7 @@ function FilterMainScreen() {
     const [industries, setIndustries] = useState([]);
 
     const [contact, setContact] = useState([]);
-    
+
 
     useEffect ( () => {
         getClients().then((result) => {
@@ -39,7 +41,8 @@ function FilterMainScreen() {
 
     return (
         <div>
-            <Grid container spacing={2} margin={1}>
+            <Grid containerInput
+          sx={{ width: "inherit", position: "relative" }}>
                 <Grid item xs={12}>
                     {(clients.length > 0) && (<SelectListClients options={clients}></SelectListClients>)}
                 </Grid>
@@ -53,40 +56,59 @@ function FilterMainScreen() {
                 </Grid>
 
                 <Grid item xs={12}>
-                    
+
                 </Grid>
 
 
                 <Grid item xs={12}>
                     <FormInfoInput
+                        marginRight={'6.9rem'}
                         customStyleClass={"form-margin"}
-                        label={'Date'}
+                        label={"Date"}
+                        width={"18.5rem"}
                         customInput={
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker variant="standard" />
-                            </LocalizationProvider>
+                          <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker variant="standard" />
+                          </LocalizationProvider>
                         }
                     ></FormInfoInput>
                 </Grid>
 
                 <Grid item xs={12}>
                     <FormInfoInput
+                        marginRight={'1.2rem'}
                         customStyleClass={"form-margin"}
-                        label={'Project contact *'}
-                        width={300}
+                        label={"Project contact"}
                         customInput={
                             <Autocomplete
                                 disablePortal
                                 id="projectContactsAutoComplete"
                                 options={contact.map((option) => option.name)}
-                                sx={300}
+                                sx={{ width: "18.5rem" }}
                                 renderInput={(params) => <TextField {...params} label="Project contact" />}
+                                // renderInput={(params) => (
+                                //     <TextField
+                                //         {...params}
+                                //         label="Project contact"
+                                //         InputProps={{
+                                //             startAdornment: (
+                                //                 <InputAdornment position="start">
+                                //                     <AccountCircle />
+                                //                 </InputAdornment>
+                                //             ),
+                                //         }}
+                                //     />
+                                // )}
                             />
                         }
                     ></FormInfoInput>
-                </Grid> 
+                                    <NextButton></NextButton>  // search button 
+
+                </Grid>
+
 
             </Grid>
+
 
         </div>
     );
