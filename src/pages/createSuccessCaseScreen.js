@@ -139,17 +139,18 @@ function CreateSuccessCaseScreen() {
           containerInput
           sx={{ width: "inherit", marginLeft: "25rem", position: "relative" }}
         >
-          <Grid item xs={12}>
+          <Grid item xs={12} paddingRight={"19.5rem"}>
           <FormInfoInput
-              marginRight={"6.4rem"}
+              marginRight={"7.4rem"}
               customStyleClass={"form-margin"}
-              label={"Name"}
+              label={"Title"}
               width={300}
               customInput={
-                <TextField
+                <TextField 
+                  label= {"Name"}
+                  fullWidth
+                  marginRight= {"0rem"}
                   inputProps={{ type: "text" }}
-                  onChange={handleAvgTeamSizeChange}
-                  value={avgTeamSizeValue}
                 />
               }
             ></FormInfoInput>
