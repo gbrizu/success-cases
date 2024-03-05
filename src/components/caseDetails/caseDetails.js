@@ -1,8 +1,7 @@
 import { Grid, Button, Box, Container } from "@mui/material";
 import "../../App.css";
-import { Widgets } from "@mui/icons-material";
 
-export default function CaseDetails({ client, backButton, nextButton }) {
+export default function CaseDetails({ succesCase: succesCase, backButton, nextButton }) {
   function backButton() {
     alert("This should go to cases list");
   }
@@ -17,7 +16,7 @@ export default function CaseDetails({ client, backButton, nextButton }) {
           <h1>Success Case Details</h1>
         </div>
         <Box>
-          <Grid container rowSpacing={1.5} columnSpacing={3}>
+          <Grid container rowSpacing={1.5} columnSpacing={2}>
             <Grid item xs={6}>
               <item>
                 <div className="labelDetails">Client</div>
@@ -25,7 +24,7 @@ export default function CaseDetails({ client, backButton, nextButton }) {
             </Grid>
             <Grid item xs={6}>
               <item>
-                <div className="valueDetails">{client.name}</div>
+                <div className="valueDetails">{succesCase.name}</div>
               </item>
             </Grid>
 
@@ -36,7 +35,7 @@ export default function CaseDetails({ client, backButton, nextButton }) {
             </Grid>
             <Grid item xs={6}>
               <item>
-                <div className="valueDetails">{client.industry}</div>
+                <div className="valueDetails">{succesCase.industry}</div>
               </item>
             </Grid>
 
@@ -47,7 +46,7 @@ export default function CaseDetails({ client, backButton, nextButton }) {
             </Grid>
             <Grid item xs={6}>
               <item>
-                <div className="valueDetails">{client.projectType}</div>
+                <div className="valueDetails">{succesCase.projectType}</div>
               </item>
             </Grid>
 
@@ -58,7 +57,7 @@ export default function CaseDetails({ client, backButton, nextButton }) {
             </Grid>
             <Grid item xs={6}>
               <item>
-                <div className="valueDetails">{client.offering}</div>
+                <div className="valueDetails">{succesCase.offering}</div>
               </item>
             </Grid>
 
@@ -69,7 +68,7 @@ export default function CaseDetails({ client, backButton, nextButton }) {
             </Grid>
             <Grid item xs={6}>
               <item>
-                <div className="valueDetails">{client.dateRange}</div>
+                <div className="valueDetails">{succesCase.dateRange}</div>
               </item>
             </Grid>
 
@@ -80,7 +79,7 @@ export default function CaseDetails({ client, backButton, nextButton }) {
             </Grid>
             <Grid item xs={6}>
               <item>
-                <div className="valueDetails">{client.mail}</div>
+                <div className="valueDetails">{succesCase.mail}</div>
               </item>
             </Grid>
 
@@ -91,13 +90,13 @@ export default function CaseDetails({ client, backButton, nextButton }) {
             </Grid>
             <Grid item xs={6}>
               <item>
-                <div className="valueDetails">{client.teamSize}</div>
+                <div className="valueDetails">{succesCase.teamSize}</div>
               </item>
             </Grid>
           </Grid>
         </Box>
 
-        <div>
+        <div >
           <Button
             variant="contained"
             onClick={backButton}
