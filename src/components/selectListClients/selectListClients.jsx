@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import "./selectListClients.css";
-import { Typography } from "@mui/material";
+import React, { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import './selectListClients.css'
+import { Typography } from '@mui/material';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -22,11 +22,14 @@ const MenuProps = {
 export default function SelectListClients({ options, value, onChange }) {
   const theme = useTheme();
   const [personName, setPersonName] = useState(value || []);
-
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
+    setPersonName(
+
+      typeof value === 'string' ? value.split(',') : value,
+    );
     setPersonName(typeof value === "string" ? value.split(",") : value);
     onChange && onChange(event);
   };
@@ -39,11 +42,8 @@ export default function SelectListClients({ options, value, onChange }) {
           : theme.typography.fontWeightMedium,
     };
   }
-
   return (
-    <div
-      style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
-    >
+    <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
       <Typography variant="h6" style={{ marginRight: "6rem" }}>
         Client
       </Typography>
@@ -58,13 +58,13 @@ export default function SelectListClients({ options, value, onChange }) {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options.map((name) => (
+          {options.map((item) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={item.id}
+              value={item.id}
+              style={getStyles(item.name, personName, theme)}
             >
-              {name}
+              {item.name}
             </MenuItem>
           ))}
         </Select>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
   Container,
@@ -22,14 +22,13 @@ import SelectListClients from "../components/selectListClients/selectListClients
 import MultipleSelect from "../components/selectListIndustry";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
-import { useState } from "react";
 
 const initialPage = {
   text: "",
   image: "",
 };
 
-function CreateSuccessCaseScreen() {
+export default function CreateSuccessCaseScreen() {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
   const [selectedOffering, setSelectedOffering] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
@@ -83,6 +82,18 @@ function CreateSuccessCaseScreen() {
   const handleIsPublicChange = (event) => {
     setIsPublic(event.target.checked);
   };
+
+  const [dateFrom, setDateFrom] = useState()
+  const [dateTo, setDateTo] = useState()
+
+  useEffect(() => {
+    if (dateTo < dateFrom) {
+      alert("El valor Seleccionado es menor a la fecha inicial")
+      setDateTo(null)
+    }
+
+  }, [dateTo, setDateTo])
+
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -140,7 +151,7 @@ function CreateSuccessCaseScreen() {
           sx={{ width: "inherit", marginLeft: "25rem", position: "relative" }}
         >
           <Grid item xs={12}>
-          <FormInfoInput
+            <FormInfoInput
               marginRight={"6.4rem"}
               customStyleClass={"form-margin"}
               label={"Name"}
@@ -191,6 +202,18 @@ function CreateSuccessCaseScreen() {
                     value={selectedDate}
                     onChange={handleDateChange}
                   />
+                  {/* <DemoContainer components={['DateTimePicker']}> */}
+                  <DatePicker
+                    label="From"
+                    value={dateFrom}
+                    onChange={(newValue) => setDateFrom(newValue)}
+                  />
+                  <DatePicker
+                    label="To"
+                    value={dateTo}
+                    onChange={(newValue) => setDateTo(newValue)}
+                  />
+                  {/* </DemoContainer> */}
                 </LocalizationProvider>
               }
             ></FormInfoInput>
@@ -255,5 +278,3 @@ function CreateSuccessCaseScreen() {
     </Container>
   );
 }
-
-export default CreateSuccessCaseScreen;
