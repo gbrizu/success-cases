@@ -70,6 +70,7 @@ export const getSuccessCase = () => {
 }
 
 export const postSuccessCase = (successCase) => {
+
     return axiosPost('/SuccessCase/create', {
         // SUCCESS CASE
 // successCase.offering
@@ -91,7 +92,7 @@ export const postSuccessCase = (successCase) => {
             console.log("Error:" + error)
             return error
         })
-    }
+}
 
 // {
 //     "title": "Ejemplo de Caso de Éxito 1",
