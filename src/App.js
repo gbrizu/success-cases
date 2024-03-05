@@ -1,9 +1,10 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
-import MainScreen from './pages/mainScreen';
-import CreateSuccessCaseScreen from './pages/createSuccessCaseScreen';
-import ProcessContext from './context/process.context';
-import SuccessCaseProcessCreationScreen from './pages/successCaseProcessCreationScreen';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import MainScreen from "./pages/mainScreen";
+import CreateSuccessCaseScreen from "./pages/createSuccessCaseScreen";
+import ProcessContext from "./context/process.context";
+import SuccessCaseProcessCreationScreen from "./pages/successCaseProcessCreationScreen";
+import CaseInfo from "./components/caseInfo/caseInfo";
 
 function App() {
   return (
@@ -11,7 +12,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainScreen />} />
-          <Route path="NewSuccessCases" element={<SuccessCaseProcessCreationScreen />} />
+          <Route
+            path="NewSuccessCases"
+            element={<SuccessCaseProcessCreationScreen />}
+          />
         </Routes>
       </BrowserRouter>
     </ProcessContext>

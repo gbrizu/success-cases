@@ -67,7 +67,7 @@ function MainScreen() {
                   marginTop: "15rem",
                   marginLeft: "13rem",
                 }}
-                onClick={() => navigate('createPage')}
+                onClick={() => navigate("createPage")}
               >
                 Create new Success Case
               </Button>

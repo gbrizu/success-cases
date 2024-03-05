@@ -22,20 +22,57 @@ import SelectListClients from "../components/selectListClients/selectListClients
 import MultipleSelect from "../components/selectListIndustry";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
+import { useState } from "react";
 
 function CreateSuccessCaseScreen() {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
+  const [selectedOffering, setSelectedOffering] = useState([]);
+  const [selectedClient, setSelectedClient] = useState("");
+  const [selectedIndustry, setSelectedIndustry] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [projectContactValue, setProjectContactValue] = useState("");
+  const [avgTeamSizeValue, setAvgTeamSizeValue] = useState("");
+  const [isPublic, setIsPublic] = useState(false);
 
   const submitHandler = () => {
     setSuccessCase({
-      offering: "Mobile",
-      client: "Mercado Libre",
-      industry: ["Entertainment", "Healthcare"],
-      date: "2022-12-12",
-      projectContact: "Juan Perez",
-      avgTeamSize: 5,
-    })
-    navigate('successCase');
+      offering: selectedOffering,
+      client: selectedClient,
+      industry: selectedIndustry,
+      date: selectedDate ? selectedDate.format("YYYY-MM-DD") : null,
+      projectContact: projectContactValue,
+      avgTeamSize: avgTeamSizeValue,
+      isPublic: isPublic,
+    });
+    navigate("successCase");
+  };
+
+  const handleOfferingChange = (event) => {
+    setSelectedOffering(event.target.value);
+  };
+
+  const handleClientChange = (event) => {
+    setSelectedClient(event.target.value);
+  };
+
+  const handleIndustryChange = (event) => {
+    setSelectedIndustry(event.target.value);
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  const handleProjectContactChange = (event) => {
+    setProjectContactValue(event.target.value);
+  };
+
+  const handleAvgTeamSizeChange = (event) => {
+    setAvgTeamSizeValue(event.target.value);
+  };
+
+  const handleIsPublicChange = (event) => {
+    setIsPublic(event.target.checked);
   };
 
   return (
@@ -60,7 +97,13 @@ function CreateSuccessCaseScreen() {
         <div>
           <FormControlLabel
             value="top"
-            control={<Switch color="primary" />}
+            control={
+              <Switch
+                color="primary"
+                checked={isPublic}
+                onChange={handleIsPublicChange}
+              />
+            }
             label="Make Public"
             labelPlacement="top"
             sx={{
@@ -89,18 +132,24 @@ function CreateSuccessCaseScreen() {
         >
           <Grid item xs={12}>
             <OfferingSelect
+              value={selectedOffering}
+              onChange={handleOfferingChange}
               options={["Mobile", "Web", "Integration", "Development"]}
             ></OfferingSelect>
           </Grid>
 
           <Grid item xs={12}>
             <SelectListClients
+              value={selectedClient}
+              onChange={handleClientChange}
               options={["Mercado Libre", "Pedidos ya"]}
-            ></SelectListClients>
+            />
           </Grid>
 
           <Grid item xs={12}>
             <MultipleSelect
+              value={selectedIndustry}
+              onChange={handleIndustryChange}
               options={["Entertainment", "Healthcare", "Banking", "Education"]}
             ></MultipleSelect>
           </Grid>
@@ -112,7 +161,11 @@ function CreateSuccessCaseScreen() {
               label={"Date"}
               customInput={
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker variant="standard" />
+                  <DatePicker
+                    variant="standard"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                  />
                 </LocalizationProvider>
               }
             ></FormInfoInput>
@@ -132,6 +185,8 @@ function CreateSuccessCaseScreen() {
                         <AccountCircle />
                       </InputAdornment>
                     }
+                    onChange={handleProjectContactChange}
+                    value={projectContactValue}
                   />
                 </FormControl>
               }
@@ -144,7 +199,13 @@ function CreateSuccessCaseScreen() {
               customStyleClass={"form-margin"}
               label={"Avg. Team size *"}
               width={300}
-              customInput={<TextField inputProps={{ type: "number" }} />}
+              customInput={
+                <TextField
+                  inputProps={{ type: "number" }}
+                  onChange={handleAvgTeamSizeChange}
+                  value={avgTeamSizeValue}
+                />
+              }
             ></FormInfoInput>
           </Grid>
         </Grid>

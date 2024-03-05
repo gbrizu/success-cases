@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import './selectListClients.css'
-import { Typography } from '@mui/material';
+import React, { useState } from "react";
+import { useTheme } from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import "./selectListClients.css";
+import { Typography } from "@mui/material";
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -18,18 +19,16 @@ const MenuProps = {
   },
 };
 
-export default function SelectListClients({ options }) {
+export default function SelectListClients({ options, value, onChange }) {
   const theme = useTheme();
-  const [personName, setPersonName] = useState([]);
+  const [personName, setPersonName] = useState(value || []);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
-      
-      typeof value === 'string' ? value.split(',') : value,
-    );
+    setPersonName(typeof value === "string" ? value.split(",") : value);
+    onChange && onChange(event);
   };
 
   function getStyles(name, personName, theme) {
@@ -40,9 +39,14 @@ export default function SelectListClients({ options }) {
           : theme.typography.fontWeightMedium,
     };
   }
-  return (  
-    <div style={{ display: "flex", alignItems: "center",marginBottom:'10px' }}>
-      <Typography variant = "h6" style={{ marginRight: "6rem" }}> Client</Typography> 
+
+  return (
+    <div
+      style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
+    >
+      <Typography variant="h6" style={{ marginRight: "6rem" }}>
+        Client
+      </Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select
@@ -60,19 +64,11 @@ export default function SelectListClients({ options }) {
               value={name}
               style={getStyles(name, personName, theme)}
             >
-              {options.map((name) => (
-                <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, personName, theme)}
-                >
-                  {name}
-                </MenuItem>
-              ))}
-              </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 }
