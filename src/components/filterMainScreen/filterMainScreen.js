@@ -1,70 +1,116 @@
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, TextField, InputAdornment } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import FormInfoInput from "../BasicFormInfo";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import Grid from "@mui/system/Unstable_Grid/Grid";
 import SelectListClients from "../selectListClients/selectListClients";
-import MultipleSelect from "../selectListIndustry/selectListIndustry";
+import MultipleSelect from "../selectListIndustry";
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
 import { margin } from '@mui/system';
+import { getClients, getIndustries, getProyectsTypes, getContacts } from "../../services/successCaseServerCalls";
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { AccountCircle } from "@mui/icons-material";
+import NextButton from '../button/nextButton';
+
+
 
 function FilterMainScreen() {
 
-    // Dummy data for selectListItems
-    const clientsOptions = [
-        "one", "two", "three"
-    ]
+    const [clients, setClients] = useState([]);
 
-    const projectContactOptions = [
-        "pc1", "pc2", "abc"
-    ]
+    const [type, setProjectType] = useState([]);
+
+    const [industries, setIndustries] = useState([]);
+
+    const [contact, setContact] = useState([]);
+
+
+    useEffect ( () => {
+        getClients().then((result) => {
+                setClients(result);
+            });
+        getProyectsTypes().then((result) => {
+            setProjectType(result);
+        });
+        getIndustries().then((result) => {
+            setIndustries(result);
+        });
+        getContacts().then((result) => {
+            setContact(result);
+        });
+    },[])
 
     return (
         <div>
-            <Grid container spacing={2} margin={1}>
-
+            <Grid containerInput
+          sx={{ width: "inherit", position: "relative" }}>
                 <Grid item xs={12}>
-                    <SelectListClients options={clientsOptions}></SelectListClients>
+                    {(clients.length > 0) && (<SelectListClients options={clients}></SelectListClients>)}
                 </Grid>
 
                 <Grid item xs={12}>
-                    <MultipleSelect></MultipleSelect>
+                    <MultipleSelect options={industries}></MultipleSelect>
                 </Grid>
 
                 <Grid item xs={12}>
-                    <SelectListProjectType></SelectListProjectType>
+                    <SelectListProjectType options={type}></SelectListProjectType>
                 </Grid>
+
+                <Grid item xs={12}>
+
+                </Grid>
+
 
                 <Grid item xs={12}>
                     <FormInfoInput
+                        marginRight={'6.9rem'}
                         customStyleClass={"form-margin"}
-                        label={'Date'}
+                        label={"Date"}
+                        width={"18.5rem"}
                         customInput={
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker variant="standard" />
-                            </LocalizationProvider>
+                          <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker variant="standard" />
+                          </LocalizationProvider>
                         }
                     ></FormInfoInput>
                 </Grid>
 
                 <Grid item xs={12}>
                     <FormInfoInput
+                        marginRight={'1.2rem'}
                         customStyleClass={"form-margin"}
-                        label={'Project contact *'}
-                        width={300}
+                        label={"Project contact"}
                         customInput={
                             <Autocomplete
-                            disablePortal
-                            id= "projectContactsAutoComplete"
-                            options = {projectContactOptions}
-                            sx={300}
-                            renderInput={(params) => <TextField {...params} label="Project contact"/>}
+                                disablePortal
+                                id="projectContactsAutoComplete"
+                                options={contact.map((option) => option.name)}
+                                sx={{ width: "18.5rem" }}
+                                renderInput={(params) => <TextField {...params} label="Project contact" />}
+                                // renderInput={(params) => (
+                                //     <TextField
+                                //         {...params}
+                                //         label="Project contact"
+                                //         InputProps={{
+                                //             startAdornment: (
+                                //                 <InputAdornment position="start">
+                                //                     <AccountCircle />
+                                //                 </InputAdornment>
+                                //             ),
+                                //         }}
+                                //     />
+                                // )}
                             />
                         }
                     ></FormInfoInput>
+                                    <NextButton></NextButton>  // search button 
+
                 </Grid>
 
+
             </Grid>
+
 
         </div>
     );
