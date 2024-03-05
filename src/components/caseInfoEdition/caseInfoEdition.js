@@ -6,10 +6,11 @@ import { useState } from "react";
 import { ProcessContextProvider } from "../../context/process.context";
 
 // En CaseInfoEdition.js
-export default function CaseInfoEdition({ screen, initValue, setText }) {
-  const { onChangeTextInput } = useContext(ProcessContextProvider);
+export default function CaseInfoEdition({ initValue }) {
+  const { setChallengeText, setSuccessCaseText, screen, successCase, challengeText, successCaseText } = useContext(ProcessContextProvider);
 
-  // Utiliza directamente `initValue` sin mantener un estado interno para `convertedText`
+  const value = screen === 'challenge' ? challengeText : successCaseText;
+
   return (
     <Box
       height="100vh"
@@ -29,10 +30,23 @@ export default function CaseInfoEdition({ screen, initValue, setText }) {
         <div>
           <ReactQuill
             theme="snow"
-            value={initValue} // Usa `initValue` directamente
+            value={value} // Usa `initValue` directamente
             onChange={(text) => {
-              setText(text); // Actualiza el texto en el componente padre
-              onChangeTextInput(text, screen); // Actualiza el contexto
+              if (screen === 'successCase') {
+                setSuccessCaseText(text)
+              }
+              else if (screen === 'challenge') {
+                setChallengeText(text)
+              } 
+              // else if (screen === 'improvements') {
+              //   if (successCase.improvements && successCase.improvements[0]) {
+              //     successCase.improvements[0].text = text;
+              //   }
+              // } else if (screen === 'technologie') {
+              //   if (successCase.technologie && successCase.technologie[0]) {
+              //     successCase.technologie[0].text = text;
+              //   }
+              // }
             }}
             style={{
               border: "2px solid black",

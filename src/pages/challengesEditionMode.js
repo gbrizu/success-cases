@@ -11,13 +11,6 @@ function ChallengesEditionMode() {
   const { navigate, challengePage, successCase, onChangeTextInput } =
     useContext(ProcessContextProvider);
 
-  const [text, setText] = useState("");
-
-  const handleTextChange = (newText) => {
-    setText(newText);
-    onChangeTextInput(newText, "challenge");
-  };
-
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
       <Grid container spacing={2} justifyContent="flex-start">
@@ -66,8 +59,7 @@ function ChallengesEditionMode() {
             >
               <CaseInfoEdition
                 screen="challenge"
-                initValue={text}
-                setText={handleTextChange}
+                initValue={successCase.challenge[challengePage].text}
               />
             </Box>
           </Grid>

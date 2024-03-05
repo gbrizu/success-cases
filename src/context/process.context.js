@@ -11,23 +11,26 @@ export default function ProcessContext({ children }) {
     const [technologiePage, setTechnologiePage] = useState(0);
     const [screen, setScreen] = useState('createPage');
 
-    console.log(successCase)
+    const [successCaseText, setSuccessCaseText] = useState('');
+    const [challengeText, setChallengeText] = useState('');
 
-    const newPageHandler = (type, content) => {
-        if (type === 'successCase') {
-            setSuccessCasePage(successCasePage + 1);
-            successCase.successCase.push(content)
-        } else if (type === 'challenge') {
-            setChallengePage(challengePage + 1);
-            successCase.challenge.push(content)
-        } else if (type === 'improvements') {
-            setImprovementsPage(improvementsPage + 1);
-            successCase.improvements.push(content)
-        } else if (type === 'technologie') {
-            setTechnologiePage(technologiePage + 1);
-            successCase.technologie.push(content)
-        }
-    }
+    console.log({successCaseText, challengeText})
+
+    // const newPageHandler = (type, content) => {
+    //     if (type === 'successCase') {
+    //         setSuccessCasePage(successCasePage + 1);
+    //         successCase.successCase.push(content)
+    //     } else if (type === 'challenge') {
+    //         setChallengePage(challengePage + 1);
+    //         successCase.challenge.push(content)
+    //     } else if (type === 'improvements') {
+    //         setImprovementsPage(improvementsPage + 1);
+    //         successCase.improvements.push(content)
+    //     } else if (type === 'technologie') {
+    //         setTechnologiePage(technologiePage + 1);
+    //         successCase.technologie.push(content)
+    //     }
+    // }
 
     const navigate = (screen, currentScreen) => {
         setScreen(screen);
@@ -38,13 +41,13 @@ export default function ProcessContext({ children }) {
     }
 
     const onChangeTextInput = (text, screen) => {
+        console.log({text, screen})
         if (screen === 'successCase') {
-            if (successCase.succesCase && successCase.successCase[successCasePage]) {
+            if (successCase.successCase && successCase.successCase[successCasePage]) {
                 successCase.successCase[successCasePage].text = text;
             }
         }
         else if (screen === 'challenge') {
-            console.log(screen, text)
             if (successCase.challenge && successCase.challenge[challengePage]) {
                 successCase.challenge[challengePage].text = text;
             }
@@ -65,13 +68,17 @@ export default function ProcessContext({ children }) {
             navigate,
             setSuccessCase,
             successCase,
-            newPageHandler,
+            // newPageHandler,
             submitSuccessCaseHandler,
             onChangeTextInput,
             successCasePage,
             challengePage,
             improvementsPage,
             technologiePage,
+            setSuccessCaseText,
+            challengeText,
+            successCaseText,
+            setChallengeText
         }}>
             {children}
         </ProcessContextProvider.Provider>

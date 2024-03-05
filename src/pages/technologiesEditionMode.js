@@ -10,13 +10,6 @@ function TechnologiesEditionMode() {
   const { navigate, technologiePage, successCase, onChangeTextInput } =
     useContext(ProcessContextProvider);
 
-  const [text, setText] = useState("");
-
-  const handleTextChange = (newText) => {
-    setText(newText);
-
-    onChangeTextInput(newText, "technologie");
-  };
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -64,8 +57,7 @@ function TechnologiesEditionMode() {
             >
               <CaseInfoEdition
                 screen="technologies"
-                initValue={text}
-                setText={handleTextChange} // Pasas la función que actualiza el estado local y global.
+                initValue={successCase.technologie[technologiePage].text}
               />
             </Box>
           </Grid>

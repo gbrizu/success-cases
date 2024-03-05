@@ -21,8 +21,6 @@ export default function NavbarScreen() {
         fill: "black",
     };
 
-    console.log(screen)
-
     return (
         <Grid item xs={2}>
             <Box

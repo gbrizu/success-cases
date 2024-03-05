@@ -10,13 +10,6 @@ function SuccessCaseEditionMode() {
   const { navigate, successCasePage, successCase, onChangeTextInput } =
     useContext(ProcessContextProvider);
 
-  const [text, setText] = useState("");
-
-  const handleTextChange = (newText) => {
-    setText(newText);
-    onChangeTextInput(newText, "successCase");
-  };
-
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
       <Grid container spacing={2} justifyContent="flex-start">
@@ -65,8 +58,7 @@ function SuccessCaseEditionMode() {
             >
               <CaseInfoEdition
                 screen="successCase"
-                initValue={text}
-                setText={handleTextChange} // Pasas la función que actualiza el estado local y global.
+                initValue={successCase.successCase[successCasePage].text}
               />
             </Box>
           </Grid>
