@@ -140,6 +140,22 @@ function CreateSuccessCaseScreen() {
           sx={{ width: "inherit", marginLeft: "25rem", position: "relative" }}
         >
           <Grid item xs={12}>
+          <FormInfoInput
+              marginRight={"6.4rem"}
+              customStyleClass={"form-margin"}
+              label={"Name"}
+              width={300}
+              customInput={
+                <TextField
+                  inputProps={{ type: "text" }}
+                  onChange={handleAvgTeamSizeChange}
+                  value={avgTeamSizeValue}
+                />
+              }
+            ></FormInfoInput>
+          </Grid>
+
+          <Grid item xs={12}>
             <OfferingSelect
               value={selectedOffering}
               onChange={handleOfferingChange}
