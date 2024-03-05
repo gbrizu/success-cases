@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Container,
@@ -21,8 +21,23 @@ import OfferingSelect from "../components/selectListOfferings/selectListOffering
 import SelectListClients from "../components/selectListClients/selectListClients";
 import MultipleSelect from "../components/selectListIndustry";
 import FormInfoInput from "../components/BasicFormInfo";
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+
 
 function CreateSuccessCaseScreen() {
+  const [dateFrom, setDateFrom] = useState()
+  const [dateTo, setDateTo] = useState()
+
+    useEffect(()=>{
+      if(dateTo < dateFrom)
+      {
+        alert("El valor Seleccionado es menor a la fecha inicial")
+        setDateTo(null)
+      }
+
+   },[dateTo, setDateTo])
+
+
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
       <Grid container spacing={2}>
@@ -95,7 +110,18 @@ function CreateSuccessCaseScreen() {
               label={"Date"}
               customInput={
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker variant="standard" />
+                  <DemoContainer components={['DateTimePicker']}>
+                    <DatePicker
+                    label="From" 
+                    value={dateFrom}
+                    onChange={(newValue) => setDateFrom(newValue)}
+                    />
+                    <DatePicker 
+                    label="To"
+                    value={dateTo}
+                    onChange={(newValue) => setDateTo(newValue)} 
+                    />
+                  </DemoContainer>
                 </LocalizationProvider>
               }
             ></FormInfoInput>
