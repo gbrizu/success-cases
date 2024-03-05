@@ -1,21 +1,24 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
-import MainScreen from './pages/mainScreen';
-import { createContext } from 'react';
-import CreateSuccessCaseScreen from './pages/createSuccessCaseScreen';
-
-export const UserContext = createContext()
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import MainScreen from "./pages/mainScreen";
+import CreateSuccessCaseScreen from "./pages/createSuccessCaseScreen";
+import ProcessContext from "./context/process.context";
+import SuccessCaseProcessCreationScreen from "./pages/successCaseProcessCreationScreen";
+import CaseInfo from "./components/caseInfo/caseInfo";
 
 function App() {
   return (
-    <UserContext.Provider value={{ name: "Matias", lastName: "Crack" }}>
+    <ProcessContext>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainScreen />} />
-          <Route path="NewSuccessCases" element={<CreateSuccessCaseScreen />} />
+          <Route
+            path="NewSuccessCases"
+            element={<SuccessCaseProcessCreationScreen />}
+          />
         </Routes>
       </BrowserRouter>
-    </UserContext.Provider>
+    </ProcessContext>
   );
 }
 

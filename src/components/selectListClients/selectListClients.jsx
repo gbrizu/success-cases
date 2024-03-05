@@ -19,10 +19,9 @@ const MenuProps = {
   },
 };
 
-export default function SelectListClients({ options }) {
+export default function SelectListClients({ options, value, onChange }) {
   const theme = useTheme();
-  const [personName, setPersonName] = useState([]);
-  console.log(options)
+  const [personName, setPersonName] = useState(value || []);
   const handleChange = (event) => {
     const {
       target: { value },
@@ -31,6 +30,8 @@ export default function SelectListClients({ options }) {
 
       typeof value === 'string' ? value.split(',') : value,
     );
+    setPersonName(typeof value === "string" ? value.split(",") : value);
+    onChange && onChange(event);
   };
 
   function getStyles(name, personName, theme) {
@@ -43,7 +44,9 @@ export default function SelectListClients({ options }) {
   }
   return (
     <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
-      <Typography variant="h6" style={{ marginRight: "6rem" }}> Client</Typography>
+      <Typography variant="h6" style={{ marginRight: "6rem" }}>
+        Client
+      </Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select
