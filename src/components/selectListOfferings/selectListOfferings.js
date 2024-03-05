@@ -19,8 +19,6 @@ const MenuProps = {
   },
 };
 
-const names = ["Mobile", "Web", "Integration", "Development"];
-
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -30,7 +28,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function OfferingSelect() {
+export default function OfferingSelect({options}) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
   const handleChange = (event) => {
@@ -45,30 +43,30 @@ export default function OfferingSelect() {
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
-  <Typography variant="h6" style={{ marginRight: "4.8rem" }}>Offering</Typography>
-  <FormControl sx={{ m: 1, width: 300 }}>
-    <InputLabel id="demo-multiple-name-label">Select Offering</InputLabel>
-    <Select
-      labelId="demo-multiple-name-label"
-      id="demo-multiple-name"
-      value={personName}
-      onChange={handleChange}
-      input={<OutlinedInput label="Select Offering" />}
-      MenuProps={MenuProps}
-    >
-      {names.map((name) => (
-        <MenuItem
-          key={name}
-          value={name}
-          style={getStyles(name, personName, theme)}
-        >
-          {name}
-        </MenuItem>
-      ))}
-    </Select>
-  </FormControl>
-</div>
+        <Typography variant="h6" style={{ marginRight: "4.8rem" }}>Offering</Typography>
+        <FormControl sx={{ m: 1, width: 300 }}>
+          <InputLabel id="demo-multiple-name-label">Select Offering</InputLabel>
+          <Select
+            labelId="demo-multiple-name-label"
+            id="demo-multiple-name"
+            value={personName}
+            onChange={handleChange}
+            input={<OutlinedInput label="Select Offering" />}
+            MenuProps={MenuProps}
+          >
+            {options.map((name) => (
+              <MenuItem
+                key={name}
+                value={name}
+                style={getStyles(name, personName, theme)}
+              >
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
 
-    </div>
-      );
-    }
+    </div >
+  );
+}

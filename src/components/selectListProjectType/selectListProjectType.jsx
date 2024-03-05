@@ -20,12 +20,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Entertainment',
-  'Healthcare',
-  'Banking',
-  'Education',
-];
 
 function getStyles(name, projectType, theme) {
   return {
@@ -36,7 +30,7 @@ function getStyles(name, projectType, theme) {
   };
 }
 
-export default function SelectListProjectType() {
+export default function SelectListProjectType({ options }) {
   const theme = useTheme();
   const [projectType, SetProjectType] = React.useState([]);
 
@@ -52,8 +46,8 @@ export default function SelectListProjectType() {
 
   return (
     <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
-    <Typography variant="h6" style={{ marginRight: "4rem" }}>Project Type</Typography>
-    <FormControl >
+    <Typography variant="h6" style={{ marginRight: "2rem" }}>Project Type</Typography>
+    <FormControl sx={{ m: 1, width: 300 }}>
       <InputLabel id="demo-multiple-name-label">Project type</InputLabel>
       <Select
         labelId="demo-multiple-name-label"
@@ -62,13 +56,13 @@ export default function SelectListProjectType() {
         onChange={handleChange}
         MenuProps={MenuProps}
       >
-        {names.map((name) => (
+        {options.map((item) => (
           <MenuItem
-            key={name}
-            value={name}
-            style={getStyles(name, projectType, theme)}
+            key={item.id}
+            value={item.id}
+            style={getStyles(item.name, projectType, theme)}
           >
-            {name}
+            {item.name}
           </MenuItem>
         ))}
       </Select>
