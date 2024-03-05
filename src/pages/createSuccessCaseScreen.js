@@ -198,11 +198,11 @@ export default function CreateSuccessCaseScreen() {
               label={"Date"}
               customInput={
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
+                  {/* <DatePicker
                     variant="standard"
                     value={selectedDate}
                     onChange={handleDateChange}
-                  />
+                  /> */}
                   {/* <DemoContainer components={['DateTimePicker']}> */}
                   <DatePicker
                     label="From"
