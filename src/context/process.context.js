@@ -42,13 +42,22 @@ export default function ProcessContext({ children }) {
         setScreen(screen);
     }
 
-    const submitSuccessCaseHandler = (content) => {
+    const toBase64 = file => new Promise((resolve, reject) => {
+        if(!file) return resolve('');
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+    });
+
+
+    const submitSuccessCaseHandler = async () => {
         setSuccessCase({
             ...successCase,
-            successCase: [{ text: successCaseText, image: successCaseFile }],
-            challenge: [{ text: challengeText, image: challengeFile }],
-            improvements: [{ text: improvementsText, image: improvementsFile }],
-            technologie: [{ text: technologieText, image: technologieFile }],
+            successCase: [{ text: successCaseText, image: await toBase64(successCaseFile) }],
+            challenge: [{ text: challengeText, image: await toBase64(challengeFile) }],
+            improvements: [{ text: improvementsText, image: await toBase64(improvementsFile) }],
+            technologie: [{ text: technologieText, image: await toBase64(technologieFile) }],
         });
         console.log(successCase)
     }
