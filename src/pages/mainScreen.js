@@ -9,11 +9,11 @@ import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCas
 
 function MainScreen() {
 
-  const enzo = [{ id:1, client: "Martina Laventure", industry: "UCU", projectType: "project", referrer: "Martina Laventure", date: "MM/DD/YYYY"},
-{ id:2, client: "Martin Laventure", industry: "UCU", projectType: "project", referrer: "Martin Laventure", date: "MM/DD/YYYY"},
-{ id:3, client: "Enzo Aparicio", industry: "UCU pde", projectType: "project challenge", referrer: "Enzo Aparicio", date: "MM/DD/YYYY"},
-{ id:4, client: "Lautaro Robayna", industry: "ORT", projectType: "project ort", referrer: "Lautaro Robayna", date: "MM/DD/YYYY"},
-{ id:5, client: "Ema Avarez", industry: "UM", projectType: "project um", referrer: "Ema Alvarez", date: "MM/DD/YYYY"}];
+  const enzo = [{ id: 1, client: "Martina Laventure", industry: "UCU", projectType: "project", referrer: "Martina Laventure", date: "MM/DD/YYYY" },
+  { id: 2, client: "Martin Laventure", industry: "UCU", projectType: "project", referrer: "Martin Laventure", date: "MM/DD/YYYY" },
+  { id: 3, client: "Enzo Aparicio", industry: "UCU pde", projectType: "project challenge", referrer: "Enzo Aparicio", date: "MM/DD/YYYY" },
+  { id: 4, client: "Lautaro Robayna", industry: "ORT", projectType: "project ort", referrer: "Lautaro Robayna", date: "MM/DD/YYYY" },
+  { id: 5, client: "Ema Avarez", industry: "UM", projectType: "project um", referrer: "Ema Alvarez", date: "MM/DD/YYYY" }];
 
   /* const [data, setData] = useState([]);
 
@@ -56,9 +56,7 @@ function MainScreen() {
 
         <Grid item xs={12} md={6}>
           <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
-            <Link to="/layout2">
-              <CreateButton />
-            </Link>
+            <CreateButton />
           </Box>
         </Grid>
       </Grid>
@@ -68,8 +66,6 @@ function MainScreen() {
           <DataTable rows={enzo} />
         </Box>
       </div>
-      {/* <CaseInfoScreen></CaseInfoScreen> */}
-      {/* <CaseDetails client={client}></CaseDetails> */}
     </Container>
   );
 }

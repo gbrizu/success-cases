@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 function DataTable({ rows }) {
     const renderDetailsButton = (params) => {
-        console.log(params.id);
         return (
             <Link to={`succesCase/${params.id}`}>
                 <IconButton>

@@ -2,21 +2,23 @@ import React, {useState, useEffect} from "react";
 import DataTable from "../dataTable/dataTable";
 import CaseDetails from "../caseDetails/caseDetails";
 import CaseInfo from "../caseInfo/caseInfo";
+import { Link } from "react-router-dom";
 
-function CaseInfoScreen() {
-    const [currentComponent,setCurrentComponent ] = useState("DataTable");
+function CaseInfoScreen(  ) {
+    const [currentComponent,setCurrentComponent ] = useState("CaseDetails");
     const [currentCaseInfo, setCurrentCaseInfo] = useState(0);
 
     const handleNext = () =>{
-        if (currentCaseInfo < 4){
+        if (currentCaseInfo <= 4){
             setCurrentCaseInfo ((prevIndex) => prevIndex + 1);
         }
     };
 
     const handleBack = () =>{
-        if (currentCaseInfo >0){
-            setCurrentCaseInfo ((prevIndex) => prevIndex - 1);
-        }
+      <Link to="/"></Link>
+        // if (currentCaseInfo >0){
+        //     setCurrentCaseInfo ((prevIndex) => prevIndex - 1);
+        // }
     };
 
     const handleDetailsClick = () =>{
@@ -26,7 +28,6 @@ function CaseInfoScreen() {
 
     return (
         <div>
-        {currentComponent === "DataTable" && <DataTable rows={[]} onDetailsClick={handleDetailsClick} />}
         {currentComponent === "CaseDetails" && <CaseDetails client={{}} onBack={handleBack} onNext={handleNext} />}
         {currentComponent === "CaseInfo" && (
           <CaseInfo
