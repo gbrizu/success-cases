@@ -53,7 +53,7 @@ export const getOfferings = () => {
     return getBaseAxiosGetWithResponseManage('/Offering/getAll')
 }
 
-export const getSuccessCases = (searchParams) => {
+export const getSuccessCasesByFilter = (searchParams) => {
     return getBaseAxiosPostWithResponseManage('/SuccessCase/getByFilter', searchParams)
 }
 
@@ -63,4 +63,8 @@ export const createSuccessCase = (successCase) => {
 
 export const getSuccessCaseById = (id) => {
     return getBaseAxiosGetWithResponseManage('/SuccessCase/getById')
+}
+
+export const getSuccessCase = () => {
+    return getBaseAxiosGetWithResponseManage('/SuccessCase/getAll')
 }

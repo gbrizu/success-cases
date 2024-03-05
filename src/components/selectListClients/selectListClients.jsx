@@ -22,7 +22,6 @@ const MenuProps = {
 export default function SelectListClients({ options }) {
   const theme = useTheme();
   const [personName, setPersonName] = useState([]);
-  console.log(options)
   const handleChange = (event) => {
     const {
       target: { value },
