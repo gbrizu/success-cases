@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import DataTable from "../dataTable/dataTable";
-import CaseDetails from "../caseDetails/CaseDetails";
+import CaseDetails from "../caseDetails/caseDetails";
 import CaseInfo from "../caseInfo/caseInfo";
 
 function CaseInfoScreen() {
