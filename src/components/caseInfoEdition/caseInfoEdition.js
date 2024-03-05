@@ -1,12 +1,17 @@
-import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
+import React, { useContext, useEffect } from 'react'
 import Box from "@mui/material/Box";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
+import { ProcessContextProvider } from '../../context/process.context';
 
-export default function CaseInfoEdition() {
-  const [convertedText, setConvertedText] = useState("Some default content");
+export default function CaseInfoEdition({ screen, initValue }) {
+  const { onChangeTextInput } = useContext(
+    ProcessContextProvider
+  );
+
+  
+  const [convertedText, setConvertedText] = useState(initValue ? initValue : "Some default content");
 
   // Estilo personalizado para el borde del editor de texto
   const quillStyle = {
@@ -16,7 +21,7 @@ export default function CaseInfoEdition() {
     maxWidth: "470px", // Limita la anchura del editor
     minHeight: "551px",
   };
-  console.log(convertedText);
+
   return (
     <Box
       height="100vh"
@@ -37,7 +42,10 @@ export default function CaseInfoEdition() {
           <ReactQuill
             theme="snow"
             value={convertedText}
-            onChange={setConvertedText}
+            onChange={(text) => {
+              setConvertedText(text);
+              onChangeTextInput(text, screen);
+            }}
             style={quillStyle} // Aplica el estilo personalizado al editor de texto
           />
         </div>

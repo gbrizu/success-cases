@@ -23,8 +23,14 @@ import MultipleSelect from "../components/selectListIndustry";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
 
+const initialPage = {
+  text: '',
+  image: ''
+}
+
 function CreateSuccessCaseScreen() {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
+
 
   const submitHandler = () => {
     setSuccessCase({
@@ -34,6 +40,10 @@ function CreateSuccessCaseScreen() {
       date: "2022-12-12",
       projectContact: "Juan Perez",
       avgTeamSize: 5,
+      successCase: [initialPage],
+      challenge: [initialPage],
+      improvements: [initialPage],
+      technologie: [initialPage]
     })
     navigate('successCase');
   };
@@ -90,7 +100,8 @@ function CreateSuccessCaseScreen() {
           <Grid item xs={12}>
             <OfferingSelect
               options={["Mobile", "Web", "Integration", "Development"]}
-            ></OfferingSelect>
+            >
+            </OfferingSelect>
           </Grid>
 
           <Grid item xs={12}>

@@ -7,7 +7,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import NavbarScreen from "../components/editionpage/NavbarScreen";
 
 function ChallengesEditionMode() {
-  const { navigate } = useContext(
+  const { navigate, challengePage, successCase } = useContext(
     ProcessContextProvider
   );
 
@@ -57,7 +57,7 @@ function ChallengesEditionMode() {
                 minHeight: "500px",
               }}
             >
-              <CaseInfoEdition />
+              <CaseInfoEdition screen="challenge" initValue={successCase.challenge[challengePage].text} />
             </Box>
           </Grid>
           <Grid item xs={5}>

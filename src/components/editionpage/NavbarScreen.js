@@ -21,6 +21,8 @@ export default function NavbarScreen() {
         fill: "black",
     };
 
+    console.log(screen)
+
     return (
         <Grid item xs={2}>
             <Box
@@ -37,7 +39,7 @@ export default function NavbarScreen() {
                 </Button>
                 <SuccesCaseButton
                     targetName={'successCase'}
-                    onClick={() => navigate('successCase')}
+                    onClick={() => navigate('successCase', screen,)}
                 >
                     Succes Case
                 </SuccesCaseButton>
@@ -68,13 +70,16 @@ export default function NavbarScreen() {
                         <Typography color="black">View</Typography>
                     </Button>
                 </Box>
-                <Box sx={buttonContainerStyle}>
-                    <Button>
-                        <SaveIcon sx={iconStyle} />
+                {
+                    screen === 'technologies' &&
+                    <Box sx={buttonContainerStyle}>
+                        <Button>
+                            <SaveIcon sx={iconStyle} />
 
-                        <Typography color="black">Save</Typography>
-                    </Button>
-                </Box>
+                            <Typography color="black">Save</Typography>
+                        </Button>
+                    </Box>
+                }
             </Box>
         </Grid>
     )

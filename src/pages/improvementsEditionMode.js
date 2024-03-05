@@ -7,7 +7,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import NavbarScreen from "../components/editionpage/NavbarScreen";
 
 function ImprovementsEditionMode() {
-  const { navigate } = useContext(
+  const { navigate, successCase, improvementsPage } = useContext(
     ProcessContextProvider
   );
 
@@ -57,7 +57,7 @@ function ImprovementsEditionMode() {
                 minHeight: "500px",
               }}
             >
-              <CaseInfoEdition />
+              <CaseInfoEdition screen="improvements" initValue={successCase.improvements[improvementsPage].text}/>
             </Box>
           </Grid>
           <Grid item xs={5}>
