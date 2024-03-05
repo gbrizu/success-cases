@@ -13,10 +13,10 @@ const EndCase = () => {
         height: '100vh',
       }}
     >
-      <div style={{ position: 'absolute', bottom: '16px', left: '16px' }}>
+      <div style={{ position: 'absolute', bottom: '16px', left: '1px' }}>
         <BackButton />
       </div>
-      <div style={{ position: 'absolute', bottom: '16px', right: '16px' }}>
+      <div style={{ position: 'absolute', bottom: '16px', right: '75px' }}>
         <NextButton />
       </div>
       <h1 style={{ color: 'red' }}>End</h1>
