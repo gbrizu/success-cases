@@ -56,8 +56,6 @@ function TechnologiesEditionMode() {
               }}
             >
               <CaseInfoEdition
-                screen="technologies"
-                initValue={successCase.technologie[technologiePage].text}
               />
             </Box>
           </Grid>

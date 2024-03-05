@@ -1,20 +1,26 @@
-import React, { createContext, useRef, useState } from 'react'
+import React, { createContext, useState } from 'react'
 
 export const ProcessContextProvider = createContext();
 
 export default function ProcessContext({ children }) {
     const [successCase, setSuccessCase] = useState({});
 
-    const [successCasePage, setSuccessCasePage] = useState(0);
-    const [challengePage, setChallengePage] = useState(0);
-    const [improvementsPage, setImprovementsPage] = useState(0);
-    const [technologiePage, setTechnologiePage] = useState(0);
+    // const [successCasePage, setSuccessCasePage] = useState(0);
+    // const [challengePage, setChallengePage] = useState(0);
+    // const [improvementsPage, setImprovementsPage] = useState(0);
+    // const [technologiePage, setTechnologiePage] = useState(0);
+
     const [screen, setScreen] = useState('createPage');
 
     const [successCaseText, setSuccessCaseText] = useState('');
     const [challengeText, setChallengeText] = useState('');
+    const [technologieText, setTechnologieText] = useState('');
+    const [improvementsText, setImprovementsText] = useState('');
 
-    console.log({successCaseText, challengeText})
+    const [successCaseFile, setSuccessCaseFile] = useState('')
+    const [challengeFile, setChallengeFile] = useState('')
+    const [technologieFile, setTechnologieFile] = useState('')
+    const [improvementsFile, setImprovementsFile] = useState('')
 
     // const newPageHandler = (type, content) => {
     //     if (type === 'successCase') {
@@ -37,29 +43,14 @@ export default function ProcessContext({ children }) {
     }
 
     const submitSuccessCaseHandler = (content) => {
-
-    }
-
-    const onChangeTextInput = (text, screen) => {
-        console.log({text, screen})
-        if (screen === 'successCase') {
-            if (successCase.successCase && successCase.successCase[successCasePage]) {
-                successCase.successCase[successCasePage].text = text;
-            }
-        }
-        else if (screen === 'challenge') {
-            if (successCase.challenge && successCase.challenge[challengePage]) {
-                successCase.challenge[challengePage].text = text;
-            }
-        } else if (screen === 'improvements') {
-            if (successCase.improvements && successCase.improvements[improvementsPage]) {
-                successCase.improvements[improvementsPage].text = text;
-            }
-        } else if (screen === 'technologie') {
-            if (successCase.technologie && successCase.technologie[technologiePage]) {
-                successCase.technologie[technologiePage].text = text;
-            }
-        }
+        setSuccessCase({
+            ...successCase,
+            successCase: [{ text: successCaseText, image: successCaseFile }],
+            challenge: [{ text: challengeText, image: challengeFile }],
+            improvements: [{ text: improvementsText, image: improvementsFile }],
+            technologie: [{ text: technologieText, image: technologieFile }],
+        });
+        console.log(successCase)
     }
 
     return (
@@ -68,17 +59,23 @@ export default function ProcessContext({ children }) {
             navigate,
             setSuccessCase,
             successCase,
-            // newPageHandler,
             submitSuccessCaseHandler,
-            onChangeTextInput,
-            successCasePage,
-            challengePage,
-            improvementsPage,
-            technologiePage,
             setSuccessCaseText,
             challengeText,
             successCaseText,
-            setChallengeText
+            setChallengeText,
+            setTechnologieText,
+            technologieText,
+            improvementsText,
+            setImprovementsText,
+            successCaseFile,
+            setSuccessCaseFile,
+            challengeFile,
+            setChallengeFile,
+            technologieFile,
+            setTechnologieFile,
+            improvementsFile,
+            setImprovementsFile
         }}>
             {children}
         </ProcessContextProvider.Provider>

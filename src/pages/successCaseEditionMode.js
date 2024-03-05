@@ -57,8 +57,6 @@ function SuccessCaseEditionMode() {
               }}
             >
               <CaseInfoEdition
-                screen="successCase"
-                initValue={successCase.successCase[successCasePage].text}
               />
             </Box>
           </Grid>

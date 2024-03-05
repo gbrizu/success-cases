@@ -1,15 +1,36 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Box from "@mui/material/Box";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useState } from "react";
 import { ProcessContextProvider } from "../../context/process.context";
 
 // En CaseInfoEdition.js
-export default function CaseInfoEdition({ initValue }) {
-  const { setChallengeText, setSuccessCaseText, screen, successCase, challengeText, successCaseText } = useContext(ProcessContextProvider);
+export default function CaseInfoEdition() {
+  const {
+    setChallengeText,
+    setSuccessCaseText,
+    screen,
+    challengeText,
+    successCaseText,
+    setTechnologieText,
+    technologieText,
+    improvementsText,
+    setImprovementsText
+  } = useContext(ProcessContextProvider);
 
-  const value = screen === 'challenge' ? challengeText : successCaseText;
+  let value = '';
+  if (screen === 'successCase') {
+    value = successCaseText;
+  }
+  else if (screen === 'challenge') {
+    value = challengeText;
+  }
+  else if (screen === 'improvement') {
+    value = improvementsText;
+  }
+  else if (screen === 'technologies') {
+    value = technologieText;
+  }
 
   return (
     <Box
@@ -30,23 +51,20 @@ export default function CaseInfoEdition({ initValue }) {
         <div>
           <ReactQuill
             theme="snow"
-            value={value} // Usa `initValue` directamente
+            value={value}
             onChange={(text) => {
               if (screen === 'successCase') {
-                setSuccessCaseText(text)
+                setSuccessCaseText(text);
               }
               else if (screen === 'challenge') {
-                setChallengeText(text)
-              } 
-              // else if (screen === 'improvements') {
-              //   if (successCase.improvements && successCase.improvements[0]) {
-              //     successCase.improvements[0].text = text;
-              //   }
-              // } else if (screen === 'technologie') {
-              //   if (successCase.technologie && successCase.technologie[0]) {
-              //     successCase.technologie[0].text = text;
-              //   }
-              // }
+                setChallengeText(text);
+              }
+              else if (screen === 'improvement') {
+                setImprovementsText(text);
+              }
+              else if (screen === 'technologies') {
+                setTechnologieText(text);
+              }
             }}
             style={{
               border: "2px solid black",

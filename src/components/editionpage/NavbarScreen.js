@@ -6,7 +6,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { ProcessContextProvider } from '../../context/process.context';
 
 export default function NavbarScreen() {
-    const { navigate, screen } = useContext(
+    const { navigate, screen, submitSuccessCaseHandler } = useContext(
         ProcessContextProvider
     );
 
@@ -71,7 +71,7 @@ export default function NavbarScreen() {
                 {
                     screen === 'technologies' &&
                     <Box sx={buttonContainerStyle}>
-                        <Button>
+                        <Button onClick={submitSuccessCaseHandler}>
                             <SaveIcon sx={iconStyle} />
 
                             <Typography color="black">Save</Typography>

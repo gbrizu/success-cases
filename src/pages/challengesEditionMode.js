@@ -58,8 +58,6 @@ function ChallengesEditionMode() {
               }}
             >
               <CaseInfoEdition
-                screen="challenge"
-                initValue={successCase.challenge[challengePage].text}
               />
             </Box>
           </Grid>
