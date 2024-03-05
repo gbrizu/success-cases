@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react'
+import { postSuccessCase } from '../services/successCaseServerCalls';
 
 export const ProcessContextProvider = createContext();
 
@@ -60,6 +61,7 @@ export default function ProcessContext({ children }) {
             technologie: [{ text: technologieText, image: await toBase64(technologieFile) }],
         });
         console.log(successCase)
+        // const res = postSuccessCase(successCase)
     }
 
     return (
