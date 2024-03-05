@@ -104,7 +104,7 @@ function FilterMainScreen() {
                             />
                         }
                     ></FormInfoInput>
-                                    <NextButton></NextButton>  // search button 
+                                     
 
                 </Grid>
 
