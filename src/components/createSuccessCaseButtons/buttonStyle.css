@@ -1,0 +1,28 @@
+.button {
+  background-color: white;
+  border: 2px solid rgb(187, 185, 185);
+  width: 150px;
+  height: 50px;
+  border-radius: 30px;
+  color: black;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  padding: 10px 20px; /* Adjust padding as needed */
+  cursor: pointer;
+  margin-bottom: 25px; /* Adjust margin as needed */
+}
+
+.aquamarine-button:hover {
+  background-color: darkcyan; /* Change color on hover if desired */
+}
+
+.button.active {
+  /* Estilos para botones activos */
+  background-color: rgb(
+    13,
+    186,
+    186
+  ); /* Puedes ajustar este color según tu preferencia */
+  color: #fff; /* Color del texto en botones activos */
+  /* Otros estilos ... */
+}

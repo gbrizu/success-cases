@@ -1,21 +1,24 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
-import DataTable from './components/dataTable/dataTable';
-import MainLayout from './components/MainLayout';
-import MainLayout2 from './components/MainLayout2';
-import EditionUtils from './components/editionModeUtils/editionModeUtils';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import MainScreen from "./pages/mainScreen";
+import CreateSuccessCaseScreen from "./pages/createSuccessCaseScreen";
+import ProcessContext from "./context/process.context";
+import SuccessCaseProcessCreationScreen from "./pages/successCaseProcessCreationScreen";
+import CaseInfo from "./components/caseInfo/caseInfo";
 
 function App() {
-  const options = ['1','2'];
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout />} />
-        <Route path="layout2" element={<MainLayout2 />} />
-        <Route path="layout3" element={<EditionUtils />} />
-      </Routes>
-    </BrowserRouter>
-    
+    <ProcessContext>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainScreen />} />
+          <Route
+            path="NewSuccessCases"
+            element={<SuccessCaseProcessCreationScreen />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </ProcessContext>
   );
 }
 

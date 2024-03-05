@@ -1,10 +1,11 @@
 import * as React from "react";
-import { useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
+import { Theme, useTheme } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { Grid } from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
 import { Typography } from "@mui/material";
 
 const ITEM_HEIGHT = 48;
@@ -21,30 +22,31 @@ const MenuProps = {
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
+      personName.indexOf(name) !== -1
+        ? theme.typography.fontWeightMedium
+        : theme.typography.fontWeightRegular,
   };
 }
 
-export default function OfferingSelect({ value, onChange, options }) {
+export default function MultipleSelect({ value, onChange, options }) {
   const theme = useTheme();
+
   return (
     <div
       style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
     >
-      <Typography variant="h6" style={{ marginRight: "4.8rem" }}>
-        Offering
+      <Typography variant="h6" style={{ marginRight: "4.6rem" }}>
+        Industry
       </Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Select Offering</InputLabel>
+        <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           multiple
           value={value}
           onChange={onChange}
-          input={<OutlinedInput label="Select Offering" />}
+          input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
           {options.map((name) => (
