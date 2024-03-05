@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { ProcessContextProvider } from "../context/process.context";
 import CaseInfoEdition from "../components/caseInfoEdition/caseInfoEdition";
@@ -7,11 +7,17 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import NavbarScreen from "../components/editionpage/NavbarScreen";
 
 function TechnologiesEditionMode() {
-  const { navigate, technologiePage, successCase } = useContext(
-    ProcessContextProvider
-  );
+  const { navigate, technologiePage, successCase, onChangeTextInput } =
+    useContext(ProcessContextProvider);
 
-  
+  const [text, setText] = useState("");
+
+  const handleTextChange = (newText) => {
+    setText(newText);
+
+    onChangeTextInput(newText, "technologie");
+  };
+
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
       <Grid container spacing={2} justifyContent="flex-start">
@@ -24,7 +30,7 @@ function TechnologiesEditionMode() {
               marginTop: "1rem",
               justifyContent: "start",
             }}
-            onClick={() => navigate('createPage')}
+            onClick={() => navigate("createPage")}
           >
             <ArrowBackIcon style={{ justifyContent: "start" }} />
           </Button>
@@ -51,14 +57,16 @@ function TechnologiesEditionMode() {
             {/* Envuelve CaseInfoEdition en un contenedor con fondo y borde negro */}
             <Box
               sx={{
-                //border: "2px solid black",
-                //borderRadius: "5px",
                 height: "50%",
                 maxHeight: "500px",
                 minHeight: "500px",
               }}
             >
-              <CaseInfoEdition screen="technologies" initValue={successCase.technologie[technologiePage].text} />
+              <CaseInfoEdition
+                screen="technologies"
+                initValue={text}
+                setText={handleTextChange} // Pasas la función que actualiza el estado local y global.
+              />
             </Box>
           </Grid>
           <Grid item xs={5}>

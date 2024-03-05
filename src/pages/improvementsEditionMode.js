@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { ProcessContextProvider } from "../context/process.context";
 import CaseInfoEdition from "../components/caseInfoEdition/caseInfoEdition";
@@ -7,9 +7,15 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import NavbarScreen from "../components/editionpage/NavbarScreen";
 
 function ImprovementsEditionMode() {
-  const { navigate, successCase, improvementsPage } = useContext(
-    ProcessContextProvider
-  );
+  const { navigate, successCase, improvementsPage, onChangeTextInput } =
+    useContext(ProcessContextProvider);
+
+  const [text, setText] = useState("");
+
+  const handleTextChange = (newText) => {
+    setText(newText);
+    onChangeTextInput(newText, "improvements");
+  };
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -23,7 +29,7 @@ function ImprovementsEditionMode() {
               marginTop: "1rem",
               justifyContent: "start",
             }}
-            onClick={() => navigate('createPage')}
+            onClick={() => navigate("createPage")}
           >
             <ArrowBackIcon style={{ justifyContent: "start" }} />
           </Button>
@@ -57,7 +63,11 @@ function ImprovementsEditionMode() {
                 minHeight: "500px",
               }}
             >
-              <CaseInfoEdition screen="improvements" initValue={successCase.improvements[improvementsPage].text}/>
+              <CaseInfoEdition
+                screen="improvements"
+                initValue={text}
+                setText={handleTextChange} // Pasas la función que actualiza el estado local y global.
+              />
             </Box>
           </Grid>
           <Grid item xs={5}>
@@ -80,7 +90,6 @@ function ImprovementsEditionMode() {
           </Grid>
 
           <NavbarScreen />
-
         </Grid>
       </Grid>
     </Container>

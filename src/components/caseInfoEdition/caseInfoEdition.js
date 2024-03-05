@@ -1,27 +1,15 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
-import { ProcessContextProvider } from '../../context/process.context';
+import { ProcessContextProvider } from "../../context/process.context";
 
-export default function CaseInfoEdition({ screen, initValue }) {
-  const { onChangeTextInput } = useContext(
-    ProcessContextProvider
-  );
+// En CaseInfoEdition.js
+export default function CaseInfoEdition({ screen, initValue, setText }) {
+  const { onChangeTextInput } = useContext(ProcessContextProvider);
 
-  
-  const [convertedText, setConvertedText] = useState(initValue ? initValue : "Some default content");
-
-  // Estilo personalizado para el borde del editor de texto
-  const quillStyle = {
-    border: "2px solid black", // Cambia el color del borde a gris oscuro
-    borderRadius: "5px",
-    minWidth: "470px", // Limita la anchura del editor
-    maxWidth: "470px", // Limita la anchura del editor
-    minHeight: "551px",
-  };
-
+  // Utiliza directamente `initValue` sin mantener un estado interno para `convertedText`
   return (
     <Box
       height="100vh"
@@ -41,12 +29,18 @@ export default function CaseInfoEdition({ screen, initValue }) {
         <div>
           <ReactQuill
             theme="snow"
-            value={convertedText}
+            value={initValue} // Usa `initValue` directamente
             onChange={(text) => {
-              setConvertedText(text);
-              onChangeTextInput(text, screen);
+              setText(text); // Actualiza el texto en el componente padre
+              onChangeTextInput(text, screen); // Actualiza el contexto
             }}
-            style={quillStyle} // Aplica el estilo personalizado al editor de texto
+            style={{
+              border: "2px solid black",
+              borderRadius: "5px",
+              minWidth: "470px",
+              maxWidth: "470px",
+              minHeight: "551px",
+            }}
           />
         </div>
       </Box>

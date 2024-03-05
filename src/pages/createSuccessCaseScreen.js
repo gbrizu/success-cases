@@ -25,9 +25,9 @@ import { ProcessContextProvider } from "../context/process.context";
 import { useState } from "react";
 
 const initialPage = {
-  text: '',
-  image: ''
-}
+  text: "",
+  image: "",
+};
 
 function CreateSuccessCaseScreen() {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
@@ -39,21 +39,49 @@ function CreateSuccessCaseScreen() {
   const [avgTeamSizeValue, setAvgTeamSizeValue] = useState("");
   const [isPublic, setIsPublic] = useState(false);
 
-
   const submitHandler = () => {
     setSuccessCase({
-      offering: "Mobile",
-      client: "Mercado Libre",
-      industry: ["Entertainment", "Healthcare"],
-      date: "2022-12-12",
-      projectContact: "Juan Perez",
-      avgTeamSize: 5,
+      offering: selectedOffering,
+      client: selectedClient,
+      industry: selectedIndustry,
+      date: selectedDate,
+      projectContact: projectContactValue,
+      avgTeamSize: avgTeamSizeValue,
+      isPublic: isPublic,
       successCase: [initialPage],
       challenge: [initialPage],
       improvements: [initialPage],
-      technologie: [initialPage]
-    })
-    navigate('successCase');
+      technologie: [initialPage],
+    });
+    navigate("successCase");
+  };
+
+  const handleOfferingChange = (event) => {
+    setSelectedOffering(event.target.value);
+  };
+
+  const handleClientChange = (event) => {
+    setSelectedClient(event.target.value);
+  };
+
+  const handleIndustryChange = (event) => {
+    setSelectedIndustry(event.target.value);
+  };
+
+  const handleProjectContactChange = (event) => {
+    setProjectContactValue(event.target.value);
+  };
+
+  const handleAvgTeamSizeChange = (event) => {
+    setAvgTeamSizeValue(event.target.value);
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  const handleIsPublicChange = (event) => {
+    setIsPublic(event.target.checked);
   };
 
   return (
@@ -116,8 +144,7 @@ function CreateSuccessCaseScreen() {
               value={selectedOffering}
               onChange={handleOfferingChange}
               options={["Mobile", "Web", "Integration", "Development"]}
-            >
-            </OfferingSelect>
+            ></OfferingSelect>
           </Grid>
 
           <Grid item xs={12}>

@@ -5,11 +5,18 @@ import CaseInfoEdition from "../components/caseInfoEdition/caseInfoEdition";
 import AddImage from "../components/addButton/addImage"; // Importa tu componente AddImage
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import NavbarScreen from "../components/editionpage/NavbarScreen";
+import { useState } from "react";
 
 function ChallengesEditionMode() {
-  const { navigate, challengePage, successCase } = useContext(
-    ProcessContextProvider
-  );
+  const { navigate, challengePage, successCase, onChangeTextInput } =
+    useContext(ProcessContextProvider);
+
+  const [text, setText] = useState("");
+
+  const handleTextChange = (newText) => {
+    setText(newText);
+    onChangeTextInput(newText, "challenge");
+  };
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -23,7 +30,7 @@ function ChallengesEditionMode() {
               marginTop: "1rem",
               justifyContent: "start",
             }}
-            onClick={() => navigate('createPage')}
+            onClick={() => navigate("createPage")}
           >
             <ArrowBackIcon style={{ justifyContent: "start" }} />
           </Button>
@@ -57,7 +64,11 @@ function ChallengesEditionMode() {
                 minHeight: "500px",
               }}
             >
-              <CaseInfoEdition screen="challenge" initValue={successCase.challenge[challengePage].text} />
+              <CaseInfoEdition
+                screen="challenge"
+                initValue={text}
+                setText={handleTextChange}
+              />
             </Box>
           </Grid>
           <Grid item xs={5}>
