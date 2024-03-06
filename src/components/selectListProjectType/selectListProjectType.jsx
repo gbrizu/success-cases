@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { Theme, useTheme } from '@mui/material/styles';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-
+import * as React from "react";
+import { Theme, useTheme } from "@mui/material/styles";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -20,16 +20,6 @@ const MenuProps = {
   },
 };
 
-
-function getStyles(name, projectType, theme) {
-  return {
-    fontWeight:
-      projectType.indexOf(name) !== -1
-        ? theme.typography.fontWeightMedium
-        : theme.typography.fontWeightRegular,
-  };
-}
-
 export default function SelectListProjectType({ options }) {
   const theme = useTheme();
   const [projectType, SetProjectType] = React.useState([]);
@@ -38,37 +28,37 @@ export default function SelectListProjectType({ options }) {
     const {
       target: { value },
     } = event;
-    SetProjectType(
-      typeof value === 'string' ? value.split(',') : value,
-    );
+    SetProjectType(typeof value === "string" ? value.split(",") : value);
   };
   
 
   return (
-    <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
-    <Typography variant="h6" style={{ marginRight: "2rem" }}>Project Type</Typography>
-    <FormControl sx={{ m: 1, width: 300 }}>
-      <InputLabel id="demo-multiple-name-label">Project type</InputLabel>
-      <Select
-        labelId="demo-multiple-name-label"
-        id="demo-multiple-name"
-        value={projectType}
-        onChange={handleChange}
-        MenuProps={MenuProps}
-      >
-        {options.map((item) => (
-          <MenuItem
-            key={item.id}
-            value={item.id}
-            style={getStyles(item.name, projectType, theme)}
-          >
-            {item.name}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
-  </div>
-  
-  
-    );    
+    <div
+      style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
+    >
+      <Typography variant="h6" style={{ marginRight: "2rem" }}>
+        Project Type
+      </Typography>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-name-label">Project type</InputLabel>
+        <Select
+          labelId="demo-multiple-name-label"
+          id="demo-multiple-name"
+          value={projectType}
+          onChange={handleChange}
+          input={<OutlinedInput label="Project Type" />}
+          MenuProps={MenuProps}
+        >
+          {options.map((item) => (
+            <MenuItem
+              key={item.id}
+              value={item.id}
+            >
+              {item.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </div>
+  );
 }
