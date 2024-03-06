@@ -62,7 +62,7 @@ export default function CreateSuccessCaseScreen() {
       projectTypeId: selectedProjectType,
       startDate: startDateValue,
       finishDate: finishDateValue,
-      projectContact: projectContactValue,
+      contactId: projectContactValue,
       teamSize: avgTeamSizeValue,
       isPublic: isPublic,
       successCase: [initialPage],
