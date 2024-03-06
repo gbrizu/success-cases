@@ -84,7 +84,7 @@ export default function CaseDetails({ successCase }) {
 
   return (
     <div style={{width: "100%", justifyContent:"center", display:"flex"}}>
-    <div style={{ width: "60rem", padding:"2rem", border:"solid", marginTop:"5rem" }}>
+    <div style={{ width: "auto", padding:"2rem", border:"solid", marginTop:"5rem" }}>
       <h1 style={{ fontSize: "4.5rem", color: "red", textAlign:"center" }}>Success Case Details</h1>
       
       <CaseDetailsInfo label={"Client"} info={succesCase.Client.name}></CaseDetailsInfo>
@@ -95,7 +95,7 @@ export default function CaseDetails({ successCase }) {
       <CaseDetailsInfo label={"Project contact"} info={succesCase.Contact.email}></CaseDetailsInfo>
       <CaseDetailsInfo label={"Avg. Team size"} info={succesCase.teamsize}></CaseDetailsInfo>
       
-      <div style={{ marginTop: "1.5rem", display:"flex", justifyContent:"space-between" }}>
+      <div style={{ marginTop: "1.5rem", display:"flex", justifyContent:"space-around" }}>
       <Link to={"/"}>
         <Button
           variant="contained"
