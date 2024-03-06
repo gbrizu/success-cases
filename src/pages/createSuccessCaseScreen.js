@@ -8,6 +8,7 @@ import {
   IconButton,
   Input,
   InputAdornment,
+  Autocomplete,
   Switch,
   TextField,
   Tooltip,
@@ -15,13 +16,13 @@ import {
 } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AccountCircle } from "@mui/icons-material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import OfferingSelectList from "../components/selectListSuccessCaseScreen/offeringSelectList";
 import ClientSelectList from "../components/selectListSuccessCaseScreen/clientSelectList";
 import IndustrySelectList from "../components/selectListSuccessCaseScreen/industrySelectList";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
+import {getContacts} from "../services/successCaseServerCalls"
 
 const initialPage = {
   text: "",
@@ -39,6 +40,7 @@ export default function CreateSuccessCaseScreen() {
   const [isPublic, setIsPublic] = useState(false);
   const [startDateValue, setStartDateValue] = useState();
   const [finishDateValue, setFinishDateValue] = useState();
+  const [contacts, setContacts] = useState([]);
 
   const submitHandler = () => {
     console.log(selectedOffering);
@@ -102,6 +104,11 @@ export default function CreateSuccessCaseScreen() {
     }
   }, [startDateValue, finishDateValue]);
 
+  useEffect(()=>{
+
+    getContacts().then(result => setContacts(result))
+    
+  },[])
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
       <Grid container spacing={2}>
@@ -204,12 +211,6 @@ export default function CreateSuccessCaseScreen() {
               label={"Date"}
               customInput={
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  {/* <DatePicker
-                    variant="standard"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                  /> */}
-                  {/* <DemoContainer components={['DateTimePicker']}> */}
                   <DatePicker
                     label="From"
                     value={startDateValue}
@@ -233,16 +234,23 @@ export default function CreateSuccessCaseScreen() {
               label={"Project contact"}
               customInput={
                 <FormControl variant="standard">
-                  <Input
-                    id="input-with-icon-adornment"
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <AccountCircle />
-                      </InputAdornment>
-                    }
-                    onChange={handleProjectContactChange}
-                    value={projectContactValue}
-                  />
+                  <Autocomplete
+                  freeSolo
+                  id="projectContact"
+                  disableClearable
+                  fullWidth={true}
+                  options={contacts.map((option) => option.email)}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Search"
+                      InputProps={{
+                        ...params.InputProps,
+                        type: 'search',
+                      }}
+                    />
+                  )}
+                />
                 </FormControl>
               }
             ></FormInfoInput>
