@@ -26,10 +26,10 @@ function FilterMainScreen() {
     const [contact, setContact] = useState([]);
 
 
-    useEffect ( () => {
+    useEffect(() => {
         getClients().then((result) => {
-                setClients(result);
-            });
+            setClients(result);
+        });
         getProyectsTypes().then((result) => {
             setProjectType(result);
         });
@@ -39,12 +39,12 @@ function FilterMainScreen() {
         getContacts().then((result) => {
             setContact(result);
         });
-    },[])
+    }, [])
 
     return (
         <div>
             <Grid containerInput
-          sx={{ width: "inherit", position: "relative" }}>
+                sx={{ width: "inherit", position: "relative" }}>
                 <Grid item xs={12}>
                     {(clients.length > 0) && (<SelectListClients options={clients}></SelectListClients>)}
                 </Grid>
@@ -69,18 +69,20 @@ function FilterMainScreen() {
                         label={"Date"}
                         width={"18.5rem"}
                         customInput={
-                          <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker variant="standard" />
-                          </LocalizationProvider>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker variant="standard" />
+                            </LocalizationProvider>
                         }
                     ></FormInfoInput>
                 </Grid>
 
                 <Grid item xs={12}>
                     <FormInfoInput
+                        id="projectContactsAutoComplete"
                         marginRight={'1.2rem'}
                         customStyleClass={"form-margin"}
                         label={"Project contact"}
+                        value={contact}
                         customInput={
                             <Autocomplete
                                 disablePortal
@@ -88,29 +90,27 @@ function FilterMainScreen() {
                                 options={contact.map((option) => option.name)}
                                 sx={{ width: "18.5rem" }}
                                 renderInput={(params) => <TextField {...params} label="Project contact" />}
-                                // renderInput={(params) => (
-                                //     <TextField
-                                //         {...params}
-                                //         label="Project contact"
-                                //         InputProps={{
-                                //             startAdornment: (
-                                //                 <InputAdornment position="start">
-                                //                     <AccountCircle />
-                                //                 </InputAdornment>
-                                //             ),
-                                //         }}
-                                //     />
-                                // )}
+                            // renderInput={(params) => (
+                            //     <TextField
+                            //         {...params}
+                            //         label="Project contact"
+                            //         InputProps={{
+                            //             startAdornment: (
+                            //                 <InputAdornment position="start">
+                            //                     <AccountCircle />
+                            //                 </InputAdornment>
+                            //             ),
+                            //         }}
+                            //     />
+                            // )}
                             />
                         }
                     ></FormInfoInput>
-                                     
+
 
                 </Grid>
 
-
             </Grid>
-
 
         </div>
     );
