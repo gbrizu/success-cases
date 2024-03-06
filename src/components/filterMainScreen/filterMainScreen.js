@@ -49,13 +49,13 @@ function FilterMainScreen() {
                     {(clients.length > 0) && (<SelectListClients options={clients}></SelectListClients>)}
                 </Grid>
 
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                     <MultipleSelect options={industries}></MultipleSelect>
                 </Grid>
 
                 <Grid item xs={12}>
                     <SelectListProjectType options={type}></SelectListProjectType>
-                </Grid>
+                </Grid> */}
 
                 <Grid item xs={12}>
 

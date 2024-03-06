@@ -1,26 +1,18 @@
-import { Grid, Button, Box, Container } from "@mui/material";
 import { Grid, Button, Container } from "@mui/material";
 import "../../App.css";
 import CaseDetailsInfo from "./caseDetailsInfo";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { getSuccessCaseById } from "../../services/successCaseServerCalls";
+import { useContext, useEffect } from "react";
+import { CaseViewContextProvider } from "../../context/casesView.context";
 
 export default function CaseDetails({ successCase }) {
-  function backButton() {
-    alert("This should go to cases list");
-  }
+  const { navigate } = useContext(
+    CaseViewContextProvider
+);
 
-  function nextButton() {
-    alert("This should go to case description");
-  }
 
-  const infoList = [
-    { label: "Client", info: "Info" }
-  ]
-
-  const params = useParams();
+  const { id } = useParams();
 
   const succesCase = {
     id: 1,
@@ -113,14 +105,13 @@ export default function CaseDetails({ successCase }) {
         </Button>
       </Link>
 
-      <Link to="info">
         <Button
           variant="contained"
           style={{ marginLeft: "100px" }}
+          onClick={() => navigate('viewSuccessCaseDescription')}
         >
           Next
         </Button>
-      </Link>
         
       </div>
       </div>

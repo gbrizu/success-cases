@@ -3,20 +3,15 @@ import Box from '@mui/material/Box';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Button } from '@mui/material';
+import { useContext } from "react";
+import { CaseViewContextProvider } from "../../context/casesView.context";
 
-const EndCase = () => {
+const CaseDetailsButtons = ({prevPage, nextPage }) => {
+  const { navigate } = useContext(
+    CaseViewContextProvider
+);
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: '100vh',
-        flexDirection: 'column'
-      }}
-    >
-      <h1 style={{ color: 'red' }}>End</h1>
-      <div style={{ display: "flex", justifyContent: "space-between", margin: '1rem', width: '100%' }}>
+      <div style={{ display: "flex", justifyContent: "space-between", margin: '1rem' }}>
         <Button
           startIcon={<ArrowBackIosNewIcon
             sx={{ color: 'yellow' }}
@@ -32,8 +27,7 @@ const EndCase = () => {
 
         >Next</Button>
       </div>
-    </Box>
   );
 };
 
-export default EndCase;
+export default CaseDetailsButtons;
