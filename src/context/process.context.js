@@ -55,10 +55,10 @@ export default function ProcessContext({ children }) {
     const submitSuccessCaseHandler = async () => {
         setSuccessCase({
             ...successCase,
-            successCase: [{ text: successCaseText, image: await toBase64(successCaseFile) }],
-            challenge: [{ text: challengeText, image: await toBase64(challengeFile) }],
-            improvements: [{ text: improvementsText, image: await toBase64(improvementsFile) }],
-            technologie: [{ text: technologieText, image: await toBase64(technologieFile) }],
+            successCase: { text: successCaseText, image: await toBase64(successCaseFile) },
+            challenge: { text: challengeText, image: await toBase64(challengeFile) },
+            improvements: { text: improvementsText, image: await toBase64(improvementsFile) },
+            technologie: { text: technologieText, image: await toBase64(technologieFile) },
         });
         console.log(successCase)
         // const res = postSuccessCase(successCase)
