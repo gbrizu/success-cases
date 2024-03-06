@@ -31,7 +31,6 @@ export default function CaseInfo({ title, description, images, prevPage, nextPag
                 <Grid item xs={12} md={6}>
                     <div style={{ height: '50%', marginTop: '25%' }}>
                         <div style={{ height: '50%' }}>
-                            <CaseInfoImagesCarousel></CaseInfoImagesCarousel>
                         </div>
                     </div>
                 </Grid>
