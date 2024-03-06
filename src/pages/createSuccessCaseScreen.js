@@ -51,8 +51,8 @@ export default function CreateSuccessCaseScreen() {
   const submitHandler = () => {
     setSuccessCase({
       title: projectTitleValue,
-      offering: selectedOffering,
-      client: selectedClient,
+      offeringId: selectedOffering,
+      clientId: selectedClient,
       industry: selectedIndustry,
       startDate: startDateValue,
       finishDate: finishDateValue,
