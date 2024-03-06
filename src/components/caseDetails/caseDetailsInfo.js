@@ -11,15 +11,15 @@ export default function CaseDetailsInfo({ label, info }) {
 
   return (
     <div style={{fontSize: "1.5rem"}}>
-      <Grid container>
-        <Grid item xs={3}>
+      <Grid container spacing={0} style={{display:"flex", justifyContent:"center"}} >
+        <Grid item xs={5}  >
           <item>
             <div className="labelDetails">{label}</div>
           </item>
         </Grid>
-        <Grid item>
+        <Grid item xs={5}>
           <item>
-            <div className="valueDetails">{info}</div>
+            <div style={{overflowWrap:"break-word"}} className="valueDetails">{info}</div>
           </item>
         </Grid>
       </Grid>

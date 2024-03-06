@@ -18,7 +18,7 @@ function App() {
   return (
     <ProcessContext>
       <CaseViewContext>
-      <BrowserRouter>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<MainScreen />} />
             <Route
@@ -26,7 +26,7 @@ function App() {
               element={<SuccessCaseProcessCreationScreen />}
             />
             <Route path="succesCase/:id" element={<CaseViewProcessScreen />} />
-            <Route path='*' exact={true} element={<ErrorScreen/>} />
+            <Route path='*' element={<ErrorScreen/>} />
           </Routes>
         </BrowserRouter>
       </CaseViewContext>

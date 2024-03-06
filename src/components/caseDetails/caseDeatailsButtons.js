@@ -16,14 +16,14 @@ const CaseDetailsButtons = ({prevPage, nextPage }) => {
           startIcon={<ArrowBackIosNewIcon
             sx={{ color: 'yellow' }}
             fontSize='large' />}
-
+            onClick={() => navigate(prevPage)}
         >Back</Button>
 
         <Button
           endIcon={<ArrowForwardIosIcon
             sx={{ color: 'yellow' }}
             fontSize='large' />}
-
+            onClick={() => navigate(nextPage)}
 
         >Next</Button>
       </div>
