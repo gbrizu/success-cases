@@ -15,21 +15,21 @@ function MainScreen() {
     const fetchData = async () => {
 
       const getSuccessCases = await getSuccessCase();
-      
+
       const data = getSuccessCases.map((successCase) => {
-      return {
-       id: successCase.id,
-       client: successCase.Client.name,
-       industry: successCase.Industry.name,
-       projectType: successCase.ProjectType.name,
-       referrer: successCase.Contact.name,
-       date: successCase.startdate + " " + successCase.finishdate,
-      };
+        return {
+          id: successCase.id,
+          client: successCase.Client.name,
+          industry: successCase.Industry.name,
+          projectType: successCase.ProjectType.name,
+          referrer: successCase.Contact.name,
+          date: successCase.startdate + " " + successCase.finishdate,
+        };
       });
 
       setData(data);
     }
-  
+
     fetchData();
   }, []);
 
@@ -53,9 +53,7 @@ function MainScreen() {
 
         <Grid item xs={12} md={6}>
           <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
-            <Link to="/layout2">
-              <CreateButton />
-            </Link>
+            <CreateButton />
           </Box>
         </Grid>
       </Grid>
