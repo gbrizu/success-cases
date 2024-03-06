@@ -20,6 +20,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import OfferingSelectList from "../components/selectListSuccessCaseScreen/offeringSelectList";
 import ClientSelectList from "../components/selectListSuccessCaseScreen/clientSelectList";
 import IndustrySelectList from "../components/selectListSuccessCaseScreen/industrySelectList";
+import ProjectTypeSelectList from "../components/selectListSuccessCaseScreen/projectTypeSelectList";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
 import { getClients, getOfferings } from "../services/successCaseServerCalls";
@@ -33,6 +34,7 @@ export default function CreateSuccessCaseScreen() {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
   const [projectTitleValue, setProjectTitleValue] = useState("");
   const [selectedOffering, setSelectedOffering] = useState("");
+  const [selectedProjectType, setSelectedProjectType] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState([]);
   const [projectContactValue, setProjectContactValue] = useState("");
@@ -77,6 +79,10 @@ export default function CreateSuccessCaseScreen() {
 
   const handleIndustryChange = (event) => {
     setSelectedIndustry(event.target.value);
+  };
+
+  const handleProjectTypeChange = (event) => {
+    selectedProjectType(event.target.value);
   };
 
   const handleProjectContactChange = (event) => {
@@ -209,6 +215,14 @@ export default function CreateSuccessCaseScreen() {
               onChange={handleClientChange}
               options={clients}
             />
+          </Grid>
+
+          <Grid item xs={12}>
+            <ProjectTypeSelectList
+              value={selectedProjectType}
+              onChange={handleProjectTypeChange}
+              options={["EJEMPLO", "EJEMPLO", "EJEMPLO", "EJEMPLO"]}
+            ></ProjectTypeSelectList>
           </Grid>
 
           <Grid item xs={12}>
