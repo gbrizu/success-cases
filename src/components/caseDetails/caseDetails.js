@@ -84,7 +84,7 @@ export default function CaseDetails({ successCase }) {
 
   useEffect(() => {
     let succesCase2 = {
-      id: 1,
+      id: 2,
       title: "Ejemplo de Caso de Éxito 1",
       startdate: "2024-02-29",
       finishdate: "2024-03-10",

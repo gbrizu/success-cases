@@ -6,6 +6,7 @@ import { CaseViewContextProvider } from "../context/casesView.context";
 import CaseDetails from "../components/caseDetails/caseDetails";
 import CaseInfo from "../components/caseInfo/caseInfo";
 import EndCase from "../components/endCase/endCase";
+import { useParams } from "react-router-dom";
 
 const viewSuccessCaseScreens = [
   "viewCaseDetails",
@@ -19,6 +20,8 @@ const viewSuccessCaseScreens = [
 export default function CaseViewProcessScreen() {
   const { screen: screenName } = useContext(CaseViewContextProvider);
   const { actualSuccessCase } = useContext(CaseViewContextProvider);
+  const { id } = useParams();
+
 
   const screens = [
     {
@@ -71,6 +74,14 @@ export default function CaseViewProcessScreen() {
     }
   ];
 
-  const currentScreen = screens.find((screen) => screen.name === screenName);
+  let currentScreen;
+  
+  if(id != actualSuccessCase.id) {
+    console.log(id)
+    console.log(actualSuccessCase.id)
+    currentScreen = screens[0]
+  } else {
+    currentScreen = screens.find((screen) => screen.name === screenName);
+  }
   return <>{currentScreen && currentScreen.component}</>;
 }
