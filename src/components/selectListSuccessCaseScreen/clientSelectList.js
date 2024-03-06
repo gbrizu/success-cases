@@ -49,10 +49,7 @@ export default function ClientSelectList({ options = [], value, onChange }) {
           MenuProps={MenuProps}
         >
           {options.map((option) => (
-            <MenuItem
-              key={option.id}
-              value={option.id}
-            >
+            <MenuItem key={option.id} value={option.id}>
               {option.name}
             </MenuItem>
           ))}

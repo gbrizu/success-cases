@@ -21,8 +21,13 @@ import IndustrySelectList from "../components/selectListSuccessCaseScreen/indust
 import ProjectTypeSelectList from "../components/selectListSuccessCaseScreen/projectTypeSelectList";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
-import { getContacts } from "../services/successCaseServerCalls"
-import { getClients, getOfferings } from "../services/successCaseServerCalls";
+import { getContacts } from "../services/successCaseServerCalls";
+import {
+  getClients,
+  getOfferings,
+  getIndustries,
+  getProyectsTypes,
+} from "../services/successCaseServerCalls";
 
 const initialPage = {
   text: "",
@@ -43,15 +48,18 @@ export default function CreateSuccessCaseScreen() {
   const [finishDateValue, setFinishDateValue] = useState();
   const [contacts, setContacts] = useState([]);
 
-  const [offerings, setOfferings] = useState();
-  const [clients, setClients] = useState();
+  const [offerings, setOfferings] = useState([]);
+  const [clients, setClients] = useState([]);
+  const [industry, setIndustry] = useState([]);
+  const [projectType, setProjectType] = useState([]);
 
   const submitHandler = () => {
     setSuccessCase({
       title: projectTitleValue,
       offeringId: selectedOffering,
       clientId: selectedClient,
-      industry: selectedIndustry,
+      industryId: selectedIndustry,
+      projectTypeId: selectedProjectType,
       startDate: startDateValue,
       finishDate: finishDateValue,
       projectContact: projectContactValue,
@@ -82,7 +90,7 @@ export default function CreateSuccessCaseScreen() {
   };
 
   const handleProjectTypeChange = (event) => {
-    selectedProjectType(event.target.value);
+    setSelectedProjectType(event.target.value);
   };
 
   const handleProjectContactChange = (event) => {
@@ -99,21 +107,34 @@ export default function CreateSuccessCaseScreen() {
 
   const getOfferingsInit = () => {
     getOfferings().then((response) => {
-      setOfferings(response)
+      setOfferings(response);
     });
-  }
+  };
 
   const getClientsInit = () => {
     getClients().then((response) => {
-      setClients(response)
+      setClients(response);
     });
-  }
+  };
+
+  const getIndustryInit = () => {
+    getIndustries().then((response) => {
+      setIndustry(response);
+    });
+  };
+
+  const getProjectTypeInit = () => {
+    getProyectsTypes().then((response) => {
+      setProjectType(response);
+    });
+  };
 
   useEffect(() => {
     getOfferingsInit();
     getClientsInit();
-  }, [])
-
+    getIndustryInit();
+    getProjectTypeInit();
+  }, []);
 
   useEffect(() => {
     if (finishDateValue < startDateValue) {
@@ -129,12 +150,9 @@ export default function CreateSuccessCaseScreen() {
     }
   }, [startDateValue, finishDateValue]);
 
-
   useEffect(() => {
-
-    getContacts().then(result => setContacts(result))
-
-  }, [])
+    getContacts().then((result) => setContacts(result));
+  }, []);
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -227,7 +245,7 @@ export default function CreateSuccessCaseScreen() {
             <ProjectTypeSelectList
               value={selectedProjectType}
               onChange={handleProjectTypeChange}
-              options={["EJEMPLO", "EJEMPLO", "EJEMPLO", "EJEMPLO"]}
+              options={projectType}
             ></ProjectTypeSelectList>
           </Grid>
 
@@ -235,7 +253,7 @@ export default function CreateSuccessCaseScreen() {
             <IndustrySelectList
               value={selectedIndustry}
               onChange={handleIndustryChange}
-              options={["Entertainment", "Healthcare", "Banking", "Education"]}
+              options={industry}
             ></IndustrySelectList>
           </Grid>
 

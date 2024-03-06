@@ -34,18 +34,14 @@ export default function IndustrySelectList({ value, onChange, options }) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          multiple
           value={value}
           onChange={onChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-            >
-              {name}
+          {options.map((option) => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.name}
             </MenuItem>
           ))}
         </Select>
