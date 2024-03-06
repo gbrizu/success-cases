@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -44,6 +45,7 @@ export default function SelectListProjectType({ options }) {
           id="demo-multiple-name"
           value={projectType}
           onChange={handleChange}
+          input={<OutlinedInput label="Project Type" />}
           MenuProps={MenuProps}
         >
           {options.map((item) => (
