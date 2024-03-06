@@ -1,15 +1,12 @@
 import * as React from 'react';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import FixedContainer from '../containerCaseInfoDescription/caseInfoDescription';
 import { Grid } from '@mui/material';
-import Button from '@mui/material/Button';
 import { useContext } from "react";
 import { CaseViewContextProvider } from '../../context/casesView.context';
-import CaseInfoImagesCarousel from '../caseInfoImage/caseInfoImagesCarousel';
 import CaseDetailsButtons from '../caseDetails/caseDeatailsButtons';
+import CaseInfoImage from '../caseInfoImage/caseInfoImage';
 
-export default function CaseInfo({ title, description, images, prevPage, nextPage }) {
+export default function CaseInfo({ title, description, image, prevPage, nextPage }) {
     const { navigate } = useContext(
         CaseViewContextProvider
     );
@@ -31,6 +28,7 @@ export default function CaseInfo({ title, description, images, prevPage, nextPag
                 <Grid item xs={12} md={6}>
                     <div style={{ height: '50%', marginTop: '25%' }}>
                         <div style={{ height: '50%' }}>
+                            <CaseInfoImage images={[image]}></CaseInfoImage>
                         </div>
                     </div>
                 </Grid>

@@ -18,11 +18,7 @@ const viewSuccessCaseScreens = [
 
 export default function CaseViewProcessScreen() {
   const { screen: screenName } = useContext(CaseViewContextProvider);
-  let { successCase } = useContext(CaseViewContextProvider);
-
-  successCase = {
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut etiam sit amet nisl purus. Nullam eget felis eget nunc lobortis mattis aliquam faucibus purus. Amet venenatis urna cursus eget nunc. Risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."
-  }
+  const { actualSuccessCase } = useContext(CaseViewContextProvider);
 
   const screens = [
     {
@@ -33,7 +29,8 @@ export default function CaseViewProcessScreen() {
       name: viewSuccessCaseScreens[1],
       component: <CaseInfo
         title={'Success Case'}
-        description={successCase.description}
+        description={actualSuccessCase.CaseDetail ? actualSuccessCase.CaseDetail.text_detail : ''}
+        image={actualSuccessCase.CaseDetail ? actualSuccessCase.CaseDetail.image_detail : ''}
         prevPage={viewSuccessCaseScreens[0]}
         nextPage={viewSuccessCaseScreens[2]}
       />
@@ -42,7 +39,7 @@ export default function CaseViewProcessScreen() {
       name: viewSuccessCaseScreens[2],
       component: <CaseInfo
         title={'Challenges'}
-        description={successCase.description}
+        description={actualSuccessCase.Challenge ? actualSuccessCase.Challenge.text_ch : ''}
         prevPage={viewSuccessCaseScreens[1]}
         nextPage={viewSuccessCaseScreens[3]}
       />
@@ -51,7 +48,7 @@ export default function CaseViewProcessScreen() {
       name: viewSuccessCaseScreens[3],
       component: <CaseInfo
         title={'Improvements'}
-        description={successCase.description}
+        description={actualSuccessCase.Improvement ? actualSuccessCase.Improvement.text_imp : ''}
         prevPage={viewSuccessCaseScreens[2]}
         nextPage={viewSuccessCaseScreens[4]}
       />
@@ -60,7 +57,7 @@ export default function CaseViewProcessScreen() {
       name: viewSuccessCaseScreens[4],
       component: <CaseInfo
         title={'Technologies'}
-        description={successCase.description}
+        description={actualSuccessCase.Improvement ? actualSuccessCase.Improvement.text_imp : ''}
         prevPage={viewSuccessCaseScreens[3]}
         nextPage={viewSuccessCaseScreens[5]}
       />
@@ -68,11 +65,12 @@ export default function CaseViewProcessScreen() {
     {
       name: viewSuccessCaseScreens[5],
       component: <EndCase
+        prevPage={viewSuccessCaseScreens[4]}
+        initialPage={viewSuccessCaseScreens[0]}
       />
     }
   ];
 
   const currentScreen = screens.find((screen) => screen.name === screenName);
-  console.log(currentScreen)
   return <>{currentScreen && currentScreen.component}</>;
 }
