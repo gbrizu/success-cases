@@ -58,13 +58,13 @@ export default function ClientSelectList({ options, value, onChange }) {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options.map((option) => (
+          {options.map((name) => (
             <MenuItem
-              key={option.id}
-              value={option.id}
-              style={getStyles(option.name, personName, theme)}
+              key={name}
+              value={name}
+              style={getStyles(name, personName, theme)}
             >
-              {option.name}
+              {name}
             </MenuItem>
           ))}
         </Select>

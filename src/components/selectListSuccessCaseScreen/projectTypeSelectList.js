@@ -43,19 +43,14 @@ export default function ProjectTypeSelectList({ value, onChange, options }) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          multiple
           value={value}
           onChange={onChange}
           input={<OutlinedInput label="Select Project Type" />}
           MenuProps={MenuProps}
         >
-          {options.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, value, theme)}
-            >
-              {name}
+          {options.map((option) => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.name}
             </MenuItem>
           ))}
         </Select>
