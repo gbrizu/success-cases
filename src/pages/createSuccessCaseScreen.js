@@ -20,9 +20,11 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import OfferingSelectList from "../components/selectListSuccessCaseScreen/offeringSelectList";
 import ClientSelectList from "../components/selectListSuccessCaseScreen/clientSelectList";
 import IndustrySelectList from "../components/selectListSuccessCaseScreen/industrySelectList";
+import ProjectTypeSelectList from "../components/selectListSuccessCaseScreen/projectTypeSelectList";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
 import {getContacts} from "../services/successCaseServerCalls"
+import { getClients, getOfferings } from "../services/successCaseServerCalls";
 
 const initialPage = {
   text: "",
@@ -32,7 +34,8 @@ const initialPage = {
 export default function CreateSuccessCaseScreen() {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
   const [projectTitleValue, setProjectTitleValue] = useState("");
-  const [selectedOffering, setSelectedOffering] = useState([]);
+  const [selectedOffering, setSelectedOffering] = useState("");
+  const [selectedProjectType, setSelectedProjectType] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState([]);
   const [projectContactValue, setProjectContactValue] = useState("");
@@ -42,8 +45,10 @@ export default function CreateSuccessCaseScreen() {
   const [finishDateValue, setFinishDateValue] = useState();
   const [contacts, setContacts] = useState([]);
 
+  const [offerings, setOfferings] = useState();
+  const [clients, setClients] = useState();
+
   const submitHandler = () => {
-    console.log(selectedOffering);
     setSuccessCase({
       title: projectTitleValue,
       offering: selectedOffering,
@@ -78,6 +83,10 @@ export default function CreateSuccessCaseScreen() {
     setSelectedIndustry(event.target.value);
   };
 
+  const handleProjectTypeChange = (event) => {
+    selectedProjectType(event.target.value);
+  };
+
   const handleProjectContactChange = (event) => {
     setProjectContactValue(event.target.value);
   };
@@ -89,6 +98,24 @@ export default function CreateSuccessCaseScreen() {
   const handleIsPublicChange = (event) => {
     setIsPublic(event.target.checked);
   };
+
+  const getOfferingsInit = () => {
+    getOfferings().then((response) => {
+      setOfferings(response)
+    });
+  }
+
+  const getClientsInit = () => {
+    getClients().then((response) => {
+      setClients(response)
+    });
+  }
+
+  useEffect(() => {
+    getOfferingsInit();
+    getClientsInit();
+  }, [])
+  
 
   useEffect(() => {
     if (finishDateValue < startDateValue) {
@@ -104,11 +131,13 @@ export default function CreateSuccessCaseScreen() {
     }
   }, [startDateValue, finishDateValue]);
 
+
   useEffect(()=>{
 
     getContacts().then(result => setContacts(result))
     
   },[])
+
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
       <Grid container spacing={2}>
@@ -184,7 +213,7 @@ export default function CreateSuccessCaseScreen() {
             <OfferingSelectList
               value={selectedOffering}
               onChange={handleOfferingChange}
-              options={["Mobile", "Web", "Integration", "Development"]}
+              options={offerings}
             ></OfferingSelectList>
           </Grid>
 
@@ -192,8 +221,16 @@ export default function CreateSuccessCaseScreen() {
             <ClientSelectList
               value={selectedClient}
               onChange={handleClientChange}
-              options={["Mercado Libre", "Pedidos ya"]}
+              options={clients}
             />
+          </Grid>
+
+          <Grid item xs={12}>
+            <ProjectTypeSelectList
+              value={selectedProjectType}
+              onChange={handleProjectTypeChange}
+              options={["EJEMPLO", "EJEMPLO", "EJEMPLO", "EJEMPLO"]}
+            ></ProjectTypeSelectList>
           </Grid>
 
           <Grid item xs={12}>

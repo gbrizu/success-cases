@@ -106,7 +106,7 @@ export const postSuccessCase = (successCaseObj) => {
         "teamsize": teamSize,
         "ispublic": isPublic,
         "industryid": industryId,
-        "offeringid": offeringId,
+        "offeringid": offeringId, 
         "clientid": clientId,
         "projecttypeid": projectTypeId,
         "contactid": contactId,

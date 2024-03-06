@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import "./clientSelectList.css";
 import { Typography } from "@mui/material";
 
 const ITEM_HEIGHT = 48;
@@ -19,41 +18,44 @@ const MenuProps = {
   },
 };
 
-export default function ClientSelectList({ options = [], value, onChange }) {
-  const theme = useTheme();
-  const [personName, setPersonName] = useState(value || []);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(typeof value === "string" ? value.split(",") : value);
-    onChange && onChange(event);
+function getStyles(name, personName, theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
   };
+}
 
+export default function ProjectTypeSelectList({ value, onChange, options }) {
+  const theme = useTheme();
   return (
     <div
       style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
     >
-      <Typography variant="h6" style={{ marginRight: "6rem" }}>
-        Client
+      <Typography variant="h6" style={{ marginRight: "4.8rem" }}>
+        Project Type
       </Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+        <InputLabel id="demo-multiple-name-label">
+          Select Project Type
+        </InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput label="Name" />}
+          multiple
+          value={value}
+          onChange={onChange}
+          input={<OutlinedInput label="Select Project Type" />}
           MenuProps={MenuProps}
         >
-          {options.map((option) => (
+          {options.map((name) => (
             <MenuItem
-              key={option.id}
-              value={option.id}
+              key={name}
+              value={name}
+              style={getStyles(name, value, theme)}
             >
-              {option.name}
+              {name}
             </MenuItem>
           ))}
         </Select>

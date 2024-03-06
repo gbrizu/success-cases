@@ -18,16 +18,7 @@ const MenuProps = {
   },
 };
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-export default function OfferingSelectList({ value, onChange, options }) {
+export default function OfferingSelectList({ value, onChange, options = [] }) {
   const theme = useTheme();
   return (
     <div
@@ -41,19 +32,17 @@ export default function OfferingSelectList({ value, onChange, options }) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          multiple
           value={value}
           onChange={onChange}
           input={<OutlinedInput label="Select Offering" />}
           MenuProps={MenuProps}
         >
-          {options.map((name) => (
+          {options.map((option) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, value, theme)}
+              key={option.id}
+              value={option.id}
             >
-              {name}
+              {option.name}
             </MenuItem>
           ))}
         </Select>
