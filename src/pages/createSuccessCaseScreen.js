@@ -6,8 +6,6 @@ import {
   FormControlLabel,
   Grid,
   IconButton,
-  Input,
-  InputAdornment,
   Autocomplete,
   Switch,
   TextField,
