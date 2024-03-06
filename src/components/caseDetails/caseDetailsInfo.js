@@ -10,9 +10,9 @@ export default function CaseDetailsInfo({ label, info }) {
   }
 
   return (
-    <>
+    <div style={{fontSize: "1.5rem"}}>
       <Grid container>
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           <item>
             <div className="labelDetails">{label}</div>
           </item>
@@ -23,6 +23,6 @@ export default function CaseDetailsInfo({ label, info }) {
           </item>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 }
