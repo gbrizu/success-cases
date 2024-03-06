@@ -25,6 +25,25 @@ function FilterMainScreen() {
 
     const [contact, setContact] = useState([]);
 
+    const [dateFrom, setDateFrom] = useState()
+
+    const [dateTo, setDateTo] = useState()
+
+    useEffect(() => {
+        if (dateTo < dateFrom && dateTo !== null) {
+            alert("El valor Seleccionado es menor a la fecha inicial")
+            setDateTo(null)
+        }
+
+    }, [dateTo])
+
+    useEffect(() => {
+        if (dateTo < dateFrom && dateFrom !== null) {
+            alert("El valor Seleccionado es mayor a la fecha final")
+            setDateFrom(null)
+        }
+
+    }, [dateFrom])
 
     useEffect(() => {
         getClients().then((result) => {
@@ -64,9 +83,27 @@ function FilterMainScreen() {
 
                 <Grid item xs={12}>
                     <FormInfoInput
-                        marginRight={'6.9rem'}
+                        marginRight={'4rem'}
                         customStyleClass={"form-margin"}
-                        label={"Date"}
+                        label={"Date from"}
+                        width={"18.5rem"}
+                        customInput={
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="From"
+                                    value={dateFrom}
+                                    onChange={(newValue) => setDateFrom(newValue)}
+                                />
+
+                            </LocalizationProvider>
+                        }
+                    ></FormInfoInput>
+                </Grid>
+                <Grid item xs={12}>
+                    <FormInfoInput
+                        marginRight={'5.5rem'}
+                        customStyleClass={"form-margin"}
+                        label={"Date to"}
                         width={"18.5rem"}
                         customInput={
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
