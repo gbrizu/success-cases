@@ -21,7 +21,7 @@ import IndustrySelectList from "../components/selectListSuccessCaseScreen/indust
 import ProjectTypeSelectList from "../components/selectListSuccessCaseScreen/projectTypeSelectList";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
-import {getContacts} from "../services/successCaseServerCalls"
+import { getContacts } from "../services/successCaseServerCalls"
 import { getClients, getOfferings } from "../services/successCaseServerCalls";
 
 const initialPage = {
@@ -113,7 +113,7 @@ export default function CreateSuccessCaseScreen() {
     getOfferingsInit();
     getClientsInit();
   }, [])
-  
+
 
   useEffect(() => {
     if (finishDateValue < startDateValue) {
@@ -130,11 +130,11 @@ export default function CreateSuccessCaseScreen() {
   }, [startDateValue, finishDateValue]);
 
 
-  useEffect(()=>{
+  useEffect(() => {
 
     getContacts().then(result => setContacts(result))
-    
-  },[])
+
+  }, [])
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -267,25 +267,28 @@ export default function CreateSuccessCaseScreen() {
               marginRight={"1.4rem"}
               customStyleClass={"form-margin"}
               label={"Project contact"}
+              id={"projectContact"}
               customInput={
                 <FormControl variant="standard">
                   <Autocomplete
-                  freeSolo
-                  id="projectContact"
-                  disableClearable
-                  fullWidth={true}
-                  options={contacts.map((option) => option.email)}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Search"
-                      InputProps={{
-                        ...params.InputProps,
-                        type: 'search',
-                      }}
-                    />
-                  )}
-                />
+                    freeSolo
+                    id="projectContact"
+                    value={projectContactValue}
+                    onChange={handleProjectContactChange}
+                    disableClearable
+                    fullWidth={true}
+                    options={contacts.map((option) => option.email)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Search"
+                        InputProps={{
+                          ...params.InputProps,
+                          type: 'search',
+                        }}
+                      />
+                    )}
+                  />
                 </FormControl>
               }
             ></FormInfoInput>
