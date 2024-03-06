@@ -32,7 +32,7 @@ const initialPage = {
 export default function CreateSuccessCaseScreen() {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
   const [projectTitleValue, setProjectTitleValue] = useState("");
-  const [selectedOffering, setSelectedOffering] = useState([]);
+  const [selectedOffering, setSelectedOffering] = useState("");
   const [selectedClient, setSelectedClient] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState([]);
   const [projectContactValue, setProjectContactValue] = useState("");
@@ -41,8 +41,8 @@ export default function CreateSuccessCaseScreen() {
   const [startDateValue, setStartDateValue] = useState();
   const [finishDateValue, setFinishDateValue] = useState();
 
-  const [offerings, setOfferings] = useState([]);
-  const [clients, setClients] = useState([]);
+  const [offerings, setOfferings] = useState();
+  const [clients, setClients] = useState();
 
   const submitHandler = () => {
     setSuccessCase({
