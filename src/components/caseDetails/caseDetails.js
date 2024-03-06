@@ -1,6 +1,7 @@
 import { Grid, Button, Container } from "@mui/material";
 import "../../App.css";
 import CaseDetailsInfo from "./caseDetailsInfo";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getSuccessCaseById } from "../../services/successCaseServerCalls";
@@ -102,21 +103,23 @@ export default function CaseDetails({ successCase }) {
       <CaseDetailsInfo label={"Avg. Team size"} info={succesCase.teamsize}></CaseDetailsInfo>
       
       <div style={{ marginTop: "1.5rem", display:"flex", justifyContent:"space-between" }}>
+      <Link to={"/"}>
         <Button
           variant="contained"
-          onClick={backButton}
-          style={{width:"10rem", height:"4rem"}}
+          style={{ marginRight: "100px" }}
         >
           Back
         </Button>
-        
+      </Link>
+
+      <Link to="info">
         <Button
           variant="contained"
-          onClick={nextButton}
-          style={{width:"10rem", height:"4rem" }}
+          style={{ marginLeft: "100px" }}
         >
           Next
         </Button>
+      </Link>
         
       </div>
       </div>
