@@ -22,6 +22,7 @@ import ClientSelectList from "../components/selectListSuccessCaseScreen/clientSe
 import IndustrySelectList from "../components/selectListSuccessCaseScreen/industrySelectList";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
+import { getOfferings } from "../services/successCaseServerCalls";
 
 const initialPage = {
   text: "",
@@ -40,8 +41,10 @@ export default function CreateSuccessCaseScreen() {
   const [startDateValue, setStartDateValue] = useState();
   const [finishDateValue, setFinishDateValue] = useState();
 
+  const [offerings, setOfferings] = useState([]);
+  const [client, setClient] = useState([]);
+
   const submitHandler = () => {
-    console.log(selectedOffering);
     setSuccessCase({
       title: projectTitleValue,
       offering: selectedOffering,
@@ -87,6 +90,17 @@ export default function CreateSuccessCaseScreen() {
   const handleIsPublicChange = (event) => {
     setIsPublic(event.target.checked);
   };
+
+  const getOfferingsInit = () => {
+    getOfferings().then((response) => {
+      setOfferings(response)
+    });
+  }
+
+  useEffect(() => {
+    getOfferingsInit();
+  }, [])
+  
 
   useEffect(() => {
     if (finishDateValue < startDateValue) {
@@ -177,7 +191,7 @@ export default function CreateSuccessCaseScreen() {
             <OfferingSelectList
               value={selectedOffering}
               onChange={handleOfferingChange}
-              options={["Mobile", "Web", "Integration", "Development"]}
+              options={offerings}
             ></OfferingSelectList>
           </Grid>
 
