@@ -1,6 +1,6 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-//Este layout es para probar el routing!!!!
+
 function MainLayout2() {
   return (
     <Container maxWidth='l'  sx={{ bgcolor: 'blue' }}>

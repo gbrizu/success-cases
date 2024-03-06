@@ -130,19 +130,6 @@ function FilterMainScreen() {
                                 options={contact.map((option) => option.name)}
                                 sx={{ width: "18.5rem" }}
                                 renderInput={(params) => <TextField {...params} label="Project contact" />}
-                            // renderInput={(params) => (
-                            //     <TextField
-                            //         {...params}
-                            //         label="Project contact"
-                            //         InputProps={{
-                            //             startAdornment: (
-                            //                 <InputAdornment position="start">
-                            //                     <AccountCircle />
-                            //                 </InputAdornment>
-                            //             ),
-                            //         }}
-                            //     />
-                            // )}
                             />
                         }
                     ></FormInfoInput>
