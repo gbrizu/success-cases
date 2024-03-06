@@ -22,7 +22,7 @@ import ClientSelectList from "../components/selectListSuccessCaseScreen/clientSe
 import IndustrySelectList from "../components/selectListSuccessCaseScreen/industrySelectList";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
-import { getOfferings } from "../services/successCaseServerCalls";
+import { getClients, getOfferings } from "../services/successCaseServerCalls";
 
 const initialPage = {
   text: "",
@@ -42,7 +42,7 @@ export default function CreateSuccessCaseScreen() {
   const [finishDateValue, setFinishDateValue] = useState();
 
   const [offerings, setOfferings] = useState([]);
-  const [client, setClient] = useState([]);
+  const [clients, setClients] = useState([]);
 
   const submitHandler = () => {
     setSuccessCase({
@@ -97,8 +97,15 @@ export default function CreateSuccessCaseScreen() {
     });
   }
 
+  const getClientsInit = () => {
+    getClients().then((response) => {
+      setClients(response)
+    });
+  }
+
   useEffect(() => {
     getOfferingsInit();
+    getClientsInit();
   }, [])
   
 
@@ -115,6 +122,7 @@ export default function CreateSuccessCaseScreen() {
       setFinishDateValue(null);
     }
   }, [startDateValue, finishDateValue]);
+
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -199,7 +207,7 @@ export default function CreateSuccessCaseScreen() {
             <ClientSelectList
               value={selectedClient}
               onChange={handleClientChange}
-              options={["Mercado Libre", "Pedidos ya"]}
+              options={clients}
             />
           </Grid>
 
