@@ -47,13 +47,13 @@ export default function OfferingSelectList({ value, onChange, options }) {
           input={<OutlinedInput label="Select Offering" />}
           MenuProps={MenuProps}
         >
-          {options.map((name) => (
+          {options.map((option) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, value, theme)}
+              key={option.id}
+              value={option.id}
+              style={getStyles(option.name, value, theme)}
             >
-              {name}
+              {option.name}
             </MenuItem>
           ))}
         </Select>

@@ -23,6 +23,7 @@ import IndustrySelectList from "../components/selectListSuccessCaseScreen/indust
 import ProjectTypeSelectList from "../components/selectListSuccessCaseScreen/projectTypeSelectList";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
+import { getClients, getOfferings } from "../services/successCaseServerCalls";
 
 const initialPage = {
   text: "",
@@ -42,8 +43,10 @@ export default function CreateSuccessCaseScreen() {
   const [startDateValue, setStartDateValue] = useState();
   const [finishDateValue, setFinishDateValue] = useState();
 
+  const [offerings, setOfferings] = useState([]);
+  const [clients, setClients] = useState([]);
+
   const submitHandler = () => {
-    console.log(selectedOffering);
     setSuccessCase({
       title: projectTitleValue,
       offering: selectedOffering,
@@ -94,6 +97,24 @@ export default function CreateSuccessCaseScreen() {
     setIsPublic(event.target.checked);
   };
 
+  const getOfferingsInit = () => {
+    getOfferings().then((response) => {
+      setOfferings(response)
+    });
+  }
+
+  const getClientsInit = () => {
+    getClients().then((response) => {
+      setClients(response)
+    });
+  }
+
+  useEffect(() => {
+    getOfferingsInit();
+    getClientsInit();
+  }, [])
+  
+
   useEffect(() => {
     if (finishDateValue < startDateValue) {
       alert("El valor Seleccionado es menor a la fecha inicial");
@@ -107,6 +128,7 @@ export default function CreateSuccessCaseScreen() {
       setFinishDateValue(null);
     }
   }, [startDateValue, finishDateValue]);
+
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -183,7 +205,7 @@ export default function CreateSuccessCaseScreen() {
             <OfferingSelectList
               value={selectedOffering}
               onChange={handleOfferingChange}
-              options={["Mobile", "Web", "Integration", "Development"]}
+              options={offerings}
             ></OfferingSelectList>
           </Grid>
 
@@ -191,7 +213,7 @@ export default function CreateSuccessCaseScreen() {
             <ClientSelectList
               value={selectedClient}
               onChange={handleClientChange}
-              options={["Mercado Libre", "Pedidos ya"]}
+              options={clients}
             />
           </Grid>
 
