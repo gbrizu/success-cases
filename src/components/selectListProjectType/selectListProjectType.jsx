@@ -1,9 +1,11 @@
-import React from "react";
-import { useTheme } from "@mui/material/styles";
+import * as React from "react";
+import { Theme, useTheme } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 const ITEM_HEIGHT = 48;
@@ -17,8 +19,6 @@ const MenuProps = {
   },
 };
 
-const names = ["Entertainment", "Healthcare", "Banking", "Education"];
-
 function getStyles(name, projectType, theme) {
   return {
     fontWeight:
@@ -28,40 +28,40 @@ function getStyles(name, projectType, theme) {
   };
 }
 
-export default function SelectListProjectType({ value, onChange }) {
+export default function SelectListProjectType({ options }) {
   const theme = useTheme();
+  const [projectType, SetProjectType] = React.useState([]);
 
   const handleChange = (event) => {
     const {
-      target: { value: selectedValues },
+      target: { value },
     } = event;
-    onChange(selectedValues);
+    SetProjectType(typeof value === "string" ? value.split(",") : value);
   };
 
   return (
     <div
       style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
     >
-      <Typography variant="h6" style={{ marginRight: "4rem" }}>
+      <Typography variant="h6" style={{ marginRight: "2rem" }}>
         Project Type
       </Typography>
-      <FormControl>
+      <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-name-label">Project type</InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          multiple
-          value={value}
+          value={projectType}
           onChange={handleChange}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {options.map((item) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, value, theme)}
+              key={item.id}
+              value={item.id}
+              style={getStyles(item.name, projectType, theme)}
             >
-              {name}
+              {item.name}
             </MenuItem>
           ))}
         </Select>
