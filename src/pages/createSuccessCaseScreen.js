@@ -38,7 +38,7 @@ const initialPage = {
 export default function CreateSuccessCaseScreen() {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
   const [projectTitleValue, setProjectTitleValue] = useState("");
-  const [selectedOffering, setSelectedOffering] = useState([]);
+  const [selectedOffering, setSelectedOffering] = useState("");
   const [selectedProjectType, setSelectedProjectType] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState([]);

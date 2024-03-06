@@ -19,7 +19,7 @@ const MenuProps = {
   },
 };
 
-export default function ClientSelectList({ options, value, onChange }) {
+export default function ClientSelectList({ options = [], value, onChange }) {
   const theme = useTheme();
   const [personName, setPersonName] = useState(value || []);
 
@@ -30,15 +30,6 @@ export default function ClientSelectList({ options, value, onChange }) {
     setPersonName(typeof value === "string" ? value.split(",") : value);
     onChange && onChange(event);
   };
-
-  function getStyles(name, personName, theme) {
-    return {
-      fontWeight:
-        personName.indexOf(name) === -1
-          ? theme.typography.fontWeightRegular
-          : theme.typography.fontWeightMedium,
-    };
-  }
 
   return (
     <div
@@ -52,19 +43,14 @@ export default function ClientSelectList({ options, value, onChange }) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          multiple
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
+          {options.map((option) => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.name}
             </MenuItem>
           ))}
         </Select>

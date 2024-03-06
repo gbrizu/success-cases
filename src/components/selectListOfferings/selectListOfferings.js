@@ -18,14 +18,6 @@ const MenuProps = {
   },
 };
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
 
 export default function OfferingSelect({ value, onChange, options }) {
   const theme = useTheme();
@@ -51,7 +43,6 @@ export default function OfferingSelect({ value, onChange, options }) {
             <MenuItem
               key={name}
               value={name}
-              style={getStyles(name, value, theme)}
             >
               {name}
             </MenuItem>
