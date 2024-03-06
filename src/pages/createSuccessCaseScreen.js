@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
   Container,
@@ -22,7 +22,6 @@ import SelectListClients from "../components/selectListClients/selectListClients
 import MultipleSelect from "../components/selectListIndustry";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
-import { useState } from "react";
 
 const initialPage = {
   text: "",
@@ -31,20 +30,26 @@ const initialPage = {
 
 function CreateSuccessCaseScreen() {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
+  const [projectTitleValue, setProjectTitleValue] = useState("");
   const [selectedOffering, setSelectedOffering] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
   const [projectContactValue, setProjectContactValue] = useState("");
   const [avgTeamSizeValue, setAvgTeamSizeValue] = useState("");
   const [isPublic, setIsPublic] = useState(false);
+  const [dateFrom, setDateFrom] = useState();
+  const [dateTo, setDateTo] = useState();
 
   const submitHandler = () => {
     setSuccessCase({
+      projectTitle: projectTitleValue,
       offering: selectedOffering,
       client: selectedClient,
       industry: selectedIndustry,
-      date: selectedDate,
+      date: {
+        from: dateFrom,
+        to: dateTo,
+      },
       projectContact: projectContactValue,
       avgTeamSize: avgTeamSizeValue,
       isPublic: isPublic,
@@ -54,6 +59,10 @@ function CreateSuccessCaseScreen() {
       technologie: [initialPage],
     });
     navigate("successCase");
+  };
+
+  const handleProjectTitleChange = (event) => {
+    setProjectTitleValue(event.target.value);
   };
 
   const handleOfferingChange = (event) => {
@@ -76,13 +85,16 @@ function CreateSuccessCaseScreen() {
     setAvgTeamSizeValue(event.target.value);
   };
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
   const handleIsPublicChange = (event) => {
     setIsPublic(event.target.checked);
   };
+
+  useEffect(() => {
+    if (dateTo < dateFrom) {
+      alert("El valor Seleccionado es menor a la fecha inicial");
+      setDateTo(null);
+    }
+  }, [dateTo, setDateTo]);
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -139,17 +151,17 @@ function CreateSuccessCaseScreen() {
           containerInput
           sx={{ width: "inherit", marginLeft: "25rem", position: "relative" }}
         >
-          <Grid item xs={12}>
-          <FormInfoInput
-              marginRight={"6.4rem"}
+          <Grid item xs={12} paddingRight={"19.5rem"}>
+            <FormInfoInput
+              marginRight={"7.4rem"}
               customStyleClass={"form-margin"}
-              label={"Name"}
+              label={"Title"}
               width={300}
               customInput={
                 <TextField
                   inputProps={{ type: "text" }}
-                  onChange={handleAvgTeamSizeChange}
-                  value={avgTeamSizeValue}
+                  onChange={handleProjectTitleChange}
+                  value={projectTitleValue}
                 />
               }
             ></FormInfoInput>
@@ -186,11 +198,18 @@ function CreateSuccessCaseScreen() {
               label={"Date"}
               customInput={
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  {/* <DemoContainer components={['DateTimePicker']}> */}
                   <DatePicker
-                    variant="standard"
-                    value={selectedDate}
-                    onChange={handleDateChange}
+                    label="From"
+                    value={dateFrom}
+                    onChange={(newValue) => setDateFrom(newValue)}
                   />
+                  <DatePicker
+                    label="To"
+                    value={dateTo}
+                    onChange={(newValue) => setDateTo(newValue)}
+                  />
+                  {/* </DemoContainer> */}
                 </LocalizationProvider>
               }
             ></FormInfoInput>
