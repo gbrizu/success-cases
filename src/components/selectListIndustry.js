@@ -28,8 +28,19 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelect({ value, onChange, options }) {
+export default function MultipleSelect({ options }) {
   const theme = useTheme();
+  const [personName, setPersonName] = React.useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill, we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
 
   return (
     <div
@@ -44,18 +55,18 @@ export default function MultipleSelect({ value, onChange, options }) {
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           multiple
-          value={value}
-          onChange={onChange}
+          value={personName}
+          onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options.map((name) => (
+          {options.map((item) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, value, theme)}
+              key={item.id}
+              value={item.id}
+              style={getStyles(item.name, personName, theme)}
             >
-              {name}
+              {item.name}
             </MenuItem>
           ))}
         </Select>
