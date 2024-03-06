@@ -157,7 +157,7 @@ export default function CaseDetails({ successCase }) {
 
   return (
     <div style={{ width: "100%", justifyContent: "center", display: "flex" }}>
-      <div style={{ width: "60rem", padding: "2rem", border: "solid", marginTop: "5rem" }}>
+      <div style={{ width: "auto", padding: "2rem", border: "solid", marginTop: "5rem" }}>
         <h1 style={{ fontSize: "4.5rem", color: "red", textAlign: "center" }}>Success Case Details</h1>
 
         <CaseDetailsInfo label={"Client"} info={succesCase.Client.name}></CaseDetailsInfo>
