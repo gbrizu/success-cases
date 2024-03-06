@@ -19,15 +19,6 @@ const MenuProps = {
   },
 };
 
-function getStyles(name, projectType, theme) {
-  return {
-    fontWeight:
-      projectType.indexOf(name) !== -1
-        ? theme.typography.fontWeightMedium
-        : theme.typography.fontWeightRegular,
-  };
-}
-
 export default function SelectListProjectType({ options }) {
   const theme = useTheme();
   const [projectType, SetProjectType] = React.useState([]);
@@ -59,7 +50,6 @@ export default function SelectListProjectType({ options }) {
             <MenuItem
               key={item.id}
               value={item.id}
-              style={getStyles(item.name, projectType, theme)}
             >
               {item.name}
             </MenuItem>

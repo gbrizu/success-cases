@@ -25,11 +25,30 @@ function FilterMainScreen() {
 
     const [contact, setContact] = useState([]);
 
+    const [dateFrom, setDateFrom] = useState()
 
-    useEffect ( () => {
+    const [dateTo, setDateTo] = useState()
+
+    useEffect(() => {
+        if (dateTo < dateFrom && dateTo !== null) {
+          alert("El valor Seleccionado es menor a la fecha inicial")
+          setDateTo(null)
+        }
+    
+      }, [dateTo])
+
+      useEffect(() => {
+        if (dateTo < dateFrom && dateFrom !== null) {
+          alert("El valor Seleccionado es mayor a la fecha final")
+          setDateFrom(null)
+        }
+    
+      }, [dateFrom])
+
+    useEffect(() => {
         getClients().then((result) => {
-                setClients(result);
-            });
+            setClients(result);
+        });
         getProyectsTypes().then((result) => {
             setProjectType(result);
         });
@@ -39,12 +58,12 @@ function FilterMainScreen() {
         getContacts().then((result) => {
             setContact(result);
         });
-    },[])
+    }, [])
 
     return (
         <div>
             <Grid containerInput
-          sx={{ width: "inherit", position: "relative" }}>
+                sx={{ width: "inherit", position: "relative" }}>
                 <Grid item xs={12}>
                     {(clients.length > 0) && (<SelectListClients options={clients}></SelectListClients>)}
                 </Grid>
@@ -64,14 +83,37 @@ function FilterMainScreen() {
 
                 <Grid item xs={12}>
                     <FormInfoInput
-                        marginRight={'6.9rem'}
+                        marginRight={'4rem'}
                         customStyleClass={"form-margin"}
-                        label={"Date"}
+                        label={"Date from"}
                         width={"18.5rem"}
                         customInput={
-                          <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker variant="standard" />
-                          </LocalizationProvider>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="From"
+                                    value={dateFrom}
+                                    onChange={(newValue) => setDateFrom(newValue)}
+                                />
+
+                            </LocalizationProvider>
+                        }
+                    ></FormInfoInput>
+                </Grid>
+                <Grid item xs={12}>
+                    <FormInfoInput
+                        marginRight={'5.5rem'}
+                        customStyleClass={"form-margin"}
+                        label={"Date to"}
+                        width={"18.5rem"}
+                        customInput={
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="To"
+                                    value={dateTo}
+                                    onChange={(newValue) => setDateTo(newValue)}
+                                />
+
+                            </LocalizationProvider>
                         }
                     ></FormInfoInput>
                 </Grid>
@@ -88,23 +130,23 @@ function FilterMainScreen() {
                                 options={contact.map((option) => option.name)}
                                 sx={{ width: "18.5rem" }}
                                 renderInput={(params) => <TextField {...params} label="Project contact" />}
-                                // renderInput={(params) => (
-                                //     <TextField
-                                //         {...params}
-                                //         label="Project contact"
-                                //         InputProps={{
-                                //             startAdornment: (
-                                //                 <InputAdornment position="start">
-                                //                     <AccountCircle />
-                                //                 </InputAdornment>
-                                //             ),
-                                //         }}
-                                //     />
-                                // )}
+                            // renderInput={(params) => (
+                            //     <TextField
+                            //         {...params}
+                            //         label="Project contact"
+                            //         InputProps={{
+                            //             startAdornment: (
+                            //                 <InputAdornment position="start">
+                            //                     <AccountCircle />
+                            //                 </InputAdornment>
+                            //             ),
+                            //         }}
+                            //     />
+                            // )}
                             />
                         }
                     ></FormInfoInput>
-                                     
+
 
                 </Grid>
 
