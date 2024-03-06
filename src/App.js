@@ -16,6 +16,8 @@ export const UserContext = createContext()
 function App() {
   return (
     <ProcessContext>
+      <CaseViewContext>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<MainScreen />} />
             <Route

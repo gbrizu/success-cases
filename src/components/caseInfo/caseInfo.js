@@ -35,7 +35,7 @@ export default function CaseInfo({ title, description, images, prevPage, nextPag
                     </div>
                 </Grid>
             </Grid>
-            <CaseDetailsButtons></CaseDetailsButtons>
+            <CaseDetailsButtons prevPage={prevPage} nextPage={nextPage}></CaseDetailsButtons>
         </div>
     );
 }
