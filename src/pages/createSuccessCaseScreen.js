@@ -17,9 +17,9 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AccountCircle } from "@mui/icons-material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import OfferingSelect from "../components/selectListOfferings/selectListOfferings";
-import SelectListClients from "../components/selectListClients/selectListClients";
-import MultipleSelect from "../components/selectListIndustry";
+import OfferingSelectList from "../components/selectListSuccessCaseScreen/offeringSelectList";
+import ClientSelectList from "../components/selectListSuccessCaseScreen/clientSelectList";
+import IndustrySelectList from "../components/selectListSuccessCaseScreen/industrySelectList";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
 
@@ -30,22 +30,27 @@ const initialPage = {
 
 export default function CreateSuccessCaseScreen() {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
+  const [projectTitleValue, setProjectTitleValue] = useState("");
   const [selectedOffering, setSelectedOffering] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
   const [projectContactValue, setProjectContactValue] = useState("");
   const [avgTeamSizeValue, setAvgTeamSizeValue] = useState("");
   const [isPublic, setIsPublic] = useState(false);
+  const [startDateValue, setStartDateValue] = useState();
+  const [finishDateValue, setFinishDateValue] = useState();
 
   const submitHandler = () => {
+    console.log(selectedOffering);
     setSuccessCase({
+      title: projectTitleValue,
       offering: selectedOffering,
       client: selectedClient,
       industry: selectedIndustry,
-      date: selectedDate,
+      startDate: startDateValue,
+      finishDate: finishDateValue,
       projectContact: projectContactValue,
-      avgTeamSize: avgTeamSizeValue,
+      teamSize: avgTeamSizeValue,
       isPublic: isPublic,
       successCase: [initialPage],
       challenge: [initialPage],
@@ -53,6 +58,10 @@ export default function CreateSuccessCaseScreen() {
       technologie: [initialPage],
     });
     navigate("successCase");
+  };
+
+  const handleProjectTitleChange = (event) => {
+    setProjectTitleValue(event.target.value);
   };
 
   const handleOfferingChange = (event) => {
@@ -75,25 +84,23 @@ export default function CreateSuccessCaseScreen() {
     setAvgTeamSizeValue(event.target.value);
   };
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
   const handleIsPublicChange = (event) => {
     setIsPublic(event.target.checked);
   };
 
-  const [dateFrom, setDateFrom] = useState()
-  const [dateTo, setDateTo] = useState()
+  useEffect(() => {
+    if (finishDateValue < startDateValue) {
+      alert("El valor Seleccionado es menor a la fecha inicial");
+      setFinishDateValue(null);
+    }
+  }, [finishDateValue, setFinishDateValue]);
 
   useEffect(() => {
-    if (dateTo < dateFrom) {
-      alert("El valor Seleccionado es menor a la fecha inicial")
-      setDateTo(null)
+    if (finishDateValue < startDateValue) {
+      alert("El valor Seleccionado es menor a la fecha inicial");
+      setFinishDateValue(null);
     }
-
-  }, [dateTo, setDateTo])
-
+  }, [startDateValue, finishDateValue]);
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -151,32 +158,31 @@ export default function CreateSuccessCaseScreen() {
           sx={{ width: "inherit", marginLeft: "25rem", position: "relative" }}
         >
           <Grid item xs={12} paddingRight={"19.5rem"}>
-          <FormInfoInput
+            <FormInfoInput
               marginRight={"7.4rem"}
               customStyleClass={"form-margin"}
               label={"Title"}
               width={300}
               customInput={
-                <TextField 
-                  label= {"Name"}
-                  fullWidth
-                  marginRight= {"0rem"}
+                <TextField
                   inputProps={{ type: "text" }}
+                  onChange={handleProjectTitleChange}
+                  value={projectTitleValue}
                 />
               }
             ></FormInfoInput>
           </Grid>
 
           <Grid item xs={12}>
-            <OfferingSelect
+            <OfferingSelectList
               value={selectedOffering}
               onChange={handleOfferingChange}
               options={["Mobile", "Web", "Integration", "Development"]}
-            ></OfferingSelect>
+            ></OfferingSelectList>
           </Grid>
 
           <Grid item xs={12}>
-            <SelectListClients
+            <ClientSelectList
               value={selectedClient}
               onChange={handleClientChange}
               options={["Mercado Libre", "Pedidos ya"]}
@@ -184,11 +190,11 @@ export default function CreateSuccessCaseScreen() {
           </Grid>
 
           <Grid item xs={12}>
-            <MultipleSelect
+            <IndustrySelectList
               value={selectedIndustry}
               onChange={handleIndustryChange}
               options={["Entertainment", "Healthcare", "Banking", "Education"]}
-            ></MultipleSelect>
+            ></IndustrySelectList>
           </Grid>
 
           <Grid item xs={12}>
@@ -206,13 +212,13 @@ export default function CreateSuccessCaseScreen() {
                   {/* <DemoContainer components={['DateTimePicker']}> */}
                   <DatePicker
                     label="From"
-                    value={dateFrom}
-                    onChange={(newValue) => setDateFrom(newValue)}
+                    value={startDateValue}
+                    onChange={(newValue) => setStartDateValue(newValue)}
                   />
                   <DatePicker
                     label="To"
-                    value={dateTo}
-                    onChange={(newValue) => setDateTo(newValue)}
+                    value={finishDateValue}
+                    onChange={(newValue) => setFinishDateValue(newValue)}
                   />
                   {/* </DemoContainer> */}
                 </LocalizationProvider>
