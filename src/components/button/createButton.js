@@ -5,14 +5,16 @@ import { ProcessContextProvider } from '../../context/process.context';
 
 export default function CreateButton() {
   return (
-    <Link to="NewSuccessCases">
-      <Button variant="contained" size="large" sx={
-        {
+    <Link to="/NewSuccessCases">
+      <Button
+        variant="contained"
+        size="large"
+        sx={{
           height: '5rem',
           marginTop: '2rem',
           marginLeft: '2rem',
-        }
-      } >
+        }}
+      >
         Create new Success Case
       </Button>
     </Link>

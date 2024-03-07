@@ -1,4 +1,3 @@
-import { Autocomplete, TextField, InputAdornment } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import FormInfoInput from "../BasicFormInfo";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -6,17 +5,12 @@ import Grid from "@mui/system/Unstable_Grid/Grid";
 import SelectListClients from "../selectListClients/selectListClients";
 import MultipleSelect from "../selectListIndustry";
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
-import { margin } from '@mui/system';
-import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCase } from "../../services/successCaseServerCalls";
+import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCasesByFilter } from "../../services/successCaseServerCalls";
 import { useContext, useState } from 'react';
 import { useEffect } from 'react';
-import { AccountCircle } from "@mui/icons-material";
-import NextButton from '../button/nextButton';
 import { CaseViewContextProvider } from '../../context/casesView.context';
 import SearchButton from '../button/searchButton';
 import { Box, MenuItem, OutlinedInput, Select, FormControl } from "@mui/material";
-
-
 
 function FilterMainScreen() {
     const { setSuccessCasesList } = useContext(
@@ -42,6 +36,18 @@ function FilterMainScreen() {
     const [dateFrom, setDateFrom] = useState();
 
     const [dateTo, setDateTo] = useState();
+
+    const handleSearch = async () => {
+        let successCasesFiltered = await getSuccessCasesByFilter({
+            startdate: dateFrom,
+            finishdate: dateTo,
+            industryid: industrySelected,
+            clientid: clientSelected,
+            projecttypeid: typeSelected,
+            contactid: contactSelected
+        });
+        setSuccessCasesList(successCasesFiltered);
+    }
 
     useEffect(() => {
         if (dateTo < dateFrom && dateTo !== null) {
@@ -161,25 +167,16 @@ function FilterMainScreen() {
                             </FormControl>
                         }
                     ></FormInfoInput>
-
-
                 </Grid>
-
             </Grid>
 
             <Grid item xs={12} md={3} xl={4}>
                 <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
-                    {/* <Link to="/layout2"> */}
-                        <button onClick={() => {console.log("CLient=", clientSelected, "\nIndustry=", industrySelected, "\nType=", typeSelected, "\ndateFrom=", dateFrom, "\ndateTo=", dateTo, "\nContact=", contactSelected)}}>
-
-                        </button>
-                    {/* </Link> */}
+                    <SearchButton handleClick={handleSearch}/>
                 </Box>
             </Grid>
-
-{/* getSuccessCasesByFilter */}
 
         </div>
     );
 }
-export default FilterMainScreen
+export default FilterMainScreen;
