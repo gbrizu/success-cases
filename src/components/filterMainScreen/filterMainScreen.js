@@ -194,14 +194,20 @@ function FilterMainScreen() {
                     </Grid>
                 </Grid>
 
-                <Grid item xs={12} md={3} xl={4}>
-                    <Box sx={{ textAlign: 'center', marginTop: '1rem'}}>
+                <Grid container
+                alignItems={'center'}
+                marginBottom={'1rem'}
+                xs={12} md={3} xl={4}>
+                    <Box>
                         <SearchButton handleClick={handleSearch}/>
                     </Box>
                 </Grid>
 
-                <Grid item xs={12} md={3} xl={4}>
-                    <Box sx={{ textAlign: 'center', marginTop: '1rem', marginBottom: '4rem'}}>
+                <Grid container
+                alignItems={'center'}
+                marginBottom={'1rem'}
+                xs={12} md={3} xl={4}>
+                    <Box>
                         <CreateButton />
                     </Box>
                 </Grid>
