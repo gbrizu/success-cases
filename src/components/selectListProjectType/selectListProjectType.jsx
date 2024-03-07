@@ -30,6 +30,7 @@ export default function SelectListProjectType({ options }) {
     } = event;
     SetProjectType(typeof value === "string" ? value.split(",") : value);
   };
+  
 
   return (
     <div

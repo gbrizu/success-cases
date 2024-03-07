@@ -1,15 +1,16 @@
-import * as React from "react";
-import { Theme, useTheme } from "@mui/material/styles";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { Grid } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import { Typography } from "@mui/material";
+import * as React from 'react';
+import { Theme, useTheme } from '@mui/material/styles';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Grid } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { Typography } from '@mui/material';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
+
 const MenuProps = {
   PaperProps: {
     style: {
@@ -34,12 +35,8 @@ export default function MultipleSelect({ options }) {
   };
 
   return (
-    <div
-      style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
-    >
-      <Typography variant="h6" style={{ marginRight: "4.6rem" }}>
-        Industry
-      </Typography>
+    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+      <Typography variant="h6" style={{ marginRight: '4.6rem' }}>Industry</Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select
@@ -62,4 +59,4 @@ export default function MultipleSelect({ options }) {
       </FormControl>
     </div>
   );
-}
+};

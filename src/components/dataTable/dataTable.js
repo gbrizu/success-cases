@@ -3,12 +3,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { Link } from "react-router-dom";
 
-function DataTable({rows}) {
+function DataTable({ rows }) {
     const renderDetailsButton = (params) => {
         return (
-            <IconButton>
-                <RemoveRedEyeIcon></RemoveRedEyeIcon>
-            </IconButton>
+            <Link to={`succesCase/${params.id}`}>
+                <IconButton>
+                    <RemoveRedEyeIcon></RemoveRedEyeIcon>
+                </IconButton>
+            </Link>
         )
     }
 
@@ -31,11 +33,11 @@ function DataTable({rows}) {
         {
             width: 50,
             disableClickEventBubbling: true,
-            renderCell: renderDetailsButton
+            renderCell: (row) => renderDetailsButton(row)
         }
     ];
 
-    
+
     return (
         <div style={{ height: 400 }}>
             <DataGrid
