@@ -23,22 +23,6 @@ export default function ProcessContext({ children }) {
     const [technologieFile, setTechnologieFile] = useState('')
     const [improvementsFile, setImprovementsFile] = useState('')
 
-    // const newPageHandler = (type, content) => {
-    //     if (type === 'successCase') {
-    //         setSuccessCasePage(successCasePage + 1);
-    //         successCase.successCase.push(content)
-    //     } else if (type === 'challenge') {
-    //         setChallengePage(challengePage + 1);
-    //         successCase.challenge.push(content)
-    //     } else if (type === 'improvements') {
-    //         setImprovementsPage(improvementsPage + 1);
-    //         successCase.improvements.push(content)
-    //     } else if (type === 'technologie') {
-    //         setTechnologiePage(technologiePage + 1);
-    //         successCase.technologie.push(content)
-    //     }
-    // }
-
     const navigate = (screen, currentScreen) => {
         setScreen(screen);
     }
@@ -53,14 +37,24 @@ export default function ProcessContext({ children }) {
 
 
     const submitSuccessCaseHandler = async () => {
-        setSuccessCase({
+        const body = {
             ...successCase,
-            successCase: { text: successCaseText, image: await toBase64(successCaseFile) },
-            challenge: { text: challengeText, image: await toBase64(challengeFile) },
-            improvements: { text: improvementsText, image: await toBase64(improvementsFile) },
-            technologie: { text: technologieText, image: await toBase64(technologieFile) },
-        });
-        // const res = postSuccessCase(successCase)
+            // NO BORRAR
+            // successCase: { text: successCaseText, image: await toBase64(successCaseFile) },
+            // challenge: { text: challengeText, image: await toBase64(challengeFile) },
+            // improvements: { text: improvementsText, image: await toBase64(improvementsFile) },
+            // technologie: { text: technologieText, image: await toBase64(technologieFile) },
+            // NO BORRAR
+            successCase: { text: successCaseText, image: 'https://phantom-expansion.unidadeditorial.es/aaad57cd1e20cab29748a0375dcd0309/crop/0x110/1920x1191/resize/828/f/jpg/assets/multimedia/imagenes/2022/05/20/16530528329270.jpg' },
+            challenge: { text: challengeText, image: 'https://phantom-expansion.unidadeditorial.es/aaad57cd1e20cab29748a0375dcd0309/crop/0x110/1920x1191/resize/828/f/jpg/assets/multimedia/imagenes/2022/05/20/16530528329270.jpg' },
+            improvements: { text: improvementsText, image: 'https://phantom-expansion.unidadeditorial.es/aaad57cd1e20cab29748a0375dcd0309/crop/0x110/1920x1191/resize/828/f/jpg/assets/multimedia/imagenes/2022/05/20/16530528329270.jpg' },
+            technologie: { text: technologieText, image: 'https://phantom-expansion.unidadeditorial.es/aaad57cd1e20cab29748a0375dcd0309/crop/0x110/1920x1191/resize/828/f/jpg/assets/multimedia/imagenes/2022/05/20/16530528329270.jpg' },
+        }
+        console.log(body)
+        const res = await postSuccessCase(body);
+        if(res.message === 'El caso se ha creado correctamente.') {
+            alert('El caso se ha creado correctamente.');
+        }
     }
 
     return (

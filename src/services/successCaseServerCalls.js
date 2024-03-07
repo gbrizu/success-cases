@@ -99,7 +99,7 @@ export const postSuccessCase = (successCaseObj) => {
 
     const finishNewDate = finishYear + "-" + finishMonth + "-" + finishDay;
 
-    return axiosPost('/SuccessCase/create', {
+    const body = {
         "title": title,
         "startdate": startNewDate,
         "finishdate": finishNewDate,
@@ -109,7 +109,8 @@ export const postSuccessCase = (successCaseObj) => {
         "offeringid": offeringId, 
         "clientid": clientId,
         "projecttypeid": projectTypeId,
-        "contactid": contactId,
+        // "contactid": contactId,
+        "contactid": 4,
         "casedetail": {
             "image_detail": successCase.image,
             "video_detail": null,
@@ -130,7 +131,11 @@ export const postSuccessCase = (successCaseObj) => {
             "video_ch": null,
             "text_ch": challenge.text,
         }
-    })
+    }
+
+    console.log(body)
+
+    return axiosPost('/SuccessCase/create', body)
         .then((response) => {
             console.log(response)
             return response.data;

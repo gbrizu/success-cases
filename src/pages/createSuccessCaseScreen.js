@@ -42,7 +42,7 @@ export default function CreateSuccessCaseScreen() {
   const [selectedClient, setSelectedClient] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState([]);
   const [projectContactValue, setProjectContactValue] = useState("");
-  const [avgTeamSizeValue, setAvgTeamSizeValue] = useState("");
+  const [avgTeamSizeValue, setAvgTeamSizeValue] = useState(0);
   const [isPublic, setIsPublic] = useState(false);
   const [startDateValue, setStartDateValue] = useState();
   const [finishDateValue, setFinishDateValue] = useState();
@@ -63,7 +63,7 @@ export default function CreateSuccessCaseScreen() {
       startDate: startDateValue,
       finishDate: finishDateValue,
       contactId: projectContactValue,
-      teamSize: avgTeamSizeValue,
+      teamSize: parseInt(avgTeamSizeValue),
       isPublic: isPublic,
       successCase: [initialPage],
       challenge: [initialPage],
@@ -135,13 +135,6 @@ export default function CreateSuccessCaseScreen() {
     getIndustryInit();
     getProjectTypeInit();
   }, []);
-
-  useEffect(() => {
-    if (finishDateValue < startDateValue) {
-      alert("El valor Seleccionado es menor a la fecha inicial");
-      setFinishDateValue(null);
-    }
-  }, [finishDateValue, setFinishDateValue]);
 
   useEffect(() => {
     if (finishDateValue < startDateValue) {
@@ -267,12 +260,14 @@ export default function CreateSuccessCaseScreen() {
                   <DatePicker
                     label="From"
                     value={startDateValue}
-                    onChange={(newValue) => setStartDateValue(newValue)}
+                    onChange={(newValue) => {
+                      setStartDateValue(newValue.$d)
+                    }}
                   />
                   <DatePicker
                     label="To"
                     value={finishDateValue}
-                    onChange={(newValue) => setFinishDateValue(newValue)}
+                    onChange={(newValue) => setFinishDateValue(newValue.$d)}
                   />
                   {/* </DemoContainer> */}
                 </LocalizationProvider>
