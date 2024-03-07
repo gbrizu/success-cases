@@ -1,44 +1,44 @@
 import React, { useContext } from 'react';
-import Box from '@mui/material/Box';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { CaseViewContextProvider } from '../../context/casesView.context';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const EndCase = ({prevPage, initialPage}) => {
-  const { navigate } = useContext(
-    CaseViewContextProvider
-);
+const EndCase = ({ prevPage, initialPage }) => {
+  const { navigate } = useContext(CaseViewContextProvider);
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: '100vh',
-        flexDirection: 'column'
-      }}
-    >
-      <h1 style={{ color: 'red' }}>End</h1>
-      <div style={{ display: "flex", justifyContent: "space-between", margin: '1rem', width: '100%' }}>
-        <Button
-          startIcon={<ArrowBackIosNewIcon
-            sx={{ color: 'yellow' }}
-            fontSize='large' />}
-            onClick={() => navigate(prevPage)}
-        >Back</Button>
+    <><div style={{
+      width: '100%',
+      height: '91vh',
+      margin: 0,
+      padding: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative',
+    }}>
+      <h1 style={{ color: 'red',fontSize:"5rem"}}>End</h1>
+    </div><div style={{ display: "flex", justifyContent: "space-between", width: '100%' }}>
+        <Button style={{fontSize:"1.2rem"}}
+          startIcon={<ArrowBackIosNewIcon sx={{ color: 'orange' }} fontSize='large' />}
+          onClick={() => navigate(prevPage)}
+        >
+          Last Slide
+        </Button>
 
         <Link to="/">
-        <Button
-          endIcon={<ArrowForwardIosIcon
-            sx={{ color: 'yellow' }}
-            fontSize='large' />}
+          <Button style={{fontSize:"1.2rem"}}
+            endIcon={<ArrowForwardIosIcon sx={{ color: 'orange' }} fontSize='large' />}
             onClick={() => navigate(initialPage)}
-        >Next</Button>
+          >
+            Success Cases
+          </Button>
         </Link>
-      </div>
-    </Box>
+      </div></>
+    
   );
 };
 
