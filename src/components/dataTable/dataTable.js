@@ -15,21 +15,21 @@ function DataTable({ rows }) {
     }
 
     const columns = [
-        { field: 'client', headerName: 'Client', width: 300, disableClickEventBubbling: true },
-        { field: 'industry', headerName: 'Industry', width: 300, disableClickEventBubbling: true },
+        { field: 'client', headerName: 'Client', width: 250, disableClickEventBubbling: true },
+        { field: 'industry', headerName: 'Industry', width: 250, disableClickEventBubbling: true },
         {
             field: 'projectType',
             headerName: 'projectType',
             disableClickEventBubbling: true,
-            width: 300
+            width: 250
         },
         {
             field: 'referrer',
             headerName: 'Referrer',
-            width: 300,
+            width: 250,
             disableClickEventBubbling: true,
         },
-        { field: 'date', headerName: 'Date', width: 150, disableClickEventBubbling: true },
+        { field: 'date', headerName: 'Date', width: 250, disableClickEventBubbling: true },
         {
             width: 50,
             disableClickEventBubbling: true,

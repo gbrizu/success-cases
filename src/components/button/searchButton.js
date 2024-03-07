@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import { Link } from "react-router-dom";
 
 export default function SearchButton({handleClick}) {
     return (
@@ -11,12 +10,11 @@ export default function SearchButton({handleClick}) {
                 height: '5rem',
                 marginTop: '2rem',
                 marginLeft: '2rem',
-                color: 'white',
-                backgroundColor: 'blue',
+                minWidth: '17rem',
             }}
             onClick={handleClick}
         >
-            Search 
+            Search
         </Button>
     );
 }   

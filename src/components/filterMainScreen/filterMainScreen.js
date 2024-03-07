@@ -10,7 +10,8 @@ import { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { CaseViewContextProvider } from '../../context/casesView.context';
 import SearchButton from '../button/searchButton';
-import { Box, MenuItem, OutlinedInput, Select, FormControl } from "@mui/material";
+import { Box, MenuItem, OutlinedInput, Select, FormControl, InputLabel } from "@mui/material";
+import CreateButton from '../button/createButton';
 
 function FilterMainScreen() {
     const { setSuccessCasesList } = useContext(
@@ -36,6 +37,18 @@ function FilterMainScreen() {
     const [dateFrom, setDateFrom] = useState();
 
     const [dateTo, setDateTo] = useState();
+    
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    
+    const MenuProps = {
+        PaperProps: {
+            style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+            },
+        },
+    };
 
     const handleSearch = async () => {
         let successCasesFiltered = await getSuccessCasesByFilter({
@@ -82,100 +95,117 @@ function FilterMainScreen() {
 
     return (
         <div>
-            <Grid containerInput
-                sx={{ width: "inherit", position: "relative" }}>
-                <Grid item xs={12}>
-                    {(clients.length > 0) && (<SelectListClients options={clients} value={clientSelected} onChange={setClientSelected}> </SelectListClients>)}
+            <Grid
+                container
+                xs={12}
+                sx={{
+                    width: "inherit", position: "relative", marginLeft: "2rem"
+                }}
+            >
+                <Grid
+                    container
+                    xs={12}
+                    md={6}
+                    xl={4}
+                    sx={{
+                        width: "inherit", position: "relative"
+                    }}
+                >
+                    <Grid item xs={12} >
+                        {(clients.length > 0) && (<SelectListClients options={clients} value={clientSelected} onChange={setClientSelected}> </SelectListClients>)}
+                    </Grid>
+
+                    <Grid item xs={12} >
+                        <MultipleSelect options={industries} value={industrySelected} onChange={setIndustrySelected}> </MultipleSelect>
+                    </Grid>
+
+                    <Grid item xs={12} >
+                        <SelectListProjectType options={type} value={typeSelected} onChange={setTypeSelected}> </SelectListProjectType>
+                    </Grid>
+
+                    <Grid item xs={12} >
+                        <FormInfoInput
+                            marginRight={'4.3rem'}
+                            customStyleClass={"form-margin"}
+                            label={"Date from"}
+                            width={"18.5rem"}
+                            customInput={
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        label="From"
+                                        value={dateFrom}
+                                        onChange={(newValue) => setDateFrom(newValue)}
+                                    />
+
+                                </LocalizationProvider>
+                            }
+                        ></FormInfoInput>
+                    </Grid>
+
+                    <Grid item xs={12} >
+                        <FormInfoInput
+                            marginRight={'5.8rem'}
+                            customStyleClass={"form-margin"}
+                            label={"Date to"}
+                            width={"18.5rem"}
+                            customInput={
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        label="To"
+                                        value={dateTo}
+                                        onChange={(newValue) => setDateTo(newValue)}
+                                    />
+                                </LocalizationProvider>
+                            }
+                        ></FormInfoInput>
+                    </Grid>
+
+                    <Grid item xs={12} >
+                        <FormInfoInput
+                            id="projectContactsAutoComplete"
+                            marginRight={'1rem'}
+                            customStyleClass={"form-margin"}
+                            label={"Project contact"}
+                            customInput={
+                                <FormControl sx={{ m: 1, width: 300 }}>
+                                    <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+                                    <Select
+                                        labelId="projectContactsAutoComplete-label"
+                                        id="Name"
+                                        value={contactSelected}
+                                        onChange={(newValue) => {
+                                            setContactSelected(newValue.target.value);
+                                        }}
+                                        input={<OutlinedInput label="Name" />}
+                                        MenuProps={MenuProps}
+                                    >
+                                        {contact.map((item) => (
+                                            <MenuItem
+                                                key={item.id}
+                                                value={item.id}
+                                            >
+                                                {item.name + " " + item.surName}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            }
+                        ></FormInfoInput>
+                    </Grid>
                 </Grid>
 
-                <Grid item xs={12}>
-                    <MultipleSelect options={industries} value={industrySelected} onChange={setIndustrySelected}> </MultipleSelect>
+                <Grid item xs={12} md={3} xl={4}>
+                    <Box sx={{ textAlign: 'center', marginTop: '1rem'}}>
+                        <SearchButton handleClick={handleSearch}/>
+                    </Box>
                 </Grid>
 
-                <Grid item xs={12}>
-
-                    <SelectListProjectType options={type} value={typeSelected} onChange={setTypeSelected}> </SelectListProjectType>
-                </Grid> 
-
-                <Grid item xs={12}>
-
-                </Grid>
-
-
-                <Grid item xs={12}>
-                    <FormInfoInput
-                        marginRight={'4rem'}
-                        customStyleClass={"form-margin"}
-                        label={"Date from"}
-                        width={"18.5rem"}
-                        customInput={
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                    label="From"
-                                    value={dateFrom}
-                                    onChange={(newValue) => setDateFrom(newValue)}
-                                />
-
-                            </LocalizationProvider>
-                        }
-                    ></FormInfoInput>
-                </Grid>
-                <Grid item xs={12}>
-                    <FormInfoInput
-                        marginRight={'5.5rem'}
-                        customStyleClass={"form-margin"}
-                        label={"Date to"}
-                        width={"18.5rem"}
-                        customInput={
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                    label="To"
-                                    value={dateTo}
-                                    onChange={(newValue) => setDateTo(newValue)}
-                                />
-                            </LocalizationProvider>
-                        }
-                    ></FormInfoInput>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <FormInfoInput
-                        id="projectContactsAutoComplete"
-                        marginRight={'1.2rem'}
-                        customStyleClass={"form-margin"}
-                        label={"Project contact"}
-                        customInput={
-                            <FormControl sx={{ m: 1, width: 300 }}>
-                                <Select
-                                    labelId="projectContactsAutoComplete-label"
-                                    id="projectContact"
-                                    value={contactSelected}
-                                    onChange={(newValue) => {
-                                        setContactSelected(newValue.target.value);
-                                    }}
-                                    input={<OutlinedInput label="Name" />}
-                                >
-                                    {contact.map((item) => (
-                                        <MenuItem
-                                            key={item.id}
-                                            value={item.id}
-                                        >
-                                            {item.name + " " + item.surName}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        }
-                    ></FormInfoInput>
+                <Grid item xs={12} md={3} xl={4}>
+                    <Box sx={{ textAlign: 'center', marginTop: '1rem', marginBottom: '4rem'}}>
+                        <CreateButton />
+                    </Box>
                 </Grid>
             </Grid>
-
-            <Grid item xs={12} md={3} xl={4}>
-                <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
-                    <SearchButton handleClick={handleSearch}/>
-                </Box>
-            </Grid>
-
         </div>
     );
 }

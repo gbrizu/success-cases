@@ -30,7 +30,7 @@ export default function MultipleSelect({ options, value, onChange}) {
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <Typography variant="h6" style={{ marginRight: '4.6rem' }}>Industry</Typography>
+      <Typography variant="h6" style={{ marginRight: '4.8rem' }}>Industry</Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-name-label">Name</InputLabel>
         <Select
