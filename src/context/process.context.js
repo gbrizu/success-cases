@@ -32,14 +32,25 @@ export default function ProcessContext({ children }) {
 
 
     const submitSuccessCaseHandler = async () => {
-        setSuccessCase({
+        const body = {
             ...successCase,
-            successCase: [{ text: successCaseText, image: await toBase64(successCaseFile) }],
-            challenge: [{ text: challengeText, image: await toBase64(challengeFile) }],
-            improvements: [{ text: improvementsText, image: await toBase64(improvementsFile) }],
-            technologie: [{ text: technologieText, image: await toBase64(technologieFile) }],
-        });
-        console.log(successCase)
+            // NO BORRAR
+            // successCase: { text: successCaseText, image: await toBase64(successCaseFile) },
+            // challenge: { text: challengeText, image: await toBase64(challengeFile) },
+            // improvements: { text: improvementsText, image: await toBase64(improvementsFile) },
+            // technologie: { text: technologieText, image: await toBase64(technologieFile) },
+            // NO BORRAR
+            successCase: { text: successCaseText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+            challenge: { text: challengeText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+            improvements: { text: improvementsText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+            technologie: { text: technologieText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+        }
+
+        const res = await postSuccessCase(body);
+
+        if(res.message === 'El caso se ha creado correctamente.') {
+            alert('El caso se ha creado correctamente.');
+        }
     }
 
     return (

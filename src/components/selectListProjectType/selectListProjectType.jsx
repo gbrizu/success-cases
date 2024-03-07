@@ -20,7 +20,7 @@ const MenuProps = {
   },
 };
 
-export default function SelectListProjectType({ options }) {
+export default function SelectListProjectType({ options, value, onChange }) {
   const theme = useTheme();
   const [projectType, SetProjectType] = React.useState([]);
 
@@ -28,24 +28,25 @@ export default function SelectListProjectType({ options }) {
     const {
       target: { value },
     } = event;
-    SetProjectType(typeof value === "string" ? value.split(",") : value);
+    onChange(value);
   };
+  
 
   return (
     <div
       style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
     >
-      <Typography variant="h6" style={{ marginRight: "2rem" }}>
+      <Typography variant="h6" style={{ marginRight: "2.3rem" }}>
         Project Type
       </Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Project type</InputLabel>
+        <InputLabel id="demo-multiple-name-label">Type</InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          value={projectType}
+          value={value}
           onChange={handleChange}
-          input={<OutlinedInput label="Project Type" />}
+          input={<OutlinedInput label="Type" />}
           MenuProps={MenuProps}
         >
           {options.map((item) => (

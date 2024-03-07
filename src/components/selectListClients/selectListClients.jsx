@@ -26,17 +26,12 @@ export default function SelectListClients({ options, value, onChange }) {
     const {
       target: { value },
     } = event;
-    setPersonName(
-
-      typeof value === 'string' ? value.split(',') : value,
-    );
-    setPersonName(typeof value === "string" ? value.split(",") : value);
-    onChange && onChange(event);
+    onChange(value);
   };
 
   return (
     <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
-      <Typography variant="h6" style={{ marginRight: "5.9rem" }}>
+      <Typography variant="h6" style={{ marginRight: "6rem" }}>
         Client
       </Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
@@ -44,7 +39,7 @@ export default function SelectListClients({ options, value, onChange }) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          value={personName}
+          value={value}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
