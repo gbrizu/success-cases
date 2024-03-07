@@ -5,7 +5,7 @@ export const CaseViewContextProvider = createContext();
 export default function CaseViewContext({ children }) {
     const [screen, setScreen] = useState('viewCaseDetails');
     const [actualSuccessCase, setSuccessCase] = useState({});
-    const [pagDescription, setPageDescription] = useState({});
+    const [successCasesList, setSuccessCasesList] = useState({});
 
 
     const navigate = (screen) => {
