@@ -20,7 +20,7 @@ const MenuProps = {
   },
 };
 
-export default function SelectListProjectType({ options }) {
+export default function SelectListProjectType({ options, value, onChange }) {
   const theme = useTheme();
   const [projectType, SetProjectType] = React.useState([]);
 
@@ -28,7 +28,7 @@ export default function SelectListProjectType({ options }) {
     const {
       target: { value },
     } = event;
-    SetProjectType(typeof value === "string" ? value.split(",") : value);
+    onChange(value);
   };
   
 
@@ -44,7 +44,7 @@ export default function SelectListProjectType({ options }) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          value={projectType}
+          value={value}
           onChange={handleChange}
           input={<OutlinedInput label="Project Type" />}
           MenuProps={MenuProps}

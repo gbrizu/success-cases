@@ -43,21 +43,11 @@ function MainScreen() {
           <Box
             sx={{
               textAlign: 'center',
-              height: '27.5rem',
               marginTop: '2rem',
               width: { xs: '100%', md: '100%' },
             }}
           >
             <FilterMainScreen />
-          </Box>
-        </Grid>
-
-        {/* CAMBIAR BOTÓN POR SEARCH*/}
-        <Grid item xs={12} md={3} xl={4}>
-          <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
-            {/* <Link to="/layout2"> */}
-            <CreateButton />
-            {/* </Link> */}
           </Box>
         </Grid>
 

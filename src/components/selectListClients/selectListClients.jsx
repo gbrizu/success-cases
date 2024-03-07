@@ -26,12 +26,7 @@ export default function SelectListClients({ options, value, onChange }) {
     const {
       target: { value },
     } = event;
-    setPersonName(
-
-      typeof value === 'string' ? value.split(',') : value,
-    );
-    setPersonName(typeof value === "string" ? value.split(",") : value);
-    onChange && onChange(event);
+    onChange(value);
   };
 
   return (
@@ -44,7 +39,7 @@ export default function SelectListClients({ options, value, onChange }) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          value={personName}
+          value={value}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
