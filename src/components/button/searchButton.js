@@ -4,15 +4,18 @@ import { Link } from "react-router-dom";
 
 export default function SearchButton() {
     return (
-       
-            <Button variant="contained" size="large" sx={
-                {
-                    height: '5rem',
-                    marginTop: '2rem',
-                    marginLeft: '2rem',
-                    color: 'white',
-                    backgroundColor: 'blue',
-                }
-            }>Search </Button>
+        <Button
+            variant="contained"
+            size="large"
+            sx={{
+                height: '5rem',
+                marginTop: '2rem',
+                marginLeft: '2rem',
+                color: 'white',
+                backgroundColor: 'blue',
+            }}
+        >
+            Search 
+        </Button>
     );
 }   

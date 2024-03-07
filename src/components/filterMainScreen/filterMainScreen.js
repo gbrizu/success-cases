@@ -7,29 +7,62 @@ import SelectListClients from "../selectListClients/selectListClients";
 import MultipleSelect from "../selectListIndustry";
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
 import { margin } from '@mui/system';
-import { getClients, getIndustries, getProyectsTypes, getContacts } from "../../services/successCaseServerCalls";
-import { useState } from 'react';
+import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCase } from "../../services/successCaseServerCalls";
+import { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { AccountCircle } from "@mui/icons-material";
 import NextButton from '../button/nextButton';
+import { CaseViewContextProvider } from '../../context/casesView.context';
+import SearchButton from '../button/searchButton';
+import { Box, MenuItem, OutlinedInput, Select, FormControl } from "@mui/material";
 
 
 
 function FilterMainScreen() {
+    const { setSuccessCasesList } = useContext(
+        CaseViewContextProvider
+    );
 
     const [clients, setClients] = useState([]);
+    
+    const [clientSelected, setClientSelected] = useState(null);
 
     const [type, setProjectType] = useState([]);
 
+    const [typeSelected, setTypeSelected] = useState(null);
+
     const [industries, setIndustries] = useState([]);
+
+    const [industrySelected, setIndustrySelected] = useState(null);
 
     const [contact, setContact] = useState([]);
 
+    const [contactSelected, setContactSelected] = useState(null);
 
-    useEffect ( () => {
+    const [dateFrom, setDateFrom] = useState();
+
+    const [dateTo, setDateTo] = useState();
+
+    useEffect(() => {
+        if (dateTo < dateFrom && dateTo !== null) {
+            alert("El valor Seleccionado es menor a la fecha inicial")
+            setDateTo(null)
+        }
+
+    }, [dateTo])
+
+    useEffect(() => {
+        if (dateTo < dateFrom && dateFrom !== null) {
+            alert("El valor Seleccionado es mayor a la fecha final")
+            setDateFrom(null)
+        }
+
+    }, [dateFrom])
+
+    useEffect(() => {
         getClients().then((result) => {
-                setClients(result);
-            });
+            setClients(result);
+        });
         getProyectsTypes().then((result) => {
             setProjectType(result);
         });
@@ -39,23 +72,24 @@ function FilterMainScreen() {
         getContacts().then((result) => {
             setContact(result);
         });
-    },[])
+    }, [])
 
     return (
         <div>
             <Grid containerInput
-          sx={{ width: "inherit", position: "relative" }}>
+                sx={{ width: "inherit", position: "relative" }}>
                 <Grid item xs={12}>
-                    {(clients.length > 0) && (<SelectListClients options={clients}></SelectListClients>)}
+                    {(clients.length > 0) && (<SelectListClients options={clients} value={clientSelected} onChange={setClientSelected}> </SelectListClients>)}
                 </Grid>
 
                 <Grid item xs={12}>
-                    <MultipleSelect options={industries}></MultipleSelect>
+                    <MultipleSelect options={industries} value={industrySelected} onChange={setIndustrySelected}> </MultipleSelect>
                 </Grid>
 
                 <Grid item xs={12}>
-                    <SelectListProjectType options={type}></SelectListProjectType>
-                </Grid>
+
+                    <SelectListProjectType options={type} value={typeSelected} onChange={setTypeSelected}> </SelectListProjectType>
+                </Grid> 
 
                 <Grid item xs={12}>
 
@@ -64,53 +98,86 @@ function FilterMainScreen() {
 
                 <Grid item xs={12}>
                     <FormInfoInput
-                        marginRight={'6.9rem'}
+                        marginRight={'4rem'}
                         customStyleClass={"form-margin"}
-                        label={"Date"}
+                        label={"Date from"}
                         width={"18.5rem"}
                         customInput={
-                          <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker variant="standard" />
-                          </LocalizationProvider>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="From"
+                                    value={dateFrom}
+                                    onChange={(newValue) => setDateFrom(newValue)}
+                                />
+
+                            </LocalizationProvider>
+                        }
+                    ></FormInfoInput>
+                </Grid>
+                <Grid item xs={12}>
+                    <FormInfoInput
+                        marginRight={'5.5rem'}
+                        customStyleClass={"form-margin"}
+                        label={"Date to"}
+                        width={"18.5rem"}
+                        customInput={
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="To"
+                                    value={dateTo}
+                                    onChange={(newValue) => setDateTo(newValue)}
+                                />
+                            </LocalizationProvider>
                         }
                     ></FormInfoInput>
                 </Grid>
 
                 <Grid item xs={12}>
                     <FormInfoInput
+                        id="projectContactsAutoComplete"
                         marginRight={'1.2rem'}
                         customStyleClass={"form-margin"}
                         label={"Project contact"}
                         customInput={
-                            <Autocomplete
-                                disablePortal
-                                id="projectContactsAutoComplete"
-                                options={contact.map((option) => option.name)}
-                                sx={{ width: "18.5rem" }}
-                                renderInput={(params) => <TextField {...params} label="Project contact" />}
-                                // renderInput={(params) => (
-                                //     <TextField
-                                //         {...params}
-                                //         label="Project contact"
-                                //         InputProps={{
-                                //             startAdornment: (
-                                //                 <InputAdornment position="start">
-                                //                     <AccountCircle />
-                                //                 </InputAdornment>
-                                //             ),
-                                //         }}
-                                //     />
-                                // )}
-                            />
+                            <FormControl sx={{ m: 1, width: 300 }}>
+                                <Select
+                                    labelId="projectContactsAutoComplete-label"
+                                    id="projectContact"
+                                    value={contactSelected}
+                                    onChange={(newValue) => {
+                                        setContactSelected(newValue.target.value);
+                                    }}
+                                    input={<OutlinedInput label="Name" />}
+                                >
+                                    {contact.map((item) => (
+                                        <MenuItem
+                                            key={item.id}
+                                            value={item.id}
+                                        >
+                                            {item.name + " " + item.surName}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         }
                     ></FormInfoInput>
-                                     
+
 
                 </Grid>
 
-
             </Grid>
 
+            <Grid item xs={12} md={3} xl={4}>
+                <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
+                    {/* <Link to="/layout2"> */}
+                        <button onClick={() => {console.log("CLient=", clientSelected, "\nIndustry=", industrySelected, "\nType=", typeSelected, "\ndateFrom=", dateFrom, "\ndateTo=", dateTo, "\nContact=", contactSelected)}}>
+
+                        </button>
+                    {/* </Link> */}
+                </Box>
+            </Grid>
+
+{/* getSuccessCasesByFilter */}
 
         </div>
     );

@@ -269,7 +269,6 @@ export default function CreateSuccessCaseScreen() {
                     value={finishDateValue}
                     onChange={(newValue) => setFinishDateValue(newValue.$d)}
                   />
-                  {/* </DemoContainer> */}
                 </LocalizationProvider>
               }
             ></FormInfoInput>

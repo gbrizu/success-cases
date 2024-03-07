@@ -1,22 +1,23 @@
 import { Box, Container, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DataTable from "../components/dataTable/dataTable";
 import FilterMainScreen from "../components/filterMainScreen/filterMainScreen";
 import CreateButton from "../components/button/createButton";
 import BasicTitle from "../components/basicTitle/basicTitle";
 import { getSuccessCase } from "../services/successCaseServerCalls";
+import { CaseViewContextProvider } from "../context/casesView.context";
 
 function MainScreen() {
 
   const [data, setData] = useState([]);
+  const { successCasesList } = useContext(
+    CaseViewContextProvider
+  );
 
   useEffect(() => {
-    const fetchData = async () => {
-
-      const getSuccessCases = await getSuccessCase();
-
-      const data = getSuccessCases.map((successCase) => {
+    if (successCasesList && successCasesList.length > 0) {
+      const temp = successCasesList.map((successCase) => {
         return {
           id: successCase.id,
           client: successCase.Client.name,
@@ -26,12 +27,9 @@ function MainScreen() {
           date: successCase.startdate + " " + successCase.finishdate,
         };
       });
-
-      setData(data);
+      setData(temp);
     }
-
-    fetchData();
-  }, []);
+  }, [successCasesList]);
 
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#ffffff' }}>
@@ -41,17 +39,19 @@ function MainScreen() {
       </div>
 
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} xl={4}>
           <Box
             sx={{
-              height: '20rem',
+              textAlign: 'center',
               marginTop: '2rem',
               width: { xs: '100%', md: '100%' },
             }}
-          ><FilterMainScreen /></Box>
+          >
+            <FilterMainScreen />
+          </Box>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={3} xl={4}>
           <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
             <CreateButton />
           </Box>
@@ -59,7 +59,7 @@ function MainScreen() {
       </Grid>
 
       <div id="TABLE">
-        <Box sx={{ height: '21.8rem', mt: '2rem', marginTop: '7rem' }} >
+        <Box sx={{ height: '21.8rem', mt: '2rem', marginTop: '2rem' }} >
           <DataTable rows={data} />
         </Box>
       </div>

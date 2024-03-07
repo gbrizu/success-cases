@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -19,16 +20,7 @@ const MenuProps = {
   },
 };
 
-function getStyles(name, projectType, theme) {
-  return {
-    fontWeight:
-      projectType.indexOf(name) !== -1
-        ? theme.typography.fontWeightMedium
-        : theme.typography.fontWeightRegular,
-  };
-}
-
-export default function SelectListProjectType({ options }) {
+export default function SelectListProjectType({ options, value, onChange }) {
   const theme = useTheme();
   const [projectType, SetProjectType] = React.useState([]);
 
@@ -36,8 +28,9 @@ export default function SelectListProjectType({ options }) {
     const {
       target: { value },
     } = event;
-    SetProjectType(typeof value === "string" ? value.split(",") : value);
+    onChange(value);
   };
+  
 
   return (
     <div
@@ -51,15 +44,15 @@ export default function SelectListProjectType({ options }) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          value={projectType}
+          value={value}
           onChange={handleChange}
+          input={<OutlinedInput label="Project Type" />}
           MenuProps={MenuProps}
         >
           {options.map((item) => (
             <MenuItem
               key={item.id}
               value={item.id}
-              style={getStyles(item.name, projectType, theme)}
             >
               {item.name}
             </MenuItem>
