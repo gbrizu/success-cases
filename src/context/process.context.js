@@ -60,7 +60,6 @@ export default function ProcessContext({ children }) {
             improvements: { text: improvementsText, image: await toBase64(improvementsFile) },
             technologie: { text: technologieText, image: await toBase64(technologieFile) },
         });
-        console.log(successCase)
         // const res = postSuccessCase(successCase)
     }
 
