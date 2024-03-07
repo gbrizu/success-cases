@@ -1,6 +1,5 @@
 import { Box, Container, Grid } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import DataTable from "../components/dataTable/dataTable";
 import FilterMainScreen from "../components/filterMainScreen/filterMainScreen";
 import CreateButton from "../components/button/createButton";
@@ -11,9 +10,15 @@ import { CaseViewContextProvider } from "../context/casesView.context";
 function MainScreen() {
 
   const [data, setData] = useState([]);
-  const { successCasesList } = useContext(
+  const { successCasesList, setSuccessCasesList } = useContext(
     CaseViewContextProvider
   );
+
+  useEffect(() => {
+    getSuccessCase().then(result => {
+      setSuccessCasesList(result);
+    });
+  }, [])
 
   useEffect(() => {
     if (successCasesList && successCasesList.length > 0) {
@@ -53,9 +58,7 @@ function MainScreen() {
 
         <Grid item xs={12} md={3} xl={4}>
           <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
-            <Link to="/layout2">
               <CreateButton />
-            </Link>
           </Box>
         </Grid>
       </Grid>
