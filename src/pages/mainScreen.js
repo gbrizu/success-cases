@@ -14,22 +14,25 @@ function MainScreen() {
   useEffect(() => {
     const fetchData = async () => {
 
-      const getSuccessCases = await getSuccessCase();
-      
-      const data = getSuccessCases.map((successCase) => {
-      return {
-       id: successCase.id,
-       client: successCase.Client.name,
-       industry: successCase.Industry.name,
-       projectType: successCase.ProjectType.name,
-       referrer: successCase.Contact.name,
-       date: successCase.startdate + " " + successCase.finishdate,
-      };
-      });
+      getSuccessCase().then((result) => {
+        console.log('result =>', result)
+        if (result && result.length > 0) {
+          const temp = result.map((successCase) => {
+            return {
+              id: successCase.id,
+              client: successCase.Client.name,
+              industry: successCase.Industry.name,
+              projectType: successCase.ProjectType.name,
+              referrer: successCase.Contact.name,
+              date: successCase.startdate + " " + successCase.finishdate,
+            };
+          });
+          setData(temp);
+        }
 
-      setData(data);
+      });
     }
-  
+
     fetchData();
   }, []);
 
@@ -58,7 +61,7 @@ function MainScreen() {
         <Grid item xs={12} md={3} xl={4}>
           <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
             {/* <Link to="/layout2"> */}
-              <CreateButton />
+            <CreateButton />
             {/* </Link> */}
           </Box>
         </Grid>

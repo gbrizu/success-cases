@@ -31,19 +31,19 @@ function FilterMainScreen() {
 
     useEffect(() => {
         if (dateTo < dateFrom && dateTo !== null) {
-          alert("El valor Seleccionado es menor a la fecha inicial")
-          setDateTo(null)
+            alert("El valor Seleccionado es menor a la fecha inicial")
+            setDateTo(null)
         }
-    
-      }, [dateTo])
 
-      useEffect(() => {
+    }, [dateTo])
+
+    useEffect(() => {
         if (dateTo < dateFrom && dateFrom !== null) {
-          alert("El valor Seleccionado es mayor a la fecha final")
-          setDateFrom(null)
+            alert("El valor Seleccionado es mayor a la fecha final")
+            setDateFrom(null)
         }
-    
-      }, [dateFrom])
+
+    }, [dateFrom])
 
     useEffect(() => {
         getClients().then((result) => {
@@ -107,12 +107,7 @@ function FilterMainScreen() {
                         width={"18.5rem"}
                         customInput={
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                    label="To"
-                                    value={dateTo}
-                                    onChange={(newValue) => setDateTo(newValue)}
-                                />
-
+                                <DatePicker variant="standard" />
                             </LocalizationProvider>
                         }
                     ></FormInfoInput>
@@ -120,9 +115,11 @@ function FilterMainScreen() {
 
                 <Grid item xs={12}>
                     <FormInfoInput
+                        id="projectContactsAutoComplete"
                         marginRight={'1.2rem'}
                         customStyleClass={"form-margin"}
                         label={"Project contact"}
+                        value={contact}
                         customInput={
                             <Autocomplete
                                 disablePortal
@@ -150,9 +147,7 @@ function FilterMainScreen() {
 
                 </Grid>
 
-
             </Grid>
-
 
         </div>
     );
