@@ -20,9 +20,15 @@ export default function CaseInfo({ title, description, image, prevPage, nextPage
                     </div>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <div style={{ height: '50%', marginTop: '25%' }}>
+
+                    <div style={{ height: '50%' }}>
                         <div style={{ height: '50%' }}>
-                            <CaseInfoImage images={[image]}></CaseInfoImage>
+                            <div style={{ margin: "auto", position: "relative", display: "flex" }}>
+                                <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+                                    <img style={{width: '50%', marginTop: '15%'}} src={image}></img>
+                                </div>
+                            </div>
+                            {/* <CaseInfoImage image={image}></CaseInfoImage> */}
                         </div>
                     </div>
                 </Grid>
