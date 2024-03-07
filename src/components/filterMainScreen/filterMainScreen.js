@@ -99,7 +99,7 @@ function FilterMainScreen() {
                 container
                 xs={12}
                 sx={{
-                    width: "inherit", position: "relative"
+                    width: "inherit", position: "relative", marginLeft: "2rem"
                 }}
             >
                 <Grid
@@ -120,13 +120,12 @@ function FilterMainScreen() {
                     </Grid>
 
                     <Grid item xs={12} >
-
                         <SelectListProjectType options={type} value={typeSelected} onChange={setTypeSelected}> </SelectListProjectType>
                     </Grid>
 
                     <Grid item xs={12} >
                         <FormInfoInput
-                            marginRight={'4rem'}
+                            marginRight={'4.3rem'}
                             customStyleClass={"form-margin"}
                             label={"Date from"}
                             width={"18.5rem"}
@@ -142,9 +141,10 @@ function FilterMainScreen() {
                             }
                         ></FormInfoInput>
                     </Grid>
+
                     <Grid item xs={12} >
                         <FormInfoInput
-                            marginRight={'5.5rem'}
+                            marginRight={'5.8rem'}
                             customStyleClass={"form-margin"}
                             label={"Date to"}
                             width={"18.5rem"}
@@ -163,20 +163,20 @@ function FilterMainScreen() {
                     <Grid item xs={12} >
                         <FormInfoInput
                             id="projectContactsAutoComplete"
-                            marginRight={'1.2rem'}
+                            marginRight={'1rem'}
                             customStyleClass={"form-margin"}
                             label={"Project contact"}
                             customInput={
                                 <FormControl sx={{ m: 1, width: 300 }}>
-                                    <InputLabel id="demo-multiple-name-label">Project contact</InputLabel>
+                                    <InputLabel id="demo-multiple-name-label">Name</InputLabel>
                                     <Select
                                         labelId="projectContactsAutoComplete-label"
-                                        id="projectContact"
+                                        id="Name"
                                         value={contactSelected}
                                         onChange={(newValue) => {
                                             setContactSelected(newValue.target.value);
                                         }}
-                                        input={<OutlinedInput label="Project contact" />}
+                                        input={<OutlinedInput label="Name" />}
                                         MenuProps={MenuProps}
                                     >
                                         {contact.map((item) => (
@@ -195,13 +195,13 @@ function FilterMainScreen() {
                 </Grid>
 
                 <Grid item xs={12} md={3} xl={4}>
-                    <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
+                    <Box sx={{ textAlign: 'center', marginTop: '1rem'}}>
                         <SearchButton handleClick={handleSearch}/>
                     </Box>
                 </Grid>
 
                 <Grid item xs={12} md={3} xl={4}>
-                    <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
+                    <Box sx={{ textAlign: 'center', marginTop: '1rem', marginBottom: '4rem'}}>
                         <CreateButton />
                     </Box>
                 </Grid>
