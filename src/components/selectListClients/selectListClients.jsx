@@ -34,17 +34,9 @@ export default function SelectListClients({ options, value, onChange }) {
     onChange && onChange(event);
   };
 
-  function getStyles(name, personName, theme) {
-    return {
-      fontWeight:
-        personName.indexOf(name) === -1
-          ? theme.typography.fontWeightRegular
-          : theme.typography.fontWeightMedium,
-    };
-  }
   return (
     <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
-      <Typography variant="h6" style={{ marginRight: "6rem" }}>
+      <Typography variant="h6" style={{ marginRight: "5.9rem" }}>
         Client
       </Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
@@ -52,7 +44,6 @@ export default function SelectListClients({ options, value, onChange }) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          multiple
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
@@ -62,7 +53,6 @@ export default function SelectListClients({ options, value, onChange }) {
             <MenuItem
               key={item.id}
               value={item.id}
-              style={getStyles(item.name, personName, theme)}
             >
               {item.name}
             </MenuItem>

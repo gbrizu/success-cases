@@ -10,6 +10,7 @@ import CreateSuccessCaseScreen from './pages/createSuccessCaseScreen';
 import CaseDetails from './components/caseDetails/caseDetails';
 import CaseViewContext from "./context/casesView.context";
 import CaseViewProcessScreen from "./pages/caseViewProcessScreen";
+import ErrorScreen from "./pages/errorScreen";
 
 export const UserContext = createContext()
 
@@ -25,6 +26,7 @@ function App() {
               element={<SuccessCaseProcessCreationScreen />}
             />
             <Route path="succesCase/:id" element={<CaseViewProcessScreen />} />
+            <Route path='*' element={<ErrorScreen/>} />
           </Routes>
         </BrowserRouter>
       </CaseViewContext>
