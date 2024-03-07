@@ -20,7 +20,7 @@ const MenuProps = {
   },
 };
 
-export default function MultipleSelect({ options }) {
+export default function MultipleSelect({ options, value, onChange}) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
@@ -28,11 +28,7 @@ export default function MultipleSelect({ options }) {
     const {
       target: { value },
     } = event;
-    console.log(value);
-    setPersonName(
-      // On autofill, we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    onChange(value);
   };
 
   return (
@@ -43,7 +39,7 @@ export default function MultipleSelect({ options }) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          value={personName}
+          value={value}
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
