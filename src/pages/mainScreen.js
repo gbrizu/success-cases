@@ -1,40 +1,35 @@
 import { Box, Container, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DataTable from "../components/dataTable/dataTable";
 import FilterMainScreen from "../components/filterMainScreen/filterMainScreen";
 import CreateButton from "../components/button/createButton";
 import BasicTitle from "../components/basicTitle/basicTitle";
 import { getSuccessCase } from "../services/successCaseServerCalls";
+import { CaseViewContextProvider } from "../context/casesView.context";
 
 function MainScreen() {
 
   const [data, setData] = useState([]);
+  const { successCasesList } = useContext(
+    CaseViewContextProvider
+  );
 
   useEffect(() => {
-    const fetchData = async () => {
-
-      getSuccessCase().then((result) => {
-        console.log('result =>', result)
-        if (result && result.length > 0) {
-          const temp = result.map((successCase) => {
-            return {
-              id: successCase.id,
-              client: successCase.Client.name,
-              industry: successCase.Industry.name,
-              projectType: successCase.ProjectType.name,
-              referrer: successCase.Contact.name,
-              date: successCase.startdate + " " + successCase.finishdate,
-            };
-          });
-          setData(temp);
-        }
-
+    if (successCasesList && successCasesList.length > 0) {
+      const temp = successCasesList.map((successCase) => {
+        return {
+          id: successCase.id,
+          client: successCase.Client.name,
+          industry: successCase.Industry.name,
+          projectType: successCase.ProjectType.name,
+          referrer: successCase.Contact.name,
+          date: successCase.startdate + " " + successCase.finishdate,
+        };
       });
+      setData(temp);
     }
-
-    fetchData();
-  }, []);
+  }, [successCasesList]);
 
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#ffffff' }}>
