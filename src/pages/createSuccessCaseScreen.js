@@ -6,8 +6,7 @@ import {
   FormControlLabel,
   Grid,
   IconButton,
-  Input,
-  InputAdornment,
+  Autocomplete,
   Switch,
   TextField,
   Tooltip,
@@ -15,13 +14,20 @@ import {
 } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AccountCircle } from "@mui/icons-material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import OfferingSelect from "../components/selectListOfferings/selectListOfferings";
-import SelectListClients from "../components/selectListClients/selectListClients";
-import MultipleSelect from "../components/selectListIndustry";
+import OfferingSelectList from "../components/selectListSuccessCaseScreen/offeringSelectList";
+import ClientSelectList from "../components/selectListSuccessCaseScreen/clientSelectList";
+import IndustrySelectList from "../components/selectListSuccessCaseScreen/industrySelectList";
+import ProjectTypeSelectList from "../components/selectListSuccessCaseScreen/projectTypeSelectList";
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
+import { getContacts } from "../services/successCaseServerCalls";
+import {
+  getClients,
+  getOfferings,
+  getIndustries,
+  getProyectsTypes,
+} from "../services/successCaseServerCalls";
 
 const initialPage = {
   text: "",
@@ -30,22 +36,34 @@ const initialPage = {
 
 export default function CreateSuccessCaseScreen() {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
-  const [selectedOffering, setSelectedOffering] = useState([]);
+  const [projectTitleValue, setProjectTitleValue] = useState("");
+  const [selectedOffering, setSelectedOffering] = useState("");
+  const [selectedProjectType, setSelectedProjectType] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
   const [projectContactValue, setProjectContactValue] = useState("");
-  const [avgTeamSizeValue, setAvgTeamSizeValue] = useState("");
+  const [avgTeamSizeValue, setAvgTeamSizeValue] = useState(0);
   const [isPublic, setIsPublic] = useState(false);
+  const [startDateValue, setStartDateValue] = useState();
+  const [finishDateValue, setFinishDateValue] = useState();
+  const [contacts, setContacts] = useState([]);
+
+  const [offerings, setOfferings] = useState([]);
+  const [clients, setClients] = useState([]);
+  const [industry, setIndustry] = useState([]);
+  const [projectType, setProjectType] = useState([]);
 
   const submitHandler = () => {
     setSuccessCase({
-      offering: selectedOffering,
-      client: selectedClient,
-      industry: selectedIndustry,
-      date: selectedDate,
-      projectContact: projectContactValue,
-      avgTeamSize: avgTeamSizeValue,
+      title: projectTitleValue,
+      offeringId: selectedOffering,
+      clientId: selectedClient,
+      industryId: selectedIndustry,
+      projectTypeId: selectedProjectType,
+      startDate: startDateValue,
+      finishDate: finishDateValue,
+      contactId: projectContactValue,
+      teamSize: parseInt(avgTeamSizeValue),
       isPublic: isPublic,
       successCase: [initialPage],
       challenge: [initialPage],
@@ -53,6 +71,10 @@ export default function CreateSuccessCaseScreen() {
       technologie: [initialPage],
     });
     navigate("successCase");
+  };
+
+  const handleProjectTitleChange = (event) => {
+    setProjectTitleValue(event.target.value);
   };
 
   const handleOfferingChange = (event) => {
@@ -67,6 +89,10 @@ export default function CreateSuccessCaseScreen() {
     setSelectedIndustry(event.target.value);
   };
 
+  const handleProjectTypeChange = (event) => {
+    setSelectedProjectType(event.target.value);
+  };
+
   const handleProjectContactChange = (event) => {
     setProjectContactValue(event.target.value);
   };
@@ -75,25 +101,51 @@ export default function CreateSuccessCaseScreen() {
     setAvgTeamSizeValue(event.target.value);
   };
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
   const handleIsPublicChange = (event) => {
     setIsPublic(event.target.checked);
   };
 
-  const [dateFrom, setDateFrom] = useState()
-  const [dateTo, setDateTo] = useState()
+  const getOfferingsInit = () => {
+    getOfferings().then((response) => {
+      setOfferings(response);
+    });
+  };
+
+  const getClientsInit = () => {
+    getClients().then((response) => {
+      setClients(response);
+    });
+  };
+
+  const getIndustryInit = () => {
+    getIndustries().then((response) => {
+      setIndustry(response);
+    });
+  };
+
+  const getProjectTypeInit = () => {
+    getProyectsTypes().then((response) => {
+      setProjectType(response);
+    });
+  };
 
   useEffect(() => {
-    if (dateTo < dateFrom) {
-      alert("El valor Seleccionado es menor a la fecha inicial")
-      setDateTo(null)
+    getOfferingsInit();
+    getClientsInit();
+    getIndustryInit();
+    getProjectTypeInit();
+  }, []);
+
+  useEffect(() => {
+    if (finishDateValue < startDateValue) {
+      alert("El valor Seleccionado es menor a la fecha inicial");
+      setFinishDateValue(null);
     }
+  }, [startDateValue, finishDateValue]);
 
-  }, [dateTo, setDateTo])
-
+  useEffect(() => {
+    getContacts().then((result) => setContacts(result));
+  }, []);
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -151,44 +203,51 @@ export default function CreateSuccessCaseScreen() {
           sx={{ width: "inherit", marginLeft: "25rem", position: "relative" }}
         >
           <Grid item xs={12} paddingRight={"19.5rem"}>
-          <FormInfoInput
+            <FormInfoInput
               marginRight={"7.4rem"}
               customStyleClass={"form-margin"}
               label={"Title"}
               width={300}
               customInput={
-                <TextField 
-                  label= {"Name"}
-                  fullWidth
-                  marginRight= {"0rem"}
+                <TextField
                   inputProps={{ type: "text" }}
+                  onChange={handleProjectTitleChange}
+                  value={projectTitleValue}
                 />
               }
             ></FormInfoInput>
           </Grid>
 
           <Grid item xs={12}>
-            <OfferingSelect
+            <OfferingSelectList
               value={selectedOffering}
               onChange={handleOfferingChange}
-              options={["Mobile", "Web", "Integration", "Development"]}
-            ></OfferingSelect>
+              options={offerings}
+            ></OfferingSelectList>
           </Grid>
 
           <Grid item xs={12}>
-            <SelectListClients
+            <ClientSelectList
               value={selectedClient}
               onChange={handleClientChange}
-              options={["Mercado Libre", "Pedidos ya"]}
+              options={clients}
             />
           </Grid>
 
           <Grid item xs={12}>
-            <MultipleSelect
+            <ProjectTypeSelectList
+              value={selectedProjectType}
+              onChange={handleProjectTypeChange}
+              options={projectType}
+            ></ProjectTypeSelectList>
+          </Grid>
+
+          <Grid item xs={12}>
+            <IndustrySelectList
               value={selectedIndustry}
               onChange={handleIndustryChange}
-              options={["Entertainment", "Healthcare", "Banking", "Education"]}
-            ></MultipleSelect>
+              options={industry}
+            ></IndustrySelectList>
           </Grid>
 
           <Grid item xs={12}>
@@ -200,13 +259,15 @@ export default function CreateSuccessCaseScreen() {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     label="From"
-                    value={dateFrom}
-                    onChange={(newValue) => setDateFrom(newValue)}
+                    value={startDateValue}
+                    onChange={(newValue) => {
+                      setStartDateValue(newValue.$d)
+                    }}
                   />
                   <DatePicker
                     label="To"
-                    value={dateTo}
-                    onChange={(newValue) => setDateTo(newValue)}
+                    value={finishDateValue}
+                    onChange={(newValue) => setFinishDateValue(newValue.$d)}
                   />
                 </LocalizationProvider>
               }
@@ -218,17 +279,27 @@ export default function CreateSuccessCaseScreen() {
               marginRight={"1.4rem"}
               customStyleClass={"form-margin"}
               label={"Project contact"}
+              id={"projectContact"}
               customInput={
                 <FormControl variant="standard">
-                  <Input
-                    id="input-with-icon-adornment"
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <AccountCircle />
-                      </InputAdornment>
-                    }
-                    onChange={handleProjectContactChange}
+                  <Autocomplete
+                    freeSolo
+                    id="projectContact"
                     value={projectContactValue}
+                    onChange={handleProjectContactChange}
+                    disableClearable
+                    fullWidth={true}
+                    options={contacts.map((option) => option.email)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Search"
+                        InputProps={{
+                          ...params.InputProps,
+                          type: 'search',
+                        }}
+                      />
+                    )}
                   />
                 </FormControl>
               }

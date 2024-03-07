@@ -21,9 +21,6 @@ const MenuProps = {
 };
 
 export default function MultipleSelect({ options, value, onChange}) {
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
-
   const handleChange = (event) => {
     const {
       target: { value },

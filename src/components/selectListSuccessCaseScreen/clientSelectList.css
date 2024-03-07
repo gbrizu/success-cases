@@ -1,0 +1,10 @@
+.label-container
+{
+  display: flex;
+  align-items: center;
+}
+
+.clientlbl
+{
+  font-size: 25px;
+}
