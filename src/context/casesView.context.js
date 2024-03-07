@@ -1,11 +1,12 @@
 import React, { createContext, useState } from 'react'
+import { getSuccessCase } from '../services/successCaseServerCalls';
 
 export const CaseViewContextProvider = createContext();
 
 export default function CaseViewContext({ children }) {
     const [screen, setScreen] = useState('viewCaseDetails');
     const [actualSuccessCase, setSuccessCase] = useState({});
-    const [successCasesList, setSuccessCasesList] = useState({});
+    const [successCasesList, setSuccessCasesList] = useState([]);
 
 
     const navigate = (screen) => {
@@ -17,7 +18,9 @@ export default function CaseViewContext({ children }) {
             screen,
             navigate,
             actualSuccessCase,
-            setSuccessCase
+            setSuccessCase,
+            successCasesList,
+            setSuccessCasesList
         }}>
             {children}
         </CaseViewContextProvider.Provider>

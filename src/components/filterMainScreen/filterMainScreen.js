@@ -7,15 +7,19 @@ import SelectListClients from "../selectListClients/selectListClients";
 import MultipleSelect from "../selectListIndustry";
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
 import { margin } from '@mui/system';
-import { getClients, getIndustries, getProyectsTypes, getContacts } from "../../services/successCaseServerCalls";
-import { useState } from 'react';
+import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCase } from "../../services/successCaseServerCalls";
+import { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { AccountCircle } from "@mui/icons-material";
 import NextButton from '../button/nextButton';
+import { CaseViewContextProvider } from '../../context/casesView.context';
 
 
 
 function FilterMainScreen() {
+    const { setSuccessCasesList } = useContext(
+        CaseViewContextProvider
+    );
 
     const [clients, setClients] = useState([]);
 
@@ -74,7 +78,7 @@ function FilterMainScreen() {
 
                 <Grid item xs={12}>
                     <SelectListProjectType options={type}></SelectListProjectType>
-                </Grid> 
+                </Grid>
 
                 <Grid item xs={12}>
 
