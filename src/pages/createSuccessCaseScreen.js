@@ -127,7 +127,7 @@ export default function CreateSuccessCaseScreen() {
             label="Make Public"
             labelPlacement="top"
             sx={{
-              marginLeft: "48rem ",
+              marginLeft: "56rem ",
               marginRight: "auto",
               marginTop: "2rem",
             }}
@@ -146,13 +146,14 @@ export default function CreateSuccessCaseScreen() {
             </IconButton>
           </Tooltip>
         </div>
+
         <Grid
           containerInput
           sx={{ width: "inherit", marginLeft: "25rem", position: "relative" }}
         >
-          <Grid item xs={12} paddingRight={"19.5rem"}>
+          <Grid item xs={12} paddingRight={"19.6rem"}>
           <FormInfoInput
-              marginRight={"7.4rem"}
+              marginRight={"7.25rem"}
               customStyleClass={"form-margin"}
               label={"Title"}
               width={300}
@@ -166,15 +167,7 @@ export default function CreateSuccessCaseScreen() {
               }
             ></FormInfoInput>
           </Grid>
-
-          <Grid item xs={12}>
-            <OfferingSelect
-              value={selectedOffering}
-              onChange={handleOfferingChange}
-              options={["Mobile", "Web", "Integration", "Development"]}
-            ></OfferingSelect>
-          </Grid>
-
+          
           <Grid item xs={12}>
             <SelectListClients
               value={selectedClient}
@@ -190,6 +183,15 @@ export default function CreateSuccessCaseScreen() {
               options={["Entertainment", "Healthcare", "Banking", "Education"]}
             ></MultipleSelect>
           </Grid>
+
+          <Grid item xs={12}>
+            <OfferingSelect
+              value={selectedOffering}
+              onChange={handleOfferingChange}
+              options={["Mobile", "Web", "Integration", "Development"]}
+            ></OfferingSelect>
+          </Grid>
+
 
           <Grid item xs={12}>
             <FormInfoInput
