@@ -6,11 +6,6 @@ export const ProcessContextProvider = createContext();
 export default function ProcessContext({ children }) {
     const [successCase, setSuccessCase] = useState({});
 
-    // const [successCasePage, setSuccessCasePage] = useState(0);
-    // const [challengePage, setChallengePage] = useState(0);
-    // const [improvementsPage, setImprovementsPage] = useState(0);
-    // const [technologiePage, setTechnologiePage] = useState(0);
-
     const [screen, setScreen] = useState('createPage');
 
     const [successCaseText, setSuccessCaseText] = useState('');

@@ -1,4 +1,3 @@
-// SuccessCaseProcessCreationScreen.js
 import React, { useContext } from "react";
 import CreateSuccessCaseScreen from "./createSuccessCaseScreen";
 import { ProcessContextProvider } from "../context/process.context";

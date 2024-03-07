@@ -4,7 +4,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { ProcessContextProvider } from "../../context/process.context";
 
-// En CaseInfoEdition.js
 export default function CaseInfoEdition() {
   const {
     setChallengeText,
