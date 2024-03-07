@@ -43,24 +43,16 @@ function MainScreen() {
         <BasicTitle basictitle={"Success cases"} />
       </div>
 
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6} xl={4}>
-          <Box
-            sx={{
-              textAlign: 'center',
-              marginTop: '2rem',
-              width: { xs: '100%', md: '100%' },
-            }}
-          >
-            <FilterMainScreen />
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} md={3} xl={4}>
-          <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
-            <CreateButton />
-          </Box>
-        </Grid>
+      <Grid container spacing={2} xs={12}>
+        <Box
+          sx={{
+            textAlign: 'center',
+            marginTop: '2rem',
+            width: { xs: '100%', md: '100%' },
+          }}
+        >
+          <FilterMainScreen />
+        </Box>
       </Grid>
 
       <div id="TABLE">

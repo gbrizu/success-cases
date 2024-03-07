@@ -18,15 +18,6 @@ const MenuProps = {
   },
 };
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
 export default function ProjectTypeSelectList({ value, onChange, options }) {
   const theme = useTheme();
   return (
