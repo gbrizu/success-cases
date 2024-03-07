@@ -40,6 +40,7 @@ export default function CaseViewProcessScreen() {
       component: <CaseInfo
         title={'Challenges'}
         description={actualSuccessCase.Challenge ? actualSuccessCase.Challenge.text_ch : ''}
+        image={actualSuccessCase.Challenge ? actualSuccessCase.Challenge.image_ch : ''}
         prevPage={viewSuccessCaseScreens[1]}
         nextPage={viewSuccessCaseScreens[3]}
       />
@@ -49,6 +50,7 @@ export default function CaseViewProcessScreen() {
       component: <CaseInfo
         title={'Improvements'}
         description={actualSuccessCase.Improvement ? actualSuccessCase.Improvement.text_imp : ''}
+        image={actualSuccessCase.Improvement ? actualSuccessCase.Improvement.image_imp : ''}
         prevPage={viewSuccessCaseScreens[2]}
         nextPage={viewSuccessCaseScreens[4]}
       />
@@ -57,7 +59,8 @@ export default function CaseViewProcessScreen() {
       name: viewSuccessCaseScreens[4],
       component: <CaseInfo
         title={'Technologies'}
-        description={actualSuccessCase.Improvement ? actualSuccessCase.Improvement.text_imp : ''}
+        description={actualSuccessCase.Technology ? actualSuccessCase.Technology.text_tech : ''}
+        image={actualSuccessCase.Technology ? actualSuccessCase.Technology.image_tech : ''}
         prevPage={viewSuccessCaseScreens[3]}
         nextPage={viewSuccessCaseScreens[5]}
       />

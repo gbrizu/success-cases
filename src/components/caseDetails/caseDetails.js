@@ -17,7 +17,6 @@ export default function CaseDetails({ successCase }) {
 
   useEffect(() => {
     getSuccessCaseById(id).then((response) => {
-      console.log(response)
       setSuccessCase(response)
     })
   }, [])
