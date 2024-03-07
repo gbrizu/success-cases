@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { CaseViewContextProvider } from "../../context/casesView.context";
+import { getSuccessCaseById } from "../../services/successCaseServerCalls";
 
 export default function CaseDetails({ successCase }) {
   const { navigate, setSuccessCase } = useContext(
@@ -14,142 +15,11 @@ export default function CaseDetails({ successCase }) {
 
   const { id } = useParams();
 
-  const succesCase = {
-    id: 1,
-    title: "Ejemplo de Caso de Éxito 1",
-    startdate: "2024-02-29",
-    finishdate: "2024-03-10",
-    teamsize: 20,
-    ispublic: true,
-    industryid: 3,
-    clientid: 1,
-    projecttypeid: 3,
-    contactid: 1,
-    casedetailsid: 1,
-    offeringid: 1,
-    technologyid: 1,
-    challengeid: 1,
-    improvementid: 1,
-    Industry: {
-      id: 3,
-      name: "Healthcare"
-    },
-    ProjectType: {
-      id: 3,
-      name: "Software Development"
-    },
-    Client: {
-      name: "Matias",
-      surname: null,
-      email: null,
-      id: 1
-    },
-    Contact: {
-      id: 1,
-      name: "German",
-      surName: "A",
-      email: "GermanA@gmail.com"
-    },
-    Offering: {
-      id: 1,
-      name: "Offering 1",
-      description: "Description 1"
-    },
-    CaseDetail: {
-      id: 1,
-      image_detail: "imagen.jpg",
-      video_detail: "video.mp4",
-      text_detail: "Lorem ipsum dolor "
-    },
-    Technology: {
-      id: 1,
-      image_tech: "aaaaaaaaaaaaa.jpg",
-      video_tech: "eaaaaaeo.mp4",
-      text_tech: "Taaaaaaogía 1"
-    },
-    Improvement: {
-      id: 1,
-      image_imp: "ebbbbbmg.jpg",
-      video_imp: "ejbbbeo.mp4",
-      text_imp: "Tebbbbba 1"
-    },
-    Challenge: {
-      id: 1,
-      image_ch: "eccccccg.jpg",
-      video_ch: "ejcccccceo.mp4",
-      text_ch: "cccccc"
-    }
-  };
-
-
   useEffect(() => {
-    let succesCase2 = {
-      id: id,
-      title: "Ejemplo de Caso de Éxito 1",
-      startdate: "2024-02-29",
-      finishdate: "2024-03-10",
-      teamsize: 20,
-      ispublic: true,
-      industryid: 3,
-      clientid: 1,
-      projecttypeid: 3,
-      contactid: 1,
-      casedetailsid: 1,
-      offeringid: 1,
-      technologyid: 1,
-      challengeid: 1,
-      improvementid: 1,
-      Industry: {
-        id: 3,
-        name: "Healthcare"
-      },
-      ProjectType: {
-        id: 3,
-        name: "Software Development"
-      },
-      Client: {
-        name: "Matias",
-        surname: null,
-        email: null,
-        id: 1
-      },
-      Contact: {
-        id: 1,
-        name: "German",
-        surName: "A",
-        email: "GermanA@gmail.com"
-      },
-      Offering: {
-        id: 1,
-        name: "Offering 1",
-        description: "Description 1"
-      },
-      CaseDetail: {
-        id: 1,
-        image_detail: "imagen.jpg",
-        video_detail: "video.mp4",
-        text_detail: "Lorem ipsum dolor "
-      },
-      Technology: {
-        id: 1,
-        image_tech: "aaaaaaaaaaaaa.jpg",
-        video_tech: "eaaaaaeo.mp4",
-        text_tech: "Taaaaaaogía 1"
-      },
-      Improvement: {
-        id: 1,
-        image_imp: "ebbbbbmg.jpg",
-        video_imp: "ejbbbeo.mp4",
-        text_imp: "Tebbbbba 1"
-      },
-      Challenge: {
-        id: 1,
-        image_ch: "eccccccg.jpg",
-        video_ch: "ejcccccceo.mp4",
-        text_ch: "cccccc"
-      }
-    };
-    setSuccessCase(succesCase2)
+    getSuccessCaseById(id).then((response) => {
+      console.log(response)
+      setSuccessCase(response)
+    })
   }, [])
 
 
