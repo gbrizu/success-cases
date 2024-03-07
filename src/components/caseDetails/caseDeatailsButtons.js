@@ -12,17 +12,17 @@ const CaseDetailsButtons = ({prevPage, nextPage }) => {
 );
   return (
       <div style={{ display: "flex", justifyContent: "space-between", margin: '1rem' }}>
-        <Button
+        <Button style={{fontSize:"1.3rem"}}
           startIcon={<ArrowBackIosNewIcon
-            sx={{ color: 'yellow' }}
+            sx={{ color: 'orange' }}
             fontSize='large' />}
             onClick={() => navigate(prevPage)}
         >Back</Button>
 
-        <Button
+        <Button style={{fontSize:"1.3rem"}}
           endIcon={<ArrowForwardIosIcon
-            sx={{ color: 'yellow' }}
-            fontSize='large' />}
+            sx={{ color: 'orange' }}
+            fontSize='1.3rem' />}
             onClick={() => navigate(nextPage)}
 
         >Next</Button>

@@ -16,6 +16,7 @@ export default function CaseViewContext({ children }) {
     return (
         <CaseViewContextProvider.Provider value={{
             screen,
+            setScreen,
             navigate,
             actualSuccessCase,
             setSuccessCase,

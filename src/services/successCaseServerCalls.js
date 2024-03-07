@@ -61,7 +61,7 @@ export const createSuccessCase = (successCase) => {
 }
 
 export const getSuccessCaseById = (id) => {
-    return getBaseAxiosGetWithResponseManage('/SuccessCase/getById')
+    return getBaseAxiosGetWithResponseManage(`/SuccessCase/getById/${id}`)
 }
 
 export const getSuccessCase = () => {

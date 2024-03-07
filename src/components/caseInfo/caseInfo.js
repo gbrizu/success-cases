@@ -11,12 +11,6 @@ export default function CaseInfo({ title, description, image, prevPage, nextPage
         CaseViewContextProvider
     );
 
-    const arrayimages = [
-        "https://htb.com/wp-content/uploads/2022/02/Card-Details-400x800-1.png",
-        "https://htb.com/wp-content/uploads/2022/02/Controls-and-Alerts-400x800-1.png",
-        "https://htb.com/wp-content/uploads/2022/02/Controls-and-Alerts-400x800-1.png",
-    ];
-
     return (
         <div style={{ border: 'none', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <Grid container spacing={2}>
