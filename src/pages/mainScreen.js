@@ -6,11 +6,6 @@ import FilterMainScreen from "../components/filterMainScreen/filterMainScreen";
 import CreateButton from "../components/button/createButton";
 import BasicTitle from "../components/basicTitle/basicTitle";
 import { getSuccessCase } from "../services/successCaseServerCalls";
-import { getSuccessCasesByFilter } from "../services/successCaseServerCalls";
-import SearchButton from "../components/button/searchButton";
-import SelectListIndustry from "../components/selectListIndustry";
-import SelectListClients from "../components/selectListClients/selectListClients";
-import SelectListProjectType from "../components/selectListProjectType/selectListProjectType";
 
 function MainScreen() {
 
@@ -19,44 +14,27 @@ function MainScreen() {
   useEffect(() => {
     const fetchData = async () => {
 
-      const getSuccessCases = await getSuccessCase();
+      getSuccessCase().then((result) => {
+        console.log('result =>', result)
+        if (result && result.length > 0) {
+          const temp = result.map((successCase) => {
+            return {
+              id: successCase.id,
+              client: successCase.Client.name,
+              industry: successCase.Industry.name,
+              projectType: successCase.ProjectType.name,
+              referrer: successCase.Contact.name,
+              date: successCase.startdate + " " + successCase.finishdate,
+            };
+          });
+          setData(temp);
+        }
 
-      const data = getSuccessCases.map((successCase) => {
-        return {
-          id: successCase.id,
-          client: successCase.Client.name,
-          industry: successCase.Industry.name,
-          projectType: successCase.ProjectType.name,
-          referrer: successCase.Contact.name,
-          date: successCase.startdate + " " + successCase.finishdate,
-        };
       });
-
-      setData(data);
     }
 
     fetchData();
   }, []);
-
-  const handleSearch = async () => {
-    const getSuccessCases = await getSuccessCasesByFilter({
-      industryid: SelectListIndustry.personName.id,
-      clientid: SelectListClients.personName.id,
-      projecttypeid: SelectListProjectType.value.id,
-      contactid: FilterMainScreen.projectContactsAutoComplete.value.id,
-    });
-    const newData = getSuccessCases.map((successCase) => {
-      return {
-        id: successCase.id,
-        client: successCase.clientid.name,
-        industry: successCase.Industry.name,
-        projectType: successCase.ProjectType.name,
-        contact: successCase.Contact.name,
-      };
-    });
-    console.log(SelectListIndustry.value.id)
-    setData(newData);
-  };
 
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#ffffff' }}>
@@ -66,30 +44,39 @@ function MainScreen() {
       </div>
 
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} xl={4}>
           <Box
             sx={{
-              height: '20rem',
+              textAlign: 'center',
+              height: '27.5rem',
               marginTop: '2rem',
               width: { xs: '100%', md: '100%' },
             }}
-          ><FilterMainScreen /></Box>
+          >
+            <FilterMainScreen />
+          </Box>
         </Grid>
 
-        <Grid item xs={12} md={6}>
-          <Grid container spacing={2}>
-            <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
-              <Link to="/layout2">
-                <CreateButton />
-              </Link>
-            </Box>
-            <SearchButton onClick={handleSearch} />
-          </Grid>
+        {/* CAMBIAR BOTÓN POR SEARCH*/}
+        <Grid item xs={12} md={3} xl={4}>
+          <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
+            {/* <Link to="/layout2"> */}
+            <CreateButton />
+            {/* </Link> */}
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} md={3} xl={4}>
+          <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
+            <Link to="/layout2">
+              <CreateButton />
+            </Link>
+          </Box>
         </Grid>
       </Grid>
 
       <div id="TABLE">
-        <Box sx={{ height: '21.8rem', mt: '2rem', marginTop: '7rem' }} >
+        <Box sx={{ height: '21.8rem', mt: '2rem', marginTop: '2rem' }} >
           <DataTable rows={data} />
         </Box>
       </div>
