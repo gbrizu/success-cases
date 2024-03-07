@@ -53,9 +53,7 @@ function MainScreen() {
 
         <Grid item xs={12} md={3} xl={4}>
           <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
-            <Link to="/layout2">
-              <CreateButton />
-            </Link>
+            <CreateButton />
           </Box>
         </Grid>
       </Grid>
