@@ -44,7 +44,6 @@ export const getProyectsTypes = () => {
     return getBaseAxiosGetWithResponseManage('/ProjectType/getAll')
 }
 
-
 export const getContacts = () => {
     return getBaseAxiosGetWithResponseManage('/Contact/getAll')
 }
