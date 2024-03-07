@@ -98,6 +98,7 @@ export const postSuccessCase = (successCaseObj) => {
 
     const finishNewDate = finishYear + "-" + finishMonth + "-" + finishDay;
 
+    
     const body = {
         "title": title,
         "startdate": startNewDate,
@@ -108,8 +109,7 @@ export const postSuccessCase = (successCaseObj) => {
         "offeringid": offeringId, 
         "clientid": clientId,
         "projecttypeid": projectTypeId,
-        // "contactid": contactId,
-        "contactid": 4,
+        "contactid": contactId,
         "casedetail": {
             "image_detail": successCase.image,
             "video_detail": null,

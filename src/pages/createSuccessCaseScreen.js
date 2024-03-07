@@ -11,6 +11,9 @@ import {
   TextField,
   Tooltip,
   Typography,
+  Select,
+  OutlinedInput,
+  MenuItem,
 } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -91,10 +94,6 @@ export default function CreateSuccessCaseScreen() {
 
   const handleProjectTypeChange = (event) => {
     setSelectedProjectType(event.target.value);
-  };
-
-  const handleProjectContactChange = (event) => {
-    setProjectContactValue(event.target.value);
   };
 
   const handleAvgTeamSizeChange = (event) => {
@@ -282,25 +281,24 @@ export default function CreateSuccessCaseScreen() {
               id={"projectContact"}
               customInput={
                 <FormControl variant="standard">
-                  <Autocomplete
-                    freeSolo
+                  <Select
+                    labelId="projectContactsAutoComplete-label"
                     id="projectContact"
                     value={projectContactValue}
-                    onChange={handleProjectContactChange}
-                    disableClearable
-                    fullWidth={true}
-                    options={contacts.map((option) => option.email)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Search"
-                        InputProps={{
-                          ...params.InputProps,
-                          type: 'search',
-                        }}
-                      />
-                    )}
-                  />
+                    onChange={(newValue) => {
+                      setProjectContactValue(newValue.target.value);
+                    }}
+                    input={<OutlinedInput label="Name" />}
+                  >
+                    {contacts.map((item) => (
+                      <MenuItem
+                        key={item.id}
+                        value={item.id}
+                      >
+                        {item.name + " " + item.surName}
+                      </MenuItem>
+                    ))}
+                  </Select>
                 </FormControl>
               }
             ></FormInfoInput>
