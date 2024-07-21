@@ -18,33 +18,30 @@ const MenuProps = {
   },
 };
 
-
-export default function OfferingSelect({ value, onChange, options }) {
+export default function ProjectTypeSelectList({ value, onChange, options }) {
   const theme = useTheme();
   return (
     <div
       style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
     >
-      <Typography variant="h6" style={{ marginRight: "4.8rem" }}>
-        Offering
+      <Typography variant="h6" style={{ marginRight: "2.1rem" }}>
+        Project Type
       </Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Select Offering</InputLabel>
+        <InputLabel id="demo-multiple-name-label">
+          Select Project Type
+        </InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          multiple
           value={value}
           onChange={onChange}
-          input={<OutlinedInput label="Select Offering" />}
+          input={<OutlinedInput label="Select Project Type" />}
           MenuProps={MenuProps}
         >
-          {options.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-            >
-              {name}
+          {options.map((option) => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.name}
             </MenuItem>
           ))}
         </Select>

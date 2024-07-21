@@ -18,8 +18,7 @@ const MenuProps = {
   },
 };
 
-
-export default function OfferingSelect({ value, onChange, options }) {
+export default function OfferingSelectList({ value, onChange, options = [] }) {
   const theme = useTheme();
   return (
     <div
@@ -33,18 +32,17 @@ export default function OfferingSelect({ value, onChange, options }) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
-          multiple
           value={value}
           onChange={onChange}
           input={<OutlinedInput label="Select Offering" />}
           MenuProps={MenuProps}
         >
-          {options.map((name) => (
+          {options.map((option) => (
             <MenuItem
-              key={name}
-              value={name}
+              key={option.id}
+              value={option.id}
             >
-              {name}
+              {option.name}
             </MenuItem>
           ))}
         </Select>
