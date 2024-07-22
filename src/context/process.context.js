@@ -32,18 +32,52 @@ export default function ProcessContext({ children }) {
 
 
     const submitSuccessCaseHandler = async () => {
+
+        
+        
+        const paramsSuccessCase = {
+            Bucket: 'challenge-3-bucket-example',
+            Key: successCase.title + '-caseimage',
+            Body: successCaseFile,
+            ContentType: 'image/*', 
+        };
+        const paramsChallenges = {
+            Bucket: 'challenge-3-bucket-example',
+            Key: successCase.name + '-challengeimage',
+            Body: challengeFile,
+            ContentType: 'image/*', 
+        };
+        const paramsImprovements = {
+            Bucket: 'challenge-3-bucket-example',
+            Key: successCase.name + '-improvimage',
+            Body: improvementsFile,
+            ContentType: 'image/*', 
+        };
+        const paramsTechnologies = {
+            Bucket: 'challenge-3-bucket-example',
+            Key: technologieFile.name + '-techimage',
+            Body: technologieFile,
+            ContentType: 'image/*', 
+        };
+        // Sube el archivo a S3
+        const caseData = await s3.upload(paramsSuccessCase).promise();
+        const challengeData = await s3.upload(paramsChallenges).promise();
+        const improvData = await s3.upload(paramsImprovements).promise();
+        const techData = await s3.upload(paramsTechnologies).promise();
+        console.log('casedata =', caseData.Location,'challengedata = ', challengeData.Location,'improvData = ', improvData.Location, 'techData = ', techData.Location)
+
         const body = {
             ...successCase,
             // NO BORRAR
-            // successCase: { text: successCaseText, image: await toBase64(successCaseFile) },
-            // challenge: { text: challengeText, image: await toBase64(challengeFile) },
-            // improvements: { text: improvementsText, image: await toBase64(improvementsFile) },
-            // technologie: { text: technologieText, image: await toBase64(technologieFile) },
+            successCase: { text: successCaseText, image: caseData.Location},
+            challenge: { text: challengeText, image: challengeData.Location },
+            improvements: { text: improvementsText, image: improvData.Location },
+            technologie: { text: technologieText, image: techData.Location },
             // NO BORRAR
-            successCase: { text: successCaseText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
-            challenge: { text: challengeText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
-            improvements: { text: improvementsText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
-            technologie: { text: technologieText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+            // successCase: { text: successCaseText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+            // challenge: { text: challengeText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+            // improvements: { text: improvementsText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+            // technologie: { text: technologieText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
         }
 
         const res = await postSuccessCase(body);
