@@ -5,6 +5,8 @@ import FilterMainScreen from "../components/filterMainScreen/filterMainScreen";
 import BasicTitle from "../components/basicTitle/basicTitle";
 import { getSuccessCase } from "../services/successCaseServerCalls";
 import { CaseViewContextProvider } from "../context/casesView.context";
+import LoginButton from "../components/button/LoginButton";
+import LogoutButton from "../components/button/LogoutButton";
 
 function MainScreen() {
 
@@ -60,6 +62,12 @@ function MainScreen() {
         <Box sx={{}} >
           <DataTable rows={data} />
         </Box>
+      </div>
+      <div>
+        <LoginButton/>
+
+        
+        <LogoutButton/>
       </div>
     </Container>
   );
