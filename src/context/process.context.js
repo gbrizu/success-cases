@@ -17,6 +17,11 @@ export default function ProcessContext({ children }) {
     const [technologieFile, setTechnologieFile] = useState('');
     const [improvementsFile, setImprovementsFile] = useState('');
 
+    const [successCaseVideo, setSuccessCaseVideo] = useState('');
+    const [challengeVideo, setChallengeVideo] = useState('');
+    const [technologieVideo, setTechnologieVideo] = useState('');
+    const [improvementsVideo, setImprovementsVideo] = useState('');
+
     const navigate = (screen) => {
         setScreen(screen);
     };
@@ -58,12 +63,17 @@ export default function ProcessContext({ children }) {
         const technologieImage = await toBase64(compressedTechnologieFile);
         const improvementsImage = await toBase64(compressedImprovementsFile);
 
+        const successCaseVideoBase64 = await toBase64(successCaseVideo);
+        const challengeVideoBase64 = await toBase64(challengeVideo);
+        const technologieVideoBase64 = await toBase64(technologieVideo);
+        const improvementsVideoBase64 = await toBase64(improvementsVideo);
+
         const body = {
             ...successCase,
-            successCase: { text: successCaseText, image: successCaseImage },
-            challenge: { text: challengeText, image: challengeImage },
-            improvements: { text: improvementsText, image: improvementsImage },
-            technologie: { text: technologieText, image: technologieImage },
+            successCase: { text: successCaseText, image: successCaseImage, video: successCaseVideoBase64 },
+            challenge: { text: challengeText, image: challengeImage, video: challengeVideoBase64 },
+            improvements: { text: improvementsText, image: improvementsImage, video: improvementsVideoBase64 },
+            technologie: { text: technologieText, image: technologieImage, video: technologieVideoBase64 },
         };
 
         const res = await postSuccessCase(body);
@@ -95,7 +105,15 @@ export default function ProcessContext({ children }) {
             technologieFile,
             setTechnologieFile,
             improvementsFile,
-            setImprovementsFile
+            setImprovementsFile,
+            successCaseVideo,
+            setSuccessCaseVideo,
+            challengeVideo,
+            setChallengeVideo,
+            technologieVideo,
+            setTechnologieVideo,
+            improvementsVideo,
+            setImprovementsVideo
         }}>
             {children}
         </ProcessContextProvider.Provider>
