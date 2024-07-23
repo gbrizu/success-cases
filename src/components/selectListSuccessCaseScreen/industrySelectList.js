@@ -41,7 +41,7 @@ export default function IndustrySelectList({ value, onChange, options }) {
         >
           {options.map((option) => (
             <MenuItem key={option.id} value={option.id}>
-              {option.name}
+              {option?.name}
             </MenuItem>
           ))}
         </Select>

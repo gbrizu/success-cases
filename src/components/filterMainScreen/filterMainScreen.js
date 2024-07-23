@@ -18,21 +18,21 @@ function FilterMainScreen() {
         CaseViewContextProvider
     );
 
-    const [clients, setClients] = useState([]);
+    const [clients, setClients] = useState(undefined);
     
-    const [clientSelected, setClientSelected] = useState(null);
+    const [clientSelected, setClientSelected] = useState(undefined);
 
-    const [type, setProjectType] = useState([]);
+    const [type, setProjectType] = useState(undefined);
 
-    const [typeSelected, setTypeSelected] = useState(null);
+    const [typeSelected, setTypeSelected] = useState(undefined);
 
-    const [industries, setIndustries] = useState([]);
+    const [industries, setIndustries] = useState(undefined);
 
-    const [industrySelected, setIndustrySelected] = useState(null);
+    const [industrySelected, setIndustrySelected] = useState(undefined);
 
-    const [contact, setContact] = useState([]);
+    const [contact, setContact] = useState(undefined);
 
-    const [contactSelected, setContactSelected] = useState(null);
+    const [contactSelected, setContactSelected] = useState(undefined);
 
     const [dateFrom, setDateFrom] = useState();
 
@@ -80,16 +80,16 @@ function FilterMainScreen() {
 
     useEffect(() => {
         getClients().then((result) => {
-            setClients(result);
+            setClients(undefined);
         });
         getProyectsTypes().then((result) => {
-            setProjectType(result);
+            setProjectType(undefined);
         });
         getIndustries().then((result) => {
-            setIndustries(result);
+            setIndustries(undefined);
         });
         getContacts().then((result) => {
-            setContact(result);
+            setContact(undefined);
         });
     }, [])
 
@@ -112,7 +112,7 @@ function FilterMainScreen() {
                     }}
                 >
                     <Grid item xs={12} >
-                        {(clients.length > 0) && (<SelectListClients options={clients} value={clientSelected} onChange={setClientSelected}> </SelectListClients>)}
+                        {(clients?.length > 0) && (<SelectListClients options={clients} value={clientSelected} onChange={setClientSelected}> </SelectListClients>)}
                     </Grid>
 
                     <Grid item xs={12} >
@@ -179,7 +179,7 @@ function FilterMainScreen() {
                                         input={<OutlinedInput label="Name" />}
                                         MenuProps={MenuProps}
                                     >
-                                        {contact.map((item) => (
+                                        {contact?.map((item) => (
                                             <MenuItem
                                                 key={item.id}
                                                 value={item.id}

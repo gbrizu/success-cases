@@ -49,7 +49,7 @@ export default function SelectListProjectType({ options, value, onChange }) {
           input={<OutlinedInput label="Type" />}
           MenuProps={MenuProps}
         >
-          {options.map((item) => (
+          {options?.map((item) => (
             <MenuItem
               key={item.id}
               value={item.id}

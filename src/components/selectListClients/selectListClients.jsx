@@ -44,7 +44,7 @@ export default function SelectListClients({ options, value, onChange }) {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options.map((item) => (
+          {options?.map((item) => (
             <MenuItem
               key={item.id}
               value={item.id}

@@ -14,7 +14,7 @@ function LoginButton() {
           console.log('Access Token:', accessToken);
 
           // Enviar una solicitud al backend con el token
-          const response = await fetch('http://20.15.110.189/back', {
+          const response = await fetch('http://localhost:3000', {
             method: 'GET',
             headers: {
               Authorization: `Bearer ${accessToken}`,

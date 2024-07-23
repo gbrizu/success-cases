@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const BASE_URL = 'http://20.15.110.189/back';
+const BASE_URL = 'http://localhost:3000';
 
 const axiosGet = (customUrl) => {
     return axios.get(`${BASE_URL}${customUrl}`)
@@ -12,23 +12,35 @@ const axiosPost = (customUrl, body) => {
 }
 
 const getBaseAxiosGetWithResponseManage = (customUrl) => {
-    return axiosGet(customUrl)
-        .then((response) => {
-            return response.data;
-        }).catch((error) => {
-            console.log("Error:" + error)
-            return error
-        })
+    console.log(accessToken + "token");
+    var options = {
+        method: 'GET',
+        url: `${BASE_URL}${customUrl}`,
+        headers: {authorization: 'Bearer ${accessToken}'}
+      };
+
+      axios.request(options).then((response) => {
+        return response.data;
+      }).catch((error) => {
+        console.log("Error:" + error)
+        return error
+      });
 }
 
 const getBaseAxiosPostWithResponseManage = (customUrl, body) => {
-    return axiosPost(customUrl, body)
-        .then((response) => {
-            return response.data;
-        }).catch((error) => {
-            console.log("Error:" + error)
+    var options = {
+        method: 'POST',
+        url: `${BASE_URL}${customUrl}`,
+        headers: {authorization: 'Bearer ${accessToken}'},
+        data: body
+    };
+    
+    axios.request(options).then(function (response) {
+        return response.data;
+    }).catch(function (error) {
+        console.log("Error:" + error)
             return error
-        })
+    });
 }
 
 

@@ -39,7 +39,7 @@ export default function OfferingSelect({ value, onChange, options }) {
           input={<OutlinedInput label="Select Offering" />}
           MenuProps={MenuProps}
         >
-          {options.map((name) => (
+          {options?.map((name) => (
             <MenuItem
               key={name}
               value={name}
