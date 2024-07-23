@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const BASE_URL = 'http://20.15.110.189/back';
+const BASE_URL = 'http://localhost:3000';
 
 const axiosGet = (customUrl) => {
     return axios.get(`${BASE_URL}${customUrl}`)

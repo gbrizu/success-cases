@@ -31,6 +31,7 @@ import {
   getIndustries,
   getProyectsTypes,
 } from "../services/successCaseServerCalls";
+import GeneratePDF from "../components/pdf/generatePDF";
 
 const initialPage = {
   text: "",
