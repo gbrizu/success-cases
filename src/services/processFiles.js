@@ -1,10 +1,10 @@
 import {setSuccessCaseData, setImprovementsData, setChallengeData, setTechnologiesData} from '../context/process.context'
 
 
-const awsLogin = async () => {
+const awsLogin = () => {
     const AWS = require('aws-sdk');
 
-        
+       
 
         const s3 = new AWS.S3();
 }
