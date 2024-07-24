@@ -269,11 +269,31 @@ export default function CreateSuccessCaseScreen() {
                     onChange={(newValue) => {
                       setStartDateValue(newValue.$d)
                     }}
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        '&.Mui-focused fieldset': {
+                          borderColor: '#BFD52E',
+                        }
+                      },
+                    '& .MuiInputLabel-root.Mui-focused': {
+                      color: '#6A8B06',
+                    }
+                  }}   
                   />
                   <DatePicker
                     label="To"
                     value={finishDateValue}
                     onChange={(newValue) => setFinishDateValue(newValue.$d)}
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        '&.Mui-focused fieldset': {
+                          borderColor: '#BFD52E',
+                        }
+                      },
+                    '& .MuiInputLabel-root.Mui-focused': {
+                      color: '#6A8B06',
+                    }
+                  }}
                   />
                 </LocalizationProvider>
               }
