@@ -212,6 +212,13 @@ export default function CreateSuccessCaseScreen() {
                   inputProps={{ type: "text" }}
                   onChange={handleProjectTitleChange}
                   value={projectTitleValue}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#BFD52E',
+                      }
+                    }
+                  }}
                 />
               }
             ></FormInfoInput>
