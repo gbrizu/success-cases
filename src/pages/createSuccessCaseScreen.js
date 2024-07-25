@@ -257,6 +257,17 @@ export default function CreateSuccessCaseScreen() {
               customInput={
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
+                  sx={{ m: 1,
+                    width: 300,
+                    border: '2px #BFD52E',
+                    '& .Mui-focused': {
+                      borderColor: '#BFD52E',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#BFD52E',
+                      },
+                    },}}
                     label="From"
                     value={startDateValue}
                     onChange={(newValue) => {
@@ -264,6 +275,17 @@ export default function CreateSuccessCaseScreen() {
                     }}
                   />
                   <DatePicker
+                  sx={{ m: 1,
+                    width: 300,
+                    border: '2px #BFD52E',
+                    '& .Mui-focused': {
+                      borderColor: '#BFD52E',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#BFD52E',
+                      },
+                    },}}
                     label="To"
                     value={finishDateValue}
                     onChange={(newValue) => setFinishDateValue(newValue.$d)}
@@ -280,7 +302,18 @@ export default function CreateSuccessCaseScreen() {
               label={"Project contact"}
               id={"projectContact"}
               customInput={
-                <FormControl variant="standard">
+                <FormControl variant="standard"
+                sx={{ m: 1,
+                  width: 300,
+                  border: '2px #BFD52E',
+                  '& .Mui-focused': {
+                    borderColor: '#BFD52E',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#BFD52E',
+                    },
+                  },}}>
                   <Select
                     labelId="projectContactsAutoComplete-label"
                     id="projectContact"
@@ -315,6 +348,17 @@ export default function CreateSuccessCaseScreen() {
                   inputProps={{ type: "number" }}
                   onChange={handleAvgTeamSizeChange}
                   value={avgTeamSizeValue}
+                  sx={{ m: 1,
+                    width: 300,
+                    border: '2px #BFD52E',
+                    '& .Mui-focused': {
+                      borderColor: '#BFD52E',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#BFD52E',
+                      },
+                    },}}
                 />
               }
             ></FormInfoInput>
