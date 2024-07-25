@@ -22,13 +22,33 @@ export default function OfferingSelectList({ value, onChange, options = [] }) {
   const theme = useTheme();
   return (
     <div
-      style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
+      style={{ display: "flex", alignItems: "center", marginBottom: "10px"}}
     >
       <Typography variant="h6" style={{ marginRight: "4.8rem" }}>
         Offering
       </Typography>
-      <FormControl sx={{ m: 1, width: 300}}>
-        <InputLabel id="demo-multiple-name-label">Select Offering</InputLabel>
+
+      
+      <FormControl sx={{ m: 1,
+          width: 300,
+          
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: '#BFD52E',
+            },
+          },}}>
+            
+        <InputLabel 
+            id="demo-multiple-name-label" 
+            sx={{ 
+              '&.Mui-focused': { 
+                color: '#6A8B06' 
+              }
+            }}
+          >
+            Select Offering
+          </InputLabel>
+
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
