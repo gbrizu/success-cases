@@ -11,6 +11,7 @@ import CaseDetails from './components/caseDetails/caseDetails';
 import CaseViewContext from "./context/casesView.context";
 import CaseViewProcessScreen from "./pages/caseViewProcessScreen";
 import ErrorScreen from "./pages/errorScreen";
+import ChatbotScreen from "./pages/chatbotScreen";
 
 export const UserContext = createContext()
 
@@ -26,6 +27,7 @@ function App() {
               element={<SuccessCaseProcessCreationScreen />}
             />
             <Route path="succesCase/:id" element={<CaseViewProcessScreen />} />
+            <Route path="chatbot" element={<ChatbotScreen />} />
             <Route path='*' element={<ErrorScreen/>} />
           </Routes>
         </BrowserRouter>
