@@ -28,7 +28,7 @@ export default function OfferingSelect({ value, onChange, options }) {
       <Typography variant="h6" style={{ marginRight: "4.8rem" }}>
         Offering
       </Typography>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 300}}>
         <InputLabel id="demo-multiple-name-label">Select Offering</InputLabel>
         <Select
           labelId="demo-multiple-name-label"

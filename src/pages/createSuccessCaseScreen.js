@@ -212,6 +212,13 @@ export default function CreateSuccessCaseScreen() {
                   inputProps={{ type: "text" }}
                   onChange={handleProjectTitleChange}
                   value={projectTitleValue}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#BFD52E',
+                      }
+                    }
+                  }}
                 />
               }
             ></FormInfoInput>
@@ -273,6 +280,16 @@ export default function CreateSuccessCaseScreen() {
                     onChange={(newValue) => {
                       setStartDateValue(newValue.$d)
                     }}
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        '&.Mui-focused fieldset': {
+                          borderColor: '#BFD52E',
+                        }
+                      },
+                    '& .MuiInputLabel-root.Mui-focused': {
+                      color: '#6A8B06',
+                    }
+                  }}   
                   />
                   <DatePicker
                   sx={{ m: 1,
@@ -289,6 +306,16 @@ export default function CreateSuccessCaseScreen() {
                     label="To"
                     value={finishDateValue}
                     onChange={(newValue) => setFinishDateValue(newValue.$d)}
+                    sx={{
+                      '& .MuiOutlinedInput-root': {
+                        '&.Mui-focused fieldset': {
+                          borderColor: '#BFD52E',
+                        }
+                      },
+                    '& .MuiInputLabel-root.Mui-focused': {
+                      color: '#6A8B06',
+                    }
+                  }}
                   />
                 </LocalizationProvider>
               }

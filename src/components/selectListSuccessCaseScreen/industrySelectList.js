@@ -31,21 +31,23 @@ export default function IndustrySelectList({ value, onChange, options }) {
       </Typography>
       <FormControl sx={{ m: 1,
           width: 300,
-          border: '2px #BFD52E',
-          '& .Mui-focused': {
-            borderColor: '#BFD52E',
-          },
+          
           '& .MuiOutlinedInput-root': {
             '&.Mui-focused fieldset': {
               borderColor: '#BFD52E',
             },
           },}}>
-        <InputLabel id="demo-multiple-name-label"
-        sx={{
-          '&.Mui-focused': {
-            color: '#6A8B06',
-          },
-        }}>Name</InputLabel>
+            
+        <InputLabel 
+            id="demo-multiple-name-label" 
+            sx={{ 
+              '&.Mui-focused': { 
+                color: '#6A8B06' 
+              }
+            }}
+          >
+            Name
+          </InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
