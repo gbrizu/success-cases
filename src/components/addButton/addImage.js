@@ -1,10 +1,11 @@
-import * as React from 'react';
+import React, { useContext, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { useContext } from 'react';
-import { ProcessContextProvider } from "../../context/process.context";
-import { Grid, Item } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Grid } from '@mui/material';
+import { uploadFileToS3, deleteFileFromS3 } from '../../services/processFiles';
+import { ProcessContextProvider } from '../../context/process.context';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -16,87 +17,113 @@ const VisuallyHiddenInput = styled('input')({
     left: 0,
     whiteSpace: 'nowrap',
     width: 1,
-
 });
 
-export default function AddImage() {
-    const {
-        successCaseFile,
-        setSuccessCaseFile,
-        challengeFile,
-        setChallengeFile,
-        technologieFile,
-        setTechnologieFile,
-        improvementsFile,
-        setImprovementsFile,
-        screen
-    } = useContext(ProcessContextProvider);
+export default function AddMedia() {
 
-    const [media, setMedia] = React.useState('')
+    const { setSuccessCaseImage, setChallengeImage, setImprovementsImage, setTechnologiesImage, screen, setSuccessCaseVideo, setChallengeVideo, setImprovementsVideo, setTechnologiesVideo} = useContext(ProcessContextProvider);
+    const [imageUrl, setImageUrl] = useState('');
+    const [videoUrl, setVideoUrl] = useState('');
 
-    React.useEffect(() => {
-        if (screen === 'successCase') {
-            setMedia(successCaseFile);
-        } else if (screen === 'challenge') {
-            setMedia(challengeFile);
-        } else if (screen === 'technologies') {
-            setMedia(technologieFile);
-        } else if (screen === 'improvement') {
-            setMedia(improvementsFile);
-        } else {
-            setMedia('');
+    const handleFileUpload = async (event, type) => {
+        const file = event.target.files[0];
+        console.log(screen);
+        if (file) {
+            const uploadedUrl = await uploadFileToS3(file, type);
+            if (type === 'image') {
+                setImageUrl(uploadedUrl);
+            } else if (type === 'video') {
+                setVideoUrl(uploadedUrl);
+            }
+            switch (screen) {
+                case 'successCase':
+                    setSuccessCaseData(uploadedUrl);
+                case 'challenges':
+                    setChallengeData(uploadedUrl);
+                case 'improvement':
+                    setImprovementsData(uploadedUrl);
+                case 'technologies':
+                    setTechnologiesData(uploadedUrl);
+            }
         }
-    }, [successCaseFile, challengeFile, technologieFile, improvementsFile, screen])
-
-    const setFile = ({ currentTarget: { files } }) => {
-        if (screen === 'successCase') {
-            setSuccessCaseFile(files[0]);
+        
+    };
+    const handleDelete = async (type) => {
+        if (type === 'image' && imageUrl) {
+            await deleteFileFromS3(imageUrl);
+            setImageUrl('');
+        } else if (type === 'video' && videoUrl) {
+            await deleteFileFromS3(videoUrl);
+            setVideoUrl('');
         }
-        else if (screen === 'challenge') {
-            setChallengeFile(files[0]);
-        }
-        else if (screen === 'improvement') {
-            setImprovementsFile(files[0]);
-        }
-        else if (screen === 'technologies') {
-            setTechnologieFile(files[0]);
-        }
-    }
-
+    };
     return (
         <Grid item xs={12}>
-            {
-                media &&
-                <Grid>
-                    <img
-                        src={URL.createObjectURL(media)}
-                        alt="Imagen Globant"
-                        style={{ width: 100, height: 100 }}
-                    />
-                </Grid>
-            }
             <Grid>
                 <Button
                     component="label"
-                    role={undefined}
                     variant="contained"
-                    tabIndex={- 1}
-                    startIcon={< CloudUploadIcon />}
+                    startIcon={<CloudUploadIcon />}
                 >
-                    {
-                        media ? 'Cambiar imagen' :
-                            screen === 'successCase' ? 'Agregar imagen de caso de éxito' :
-                                screen === 'challenge' ? 'Agregar imagen de reto' :
-                                    screen === 'improvement' ? 'Agregar imagen de mejora' :
-                                        screen === 'technologies' ? 'Agregar imagen de tecnología' : ''
-                    }
-                    < VisuallyHiddenInput
+                    {imageUrl ? 'Cambiar imagen' : 'Agregar imagen'}
+                    <VisuallyHiddenInput
                         type="file"
                         accept="image/*"
-                        onChange={setFile}
+                        onChange={(e) => handleFileUpload(e, 'image')}
                     />
                 </Button>
-            </Grid >
+                {imageUrl && (
+                    <>
+                        <img
+                            src={imageUrl}
+                            alt="Imagen"
+                            style={{ width: 100, height: 100, marginLeft: 10 }}
+                        />
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            startIcon={<DeleteIcon />}
+                            onClick={() => handleDelete('image')}
+                            style={{ marginLeft: '10px' }}
+                        >
+                            Eliminar imagen
+                        </Button>
+                    </>
+                )}
+            </Grid>
+            <Grid>
+                <Button
+                    component="label"
+                    variant="contained"
+                    startIcon={<CloudUploadIcon />}
+                    style={{ marginTop: '20px' }}
+                >
+                    {videoUrl ? 'Cambiar video' : 'Agregar video'}
+                    <VisuallyHiddenInput
+                        type="file"
+                        accept="video/*"
+                        onChange={(e) => handleFileUpload(e, 'video')}
+                    />
+                </Button>
+                {videoUrl && (
+                    <>
+                        <video
+                            src={videoUrl}
+                            controls
+                            style={{ width: 100, height: 100, marginLeft: 10 }}
+                        />
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            startIcon={<DeleteIcon />}
+                            onClick={() => handleDelete('video')}
+                            style={{ marginLeft: '10px' }}
+                        >
+                            Eliminar video
+                        </Button>
+                    </>
+                )}
+            </Grid>
         </Grid>
     );
 }

@@ -1,35 +1,35 @@
-import {setSuccessCaseData, setImprovementsData, setChallengeData, setTechnologiesData} from '../context/process.context'
+import { setSuccessCaseData, setImprovementsData, setChallengeData, setTechnologiesData } from '../context/process.context'
 
 
-const awsLogin = () => {
-    const AWS = require('aws-sdk');
 
-       
+const AWS = require('aws-sdk');
 
-        const s3 = new AWS.S3();
-}
 
-const submitImage = async (file, screen) => {
+
+
+export const uploadFileToS3 = async (file, type) => {
+
     const params = {
         Bucket: 'challenge-3-bucket-example',
-        Key: file.name + screen,
+        Key: `${type}/${file.name}`,
         Body: file,
-        ContentType: 'image/*', 
+        ContentType: file.type,
     };
 
     const data = await s3.upload(params).promise();
 
-    switch (screen) {
-        case 'successCase':
-            setSuccessCaseData(data.Location);
-            console.log(data);
-        case 'challenges':
-            setChallengeData(data.Location);
-        case 'improvement':
-            setImprovementsData(data.Location);
-        case 'technologies':
-            setTechnologiesData(data.Location);
-    }
+    return data.Location;
+};
 
-}
+export const deleteFileFromS3 = async (url) => {
+
+    const key = url.split('.com/')[1];
+
+    const params = {
+        Bucket: 'challenge-3-bucket-example',
+        Key: key,
+    };
+
+    await s3.deleteObject(params).promise();
+};
 

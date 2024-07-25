@@ -112,22 +112,22 @@ export const postSuccessCase = (successCaseObj) => {
         "contactid": contactId,
         "casedetail": {
             "image_detail": successCase.image,
-            "video_detail": null,
+            "video_detail": successCase.video,
             "text_detail": successCase.text
         },
         "technology": {
             "image_tech": technologie.image,
-            "video_tech": null,
+            "video_tech": technologie.video,
             "text_tech": technologie.text
         },
         "improvement": {
             "image_imp": improvements.image,
-            "video_imp": null,
+            "video_imp": improvements.video,
             "text_imp": improvements.text
         },
         "challenge": {
             "image_ch": challenge.image,
-            "video_ch": null,
+            "video_ch": challenge.video,
             "text_ch": challenge.text,
         }
     }
