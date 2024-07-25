@@ -11,6 +11,7 @@ export default function chatbotScreen() {
                     <img src='/globant_logo.png' alt='' width='190' height='60' />
                 </div>
             </div>
+            <hr />
             <Chat />
         </div>
     )

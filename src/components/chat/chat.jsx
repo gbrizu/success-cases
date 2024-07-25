@@ -18,7 +18,7 @@ function Chat() {
       setMessages([...messages, userMessage]);
 
 
-      const botResponse = { text: 'Respuesta del chatbot: ' + input, sender: 'bot' };
+      const botResponse = { text: input, sender: 'bot' };
       setMessages((prevMessages) => [...prevMessages, botResponse]);
 
       setInput('');

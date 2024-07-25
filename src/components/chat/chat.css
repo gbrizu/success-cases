@@ -28,11 +28,13 @@
 .message-item.user {
     background-color: #f0f0f0;
     text-align: right;
+    animation: slideIn 0.5s forwards;
 }
 
 .message-item.bot {
-    background-color: #bfd731;
+    background: linear-gradient(90deg, #d9e021 0, #8cc63f 100%) 0 0 no-repeat padding-box;
     text-align: left;
+    animation: slideOut 0.5s forwards;
 }
 
 .text-field {
@@ -46,4 +48,28 @@
 
 .text-field {
     margin-bottom: 20%;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
 }
