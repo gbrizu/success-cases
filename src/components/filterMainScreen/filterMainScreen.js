@@ -94,10 +94,9 @@ function FilterMainScreen() {
                         </SelectListClients>
                     )}
                 </Grid>
-                <Grid item xs={6} md={3.5}>
+                <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
                     <FormInfoInput
-                        marginRight={'4.3rem'}
-                        customStyleClass={"form-margin"}
+                        marginRight={'2.3rem'}
                         label={"Date from"}
                         width={"18.5rem"}
                         customInput={
@@ -111,7 +110,7 @@ function FilterMainScreen() {
                         }
                     />
                 </Grid>
-                <Grid item xs={6} md={3.5}>
+                <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
                     <SelectListProjectType options={type} value={typeSelected} onChange={setTypeSelected}>
                     </SelectListProjectType>
                 </Grid>
@@ -119,12 +118,11 @@ function FilterMainScreen() {
                     <MultipleSelect options={industries} value={industrySelected} onChange={setIndustrySelected}>
                     </MultipleSelect>
                 </Grid>
-                <Grid item xs={6} md={3.5}>
+                <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
                     <FormInfoInput
-                        marginRight={'5.8rem'}
-                        customStyleClass={"form-margin"}
-                        label={"Date to"}
-                        width={"18.5rem"}
+                        marginRight={'3.8rem'}
+                        label={'Date to'}
+                        width={'18.5rem'}
                         customInput={
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
@@ -136,11 +134,11 @@ function FilterMainScreen() {
                         }
                     />
                 </Grid>
-                <Grid item xs={6} md={3.5}>
+                <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
                     <FormInfoInput
                         id="projectContactsAutoComplete"
                         marginRight={'1rem'}
-                        customStyleClass={"form-margin"}
+                        style={{ display: 'box' }}
                         label={"Project contact"}
                         customInput={
                             <FormControl sx={{ m: 1, width: 300 }}>
@@ -169,10 +167,7 @@ function FilterMainScreen() {
                     />
                 </Grid>
 
-                <Grid container
-                    alignItems={'center'}
-                    marginBottom={'1rem'}
-                    xs={12} md={3} xl={4}>
+                <Grid item xs={12} display="flex" justifyContent="center" marginBottom="1rem" marginTop="-2.8rem" marginRight={"5rem"}>
                     <Box>
                         <SearchButton handleClick={handleSearch} />
                     </Box>
