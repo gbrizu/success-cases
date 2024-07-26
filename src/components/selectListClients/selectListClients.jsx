@@ -31,7 +31,7 @@ export default function SelectListClients({ options, value, onChange }) {
 
   return (
     <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
-      <Typography variant="h6" style={{ marginRight: "6rem" }}>
+      <Typography variant="h6" style={{ marginRight: "5.3rem"}}>
         Client
       </Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
