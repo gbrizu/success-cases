@@ -6,11 +6,6 @@ export const ProcessContextProvider = createContext();
 export default function ProcessContext({ children }) {
     const [successCase, setSuccessCase] = useState({});
 
-    // const [successCasePage, setSuccessCasePage] = useState(0);
-    // const [challengePage, setChallengePage] = useState(0);
-    // const [improvementsPage, setImprovementsPage] = useState(0);
-    // const [technologiePage, setTechnologiePage] = useState(0);
-
     const [screen, setScreen] = useState('createPage');
 
     const [successCaseText, setSuccessCaseText] = useState('');
@@ -22,22 +17,6 @@ export default function ProcessContext({ children }) {
     const [challengeFile, setChallengeFile] = useState('')
     const [technologieFile, setTechnologieFile] = useState('')
     const [improvementsFile, setImprovementsFile] = useState('')
-
-    // const newPageHandler = (type, content) => {
-    //     if (type === 'successCase') {
-    //         setSuccessCasePage(successCasePage + 1);
-    //         successCase.successCase.push(content)
-    //     } else if (type === 'challenge') {
-    //         setChallengePage(challengePage + 1);
-    //         successCase.challenge.push(content)
-    //     } else if (type === 'improvements') {
-    //         setImprovementsPage(improvementsPage + 1);
-    //         successCase.improvements.push(content)
-    //     } else if (type === 'technologie') {
-    //         setTechnologiePage(technologiePage + 1);
-    //         successCase.technologie.push(content)
-    //     }
-    // }
 
     const navigate = (screen, currentScreen) => {
         setScreen(screen);
@@ -53,15 +32,25 @@ export default function ProcessContext({ children }) {
 
 
     const submitSuccessCaseHandler = async () => {
-        setSuccessCase({
+        const body = {
             ...successCase,
-            successCase: [{ text: successCaseText, image: await toBase64(successCaseFile) }],
-            challenge: [{ text: challengeText, image: await toBase64(challengeFile) }],
-            improvements: [{ text: improvementsText, image: await toBase64(improvementsFile) }],
-            technologie: [{ text: technologieText, image: await toBase64(technologieFile) }],
-        });
-        console.log(successCase)
-        // const res = postSuccessCase(successCase)
+            // NO BORRAR
+            // successCase: { text: successCaseText, image: await toBase64(successCaseFile) },
+            // challenge: { text: challengeText, image: await toBase64(challengeFile) },
+            // improvements: { text: improvementsText, image: await toBase64(improvementsFile) },
+            // technologie: { text: technologieText, image: await toBase64(technologieFile) },
+            // NO BORRAR
+            successCase: { text: successCaseText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+            challenge: { text: challengeText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+            improvements: { text: improvementsText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+            technologie: { text: technologieText, image: 'https://www.coca-cola.com/content/dam/onexp/ie/en/apps/Campaign-card_1280x1024.jpg' },
+        }
+
+        const res = await postSuccessCase(body);
+
+        if(res.message === 'El caso se ha creado correctamente.') {
+            alert('El caso se ha creado correctamente.');
+        }
     }
 
     return (

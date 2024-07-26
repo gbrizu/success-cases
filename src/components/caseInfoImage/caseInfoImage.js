@@ -1,11 +1,25 @@
-export default function CaseInfoImage({ images }) {
+import { Typography } from "@mui/material"
+import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
+
+export default function CaseInfoImage({ image }) {
     return (
-        <div style={{ background: "#7b7af5", margin: "auto", position: "relative", display: "flex" }}>
-            <div style={{ display: "flex", flexWrap:"wrap", justifyContent:"center"}}>
-                {images.map((image, index) => (
-                    <img key={index} src={image} style={{ margin: "10px", width:"30%"}} />
-                ))}
-            </div>
-        </div>
+        <>
+            {image ? (
+                <div style={{ margin: "auto", position: "relative", display: "flex" }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+                        <img src={image} style={{ margin: "10px", width: "30%" }} />
+                    </div>
+                </div>
+            ) : (
+                <>
+                    <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                        <DoNotDisturbIcon sx={{ fontSize: '10rem' }}></DoNotDisturbIcon>
+                        <Typography variant="h3" gutterBottom>
+                            No Images Available
+                        </Typography>
+                    </div>
+                </>
+            )}
+        </>
     )
 }

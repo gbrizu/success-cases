@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { ProcessContextProvider } from "../context/process.context";
 import CaseInfoEdition from "../components/caseInfoEdition/caseInfoEdition";
-import AddImage from "../components/addButton/addImage"; // Importa tu componente AddImage
+import AddImage from "../components/addButton/addImage";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import NavbarScreen from "../components/editionpage/NavbarScreen";
 
@@ -43,14 +43,12 @@ function SuccessCaseEditionMode() {
           </Typography>
         </Grid>
 
-        {/* Grid para organizar CaseInfoEdition y AddImage en una fila */}
+        { }
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={5}>
-            {/* Envuelve CaseInfoEdition en un contenedor con fondo y borde negro */}
+            { }
             <Box
               sx={{
-                //border: "2px solid black",
-                //borderRadius: "5px",
                 height: "50%",
                 maxHeight: "500px",
                 minHeight: "500px",
@@ -61,7 +59,7 @@ function SuccessCaseEditionMode() {
             </Box>
           </Grid>
           <Grid item xs={5}>
-            {/* Envuelve AddImage en un contenedor con fondo y borde negro */}
+            { }
             <Box
               sx={{
                 border: "2px solid black",

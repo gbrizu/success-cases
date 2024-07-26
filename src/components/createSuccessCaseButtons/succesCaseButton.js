@@ -1,9 +1,7 @@
-// SuccesCaseButton.js
-
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { ProcessContextProvider } from "../../context/process.context";
-import "./buttonStyle.css"; // Create a separate CSS file for styling
+import "./buttonStyle.css"; 
 
 const SuccesCaseButton = ({ onClick, children, targetName }) => {
   const { screen } = useContext(ProcessContextProvider);
