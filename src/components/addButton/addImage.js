@@ -21,32 +21,24 @@ const VisuallyHiddenInput = styled('input')({
 
 export default function AddMedia() {
 
-    const { setSuccessCaseImage, setChallengeImage, setImprovementsImage, setTechnologiesImage, screen, setSuccessCaseVideo, setChallengeVideo, setImprovementsVideo, setTechnologiesVideo} = useContext(ProcessContextProvider);
+    const context = useContext(ProcessContextProvider);
+    const {screen} = useContext(ProcessContextProvider);
     const [imageUrl, setImageUrl] = useState('');
     const [videoUrl, setVideoUrl] = useState('');
 
     const handleFileUpload = async (event, type) => {
         const file = event.target.files[0];
-        console.log(screen);
-        if (file) {
-            const uploadedUrl = await uploadFileToS3(file, type);
-            if (type === 'image') {
-                setImageUrl(uploadedUrl);
-            } else if (type === 'video') {
-                setVideoUrl(uploadedUrl);
-            }
-            switch (screen) {
-                case 'successCase':
-                    setSuccessCaseData(uploadedUrl);
-                case 'challenges':
-                    setChallengeData(uploadedUrl);
-                case 'improvement':
-                    setImprovementsData(uploadedUrl);
-                case 'technologies':
-                    setTechnologiesData(uploadedUrl);
-            }
-        }
         
+        const uploadedUrl = await uploadFileToS3(file, type, context);
+        
+        console.log('after upladedUrl === ' + uploadedUrl);
+        if (type === 'image') {
+            setImageUrl(uploadedUrl);
+            
+        } else if (type === 'video') {
+            setVideoUrl(uploadedUrl);
+        }
+              
     };
     const handleDelete = async (type) => {
         if (type === 'image' && imageUrl) {

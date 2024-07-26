@@ -36,12 +36,15 @@ export default function ProcessContext({ children }) {
 
         const body = {
             ...successCase,
-            successCase: { text: successCaseText, image: successCaseImage, video: '' },
-            challenge: { text: challengeText, image: improvementsImage, video: '' },
-            improvements: { text: improvementsText, image: challengeImage, video: '' },
-            technologie: { text: technologieText, image: technologiesImage, video: '' },
+            successCase: { text: successCaseText, image: successCaseImage, video: successCaseVideo },
+            challenge: { text: challengeText, image: challengeImage, video: challengeVideo },
+            improvements: { text: improvementsText, image: improvementsImage, video: improvementsVideo },
+            technologie: { text: technologieText, image: technologiesImage, video: technologiesVideo },
         }
-
+        console.log('before post === sc' + successCaseVideo);
+        console.log('before post === ch' + challengeImage);
+        console.log('before post === imp' + improvementsImage);
+        console.log('before post === tech' + technologiesImage);
         const res = await postSuccessCase(body);
 
         if (res.message === 'El caso se ha creado correctamente.') {

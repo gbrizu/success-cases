@@ -31,6 +31,7 @@ export default function CaseViewProcessScreen() {
         title={'Success Case'}
         description={actualSuccessCase.CaseDetail ? actualSuccessCase.CaseDetail.text_detail : ''}
         image={actualSuccessCase.CaseDetail ? actualSuccessCase.CaseDetail.image_detail : ''}
+        video={actualSuccessCase.CaseDetail ? actualSuccessCase.CaseDetail.video_detail : ''}
         prevPage={viewSuccessCaseScreens[0]}
         nextPage={viewSuccessCaseScreens[2]}
       />
@@ -41,6 +42,7 @@ export default function CaseViewProcessScreen() {
         title={'Challenges'}
         description={actualSuccessCase.Challenge ? actualSuccessCase.Challenge.text_ch : ''}
         image={actualSuccessCase.Challenge ? actualSuccessCase.Challenge.image_ch : ''}
+        video={actualSuccessCase.Challenge ? actualSuccessCase.Challenge.video_ch : ''}
         prevPage={viewSuccessCaseScreens[1]}
         nextPage={viewSuccessCaseScreens[3]}
       />
@@ -51,6 +53,7 @@ export default function CaseViewProcessScreen() {
         title={'Improvements'}
         description={actualSuccessCase.Improvement ? actualSuccessCase.Improvement.text_imp : ''}
         image={actualSuccessCase.Improvement ? actualSuccessCase.Improvement.image_imp : ''}
+        video={actualSuccessCase.Improvement ? actualSuccessCase.Improvement.video_imp : ''}
         prevPage={viewSuccessCaseScreens[2]}
         nextPage={viewSuccessCaseScreens[4]}
       />
@@ -61,6 +64,7 @@ export default function CaseViewProcessScreen() {
         title={'Technologies'}
         description={actualSuccessCase.Technology ? actualSuccessCase.Technology.text_tech : ''}
         image={actualSuccessCase.Technology ? actualSuccessCase.Technology.image_tech : ''}
+        video={actualSuccessCase.Technology ? actualSuccessCase.Technology.video_tech : ''}
         prevPage={viewSuccessCaseScreens[3]}
         nextPage={viewSuccessCaseScreens[5]}
       />

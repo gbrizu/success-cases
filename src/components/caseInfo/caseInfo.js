@@ -6,7 +6,7 @@ import { CaseViewContextProvider } from '../../context/casesView.context';
 import CaseDetailsButtons from '../caseDetails/caseDeatailsButtons';
 import CaseInfoImage from '../caseInfoImage/caseInfoImage';
 
-export default function CaseInfo({ title, description, image, prevPage, nextPage }) {
+export default function CaseInfo({ title, description, image, video, prevPage, nextPage }) {
     const { navigate } = useContext(
         CaseViewContextProvider
     );
@@ -21,15 +21,18 @@ export default function CaseInfo({ title, description, image, prevPage, nextPage
                 </Grid>
                 <Grid item xs={12} md={6}>
 
-                    <div style={{ height: '50%' }}>
-                        <div style={{ height: '50%' }}>
-                            <div style={{ margin: "auto", position: "relative", display: "flex" }}>
-                                <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-                                    <img style={{width: '50%', marginTop: '15%'}} src={image}></img>
-                                </div>
+                    <div style={{ height: '50%', display:'flex' }}>
+                        
+                        <div style={{ margin: "auto", display: "flex" }}>
+                            <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+                                <img style={{ marginTop: '15%'}} src={image}></img>
+                                
+                                {video && <video controls style={{ marginTop: '15%',}} src={video}></video>}
+                                {console.log(video)}
                             </div>
-                            {/* <CaseInfoImage image={image}></CaseInfoImage> */}
                         </div>
+                        {/* <CaseInfoImage image={image}></CaseInfoImage> */}
+                        
                     </div>
                 </Grid>
             </Grid>
