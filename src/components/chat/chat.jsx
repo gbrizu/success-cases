@@ -5,6 +5,25 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import { sendRequestChat } from '../../services/chatbotServerCalls';
+import ReactMarkdown from 'react-markdown';
+// {
+//     "text": "CONTENIDO DEL MENSAJE" -> REQUERIDO,
+//     "history": [
+//         {
+//             "role": "model",
+//             "parts": [
+//                 "Please provide me with more context! What do you want me to do with \"a\"?  \n\nFor example, you could ask:\n\n* \"What is 'a'?\"\n* \"What does 'a' stand for?\" \n* \"Can you tell me a story about 'a'?\"\n\nLet me know what you have in mind! \n",
+//             ],
+//         },
+//         {
+//             "role": "user",
+//             "parts": [
+//                 ".......",
+//             ],
+//         },
+//     ]
+// }
 
 function Chat() {
   const [messages, setMessages] = useState([]);
@@ -13,18 +32,36 @@ function Chat() {
 
   const handleSend = async (e) => {
     e.preventDefault();
+
     if (input.trim()) {
-      const userMessage = { text: input, sender: 'user' };
-      setMessages([...messages, userMessage]);
+      try {
+        const userMessage = { text: input, sender: 'user' };
+        setMessages([...messages, userMessage]);
+        setInput('');
+        const res = await sendRequestChat({
+          text: input,
+          history: messages.map((message) => ({
+            role: message.sender,
+            parts: [message.text]
+          }))
+        })
 
+        const {
+          response
+        } = res
 
-      const botResponse = { text: input, sender: 'bot' };
-      setMessages((prevMessages) => [...prevMessages, botResponse]);
+        if (response) {
+          const botResponse = { text: response, sender: 'model' };
+          setMessages((prevMessages) => [...prevMessages, botResponse]);
 
-      setInput('');
+          await sleep(100);
+          scrollToBottom();
+        }
+      } catch (error) {
+        alert('Error al enviar el mensaje');
+        console.log(error);
+      }
     }
-    await sleep(100);
-    scrollToBottom();
   };
 
   function scrollToBottom() {
@@ -45,7 +82,7 @@ function Chat() {
         {messages.map((message, index) => (
           <ListItem key={index} className={`message-item ${message.sender}`}>
             <ListItemText
-              primary={message.text}
+              primary={<ReactMarkdown>{message.text}</ReactMarkdown>}
               secondary={message.sender === 'user' ? 'Tú' : 'Chatbot'}
             />
           </ListItem>
@@ -75,13 +112,12 @@ function Chat() {
             sx={{ p: '10px' }}
             aria-label="search"
             onClick={handleSend}
-            onenter
           >
             <SearchIcon />
           </IconButton>
         </Paper>
       </div>
-    </Box>
+    </Box >
   );
 }
 

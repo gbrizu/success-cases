@@ -31,7 +31,7 @@
     animation: slideIn 0.5s forwards;
 }
 
-.message-item.bot {
+.message-item.model {
     background: linear-gradient(90deg, #d9e021 0, #8cc63f 100%) 0 0 no-repeat padding-box;
     text-align: left;
     animation: slideOut 0.5s forwards;
