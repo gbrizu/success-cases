@@ -7,22 +7,20 @@
   color: black;
   font-weight: 700;
   font-family: "Roboto", sans-serif;
-  padding: 10px 20px; /* Adjust padding as needed */
+  padding: 10px 20px;
   cursor: pointer;
-  margin-bottom: 25px; /* Adjust margin as needed */
+  margin-bottom: 25px;
 }
 
 .aquamarine-button:hover {
-  background-color: darkcyan; /* Change color on hover if desired */
+  background-color: darkcyan; 
 }
 
 .button.active {
-  /* Estilos para botones activos */
   background-color: rgb(
     13,
     186,
     186
-  ); /* Puedes ajustar este color según tu preferencia */
-  color: #fff; /* Color del texto en botones activos */
-  /* Otros estilos ... */
+  );
+  color: #fff;
 }

@@ -3,11 +3,10 @@ import { Theme, useTheme } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import Box from "@mui/material/Box";
+import { Grid } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import { Typography } from "@mui/material";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -20,41 +19,46 @@ const MenuProps = {
   },
 };
 
-export default function SelectListProjectType({ options, value, onChange }) {
+export default function IndustrySelectList({ value, onChange, options }) {
   const theme = useTheme();
-  const [projectType, SetProjectType] = React.useState([]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    onChange(value);
-  };
-  
 
   return (
     <div
       style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
     >
-      <Typography variant="h6" style={{ marginRight: "2.3rem" }}>
-        Project Type
+      <Typography variant="h6" style={{ marginRight: "4.6rem" }}>
+        Industry
       </Typography>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Type</InputLabel>
+      <FormControl sx={{ m: 1,
+          width: 300,
+          
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: '#BFD52E',
+            },
+          },}}>
+            
+        <InputLabel 
+            id="demo-multiple-name-label" 
+            sx={{ 
+              '&.Mui-focused': { 
+                color: '#6A8B06' 
+              }
+            }}
+          >
+            Name
+          </InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           value={value}
-          onChange={handleChange}
-          input={<OutlinedInput label="Type" />}
+          onChange={onChange}
+          input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options.map((item) => (
-            <MenuItem
-              key={item.id}
-              value={item.id}
-            >
-              {item.name}
+          {options.map((option) => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.name}
             </MenuItem>
           ))}
         </Select>

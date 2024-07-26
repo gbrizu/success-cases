@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function BackButton() {
   return (
-    <Link to="/layout2">
+    <Link to="/">
     <Button
       disableElevation
       variant="contained"
