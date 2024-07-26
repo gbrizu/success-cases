@@ -4,7 +4,7 @@
     padding: 20px;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
 .chat-header {
@@ -17,16 +17,21 @@
     list-style-type: none;
     padding: 0;
     margin-bottom: 100px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .message-item {
-    padding: 10px;
     margin-bottom: 10px;
-    border-radius: 4px;
+    border-radius: 15px;
+    padding: 0px 20px 0px;
 }
 
 .message-item.user {
     background-color: #f0f0f0;
+    max-width: fit-content;
     text-align: right;
     animation: slideIn 0.5s forwards;
 }
@@ -35,6 +40,10 @@
     background: linear-gradient(90deg, #d9e021 0, #8cc63f 100%) 0 0 no-repeat padding-box;
     text-align: left;
     animation: slideOut 0.5s forwards;
+}
+
+.message-item p {
+    margin: 5px;
 }
 
 .text-field {

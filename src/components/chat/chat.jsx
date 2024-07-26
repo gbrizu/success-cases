@@ -7,37 +7,24 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { sendRequestChat } from '../../services/chatbotServerCalls';
 import ReactMarkdown from 'react-markdown';
-// {
-//     "text": "CONTENIDO DEL MENSAJE" -> REQUERIDO,
-//     "history": [
-//         {
-//             "role": "model",
-//             "parts": [
-//                 "Please provide me with more context! What do you want me to do with \"a\"?  \n\nFor example, you could ask:\n\n* \"What is 'a'?\"\n* \"What does 'a' stand for?\" \n* \"Can you tell me a story about 'a'?\"\n\nLet me know what you have in mind! \n",
-//             ],
-//         },
-//         {
-//             "role": "user",
-//             "parts": [
-//                 ".......",
-//             ],
-//         },
-//     ]
-// }
+import { GradientCircularProgress } from './gradientCircularProgress';
 
 function Chat() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   window.onload = scrollToBottom;
 
   const handleSend = async (e) => {
     e.preventDefault();
-
+    if (isLoading) return;
+    setIsLoading(true);
     if (input.trim()) {
       try {
         const userMessage = { text: input, sender: 'user' };
         setMessages([...messages, userMessage]);
         setInput('');
+
         const res = await sendRequestChat({
           text: input,
           history: messages.map((message) => ({
@@ -54,6 +41,7 @@ function Chat() {
           const botResponse = { text: response, sender: 'model' };
           setMessages((prevMessages) => [...prevMessages, botResponse]);
 
+          setIsLoading(false);
           await sleep(100);
           scrollToBottom();
         }
@@ -75,7 +63,6 @@ function Chat() {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-
   return (
     <Box>
       <List className="message-list">
@@ -95,7 +82,8 @@ function Chat() {
           sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: '100%' }}
         >
           <InputBase
-            sx={{ ml: 1, flex: 1 }}
+            disabled={isLoading}
+            sx={{ ml: 1, flex: 1, height: 48 }}
             placeholder="Escribe un mensaje"
             inputProps={{ 'aria-label': 'search google maps' }}
             type="text"
@@ -107,18 +95,25 @@ function Chat() {
               }
             }}
           />
-          <IconButton
-            type="button"
-            sx={{ p: '10px' }}
-            aria-label="search"
-            onClick={handleSend}
-          >
-            <SearchIcon />
-          </IconButton>
+          {
+            isLoading ? (
+              <GradientCircularProgress />
+            ) : (
+              <IconButton
+                type="button"
+                sx={{ p: '10px' }}
+                aria-label="search"
+                onClick={handleSend}
+              >
+                <SearchIcon />
+              </IconButton>
+            )
+          }
         </Paper>
       </div>
     </Box >
   );
 }
+
 
 export default Chat; 
