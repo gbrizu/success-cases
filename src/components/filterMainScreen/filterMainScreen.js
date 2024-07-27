@@ -214,14 +214,14 @@ function FilterMainScreen() {
                                         input={<OutlinedInput label="Name" />}
                                         MenuProps={MenuProps}
                                     >
-                                        {contact?.map((item) => (
+                                        {(contact?.length > 0) && (contact?.map((item) => (
                                             <MenuItem
                                                 key={item.id}
                                                 value={item.id}
                                             >
                                                 {item.name + " " + item.surName}
                                             </MenuItem>
-                                        ))}
+                                        )))}
                                     </Select>
                                 </FormControl>
                             }
