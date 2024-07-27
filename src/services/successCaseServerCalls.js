@@ -5,28 +5,6 @@ const BASE_URL = 'http://localhost:3000';
 // Obtener el token desde localStorage
 const getAccessToken = () => localStorage.getItem('accessToken');
 
-// Función para realizar solicitudes GET
-const axiosGet = (customUrl) => {
-  const token = getAccessToken();
-  console.log('GET Access Token:', token); // Verificar el token
-  return axios.get(`${BASE_URL}${customUrl}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-};
-
-// Función para realizar solicitudes POST
-const axiosPost = (customUrl, body) => {
-  const token = getAccessToken();
-  console.log('POST Access Token:', token); // Verificar el token
-  return axios.post(`${BASE_URL}${customUrl}`, body, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-};
-
 // Función para manejar solicitudes GET con respuesta gestionada
 const getBaseAxiosGetWithResponseManage = async (customUrl) => {
   const token = getAccessToken();
@@ -171,13 +149,5 @@ export const postSuccessCase = (successCaseObj) => {
 
   console.log('Request Body:', body); // Verificar el cuerpo de la solicitud
 
-  return axiosPost('/SuccessCase/create', body)
-    .then((response) => {
-      console.log('Response:', response);
-      return response.data;
-    })
-    .catch((error) => {
-      console.log("Error:", error);
-      return error;
-    });
+  return getBaseAxiosPostWithResponseManage('/SuccessCase/create', body);
 };

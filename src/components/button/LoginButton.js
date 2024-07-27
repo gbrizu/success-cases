@@ -11,34 +11,13 @@ function LoginButton() {
         try {
           const accessToken = await getAccessTokenSilently();
           setToken(accessToken);
-          localStorage.setItem('accessToken', accessToken); // Guardar el token en localStorage
-          console.log('Access Token:', accessToken);
-
-          // Verificar si el token se guardó en localStorage
-          const storedToken = localStorage.getItem('accessToken');
-          if (storedToken) {
-            console.log('Token  saved in localStorage:', storedToken);
-          } else {
-            console.log('Failed to save token in localStorage');
+          localStorage.setItem('accessToken', accessToken); // Guardar el token en localStorage, habría que cambiarlo
           }
-
-          // Enviar una solicitud al backend con el token
-          const response = await fetch('http://localhost:3000', {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json'
-            }
-          });
-
-          const data = await response.json();
-          console.log('Response from backend:', data);
-        } catch (error) {
-          console.error('Error getting access token', error);
-        }
+      catch (error) {
+        console.log('Error: ', error);
       }
-    };
-
+    }
+  }
     fetchToken();
   }, [isAuthenticated, getAccessTokenSilently]);
 

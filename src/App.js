@@ -16,7 +16,13 @@ export const UserContext = createContext()
 
 function App() {
   return (
-    <Auth0Provider domain="dev-0efequbnpda3f7au.us.auth0.com" clientId="T2Igi7TuY129hwxd84q3b8cs2cIqm5bg" redirectUri={window.location.origin}>
+    <Auth0Provider 
+    domain="challenge-3.us.auth0.com"
+    clientId="mxZ6wKxWapWVUtCUHRGsiPbfmfyCgK3Z"
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+      audience: 'https://challenge-3.us.auth0.com/api/v2/'
+    }}>
       <ProcessContext>
         <CaseViewContext>
           <BrowserRouter>

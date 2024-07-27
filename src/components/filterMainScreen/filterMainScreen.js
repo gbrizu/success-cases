@@ -3,9 +3,10 @@ import FormInfoInput from "../BasicFormInfo";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import Grid from "@mui/system/Unstable_Grid/Grid";
 import SelectListClients from "../selectListClients/selectListClients";
-import MultipleSelect from "../selectListIndustry";
+import SelectListIndustry from "../selectListIndustry";
+import SelectListOffering from '../selectListOfferings/selectListOfferings';
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
-import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCasesByFilter } from "../../services/successCaseServerCalls";
+import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCasesByFilter, getOfferings } from "../../services/successCaseServerCalls";
 import { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { CaseViewContextProvider } from '../../context/casesView.context';
@@ -13,7 +14,12 @@ import SearchButton from '../button/searchButton';
 import { Box, MenuItem, OutlinedInput, Select, FormControl, InputLabel } from "@mui/material";
 import CreateButton from '../button/createButton';
 
+import { useAuth0 } from '@auth0/auth0-react';
+
 function FilterMainScreen() {
+
+    const {isAuthenticated} = useAuth0();
+
     const { setSuccessCasesList } = useContext(
         CaseViewContextProvider
     );
@@ -31,6 +37,10 @@ function FilterMainScreen() {
     const [industrySelected, setIndustrySelected] = useState(undefined);
 
     const [contact, setContact] = useState(undefined);
+
+    const [offering, setOffering] = useState(undefined);
+
+    const [offeringSelected, setOfferingSelected] = useState(undefined);
 
     const [contactSelected, setContactSelected] = useState(undefined);
 
@@ -79,19 +89,40 @@ function FilterMainScreen() {
     }, [dateFrom])
 
     useEffect(() => {
-        getClients().then((result) => {
-            setClients(undefined);
-        });
-        getProyectsTypes().then((result) => {
-            setProjectType(undefined);
-        });
-        getIndustries().then((result) => {
-            setIndustries(undefined);
-        });
-        getContacts().then((result) => {
-            setContact(undefined);
-        });
-    }, [])
+        if(isAuthenticated){
+            getClients().then((result) => {
+                setClients(result);
+            });
+            getProyectsTypes().then((result) => {
+                setProjectType(result);
+            });
+            getIndustries().then((result) => {
+                setIndustries(result);
+            });
+            getContacts().then((result) => {
+                setContact(result);
+            });
+            getOfferings().then((result) => {
+                setOffering(result);
+            });
+        } else {
+            getClients().then((result) => {
+                setClients(undefined);
+            });
+            getProyectsTypes().then((result) => {
+                setProjectType(undefined);
+            });
+            getIndustries().then((result) => {
+                setIndustries(undefined);
+            });
+            getContacts().then((result) => {
+                setContact(undefined);
+            });
+            getOfferings().then((result) => {
+                setOffering(undefined);
+            });
+        }
+    }, [isAuthenticated])
 
     return (
         <div>
@@ -112,16 +143,20 @@ function FilterMainScreen() {
                     }}
                 >
                     <Grid item xs={12} >
-                        {(clients?.length > 0) && (<SelectListClients options={clients} value={clientSelected} onChange={setClientSelected}> </SelectListClients>)}
+                        <SelectListClients options={clients} value={clientSelected} onChange={setClientSelected}> </SelectListClients>
                     </Grid>
 
                     <Grid item xs={12} >
-                        <MultipleSelect options={industries} value={industrySelected} onChange={setIndustrySelected}> </MultipleSelect>
+                        <SelectListIndustry options={industries} value={industrySelected} onChange={setIndustrySelected}> </SelectListIndustry>
                     </Grid>
 
                     <Grid item xs={12} >
                         <SelectListProjectType options={type} value={typeSelected} onChange={setTypeSelected}> </SelectListProjectType>
                     </Grid>
+
+                    {/* <Grid item xs={12} >
+                        <SelectListOffering options={offering} value={offeringSelected} onChange={setOfferingSelected}> </SelectListOffering>
+                    </Grid> */}
 
                     <Grid item xs={12} >
                         <FormInfoInput

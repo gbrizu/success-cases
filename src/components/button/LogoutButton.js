@@ -6,7 +6,10 @@ const LogoutButton = () => {
     const { logout } = useAuth0();
 
     return (
-        <button onClick={() => logout({ returnTo: window.location.origin })}>
+        <button onClick={() => {
+            localStorage.removeItem('accessToken')
+            logout({ returnTo: window.location.origin })
+        }}>
             Logout
         </button>
     );

@@ -20,7 +20,7 @@ const MenuProps = {
   },
 };
 
-export default function MultipleSelect({ options, value, onChange}) {
+export default function SelectListIndustry({ options, value, onChange}) {
   const handleChange = (event) => {
     const {
       target: { value },
