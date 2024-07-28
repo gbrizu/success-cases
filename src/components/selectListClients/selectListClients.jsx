@@ -5,7 +5,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import './selectListClients.css'
 import { Typography } from '@mui/material';
 
 const ITEM_HEIGHT = 48;

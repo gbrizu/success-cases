@@ -21,18 +21,18 @@ export default function CaseInfo({ title, description, image, video, prevPage, n
                 </Grid>
                 <Grid item xs={12} md={6}>
 
-                    <div style={{ height: '50%', display:'flex' }}>
-                        
+                    <div style={{ height: '50%', display: 'flex' }}>
+
                         <div style={{ margin: "auto", display: "flex" }}>
                             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-                                <img style={{ marginTop: '15%'}} src={image}></img>
-                                
-                                {video && <video controls style={{ marginTop: '15%',}} src={video}></video>}
+                                <img style={{ width: '50%', marginTop: '15%' }} src={image}></img>
+
+                                {video && <video controls style={{ width: '50%', marginTop: '15%', }} src={video}></video>}
                                 {console.log(video)}
                             </div>
                         </div>
                         {/* <CaseInfoImage image={image}></CaseInfoImage> */}
-                        
+
                     </div>
                 </Grid>
             </Grid>
