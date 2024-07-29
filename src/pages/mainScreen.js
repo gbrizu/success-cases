@@ -7,6 +7,7 @@ import { getSuccessCase } from "../services/successCaseServerCalls";
 import { CaseViewContextProvider } from "../context/casesView.context";
 import LoginButton from "../components/button/LoginButton";
 import LogoutButton from "../components/button/LogoutButton";
+import AuthButtons from "../components/button/AuthButtons";
 
 function MainScreen() {
 
@@ -64,10 +65,9 @@ function MainScreen() {
         </Box>
       </div>
       <div>
-        <LoginButton/>
-
         
-        <LogoutButton/>
+        <LoginButton></LoginButton>
+        <LogoutButton></LogoutButton>
       </div>
     </Container>
   );
