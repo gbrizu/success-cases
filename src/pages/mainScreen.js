@@ -7,6 +7,7 @@ import { getSuccessCase } from "../services/successCaseServerCalls";
 import { CaseViewContextProvider } from "../context/casesView.context";
 import LoginButton from "../components/button/LoginButton";
 import LogoutButton from "../components/button/LogoutButton";
+import { useAuth0 } from '@auth0/auth0-react';
 
 function MainScreen() {
 
@@ -15,11 +16,21 @@ function MainScreen() {
     CaseViewContextProvider
   );
 
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [token, setToken] = useState(undefined);
+
   useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
     getSuccessCase().then(result => {
-      setSuccessCasesList(result);
-    });
-  }, [])
+      setSuccessCasesList(result)
+    })}
+    else {
+      setSuccessCasesList([])
+      if (isAuthenticated){
+        setToken(getAccessTokenSilently())
+      }
+    }
+  }, [isAuthenticated, token]);
 
   useEffect(() => {
     if (successCasesList && successCasesList.length > 0) {

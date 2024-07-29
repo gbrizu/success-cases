@@ -18,9 +18,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 
 function FilterMainScreen() {
-
-    const {isAuthenticated} = useAuth0();
-
     const { setSuccessCasesList } = useContext(
         CaseViewContextProvider
     );
@@ -81,6 +78,10 @@ function FilterMainScreen() {
 
     }, [dateTo])
 
+    const [token, setToken] = useState(null);
+
+    const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+
     useEffect(() => {
         if (dateTo < dateFrom && dateFrom !== null) {
             alert("El valor Seleccionado es mayor a la fecha final")
@@ -90,7 +91,7 @@ function FilterMainScreen() {
     }, [dateFrom])
 
     useEffect(() => {
-        if(isAuthenticated){
+        if(localStorage.getItem('accessToken')){
             getClients().then((result) => {
                 setClients(result);
             });
@@ -107,23 +108,16 @@ function FilterMainScreen() {
                 setOffering(result);
             });
         } else {
-            getClients().then((result) => {
-                setClients(undefined);
-            });
-            getProyectsTypes().then((result) => {
-                setProjectType(undefined);
-            });
-            getIndustries().then((result) => {
-                setIndustries(undefined);
-            });
-            getContacts().then((result) => {
-                setContact(undefined);
-            });
-            getOfferings().then((result) => {
-                setOffering(undefined);
-            });
+            setClients(undefined);
+            setProjectType(undefined);
+            setIndustries(undefined);
+            setContact(undefined);
+            setOffering(undefined);
+            if (isAuthenticated) {
+                setToken(getAccessTokenSilently());
+            }
         }
-    }, [isAuthenticated, localStorage.getItem('accessToken')]);
+    }, [isAuthenticated, token]);
 
     return (
         <div>
