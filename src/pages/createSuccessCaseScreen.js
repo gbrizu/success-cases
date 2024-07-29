@@ -25,6 +25,7 @@ import ProjectTypeSelectList from "../components/selectListSuccessCaseScreen/pro
 import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
 import { getContacts } from "../services/successCaseServerCalls";
+import BasicTabs from "../components/BasicTabs";
 import {
   getClients,
   getOfferings,
@@ -400,16 +401,23 @@ export default function CreateSuccessCaseScreen() {
           </Grid>
         </Grid>
       
-        <Grid item xs={12} style={{ textAlign: "center" }}>
+        <Grid item xs={12}  sx={{ marginTop: '2rem' }}>
+          <BasicTabs />
+        </Grid>
+
+        <Grid item xs={12} style={{ display: 'flex' }}>
           <Button
+          
             variant="contained"
             size="large"
             sx={{
-              height: "2.5rem",
-              marginTop: { xs: "1rem", md: "4rem" },
-              marginLeft: "35rem",
-              marginRight: "auto",
-              marginBottom: "200px",
+             
+              height: "4rem", 
+              width: "8rem",
+              marginTop: "-17rem",
+              marginLeft: "52.5rem",
+              // marginRight: "0rem",
+              marginBottom: "50px",
               background:'#BFD52E',
                 '&:hover': {
                     backgroundColor: '#6A8B06',
@@ -420,6 +428,10 @@ export default function CreateSuccessCaseScreen() {
             Create
           </Button>
         </Grid>
+
+        
+
+
       </Grid>
     </Container>
   );

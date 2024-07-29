@@ -5,6 +5,8 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useContext } from 'react';
 import { ProcessContextProvider } from "../../context/process.context";
 import { Grid, Item } from '@mui/material';
+import Box from '@mui/material/Box';
+
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -64,16 +66,16 @@ export default function AddImage() {
     }
 
     return (
-        <Grid item xs={12}>
+        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100%">
             {
                 media &&
-                <Grid>
+                <Box mb={2}>
                     <img
                         src={URL.createObjectURL(media)}
                         alt="Imagen Globant"
                         style={{ width: 100, height: 100 }}
                     />
-                </Grid>
+                </Box>
             }
             <Grid>
                 <Button
@@ -97,6 +99,6 @@ export default function AddImage() {
                     />
                 </Button>
             </Grid >
-        </Grid>
+        </Box>
     );
 }
