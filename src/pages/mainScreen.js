@@ -8,6 +8,7 @@ import { CaseViewContextProvider } from "../context/casesView.context";
 import LoginButton from "../components/button/LoginButton";
 import LogoutButton from "../components/button/LogoutButton";
 import { useAuth0 } from '@auth0/auth0-react';
+import Authentication from "../components/button/Authentication";
 
 function MainScreen() {
 
@@ -75,10 +76,7 @@ function MainScreen() {
         </Box>
       </div>
       <div>
-        <LoginButton/>
-
-        
-        <LogoutButton/>
+       <Authentication></Authentication>
       </div>
     </Container>
   );
