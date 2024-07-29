@@ -16,6 +16,7 @@ import CreateButton from '../button/createButton';
 
 import { useAuth0 } from '@auth0/auth0-react';
 
+
 function FilterMainScreen() {
 
     const {isAuthenticated} = useAuth0();
@@ -122,7 +123,7 @@ function FilterMainScreen() {
                 setOffering(undefined);
             });
         }
-    }, [isAuthenticated])
+    }, [isAuthenticated, localStorage.getItem('accessToken')]);
 
     return (
         <div>

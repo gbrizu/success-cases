@@ -48,11 +48,11 @@ export default function ClientSelectList({ options = [], value, onChange }) {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options?.map((option) => (
+          {(options?.length > 0) && (options?.map((option) => (
             <MenuItem key={option.id} value={option.id}>
               {option.name}
             </MenuItem>
-          ))}
+          )))}
         </Select>
       </FormControl>
     </div>
