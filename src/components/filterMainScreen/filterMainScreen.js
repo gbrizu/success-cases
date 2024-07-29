@@ -57,20 +57,29 @@ function FilterMainScreen() {
             setDateFrom(null);
         }
     }, [dateFrom]);
+
     useEffect(() => {
-        getClients().then((result) => {
-            setClients(result);
-        });
-        getProyectsTypes().then((result) => {
-            setProjectType(result);
-        });
-        getIndustries().then((result) => {
-            setIndustries(result);
-        });
-        getContacts().then((result) => {
-            setContact(result);
-        });
-    }, []);
+        setClients([
+            { id: 1, name: "Cliente 1" },
+            { id: 2, name: "Cliente 2" },
+            { id: 3, name: "Cliente 3" }
+        ]);
+        setProjectType([
+            { id: 1, name: "Proyecto 1" },
+            { id: 2, name: "Proyecto 2" },
+            { id: 3, name: "Proyecto 3" }
+        ]);
+        setIndustries([
+            { id: 1, name: "Industria 1" },
+            { id: 2, name: "Industria 2" },
+            { id: 3, name: "Industria 3" }
+        ]);
+        setContact([
+            { id: 1, name: "Enzo", surName: "Aparicio" },
+            { id: 2, name: "Gustavo", surName: "Gonzalez" },
+            { id: 3, name: "Yazmin", surName: "Espagnolo" }
+        ]);
+    }, [])
     return (
         <div>
             <Grid
@@ -169,7 +178,6 @@ function FilterMainScreen() {
     );
 }
 export default FilterMainScreen;
-
 
 
 
