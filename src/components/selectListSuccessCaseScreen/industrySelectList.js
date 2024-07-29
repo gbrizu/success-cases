@@ -31,6 +31,7 @@ export default function IndustrySelectList({ value, onChange, options }) {
       </Typography>
       <FormControl sx={{ m: 1,
           width: 300,
+          height: 50,
           
           '& .MuiOutlinedInput-root': {
             '&.Mui-focused fieldset': {
