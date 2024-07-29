@@ -1,46 +1,17 @@
-<<<<<<< Updated upstream
 import React from 'react';
-=======
-import React, { useEffect, useState } from 'react';
->>>>>>> Stashed changes
 import { useAuth0 } from '@auth0/auth0-react';
 
 function LoginButton() {
   const { loginWithRedirect, isAuthenticated, getAccessTokenSilently } = useAuth0();
-  const [token, setToken] = useState(null);
+  const [token, setToken] = React.useState(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchToken = async () => {
       if (isAuthenticated) {
         try {
           const accessToken = await getAccessTokenSilently();
           setToken(accessToken);
-<<<<<<< Updated upstream
           localStorage.setItem('accessToken', accessToken); // Guardar el token en localStorage, habría que cambiarlo
-=======
-          localStorage.setItem('accessToken', accessToken);
-          console.log('Access Token:', accessToken);
-
-          // Verificar si el token se guardó en localStorage
-          const storedToken = localStorage.getItem('accessToken');
-          if (storedToken) {
-            console.log('Token saved in localStorage:', storedToken);
-          } else {
-            console.log('Failed to save token in localStorage');
-          }
-
-          // Enviar una solicitud al backend con el token
-          const response = await fetch('http://localhost:3000', {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json'
-            }
-          });
-
-          const data = await response.json();
-          console.log('Response from backend:', data);
->>>>>>> Stashed changes
         } catch (error) {
           console.log('Error: ', error);
         }
@@ -66,7 +37,6 @@ function LoginButton() {
   };
 
   return (
-<<<<<<< Updated upstream
     <div className="loginButton">
       <button
         style={buttonStyle}
@@ -76,12 +46,7 @@ function LoginButton() {
       >
         Log  In
       </button>
-      {token && <p>Token: {token}</p>}
-=======
-    <div className='loginButton'>
-      {!isAuthenticated && <button onClick={() => loginWithRedirect()}>Log In</button>}
-      {isAuthenticated && token && <p>Token: {token}</p>}
->>>>>>> Stashed changes
+    
     </div>
   );
 }
