@@ -5,8 +5,8 @@ import Grid from "@mui/system/Unstable_Grid/Grid";
 import SelectListClients from "../selectListClients/selectListClients";
 import MultipleSelect from "../selectListIndustry";
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
-import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCasesByFilter } from "../../services/successCaseServerCalls";
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
+import { useEffect } from 'react';
 import { CaseViewContextProvider } from '../../context/casesView.context';
 import SearchButton from '../button/searchButton';
 import { Box, MenuItem, OutlinedInput, Select, FormControl, InputLabel, Typography } from "@mui/material";
@@ -15,6 +15,7 @@ import { siLK } from '@mui/material/locale';
 function FilterMainScreen() {
     const { setSuccessCasesList } = useContext(CaseViewContextProvider);
     const [clients, setClients] = useState([]);
+
     const [clientSelected, setClientSelected] = useState(null);
     const [type, setProjectType] = useState([]);
     const [typeSelected, setTypeSelected] = useState(null);
@@ -24,8 +25,10 @@ function FilterMainScreen() {
     const [contactSelected, setContactSelected] = useState(null);
     const [dateFrom, setDateFrom] = useState();
     const [dateTo, setDateTo] = useState();
+
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
+
     const MenuProps = {
         PaperProps: {
             style: {
@@ -34,17 +37,19 @@ function FilterMainScreen() {
             },
         },
     };
-    const handleSearch = async () => {
-        let successCasesFiltered = await getSuccessCasesByFilter({
-            startdate: dateFrom,
-            finishdate: dateTo,
-            industryid: industrySelected,
-            clientid: clientSelected,
-            projecttypeid: typeSelected,
-            contactid: contactSelected
-        });
-        setSuccessCasesList(successCasesFiltered);
-    }
+
+    /*     const handleSearch = async () => {
+            let successCasesFiltered = await getSuccessCasesByFilter({
+                startdate: dateFrom,
+                finishdate: dateTo,
+                industryid: industrySelected,
+                clientid: clientSelected,
+                projecttypeid: typeSelected,
+                contactid: contactSelected
+            });
+            setSuccessCasesList(successCasesFiltered);
+        } */
+
     useEffect(() => {
         if (dateTo < dateFrom && dateTo !== null) {
             alert("El valor Seleccionado es menor a la fecha inicial");
@@ -58,19 +63,30 @@ function FilterMainScreen() {
         }
     }, [dateFrom]);
     useEffect(() => {
-        getClients().then((result) => {
-            setClients(result);
-        });
-        getProyectsTypes().then((result) => {
-            setProjectType(result);
-        });
-        getIndustries().then((result) => {
-            setIndustries(result);
-        });
-        getContacts().then((result) => {
-            setContact(result);
-        });
-    }, []);
+        setClients([
+            { id: 1, name: "Cliente 1" },
+            { id: 2, name: "Cliente 2" },
+            { id: 3, name: "Cliente 3" }
+        ]);
+        setProjectType([
+            { id: 1, name: "Proyecto 1" },
+            { id: 2, name: "Proyecto 2" },
+            { id: 3, name: "Proyecto 3" }
+        ]);
+        setIndustries([
+            { id: 1, name: "Industria 1" },
+            { id: 2, name: "Industria 2" },
+            { id: 3, name: "Industria 3" }
+        ]);
+        setContact([
+            { id: 1, name: "Enzo", surName: "Aparicio" },
+            { id: 2, name: "Gustavo", surName: "Gonzalez" },
+            { id: 3, name: "Yazmin", surName: "Espagnolo" }
+        ]);
+    }, [])
+
+
+
     return (
         <div>
             <Grid
@@ -156,11 +172,21 @@ function FilterMainScreen() {
                         }
                     />
                 </Grid>
-                <Grid item xs={12} display="flex" justifyContent="center" marginBottom="1rem" marginTop="-2.8rem" marginRight={"5rem"}>
+
+                <Grid container
+                    alignItems={'center'}
+                    marginBottom={'1rem'}
+                    xs={12} md={3} xl={4}>
                     <Box>
                         <SearchButton handleClick={handleSearch} />
                     </Box>
-                    <Box sx={{ ml: 6 }}>
+                </Grid>
+
+                <Grid container
+                    alignItems={'center'}
+                    marginBottom={'1rem'}
+                    xs={12} md={3} xl={4}>
+                    <Box>
                         <CreateButton />
                     </Box>
                 </Grid>
