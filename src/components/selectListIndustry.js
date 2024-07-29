@@ -41,14 +41,14 @@ export default function SelectListIndustry({ options, value, onChange}) {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options?.map((item) => (
+          {(options?.length > 0) && (options?.map((item) => (
             <MenuItem
               key={item.id}
               value={item.id}
             >
               {item.name}
             </MenuItem>
-          ))}
+          )))}
         </Select>
       </FormControl>
     </div>

@@ -45,14 +45,18 @@ export default function SelectListClients({ options = [], value, onChange }) {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
+<<<<<<< HEAD
           {options.map((item) => (
+=======
+          {(options?.length > 0) && (options?.map((item) => (
+>>>>>>> ddc4e849f3ff480eca86df812e47dc29876465a1
             <MenuItem
               key={item.id}
               value={item.id}
             >
               {item.name}
             </MenuItem>
-          ))}
+          )))}
         </Select>
       </FormControl>
     </div>
