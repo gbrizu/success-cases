@@ -26,6 +26,14 @@ import { getContacts, getClients, getOfferings, getIndustries, getProyectsTypes 
 import CaseInfoEdition from "../components/caseInfoEdition/caseInfoEdition";
 import AddImage from "../components/addButton/addImage";
 import NavbarScreen from "../components/editionpage/NavbarScreen";
+import { getContacts } from "../services/successCaseServerCalls";
+import {
+  getClients,
+  getOfferings,
+  getIndustries,
+  getProyectsTypes,
+} from "../services/successCaseServerCalls";
+import GeneratePDF from "../components/pdf/generatePDF";
 
 const initialPage = { text: "", image: "" };
 
