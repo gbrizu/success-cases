@@ -39,7 +39,7 @@ const initialPage = {
 };
 
 export default function CreateSuccessCaseScreen() {
-  const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
+  // const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
   const [projectTitleValue, setProjectTitleValue] = useState("");
   const [selectedOffering, setSelectedOffering] = useState("");
   const [selectedProjectType, setSelectedProjectType] = useState([]);
@@ -57,25 +57,29 @@ export default function CreateSuccessCaseScreen() {
   const [industry, setIndustry] = useState([]);
   const [projectType, setProjectType] = useState([]);
 
-  const submitHandler = () => {
-    setSuccessCase({
-      title: projectTitleValue,
-      offeringId: selectedOffering,
-      clientId: selectedClient,
-      industryId: selectedIndustry,
-      projectTypeId: selectedProjectType,
-      startDate: startDateValue,
-      finishDate: finishDateValue,
-      contactId: projectContactValue,
-      teamSize: parseInt(avgTeamSizeValue),
-      isPublic: isPublic,
-      successCase: [initialPage],
-      challenge: [initialPage],
-      improvements: [initialPage],
-      technologie: [initialPage],
-    });
-    navigate("successCase");
-  };
+  // const submitHandler = () => {
+  //   setSuccessCase({
+  //     title: projectTitleValue,
+  //     offeringId: selectedOffering,
+  //     clientId: selectedClient,
+  //     industryId: selectedIndustry,
+  //     projectTypeId: selectedProjectType,
+  //     startDate: startDateValue,
+  //     finishDate: finishDateValue,
+  //     contactId: projectContactValue,
+  //     teamSize: parseInt(avgTeamSizeValue),
+  //     isPublic: isPublic,
+  //     successCase: [initialPage],
+  //     challenge: [initialPage],
+  //     improvements: [initialPage],
+  //     technologie: [initialPage],
+  //   });
+  //   navigate("successCase");
+  // };
+
+  const { navigate, screen, submitSuccessCaseHandler } = useContext(
+    ProcessContextProvider
+);
 
   const handleProjectTitleChange = (event) => {
     setProjectTitleValue(event.target.value);
@@ -423,7 +427,7 @@ export default function CreateSuccessCaseScreen() {
                     backgroundColor: '#6A8B06',
                 }
             }}
-            onClick={submitHandler}
+            onClick={submitSuccessCaseHandler}
           >
             Create
           </Button>

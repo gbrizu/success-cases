@@ -12,6 +12,7 @@ import SearchButton from '../button/searchButton';
 import { Box, MenuItem, OutlinedInput, Select, FormControl, InputLabel, Typography } from "@mui/material";
 import CreateButton from '../button/createButton';
 import { siLK } from '@mui/material/locale';
+
 function FilterMainScreen() {
     const { setSuccessCasesList } = useContext(CaseViewContextProvider);
     const [clients, setClients] = useState([]);
@@ -178,7 +179,7 @@ function FilterMainScreen() {
                     marginBottom={'1rem'}
                     xs={12} md={3} xl={4}>
                     <Box>
-                        <SearchButton handleClick={handleSearch} />
+                        {/* <SearchButton handleClick={handleSearch} /> */}
                     </Box>
                 </Grid>
 
