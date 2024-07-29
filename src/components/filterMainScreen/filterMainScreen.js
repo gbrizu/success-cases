@@ -142,9 +142,7 @@ function FilterMainScreen() {
                         width: "inherit", position: "relative"
                     }}
                 >
-                    <Grid item xs={12} >
-                        <SelectListClients options={clients} value={clientSelected} onChange={setClientSelected}> </SelectListClients>
-                    </Grid>
+                    
 
                     <Grid item xs={12} >
                         <SelectListIndustry options={industries} value={industrySelected} onChange={setIndustrySelected}> </SelectListIndustry>

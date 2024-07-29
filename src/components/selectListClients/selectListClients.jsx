@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import './selectListClients.css'
+import './selectListClients.css';
 import { Typography } from '@mui/material';
 
 const ITEM_HEIGHT = 48;
@@ -19,9 +19,10 @@ const MenuProps = {
   },
 };
 
-export default function SelectListClients({ options, value, onChange }) {
+export default function SelectListClients({ options = [], value, onChange }) {
   const theme = useTheme();
   const [personName, setPersonName] = useState(value || []);
+  
   const handleChange = (event) => {
     const {
       target: { value },
@@ -44,7 +45,7 @@ export default function SelectListClients({ options, value, onChange }) {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options?.map((item) => (
+          {options.map((item) => (
             <MenuItem
               key={item.id}
               value={item.id}
