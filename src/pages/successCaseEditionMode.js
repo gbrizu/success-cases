@@ -43,10 +43,10 @@ function SuccessCaseEditionMode() {
           </Typography>
         </Grid>
 
-        {}
+        { }
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={5}>
-            {}
+            { }
             <Box
               sx={{
                 height: "50%",
@@ -59,7 +59,7 @@ function SuccessCaseEditionMode() {
             </Box>
           </Grid>
           <Grid item xs={5}>
-            {}
+            { }
             <Box
               sx={{
                 border: "2px solid black",
