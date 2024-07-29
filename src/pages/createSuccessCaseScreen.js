@@ -1,16 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
+  AppBar,
+  Box,
   Button,
   Container,
   FormControl,
   FormControlLabel,
   Grid,
   IconButton,
-  Autocomplete,
   Switch,
   TextField,
   Tooltip,
   Typography,
+  Tabs,
+  Tab,
   Select,
   OutlinedInput,
   MenuItem,
@@ -18,12 +21,11 @@ import {
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import OfferingSelectList from "../components/selectListSuccessCaseScreen/offeringSelectList";
-import ClientSelectList from "../components/selectListSuccessCaseScreen/clientSelectList";
-import IndustrySelectList from "../components/selectListSuccessCaseScreen/industrySelectList";
-import ProjectTypeSelectList from "../components/selectListSuccessCaseScreen/projectTypeSelectList";
-import FormInfoInput from "../components/BasicFormInfo";
 import { ProcessContextProvider } from "../context/process.context";
+import { getContacts, getClients, getOfferings, getIndustries, getProyectsTypes } from "../services/successCaseServerCalls";
+import CaseInfoEdition from "../components/caseInfoEdition/caseInfoEdition";
+import AddImage from "../components/addButton/addImage";
+import NavbarScreen from "../components/editionpage/NavbarScreen";
 import { getContacts } from "../services/successCaseServerCalls";
 import {
   getClients,
@@ -33,13 +35,30 @@ import {
 } from "../services/successCaseServerCalls";
 import GeneratePDF from "../components/pdf/generatePDF";
 
-const initialPage = {
-  text: "",
-  image: "",
-};
+const initialPage = { text: "", image: "" };
 
-export default function CreateSuccessCaseScreen() {
+const TabPanel = (props) => {
+  const { children, value, index, ...other } = props;
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+const CreateSuccessCaseScreen = () => {
   const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
+  const [value, setValue] = useState(0);
   const [projectTitleValue, setProjectTitleValue] = useState("");
   const [selectedOffering, setSelectedOffering] = useState("");
   const [selectedProjectType, setSelectedProjectType] = useState([]);
@@ -51,7 +70,6 @@ export default function CreateSuccessCaseScreen() {
   const [startDateValue, setStartDateValue] = useState();
   const [finishDateValue, setFinishDateValue] = useState();
   const [contacts, setContacts] = useState([]);
-
   const [offerings, setOfferings] = useState([]);
   const [clients, setClients] = useState([]);
   const [industry, setIndustry] = useState([]);
@@ -77,63 +95,16 @@ export default function CreateSuccessCaseScreen() {
     navigate("successCase");
   };
 
-  const handleProjectTitleChange = (event) => {
-    setProjectTitleValue(event.target.value);
-  };
-
-  const handleOfferingChange = (event) => {
-    setSelectedOffering(event.target.value);
-  };
-
-  const handleClientChange = (event) => {
-    setSelectedClient(event.target.value);
-  };
-
-  const handleIndustryChange = (event) => {
-    setSelectedIndustry(event.target.value);
-  };
-
-  const handleProjectTypeChange = (event) => {
-    setSelectedProjectType(event.target.value);
-  };
-
-  const handleAvgTeamSizeChange = (event) => {
-    setAvgTeamSizeValue(event.target.value);
-  };
-
-  const handleIsPublicChange = (event) => {
-    setIsPublic(event.target.checked);
-  };
-
-  const getOfferingsInit = () => {
-    getOfferings().then((response) => {
-      setOfferings(response);
-    });
-  };
-
-  const getClientsInit = () => {
-    getClients().then((response) => {
-      setClients(response);
-    });
-  };
-
-  const getIndustryInit = () => {
-    getIndustries().then((response) => {
-      setIndustry(response);
-    });
-  };
-
-  const getProjectTypeInit = () => {
-    getProyectsTypes().then((response) => {
-      setProjectType(response);
-    });
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   useEffect(() => {
-    getOfferingsInit();
-    getClientsInit();
-    getIndustryInit();
-    getProjectTypeInit();
+    getOfferings().then(setOfferings);
+    getClients().then(setClients);
+    getIndustries().then(setIndustry);
+    getProyectsTypes().then(setProjectType);
+    getContacts().then(setContacts);
   }, []);
 
   useEffect(() => {
@@ -142,10 +113,6 @@ export default function CreateSuccessCaseScreen() {
       setFinishDateValue(null);
     }
   }, [startDateValue, finishDateValue]);
-
-  useEffect(() => {
-    getContacts().then((result) => setContacts(result));
-  }, []);
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
@@ -165,251 +132,159 @@ export default function CreateSuccessCaseScreen() {
             New Success Case
           </Typography>
         </Grid>
-
-        <div>
-          <FormControlLabel
-            value="top"
-            control={
-              <Switch
-                color="primary"
-                checked={isPublic}
-                onChange={handleIsPublicChange}
-              />
-            }
-            label="Make Public"
-            labelPlacement="top"
-            sx={{
-              marginLeft: "48rem ",
-              marginRight: "auto",
-              marginTop: "2rem",
-            }}
-          />
-          <Tooltip
-            title={
-              <h1 style={{ color: "black" }}>
-                If the Make Public option is turned on, any person will be able
-                to see the Client field. If it is OFF, then the Client field
-                will only be displayed to the Success Case creator
-              </h1>
-            }
-          >
-            <IconButton sx={{ marginTop: "3.4rem" }}>
-              <HelpOutlineIcon />
-            </IconButton>
-          </Tooltip>
-        </div>
-        <Grid
-          containerInput
-          sx={{ width: "inherit", marginLeft: "25rem", position: "relative" }}
-        >
-          <Grid item xs={12} paddingRight={"19.5rem"}>
-            <FormInfoInput
-              marginRight={"7.4rem"}
-              customStyleClass={"form-margin"}
-              label={"Title"}
-              width={300}
-              customInput={
-                <TextField
-                  inputProps={{ type: "text" }}
-                  onChange={handleProjectTitleChange}
-                  value={projectTitleValue}
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#BFD52E',
-                      }
-                    }
-                  }}
-                />
-              }
-            ></FormInfoInput>
-          </Grid>
-
+        <Grid container spacing={2}>
           <Grid item xs={12}>
-            <OfferingSelectList
-              value={selectedOffering}
-              onChange={handleOfferingChange}
-              options={offerings}
-            ></OfferingSelectList>
-          </Grid>
-
-          <Grid item xs={12}>
-            <ClientSelectList
-              value={selectedClient}
-              onChange={handleClientChange}
-              options={clients}
+            <TextField
+              label="Title"
+              value={projectTitleValue}
+              onChange={(e) => setProjectTitleValue(e.target.value)}
             />
-          </Grid>
-
-          <Grid item xs={12}>
-            <ProjectTypeSelectList
-              value={selectedProjectType}
-              onChange={handleProjectTypeChange}
-              options={projectType}
-            ></ProjectTypeSelectList>
-          </Grid>
-
-          <Grid item xs={12}>
-            <IndustrySelectList
-              value={selectedIndustry}
-              onChange={handleIndustryChange}
-              options={industry}
-            ></IndustrySelectList>
-          </Grid>
-
-          <Grid item xs={12}>
-            <FormInfoInput
-              marginRight={"6.9rem"}
-              customStyleClass={"form-margin"}
-              label={"Date"}
-              customInput={
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                  sx={{ m: 1,
-                    width: 300,
-                    border: '2px #BFD52E',
-                    '& .Mui-focused': {
-                      borderColor: '#BFD52E',
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#BFD52E',
-                      },
-                    },}}
-                    label="From"
-                    value={startDateValue}
-                    onChange={(newValue) => {
-                      setStartDateValue(newValue.$d)
-                    }}
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        '&.Mui-focused fieldset': {
-                          borderColor: '#BFD52E',
-                        }
-                      },
-                    '& .MuiInputLabel-root.Mui-focused': {
-                      color: '#6A8B06',
-                    }
-                  }}   
+            <Grid item xs={12}>
+              <FormControlLabel
+                value="top"
+                control={
+                  <Switch
+                    color="primary"
+                    checked={isPublic}
+                    onChange={(e) => setIsPublic(e.target.checked)}
                   />
-                  <DatePicker
-                  sx={{ m: 1,
-                    width: 300,
-                    border: '2px #BFD52E',
-                    '& .Mui-focused': {
-                      borderColor: '#BFD52E',
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#BFD52E',
-                      },
-                    },}}
-                    label="To"
-                    value={finishDateValue}
-                    onChange={(newValue) => setFinishDateValue(newValue.$d)}
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        '&.Mui-focused fieldset': {
-                          borderColor: '#BFD52E',
-                        }
-                      },
-                    '& .MuiInputLabel-root.Mui-focused': {
-                      color: '#6A8B06',
-                    }
-                  }}
-                  />
-                </LocalizationProvider>
-              }
-            ></FormInfoInput>
+                }
+                label="Make Public"
+                labelPlacement="top"
+                sx={{
+                  marginLeft: "48rem ",
+                  marginRight: "auto",
+                  marginTop: "2rem",
+                }}
+              />
+              <Tooltip title={<h1 style={{ color: "black" }}>If the Make Public option is turned on, any person will be able to see the Client field. If it is OFF, then the Client field will only be displayed to the Success Case creator</h1>}>
+                <IconButton sx={{ marginTop: "3.4rem" }}>
+                  <HelpOutlineIcon />
+                </IconButton>
+              </Tooltip>
+            </Grid>
           </Grid>
-
-          <Grid item xs={12}>
-            <FormInfoInput
-              marginRight={"1.4rem"}
-              customStyleClass={"form-margin"}
-              label={"Project contact"}
-              id={"projectContact"}
-              customInput={
-                <FormControl variant="standard"
-                sx={{ m: 1,
-                  width: 300,
-                  border: '2px #BFD52E',
-                  '& .Mui-focused': {
-                    borderColor: '#BFD52E',
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#BFD52E',
-                    },
-                  },}}>
-                  <Select
-                    labelId="projectContactsAutoComplete-label"
-                    id="projectContact"
-                    value={projectContactValue}
-                    onChange={(newValue) => {
-                      setProjectContactValue(newValue.target.value);
-                    }}
-                    input={<OutlinedInput label="Name" />}
-                  >
-                    {contacts.map((item) => (
-                      <MenuItem
-                        key={item.id}
-                        value={item.id}
-                      >
-                        {item.name + " " + item.surName}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              }
-            ></FormInfoInput>
+          <Grid item xs={6}>
+            <FormControl variant="outlined" sx={{ width: '100%' }}>
+              <Select value={selectedOffering} onChange={(e) => setSelectedOffering(e.target.value)} input={<OutlinedInput label="Offering" />}>
+                {offerings.map((item) => (
+                  <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
-
-          <Grid item xs={12}>
-            <FormInfoInput
-              marginRight={"0.3rem"}
-              customStyleClass={"form-margin"}
-              label={"Avg. Team size *"}
-              width={300}
-              customInput={
-                <TextField
-                  inputProps={{ type: "number" }}
-                  onChange={handleAvgTeamSizeChange}
-                  value={avgTeamSizeValue}
-                  sx={{ m: 1,
-                    width: 300,
-                    border: '2px #BFD52E',
-                    '& .Mui-focused': {
-                      borderColor: '#BFD52E',
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#BFD52E',
-                      },
-                    },}}
-                />
-              }
-            ></FormInfoInput>
+          <Grid item xs={6}>
+            <FormControl variant="outlined" sx={{ width: '100%' }}>
+              <Select value={selectedClient} onChange={(e) => setSelectedClient(e.target.value)} input={<OutlinedInput label="Client" />}>
+                {clients.map((item) => (
+                  <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={6}>
+            <FormControl variant="outlined" sx={{ width: '100%' }}>
+              <Select value={selectedIndustry} onChange={(e) => setSelectedIndustry(e.target.value)} input={<OutlinedInput label="Industry" />}>
+                {industry.map((item) => (
+                  <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={6}>
+            <FormControl variant="outlined" sx={{ width: '100%' }}>
+              <Select value={selectedProjectType} onChange={(e) => setSelectedProjectType(e.target.value)} input={<OutlinedInput label="Project Type" />}>
+                {projectType.map((item) => (
+                  <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={6}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="From"
+                value={startDateValue}
+                onChange={(newValue) => setStartDateValue(newValue.$d)}
+                sx={{ width: '100%' }}
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item xs={6}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="To"
+                value={finishDateValue}
+                onChange={(newValue) => setFinishDateValue(newValue.$d)}
+                sx={{ width: '100%' }}
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item xs={6}>
+            <FormControl variant="outlined" sx={{ width: '100%' }}>
+              <Select value={projectContactValue} onChange={(e) => setProjectContactValue(e.target.value)} input={<OutlinedInput label="Project Contact" />}>
+                {contacts.map((item) => (
+                  <MenuItem key={item.id} value={item.id}>{item.name + " " + item.surName}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              label="Average Team Size"
+              type="number"
+              value={avgTeamSizeValue}
+              onChange={(e) => setAvgTeamSizeValue(e.target.value)}
+              sx={{ width: '100%' }}
+            />
           </Grid>
         </Grid>
 
         <Grid item xs={12}>
+          <Box sx={{ width: '100%' }}>
+            <AppBar position="static">
+              <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                <Tab label="Success Case" />
+                <Tab label="Challenges" />
+                <Tab label="Improvements" />
+                <Tab label="Technologies" />
+              </Tabs>
+            </AppBar>
+            <TabPanel value={value} index={0}>
+
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <CaseInfoEdition label="Challenges" />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              <CaseInfoEdition label="Improvements" />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+              <CaseInfoEdition label="Technologies" />
+            </TabPanel>
+          </Box>
+        </Grid>
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
           <Button
             variant="contained"
-            size="large"
-            sx={{
-              height: "2.5rem",
-              marginTop: { xs: "1rem", md: "4rem" },
-              marginLeft: "35rem",
-              marginRight: "auto",
-              marginBottom: "200px",
-            }}
             onClick={submitHandler}
+            sx={{
+              width: "10rem",
+              height: "3rem",
+              borderRadius: "1.5rem",
+              bgcolor: "#ff642f",
+              color: "white",
+              fontWeight: "bold",
+              fontSize: "1rem",
+              textTransform: "none",
+            }}
           >
-            Create
+            Save
           </Button>
         </Grid>
       </Grid>
     </Container>
   );
-}
+};
+
+export default CreateSuccessCaseScreen;

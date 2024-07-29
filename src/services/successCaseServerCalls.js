@@ -86,19 +86,19 @@ export const postSuccessCase = (successCaseObj) => {
         technologie
     } = successCaseObj;
 
-    const startMonth = startDate.getUTCMonth() + 1; 
+    const startMonth = startDate.getUTCMonth() + 1;
     const startDay = startDate.getUTCDate();
     const startYear = startDate.getUTCFullYear();
 
     const startNewDate = startYear + "-" + startMonth + "-" + startDay;
 
-    const finishMonth = finishDate.getUTCMonth() + 1; 
+    const finishMonth = finishDate.getUTCMonth() + 1;
     const finishDay = finishDate.getUTCDate();
     const finishYear = finishDate.getUTCFullYear();
 
     const finishNewDate = finishYear + "-" + finishMonth + "-" + finishDay;
 
-    
+
     const body = {
         "title": title,
         "startdate": startNewDate,
@@ -106,7 +106,7 @@ export const postSuccessCase = (successCaseObj) => {
         "teamsize": teamSize,
         "ispublic": isPublic,
         "industryid": industryId,
-        "offeringid": offeringId, 
+        "offeringid": offeringId,
         "clientid": clientId,
         "projecttypeid": projectTypeId,
         "contactid": contactId,
