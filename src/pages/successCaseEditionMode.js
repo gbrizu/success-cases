@@ -13,7 +13,6 @@ function SuccessCaseEditionMode() {
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
       <Grid container spacing={1} justifyContent="center" alignItems="center" style={{ height: '100%' }}>
-        <Grid container item xs={12} spacing={-2} justifyContent="center" alignItems="center">
           <Grid item xs={5} display="flex" justifyContent="center" alignItems="center">
             
             <Box
@@ -54,11 +53,7 @@ function SuccessCaseEditionMode() {
               <AddImage />
             </Box>
           </Grid>
-
-          {/* <NavbarScreen /> */}
-          
         </Grid>
-      </Grid>
     </Container>
   );
 }

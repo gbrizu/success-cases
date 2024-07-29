@@ -39,7 +39,7 @@ function FilterMainScreen() {
         },
     };
 
-    /*     const handleSearch = async () => {
+    const handleSearch = async () => {
             let successCasesFiltered = await getSuccessCasesByFilter({
                 startdate: dateFrom,
                 finishdate: dateTo,
@@ -49,7 +49,7 @@ function FilterMainScreen() {
                 contactid: contactSelected
             });
             setSuccessCasesList(successCasesFiltered);
-        } */
+        } 
 
     useEffect(() => {
         if (dateTo < dateFrom && dateTo !== null) {
@@ -59,10 +59,11 @@ function FilterMainScreen() {
     }, [dateTo]);
     useEffect(() => {
         if (dateTo < dateFrom && dateFrom !== null) {
-            alert("El valor Seleccionado es mayor a la fecha final");
+           alert("El valor Seleccionado es mayor a la fecha final");
             setDateFrom(null);
         }
     }, [dateFrom]);
+
     useEffect(() => {
         setClients([
             { id: 1, name: "Cliente 1" },
@@ -85,9 +86,6 @@ function FilterMainScreen() {
             { id: 3, name: "Yazmin", surName: "Espagnolo" }
         ]);
     }, [])
-
-
-
     return (
         <div>
             <Grid
@@ -179,7 +177,7 @@ function FilterMainScreen() {
                     marginBottom={'1rem'}
                     xs={12} md={3} xl={4}>
                     <Box>
-                        {/* <SearchButton handleClick={handleSearch} /> */}
+                        <SearchButton handleClick={handleSearch} />
                     </Box>
                 </Grid>
 
@@ -196,3 +194,11 @@ function FilterMainScreen() {
     );
 }
 export default FilterMainScreen;
+
+
+
+
+
+
+
+

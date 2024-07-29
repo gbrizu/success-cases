@@ -109,36 +109,66 @@ export default function CreateSuccessCaseScreen() {
     setIsPublic(event.target.checked);
   };
 
-  const getOfferingsInit = () => {
-    getOfferings().then((response) => {
-      setOfferings(response);
-    });
-  };
+  /*   const getOfferingsInit = () => {
+      getOfferings().then((response) => {
+        setOfferings(response);
+      });
+    };
+  
+    const getClientsInit = () => {
+      getClients().then((response) => {
+        setClients(response);
+      });
+    };
+  
+    const getIndustryInit = () => {
+      getIndustries().then((response) => {
+        setIndustry(response);
+      });
+    };
+  
+    const getProjectTypeInit = () => {
+      getProyectsTypes().then((response) => {
+        setProjectType(response);
+      });
+    }; */
 
-  const getClientsInit = () => {
-    getClients().then((response) => {
-      setClients(response);
-    });
-  };
-
-  const getIndustryInit = () => {
-    getIndustries().then((response) => {
-      setIndustry(response);
-    });
-  };
-
-  const getProjectTypeInit = () => {
-    getProyectsTypes().then((response) => {
-      setProjectType(response);
-    });
-  };
+  //quiero hardcodear los datos
 
   useEffect(() => {
-    getOfferingsInit();
-    getClientsInit();
-    getIndustryInit();
-    getProjectTypeInit();
-  }, []);
+    setOfferings([
+      { id: 1, name: "Offering 1" },
+      { id: 2, name: "Offering 2" },
+      { id: 3, name: "Offering 3" },
+    ]);
+    setClients([
+      { id: 1, name: "Client 1" },
+      { id: 2, name: "Client 2" },
+      { id: 3, name: "Client 3" },
+    ]);
+    setIndustry([
+      { id: 1, name: "Industry 1" },
+      { id: 2, name: "Industry 2" },
+      { id: 3, name: "Industry 3" },
+    ]);
+    setProjectType([
+      { id: 1, name: "Project Type 1" },
+      { id: 2, name: "Project Type 2" },
+      { id: 3, name: "Project Type 3" },
+    ]);
+    setContacts([
+      { id: 1, name: "Contact 1", surName: "Surname 1" },
+      { id: 2, name: "Contact 2", surName: "Surname 2" },
+      { id: 3, name: "Contact 3", surName: "Surname 3" },
+    ]);
+  }, [])
+
+  /*   useEffect(() => {
+        getOfferingsInit();
+        getClientsInit();
+        getIndustryInit();
+        getProjectTypeInit();
+      }, []);  */
 
   useEffect(() => {
     if (finishDateValue < startDateValue) {
@@ -350,24 +380,25 @@ export default function CreateSuccessCaseScreen() {
                           '&.Mui-focused fieldset': {
                             borderColor: '#BFD52E',
                           },
-                        },}}>
-                        <Select
-                          labelId="projectContactsAutoComplete-label"
-                          id="projectContact"
-                          value={projectContactValue}
-                          onChange={(newValue) => {
-                            setProjectContactValue(newValue.target.value);
-                          }}
-                          input={<OutlinedInput label="Name"/>}
-                        >
-                          {contacts.map((item) => (
-                            <MenuItem
-                              key={item.id}
-                              value={item.id}
-                            >
-                              {item.name + " " + item.surName}
-                            </MenuItem>
-                          ))}
+                        },
+                      }}>
+                      <Select
+                        labelId="projectContactsAutoComplete-label"
+                        id="projectContact"
+                        value={projectContactValue}
+                        onChange={(newValue) => {
+                          setProjectContactValue(newValue.target.value);
+                        }}
+                        input={<OutlinedInput label="Name" />}
+                      >
+                                                {/* {contacts.map((item) => (
+                          <MenuItem
+                            key={item.id}
+                            value={item.id}
+                          >
+                            {item.name + " " + item.surName}
+                          </MenuItem>
+                        ))} */}
                       </Select>
                     </FormControl>
                   }
@@ -418,10 +449,9 @@ export default function CreateSuccessCaseScreen() {
              
               height: "4rem", 
               width: "8rem",
-              marginTop: "-17rem",
+              marginTop: "-12rem",
               marginLeft: "52.5rem",
-              // marginRight: "0rem",
-              marginBottom: "50px",
+              marginBottom: "80px",
               background:'#BFD52E',
                 '&:hover': {
                     backgroundColor: '#6A8B06',
