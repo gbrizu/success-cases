@@ -11,9 +11,9 @@ function LoginButton() {
         try {
           const accessToken = await getAccessTokenSilently();
           setToken(accessToken);
-          localStorage.setItem('accessToken', accessToken); // Guardar el token en localStorage
+          localStorage.setItem('accessToken', accessToken); // Guardar el token en localStorage, habría que cambiarlo
         } catch (error) {
-          console.log('Error al obtener el token: ', error);
+          console.log('Error: ', error);
         }
       }
     };
@@ -29,7 +29,7 @@ function LoginButton() {
     cursor: 'pointer',
     fontSize: '16px',
     transition: 'background-color 0.3s ease',
-    width: '5.5rem'
+     width: '5.5rem'
   };
 
   const buttonHoverStyle = {
@@ -44,7 +44,7 @@ function LoginButton() {
         onMouseOut={(e) => (e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor)}
         onClick={() => loginWithRedirect()}
       >
-        Log In
+        Log  In
       </button>
       {token && <p>Token: {token}</p>}
     </div>

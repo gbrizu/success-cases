@@ -5,8 +5,8 @@ import FilterMainScreen from "../components/filterMainScreen/filterMainScreen";
 import BasicTitle from "../components/basicTitle/basicTitle";
 import { getSuccessCase } from "../services/successCaseServerCalls";
 import { CaseViewContextProvider } from "../context/casesView.context";
-
-import Authentication from "../components/button/Authentication";
+import LoginButton from "../components/button/LoginButton";
+import LogoutButton from "../components/button/LogoutButton";
 
 function MainScreen() {
 
@@ -39,9 +39,35 @@ function MainScreen() {
 
   return (
     <Container maxWidth='l' sx={{ bgcolor: '#ffffff'}}>
-    
+      <div id='TITLE' style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+        <BasicTitle basictitle={"Success cases"} />
+        <div style={{marginTop: '1rem', marginRight: '1rem'}}>
+          <img src='/globant_logo.png' alt='' width='190' height='60'/>
+        </div>
+      </div>
+
+      <Grid container spacing={2} xs={12}>
+        <Box
+          sx={{
+            textAlign: 'center',
+            marginTop: '2rem',
+            width: { xs: '100%', md: '100%' },
+          }}
+        >
+          <FilterMainScreen />
+        </Box>
+      </Grid>
+
+      <div id="TABLE">
+        <Box sx={{}} >
+          <DataTable rows={data} />
+        </Box>
+      </div>
       <div>
-        <Authentication></Authentication>
+        <LoginButton/>
+
+        
+        <LogoutButton/>
       </div>
     </Container>
   );
