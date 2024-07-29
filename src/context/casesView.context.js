@@ -7,7 +7,10 @@ export default function CaseViewContext({ children }) {
     const [screen, setScreen] = useState('viewCaseDetails');
     const [actualSuccessCase, setSuccessCase] = useState({});
     const [successCasesList, setSuccessCasesList] = useState([]);
-
+    const [challenge, setChallenge] = useState('');
+    const [casedetail, setCaseDetail] = useState('');
+    const [technology, setTechnology] = useState('');
+    const [improvement, setImprovement] = useState('');
 
     const navigate = (screen) => {
         setScreen(screen);
@@ -21,7 +24,16 @@ export default function CaseViewContext({ children }) {
             actualSuccessCase,
             setSuccessCase,
             successCasesList,
-            setSuccessCasesList
+            setSuccessCasesList,
+            challenge,
+            setChallenge,
+            casedetail,
+            setCaseDetail,
+            technology,
+            setTechnology,
+            improvement,
+            setImprovement
+
         }}>
             {children}
         </CaseViewContextProvider.Provider>

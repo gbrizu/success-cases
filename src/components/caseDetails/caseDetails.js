@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { CaseViewContextProvider } from "../../context/casesView.context";
 import { getSuccessCaseById } from "../../services/successCaseServerCalls";
+import GeneratePDF from "../pdf/generatePDF";
 
 export default function CaseDetails({ successCase }) {
   const { navigate, setSuccessCase, actualSuccessCase } = useContext(
@@ -56,8 +57,9 @@ export default function CaseDetails({ successCase }) {
           >
             Next
           </Button>
-
+          
         </div>
+        <GeneratePDF />
       </div>
     </div>
   );
