@@ -25,59 +25,24 @@ export default function NavbarScreen() {
         <Grid item xs={2}>
             <Box
                 sx={{
-                    marginLeft: "auto",
+                    marginLeft: "5rem",
                     textAlign: "center",
                     marginTop: "1rem",
                 }}
             >
-                <Button>
-                    <Typography variant="h4" gutterBottom color={'black'}>
-                        + Page
-                    </Typography>
-                </Button>
-                <SuccesCaseButton
-                    targetName={'successCase'}
-                    onClick={() => navigate('successCase', screen,)}
-                >
-                    Succes Case
-                </SuccesCaseButton>
-
-                <SuccesCaseButton
-                    targetName={'challenge'}
-                    onClick={() => navigate('challenge')}
-                >
-                    Challenges
-                </SuccesCaseButton>
-
-                <SuccesCaseButton
-                    targetName={'improvement'}
-                    onClick={() => navigate('improvement')}
-                >
-                    Improvements
-                </SuccesCaseButton>
-
-                <SuccesCaseButton
-                    targetName={'technologies'}
-                    onClick={() => navigate('technologies')}
-                >
-                    Technologies
-                </SuccesCaseButton>
                 <Box sx={buttonContainerStyle}>
                     <Button>
                         <VisibilityIcon sx={iconStyle} />
                         <Typography color="black">View</Typography>
                     </Button>
                 </Box>
-                {
-                    screen === 'technologies' &&
-                    <Box sx={buttonContainerStyle}>
-                        <Button onClick={submitSuccessCaseHandler}>
-                            <SaveIcon sx={iconStyle} />
+                <Box sx={buttonContainerStyle}>
+                    <Button onClick={submitSuccessCaseHandler}>
+                        <SaveIcon sx={iconStyle} />
 
-                            <Typography color="black">Save</Typography>
-                        </Button>
-                    </Box>
-                }
+                        <Typography color="black">Save</Typography>
+                    </Button>
+                </Box>
             </Box>
         </Grid>
     )

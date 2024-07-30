@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const BASE_URL = 'http://20.15.110.189/back';
+const BASE_URL = 'http://localhost:3000';
 
 const axiosGet = (customUrl) => {
     return axios.get(`${BASE_URL}${customUrl}`)
@@ -44,7 +44,6 @@ export const getProyectsTypes = () => {
     return getBaseAxiosGetWithResponseManage('/ProjectType/getAll')
 }
 
-
 export const getContacts = () => {
     return getBaseAxiosGetWithResponseManage('/Contact/getAll')
 }
@@ -53,7 +52,7 @@ export const getOfferings = () => {
     return getBaseAxiosGetWithResponseManage('/Offering/getAll')
 }
 
-export const getSuccessCases = (searchParams) => {
+export const getSuccessCasesByFilter = (searchParams) => {
     return getBaseAxiosPostWithResponseManage('/SuccessCase/getByFilter', searchParams)
 }
 
@@ -62,25 +61,80 @@ export const createSuccessCase = (successCase) => {
 }
 
 export const getSuccessCaseById = (id) => {
-    return getBaseAxiosGetWithResponseManage('/SuccessCase/getById')
+    return getBaseAxiosGetWithResponseManage(`/SuccessCase/getById/${id}`)
 }
 
-export const postSuccessCase = (successCase) => {
+export const getSuccessCase = () => {
+    return getBaseAxiosGetWithResponseManage('/SuccessCase/getAll')
+}
 
-    return axiosPost('/SuccessCase/create', {
-        // SUCCESS CASE
-// successCase.offering
-// successCase.client
-// successCase.industry
-// successCase.date
-// successCase.projectContact
-// successCase.avgTeamSize
-// successCase.isPublic
-// successCase.successCase
-// successCase.challenge
-// successCase.improvements
-// successCase.technologie
-    })
+export const postSuccessCase = (successCaseObj) => {
+    const {
+        title,
+        startDate,
+        finishDate,
+        teamSize,
+        isPublic,
+        industryId,
+        offeringId,
+        clientId,
+        projectTypeId,
+        contactId,
+        successCase,
+        challenge,
+        improvements,
+        technologie
+    } = successCaseObj;
+
+    const startMonth = startDate.getUTCMonth() + 1;
+    const startDay = startDate.getUTCDate();
+    const startYear = startDate.getUTCFullYear();
+
+    const startNewDate = startYear + "-" + startMonth + "-" + startDay;
+
+    const finishMonth = finishDate.getUTCMonth() + 1;
+    const finishDay = finishDate.getUTCDate();
+    const finishYear = finishDate.getUTCFullYear();
+
+    const finishNewDate = finishYear + "-" + finishMonth + "-" + finishDay;
+
+
+    const body = {
+        "title": title,
+        "startdate": startNewDate,
+        "finishdate": finishNewDate,
+        "teamsize": teamSize,
+        "ispublic": isPublic,
+        "industryid": industryId,
+        "offeringid": offeringId,
+        "clientid": clientId,
+        "projecttypeid": projectTypeId,
+        "contactid": contactId,
+        "casedetail": {
+            "image_detail": successCase.image,
+            "video_detail": null,
+            "text_detail": successCase.text
+        },
+        "technology": {
+            "image_tech": technologie.image,
+            "video_tech": null,
+            "text_tech": technologie.text
+        },
+        "improvement": {
+            "image_imp": improvements.image,
+            "video_imp": null,
+            "text_imp": improvements.text
+        },
+        "challenge": {
+            "image_ch": challenge.image,
+            "video_ch": null,
+            "text_ch": challenge.text,
+        }
+    }
+
+    console.log(body)
+
+    return axiosPost('/SuccessCase/create', body)
         .then((response) => {
             console.log(response)
             return response.data;
@@ -90,35 +144,3 @@ export const postSuccessCase = (successCase) => {
         })
 }
 
-// {
-//     "title": "Ejemplo de Caso de Éxito 1",
-//     "startdate": "2024-02-29",
-//     "finishdate": "2024-03-10",
-//     "teamsize": 20,
-//     "ispublic": true,
-//     "industryid": 3,
-//     "offeringid": 1,
-//     "clientid": 1,
-//     "projecttypeid": 3,
-//     "contactid": 1,
-//     "casedetail": {
-//         "image_detail": "BASE64",
-//         "video_detail": null,
-//         "text_detail": "BASE64"
-//     },
-//      "technology": {
-//             "image_tech": "BASE64",
-//             "video_tech": null,
-//             "text_tech": "BASE64"
-//         },
-//         "improvement": {
-//             "image_imp": "BASE64",
-//             "video_imp": null,
-//             "text_imp": "BASE64"
-//         },
-//         "challenge": {
-//             "image_ch": "BASE64",
-//             "video_ch": null,
-//             "text_ch": "BASE64"
-//         }
-// }

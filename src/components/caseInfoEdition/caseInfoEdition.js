@@ -4,7 +4,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { ProcessContextProvider } from "../../context/process.context";
 
-// En CaseInfoEdition.js
 export default function CaseInfoEdition() {
   const {
     setChallengeText,
@@ -69,9 +68,9 @@ export default function CaseInfoEdition() {
             style={{
               border: "2px solid black",
               borderRadius: "5px",
-              minWidth: "470px",
-              maxWidth: "470px",
-              minHeight: "551px",
+              minWidth: "450px",
+              maxWidth: "450px",
+              minHeight: "500px",
             }}
           />
         </div>
