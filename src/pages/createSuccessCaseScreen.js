@@ -40,7 +40,7 @@ const initialPage = {
 };
 
 export default function CreateSuccessCaseScreen() {
-  const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
+  // const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
   const [projectTitleValue, setProjectTitleValue] = useState("");
   const [selectedOffering, setSelectedOffering] = useState("");
   const [selectedProjectType, setSelectedProjectType] = useState([]);
@@ -58,25 +58,29 @@ export default function CreateSuccessCaseScreen() {
   const [industry, setIndustry] = useState([]);
   const [projectType, setProjectType] = useState([]);
 
-  const submitHandler = () => {
-    setSuccessCase({
-      title: projectTitleValue,
-      offeringId: selectedOffering,
-      clientId: selectedClient,
-      industryId: selectedIndustry,
-      projectTypeId: selectedProjectType,
-      startDate: startDateValue,
-      finishDate: finishDateValue,
-      contactId: projectContactValue,
-      teamSize: parseInt(avgTeamSizeValue),
-      isPublic: isPublic,
-      successCase: [initialPage],
-      challenge: [initialPage],
-      improvements: [initialPage],
-      technologie: [initialPage],
-    });
-    navigate("successCase");
-  };
+  // const submitHandler = () => {
+  //   setSuccessCase({
+  //     title: projectTitleValue,
+  //     offeringId: selectedOffering,
+  //     clientId: selectedClient,
+  //     industryId: selectedIndustry,
+  //     projectTypeId: selectedProjectType,
+  //     startDate: startDateValue,
+  //     finishDate: finishDateValue,
+  //     contactId: projectContactValue,
+  //     teamSize: parseInt(avgTeamSizeValue),
+  //     isPublic: isPublic,
+  //     successCase: [initialPage],
+  //     challenge: [initialPage],
+  //     improvements: [initialPage],
+  //     technologie: [initialPage],
+  //   });
+  //   navigate("successCase");
+  // };
+
+  const { navigate, screen, submitSuccessCaseHandler } = useContext(
+    ProcessContextProvider
+);
 
   const handleProjectTitleChange = (event) => {
     setProjectTitleValue(event.target.value);
@@ -130,7 +134,6 @@ export default function CreateSuccessCaseScreen() {
       });
     }; */
 
-  //quiero hardcodear los datos
 
   useEffect(() => {
     setOfferings([
@@ -216,14 +219,14 @@ export default function CreateSuccessCaseScreen() {
               '& .MuiSwitch-switchBase.Mui-checked': {
                 color: '#BFD52E',
                 '&:hover': {
-                  backgroundColor: 'rgba(191, 213, 46, 0.1)',
-                }
+                backgroundColor: 'rgba(191, 213, 46, 0.1)',
+               }
               },
 
               '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
                 backgroundColor: '#BFD52E'
               },
-
+              
             }}
           />
           <Tooltip
@@ -243,7 +246,7 @@ export default function CreateSuccessCaseScreen() {
 
         <Grid container spacing={25} >
           <Grid item xs={6}>
-            <Grid container spacing={2} direction="column" sx={{ marginTop: '-5rem' }}>
+            <Grid container spacing={2} direction="column" sx={{ marginTop: '-5rem'}}>
               <Grid item xs={12} sx={{ marginBottom: '0.5rem' }}>
                 <FormInfoInput
                   marginRight={"7.4rem"}
@@ -255,15 +258,14 @@ export default function CreateSuccessCaseScreen() {
                       inputProps={{ type: "text" }}
                       onChange={handleProjectTitleChange}
                       value={projectTitleValue}
-                      sx={{
+                      sx={{ 
                         width: 300,
                         height: 50,
                         '& .MuiOutlinedInput-root': {
                           '&.Mui-focused fieldset': {
                             borderColor: '#BFD52E',
                           },
-                        },
-                      }}
+                        },}}
                     />
                   }
                 ></FormInfoInput>
@@ -277,7 +279,7 @@ export default function CreateSuccessCaseScreen() {
                <SelectListGeneric options={clients} value= {selectedClient} onChange={handleClientChange} label= "Clients" />
               </Grid>
 
-
+              
               <Grid item xs={12} sx={{ marginBottom: '0.5rem' }}>
                 <FormInfoInput
                   marginRight={"7rem"}
@@ -299,10 +301,10 @@ export default function CreateSuccessCaseScreen() {
                               borderColor: '#BFD52E',
                             }
                           },
-                          '& .MuiInputLabel-root.Mui-focused': {
-                            color: '#6A8B06',
-                          }
-                        }}
+                        '& .MuiInputLabel-root.Mui-focused': {
+                          color: '#6A8B06',
+                        }
+                      }}   
                       />
                       <DatePicker
                         label="To"
@@ -317,10 +319,10 @@ export default function CreateSuccessCaseScreen() {
                               borderColor: '#BFD52E',
                             }
                           },
-                          '& .MuiInputLabel-root.Mui-focused': {
-                            color: '#6A8B06',
-                          }
-                        }}
+                        '& .MuiInputLabel-root.Mui-focused': {
+                          color: '#6A8B06',
+                        }
+                      }}
                       />
                     </LocalizationProvider>
                   }
@@ -330,16 +332,21 @@ export default function CreateSuccessCaseScreen() {
           </Grid>
 
           <Grid item xs={6}>
-            <Grid container spacing={1.6} direction="column" sx={{ marginTop: '-5.3rem' }}>
-
+            <Grid container spacing={1.6} direction="column"  sx={{ marginTop: '-5.3rem'}}>
 
               <Grid item xs={12} sx={{ marginBottom: '0.2rem' }}>
-                <SelectListGeneric options={projectType} value= {selectedProjectType} onChange={handleProjectTypeChange} label= "Project Type" />
+                <ProjectTypeSelectList
+                  value={selectedProjectType}
+                  onChange={handleProjectTypeChange}
+                  options={projectType}
+                ></ProjectTypeSelectList>
               </Grid>
 
               <Grid item xs={12} sx={{ marginBottom: '0.2rem' }}>
                 <SelectListGeneric options={industry} value= {selectedIndustry} onChange={handleIndustryChange} label= "Industry" />
               </Grid>
+
+
 
               <Grid item xs={12} sx={{ marginBottom: '0.2rem' }}>
                 <FormInfoInput
@@ -349,8 +356,7 @@ export default function CreateSuccessCaseScreen() {
                   id={"projectContact"}
                   customInput={
                     <FormControl variant="standard"
-                      sx={{
-                        m: 1,
+                      sx={{ m: 1,
                         width: 300,
                         height: 50,
                         border: '2px #BFD52E',
@@ -372,7 +378,7 @@ export default function CreateSuccessCaseScreen() {
                         }}
                         input={<OutlinedInput label="Name" />}
                       >
-                        {/*                         {contacts.map((item) => (
+                                                {/* {contacts.map((item) => (
                           <MenuItem
                             key={item.id}
                             value={item.id}
@@ -397,8 +403,7 @@ export default function CreateSuccessCaseScreen() {
                       inputProps={{ type: "number" }}
                       onChange={handleAvgTeamSizeChange}
                       value={avgTeamSizeValue}
-                      sx={{
-                        m: 1,
+                      sx={{ m: 1,
                         width: 300,
                         height: 50,
                         border: '2px #BFD52E',
@@ -409,8 +414,7 @@ export default function CreateSuccessCaseScreen() {
                           '&.Mui-focused fieldset': {
                             borderColor: '#BFD52E',
                           },
-                        },
-                      }}
+                        },}}
                     />
                   }
                 ></FormInfoInput>
@@ -418,38 +422,33 @@ export default function CreateSuccessCaseScreen() {
             </Grid>
           </Grid>
         </Grid>
-
-        <Grid item xs={12} sx={{ marginTop: '2rem' }}>
+      
+        <Grid item xs={12}  sx={{ marginTop: '2rem' }}>
           <BasicTabs />
         </Grid>
 
         <Grid item xs={12} style={{ display: 'flex' }}>
           <Button
-
+          
             variant="contained"
             size="large"
             sx={{
-
-              height: "4rem",
+             
+              height: "4rem", 
               width: "8rem",
-              marginTop: "-17rem",
+              marginTop: "-16rem",
               marginLeft: "52.5rem",
-              // marginRight: "0rem",
-              marginBottom: "50px",
-              background: '#BFD52E',
-              '&:hover': {
-                backgroundColor: '#6A8B06',
-              }
+              marginBottom: "10px",
+              background:'#BFD52E',
+                '&:hover': {
+                    backgroundColor: '#6A8B06',
+                }
             }}
-            onClick={submitHandler}
+            onClick={submitSuccessCaseHandler}
           >
             Create
           </Button>
         </Grid>
-
-
-
-
       </Grid>
     </Container>
   );
