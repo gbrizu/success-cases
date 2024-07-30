@@ -7,7 +7,7 @@ import SelectListIndustry from "../selectListIndustry";
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
 
 
-import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCasesByFilter} from "../../services/successCaseServerCalls";
+import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCasesByFilter, getOfferings} from "../../services/successCaseServerCalls";
 import { useContext, useState, useEffect } from 'react';
 
 

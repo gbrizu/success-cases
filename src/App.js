@@ -18,7 +18,7 @@ export const UserContext = createContext();
 
 function App() {
   return (
-    <Auth0Provider 
+    <Auth0Provider
       domain="challenge-3.us.auth0.com"
       clientId="mxZ6wKxWapWVUtCUHRGsiPbfmfyCgK3Z"
       authorizationParams={{
@@ -35,14 +35,14 @@ function App() {
               />
               <Route
                 path="NewSuccessCases"
-                element={<SuccessCaseProcessCreationScreen />}
+                element={<ProtectedRoute component={<SuccessCaseProcessCreationScreen />} />}
               />
               <Route
                 path="succesCase/:id"
-                element={<CaseViewProcessScreen />}
+                element={<ProtectedRoute component={<CaseViewProcessScreen />} />}
               />
-            <Route path="chatbot" element={<ChatbotScreen />} />
-            <Route path='*' element={<ErrorScreen />} />
+              <Route path="chatbot" element={<ProtectedRoute component={<ChatbotScreen />} />} />
+              <Route path='*' element={<ErrorScreen />} />
             </Routes>
           </BrowserRouter>
         </CaseViewContext>
