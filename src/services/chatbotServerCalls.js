@@ -7,7 +7,6 @@ const axiosPost = (customUrl, body) => {
 }
 
 const getBaseAxiosPostWithResponseManage = (customUrl, body) => {
-    console.log(body) 
     return axiosPost(customUrl, body)
         .then((response) => {
             return response.data;

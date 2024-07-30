@@ -32,25 +32,27 @@ function Chat() {
             parts: [message.text]
           }))
         })
+        console.log({res})
 
         const {
-          response,
+          model_response,
+          is_search,
           relational_success_cases
         } = res
 
-        if (response) {
-          const botResponse = { text: response, sender: 'model' };
-          if (relational_success_cases) {
+        if (model_response) {
+          const botResponse = { text: model_response, sender: 'model' };
+          if (is_search && relational_success_cases) {
             const successCases = relational_success_cases.map((successCase) => {
+              const { title, link } = successCase;
               return {
-                title: successCase.title,
-                text: successCase.text,
-                image: successCase.image
+                title,
+                link,
               }
             });
             botResponse.text += '\n\n### Casos de éxito relacionados\n\n';
             successCases.forEach((successCase) => {
-              botResponse.text += `* ${successCase.title}\n\n${successCase.text}\n\n![${successCase.title}](${successCase.image})\n\n`;
+              botResponse.text += `* ${successCase.title} - *[Link](${successCase.link})* \n\n`;
             });
           }
           setMessages((prevMessages) => [...prevMessages, botResponse]);
