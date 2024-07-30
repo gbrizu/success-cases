@@ -22,8 +22,6 @@ function SuccessCaseEditionMode() {
                 height: "50%",
                 maxHeight: "500px",
                 minHeight: "500px",
-                
-                
               }}
             >
               <CaseInfoEdition

@@ -133,7 +133,6 @@ export default function CreateSuccessCaseScreen() {
       });
     }; */
 
-  //quiero hardcodear los datos
 
   useEffect(() => {
     setOfferings([
@@ -341,7 +340,6 @@ export default function CreateSuccessCaseScreen() {
 
           <Grid item xs={6}>
             <Grid container spacing={1.6} direction="column"  sx={{ marginTop: '-5.3rem'}}>
-          
 
             <Grid item xs={12} sx={{ marginBottom: '0.2rem' }}>
                 <ProjectTypeSelectList

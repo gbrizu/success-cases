@@ -8,9 +8,6 @@ import ImprovementsEditionMode from '../pages/improvementsEditionMode';
 import TechnologiesEditionMode from '../pages/technologiesEditionMode';
 import ChallengesEditionMode from '../pages/challengesEditionMode';
 
-
-
-
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -71,14 +68,15 @@ export default function BasicTabs() {
             
           }>
 
-          <Tab label="success Case" {...a11yProps(0)} />
+          <Tab label="success Case" {...a11yProps(0)} /> 
           <Tab label="challenges" {...a11yProps(1)} />
           <Tab label="improvements" {...a11yProps(2)} />
           <Tab label="technologies" {...a11yProps(3)} />
           
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0}>
+      
+      <CustomTabPanel value={value} index={0}> 
         <SuccessCaseEditionMode/>
       </CustomTabPanel>
 
