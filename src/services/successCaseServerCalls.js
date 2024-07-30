@@ -8,7 +8,6 @@ const getAccessToken = () => localStorage.getItem('accessToken');
 // Función para manejar solicitudes GET con respuesta gestionada
 const getBaseAxiosGetWithResponseManage = async (customUrl) => {
   const token = getAccessToken();
-  console.log('Manejando el  GET token perroooo:', token); // Verificar el token
   const options = {
     method: 'GET',
     url: `${BASE_URL}${customUrl}`,
@@ -29,7 +28,6 @@ const getBaseAxiosGetWithResponseManage = async (customUrl) => {
 // Función para manejar solicitudes POST con respuesta gestionada
 const getBaseAxiosPostWithResponseManage = async (customUrl, body) => {
   const token = getAccessToken();
-  console.log('Manajandio el POST  Access Token perrooo :', token); // Verificar el token
   const options = {
     method: 'POST',
     url: `${BASE_URL}${customUrl}`,
@@ -102,52 +100,51 @@ export const postSuccessCase = (successCaseObj) => {
     technologie,
   } = successCaseObj;
 
-  const startMonth = startDate.getUTCMonth() + 1;
-  const startDay = startDate.getUTCDate();
-  const startYear = startDate.getUTCFullYear();
+    const startMonth = startDate.getUTCMonth() + 1;
+    const startDay = startDate.getUTCDate();
+    const startYear = startDate.getUTCFullYear();
 
   const startNewDate = `${startYear}-${startMonth}-${startDay}`;
 
-  const finishMonth = finishDate.getUTCMonth() + 1;
-  const finishDay = finishDate.getUTCDate();
-  const finishYear = finishDate.getUTCFullYear();
+    const finishMonth = finishDate.getUTCMonth() + 1;
+    const finishDay = finishDate.getUTCDate();
+    const finishYear = finishDate.getUTCFullYear();
 
   const finishNewDate = `${finishYear}-${finishMonth}-${finishDay}`;
 
-  const body = {
-    title,
-    startdate: startNewDate,
-    finishdate: finishNewDate,
-    teamsize: teamSize,
-    ispublic: isPublic,
-    industryid: industryId,
-    offeringid: offeringId,
-    clientid: clientId,
-    projecttypeid: projectTypeId,
-    contactid: contactId,
-    casedetail: {
-      image_detail: successCase.image,
-      video_detail: null,
-      text_detail: successCase.text,
-    },
-    technology: {
-      image_tech: technologie.image,
-      video_tech: null,
-      text_tech: technologie.text,
-    },
-    improvement: {
-      image_imp: improvements.image,
-      video_imp: null,
-      text_imp: improvements.text,
-    },
-    challenge: {
-      image_ch: challenge.image,
-      video_ch: null,
-      text_ch: challenge.text,
-    },
-  };
 
-  console.log('Request Body:', body); // Verificar el cuerpo de la solicitud
+    const body = {
+        "title": title,
+        "startdate": startNewDate,
+        "finishdate": finishNewDate,
+        "teamsize": teamSize,
+        "ispublic": isPublic,
+        "industryid": industryId,
+        "offeringid": offeringId,
+        "clientid": clientId,
+        "projecttypeid": projectTypeId,
+        "contactid": contactId,
+        "casedetail": {
+            "image_detail": successCase.image,
+            "video_detail": null,
+            "text_detail": successCase.text
+        },
+        "technology": {
+            "image_tech": technologie.image,
+            "video_tech": null,
+            "text_tech": technologie.text
+        },
+        "improvement": {
+            "image_imp": improvements.image,
+            "video_imp": null,
+            "text_imp": improvements.text
+        },
+        "challenge": {
+            "image_ch": challenge.image,
+            "video_ch": null,
+            "text_ch": challenge.text,
+        }
+    }
 
   return getBaseAxiosPostWithResponseManage('/SuccessCase/create', body);
 };

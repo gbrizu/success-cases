@@ -22,13 +22,34 @@ export default function OfferingSelectList({ value, onChange, options = [] }) {
   const theme = useTheme();
   return (
     <div
-      style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
+      style={{ display: "flex", alignItems: "center", marginBottom: "10px"}}
     >
-      <Typography variant="h6" style={{ marginRight: "4.8rem" }}>
+      <Typography variant="h6" style={{ marginRight: "4.7rem" }}>
         Offering
       </Typography>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Select Offering</InputLabel>
+
+      
+      <FormControl sx={{ m: 1,
+          width: 300,
+          height: 50,
+          
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: '#BFD52E',
+            },
+          },}}>
+            
+        <InputLabel 
+            id="demo-multiple-name-label" 
+            sx={{ 
+              '&.Mui-focused': { 
+                color: '#6A8B06' 
+              }
+            }}
+          >
+            Select Offering
+          </InputLabel>
+
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
@@ -36,6 +57,22 @@ export default function OfferingSelectList({ value, onChange, options = [] }) {
           onChange={onChange}
           input={<OutlinedInput label="Select Offering" />}
           MenuProps={MenuProps}
+          sx={{
+            '.MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: '#BFD52E',
+              },
+              '&:hover fieldset': {
+                borderColor: '#6a8b06',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#6a8b06',
+              },
+            },
+            '.MuiSvgIcon-root': {
+              color: '#BFD52E',
+            },
+          }}
         >
           {options?.map((option) => (
             <MenuItem

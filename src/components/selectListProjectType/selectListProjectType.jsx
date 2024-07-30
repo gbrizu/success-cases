@@ -36,7 +36,7 @@ export default function SelectListProjectType({ options, value, onChange }) {
     <div
       style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
     >
-      <Typography variant="h6" style={{ marginRight: "2.3rem" }}>
+      <Typography variant="h6" style={{ marginRight: "2rem" }}>
         Project Type
       </Typography>
       <FormControl sx={{ m: 1, width: 300 }}>
