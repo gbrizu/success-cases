@@ -19,7 +19,42 @@ const GeneratePDF = () => {
     });
   }, [id, setSuccessCase, setChallenge, setCaseDetail, setTechnology, setImprovement]);
 
-  const generatePDF = () => {
+  const addImageToPDF = (doc, imageUrl, x, y, maxWidth, maxHeight) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = imageUrl;
+      img.onload = () => {
+        const imgWidth = img.width;
+        const imgHeight = img.height;
+        const aspectRatio = imgWidth / imgHeight;
+
+        let width = maxWidth;
+        let height = maxHeight;
+
+        if (imgWidth > imgHeight) {
+          height = maxWidth / aspectRatio;
+        } else {
+          width = maxHeight * aspectRatio;
+        }
+
+        if (width > maxWidth) {
+          width = maxWidth;
+          height = maxWidth / aspectRatio;
+        }
+
+        if (height > maxHeight) {
+          height = maxHeight;
+          width = maxHeight * aspectRatio;
+        }
+
+        doc.addImage(imageUrl, 'JPEG', x, y, width, height);
+        resolve(height);
+      };
+      img.onerror = reject;
+    });
+  };
+
+  const generatePDF = async () => {
     const doc = new jsPDF();
     
     // Header
@@ -33,9 +68,17 @@ const GeneratePDF = () => {
     let yPos = 30;
     const lineHeight = 10;
     const leftMargin = 14;
+    const pageHeight = doc.internal.pageSize.height;
+    const maxWidth = 180; // Max width for image
+    const maxHeight = 80; // Max height for image
 
-    const addSection = (title, content) => {
-      if (content) {
+    const addSection = async (title, content, images) => {
+      if (content.length > 0 || images.length > 0) {
+        if (yPos + lineHeight * (content.length + images.length + 1) > pageHeight - 20) {
+          doc.addPage();
+          yPos = 20;
+        }
+        
         doc.setFontSize(14);
         doc.setTextColor('#BFD52E');
         doc.text(title, leftMargin, yPos);
@@ -44,16 +87,34 @@ const GeneratePDF = () => {
         doc.setFontSize(12);
         doc.setTextColor('#000000');
         content.forEach(text => {
+          if (yPos + lineHeight > pageHeight - 20) {
+            doc.addPage();
+            yPos = 20;
+          }
           doc.text(text, leftMargin, yPos);
           yPos += lineHeight;
         });
+
+        for (const imageUrl of images) {
+          if (yPos + maxHeight > pageHeight - 20) { // If the image would overflow the page
+            doc.addPage();
+            yPos = 20;
+          }
+          if (imageUrl) {
+            const imageHeight = await addImageToPDF(doc, imageUrl, leftMargin, yPos, maxWidth, maxHeight);
+            yPos += imageHeight + 10; // Ajusta el espacio después de la imagen
+          } else {
+            doc.text('No image attached', leftMargin, yPos);
+            yPos += lineHeight;
+          }
+        }
 
         yPos += 5; 
       }
     };
 
     if (actualSuccessCase) {
-      addSection('General Information', [
+      await addSection('General Information', [
         `Title: ${actualSuccessCase.title}`,
         `Date: ${actualSuccessCase.startdate} - ${actualSuccessCase.finishdate}`,
         `Team size: ${actualSuccessCase.teamsize}`,
@@ -63,31 +124,30 @@ const GeneratePDF = () => {
         `Project type: ${actualSuccessCase.ProjectType ? actualSuccessCase.ProjectType.name : ''}`,
         `Offering: ${actualSuccessCase.Offering ? actualSuccessCase.Offering.name : ''}`,
         `Project contact: ${actualSuccessCase.Contact ? actualSuccessCase.Contact.email : ''}`,
-        
-      ]);
+      ], []);
 
-      addSection('Challenge', [
-        `${challenge?.text_ch || ''}`,
+      await addSection('Challenge', [
+        `${challenge?.text_ch || ''}`
+      ], [
         `${challenge?.image_ch || ''}`,
-        //`Video: ${challenge?.video_ch || ''}`
       ]);
 
-      addSection('Case Detail', [
-        `${casedetail?.text_detail || ''}`,
+      await addSection('Case Detail', [
+        `${casedetail?.text_detail || ''}`
+      ], [
         `${casedetail?.image_detail || ''}`,
-        //`Video: ${casedetail?.video_detail || ''}`
       ]);
 
-      addSection('Improvement', [
-        `${improvement?.text_imp || ''}`,
+      await addSection('Improvement', [
+        `${improvement?.text_imp || ''}`
+      ], [
         `${improvement?.image_imp || ''}`,
-        //`Video: ${improvement?.video_imp || ''}`,
       ]);
 
-      addSection('Technology', [
-        `${technology?.text_tech || ''}`,
+      await addSection('Technology', [
+        `${technology?.text_tech || ''}`
+      ], [
         `${technology?.image_tech || ''}`,
-        //`Video: ${technology?.video_tech || ''}`,
       ]);
     }
 
