@@ -12,40 +12,9 @@ function ImprovementsEditionMode() {
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
-      <Grid container spacing={2} justifyContent="flex-start">
-        <Grid item xs={12}>
-          <Button
-            variant="text"
-            size="large"
-            sx={{
-              marginLeft: "0rem",
-              marginTop: "1rem",
-              justifyContent: "start",
-            }}
-            onClick={() => navigate("createPage")}
-          >
-            <ArrowBackIcon style={{ justifyContent: "start" }} />
-          </Button>
-        </Grid>
-
-        <Grid item xs={12}>
-          <Typography
-            variant="h3"
-            gutterBottom
-            sx={{
-              marginLeft: "0rem",
-              marginRight: "auto",
-              marginTop: "0rem",
-              fontWeight: "bold",
-            }}
-          >
-            Improvements
-          </Typography>
-        </Grid>
-
-        {}
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={5}>
+      <Grid container spacing={1} justifyContent="center" alignItems="center" style={{ height: '100%' }}>
+        <Grid container item xs={12} spacing={-2} justifyContent="center" alignItems="center">
+          <Grid item xs={5} display="flex" justifyContent="center" alignItems="center">
             {}
             <Box
               sx={{
@@ -58,7 +27,7 @@ function ImprovementsEditionMode() {
               />
             </Box>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={5} display="flex" justifyContent="center" alignItems="center">
             {}
             <Box
               sx={{
@@ -69,15 +38,17 @@ function ImprovementsEditionMode() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                minHeight: "520px",
-                maxHeight: "520px",
+                minHeight: "468px",
+                maxHeight: "468px",
+                width: "318px", 
+                minWidth: "318px", 
+                maxWidth: "318px",
+                marginTop: "0.2rem"
               }}
             >
               <AddImage />
             </Box>
           </Grid>
-
-          <NavbarScreen />
         </Grid>
       </Grid>
     </Container>

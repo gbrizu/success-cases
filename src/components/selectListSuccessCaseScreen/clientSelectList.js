@@ -40,6 +40,7 @@ export default function ClientSelectList({ options = [], value, onChange }) {
       </Typography>
       <FormControl sx={{ m: 1,
           width: 300,
+          height: 50,
           border: '2px #BFD52E',
           '& .Mui-focused': {
             borderColor: '#BFD52E',

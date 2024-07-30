@@ -7,7 +7,7 @@ export default function SearchButton({handleClick}) {
             variant="contained"
             size="large"
             sx={{
-                height: '5rem',
+                height: '3rem',
                 marginTop: '2rem',
                 marginLeft: '2rem',
                 minWidth: '17rem',
