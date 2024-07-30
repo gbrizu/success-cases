@@ -40,6 +40,7 @@ export default function ClientSelectList({ options = [], value, onChange }) {
       </Typography>
       <FormControl sx={{ m: 1,
           width: 300,
+          height: 50,
           border: '2px #BFD52E',
           '& .Mui-focused': {
             borderColor: '#BFD52E',
@@ -65,11 +66,11 @@ export default function ClientSelectList({ options = [], value, onChange }) {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options.map((option) => (
+          {(options?.length > 0) && (options?.map((option) => (
             <MenuItem key={option.id} value={option.id}>
               {option.name}
             </MenuItem>
-          ))}
+          )))}
         </Select>
       </FormControl>
     </div>

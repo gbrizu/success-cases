@@ -1,55 +1,59 @@
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import FormInfoInput from "../BasicFormInfo";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import Grid from "@mui/system/Unstable_Grid/Grid";
 import SelectListClients from "../selectListClients/selectListClients";
-import MultipleSelect from "../selectListIndustry";
+import SelectListIndustry from "../selectListIndustry";
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
-import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCasesByFilter } from "../../services/successCaseServerCalls";
-import { useContext, useState } from 'react';
-import { useEffect } from 'react';
+
+
+import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCasesByFilter} from "../../services/successCaseServerCalls";
+import { useContext, useState, useEffect } from 'react';
+
+
 import { CaseViewContextProvider } from '../../context/casesView.context';
 import SearchButton from '../button/searchButton';
-import { Box, MenuItem, OutlinedInput, Select, FormControl, InputLabel } from "@mui/material";
+import { Box, MenuItem, OutlinedInput, Select, FormControl, InputLabel, Typography } from "@mui/material";
 import CreateButton from '../button/createButton';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function FilterMainScreen() {
     const { setSuccessCasesList } = useContext(
         CaseViewContextProvider
     );
 
-    const [clients, setClients] = useState([]);
+    const [clients, setClients] = useState(undefined);
     
-    const [clientSelected, setClientSelected] = useState(null);
+    const [clientSelected, setClientSelected] = useState(undefined);
 
-    const [type, setProjectType] = useState([]);
+    const [type, setProjectType] = useState(undefined);
 
-    const [typeSelected, setTypeSelected] = useState(null);
+    const [typeSelected, setTypeSelected] = useState(undefined);
 
-    const [industries, setIndustries] = useState([]);
+    const [industries, setIndustries] = useState(undefined);
 
-    const [industrySelected, setIndustrySelected] = useState(null);
+    const [industrySelected, setIndustrySelected] = useState(undefined);
 
-    const [contact, setContact] = useState([]);
+    const [contact, setContact] = useState(undefined);
 
-    const [contactSelected, setContactSelected] = useState(null);
+    const [offering, setOffering] = useState(undefined);
+
+    const [offeringSelected, setOfferingSelected] = useState(undefined);
+
+    const [contactSelected, setContactSelected] = useState(undefined);
 
     const [dateFrom, setDateFrom] = useState();
-
     const [dateTo, setDateTo] = useState();
-    
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
-    
     const MenuProps = {
         PaperProps: {
             style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
             },
         },
     };
-
     const handleSearch = async () => {
         let successCasesFiltered = await getSuccessCasesByFilter({
             startdate: dateFrom,
@@ -61,46 +65,60 @@ function FilterMainScreen() {
         });
         setSuccessCasesList(successCasesFiltered);
     }
-
     useEffect(() => {
         if (dateTo < dateFrom && dateTo !== null) {
-            alert("El valor Seleccionado es menor a la fecha inicial")
-            setDateTo(null)
+            alert("El valor Seleccionado es menor a la fecha inicial");
+            setDateTo(null);
         }
 
     }, [dateTo])
 
+    const [token, setToken] = useState(null);
+
+    const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+
     useEffect(() => {
         if (dateTo < dateFrom && dateFrom !== null) {
-            alert("El valor Seleccionado es mayor a la fecha final")
-            setDateFrom(null)
+            alert("El valor Seleccionado es mayor a la fecha final");
+            setDateFrom(null);
         }
-
-    }, [dateFrom])
+    }, [dateFrom]);
 
     useEffect(() => {
-        getClients().then((result) => {
-            setClients(result);
-        });
-        getProyectsTypes().then((result) => {
-            setProjectType(result);
-        });
-        getIndustries().then((result) => {
-            setIndustries(result);
-        });
-        getContacts().then((result) => {
-            setContact(result);
-        });
-    }, [])
+        if(localStorage.getItem('accessToken')){
+            getClients().then((result) => {
+                setClients(result);
+            });
+            getProyectsTypes().then((result) => {
+                setProjectType(result);
+            });
+            getIndustries().then((result) => {
+                setIndustries(result);
+            });
+            getContacts().then((result) => {
+                setContact(result);
+            });
+            getOfferings().then((result) => {
+                setOffering(result);
+            });
+        } else {
+            setClients(undefined);
+            setProjectType(undefined);
+            setIndustries(undefined);
+            setContact(undefined);
+            setOffering(undefined);
+            if (isAuthenticated) {
+                setToken(getAccessTokenSilently());
+            }
+        }
+    }, [isAuthenticated, token]);
 
     return (
         <div>
             <Grid
                 container
-                xs={12}
-                sx={{
-                    width: "inherit", position: "relative", marginLeft: "2rem"
-                }}
+                spacing={1}
+                sx={{ width: "inherit", position: "relative", marginLeft: "10rem" }}
             >
                 <Grid
                     container
@@ -111,12 +129,13 @@ function FilterMainScreen() {
                         width: "inherit", position: "relative"
                     }}
                 >
+                    
                     <Grid item xs={12} >
-                        {(clients.length > 0) && (<SelectListClients options={clients} value={clientSelected} onChange={setClientSelected}> </SelectListClients>)}
+                        <SelectListClients options={clients} value={clientSelected} onChange={setClientSelected}> </SelectListClients>
                     </Grid>
 
                     <Grid item xs={12} >
-                        <MultipleSelect options={industries} value={industrySelected} onChange={setIndustrySelected}> </MultipleSelect>
+                        <SelectListIndustry options={industries} value={industrySelected} onChange={setIndustrySelected}> </SelectListIndustry>
                     </Grid>
 
                     <Grid item xs={12} >
@@ -179,35 +198,25 @@ function FilterMainScreen() {
                                         input={<OutlinedInput label="Name" />}
                                         MenuProps={MenuProps}
                                     >
-                                        {contact.map((item) => (
+                                        {(contact?.length > 0) && (contact?.map((item) => (
                                             <MenuItem
                                                 key={item.id}
                                                 value={item.id}
                                             >
                                                 {item.name + " " + item.surName}
                                             </MenuItem>
-                                        ))}
+                                        )))}
                                     </Select>
                                 </FormControl>
                             }
                         ></FormInfoInput>
                     </Grid>
                 </Grid>
-
-                <Grid container
-                alignItems={'center'}
-                marginBottom={'1rem'}
-                xs={12} md={3} xl={4}>
+                <Grid item xs={12} display="flex" justifyContent="center" marginBottom="1rem" marginTop="-2.8rem" marginRight={"5rem"}>
                     <Box>
-                        <SearchButton handleClick={handleSearch}/>
+                        <SearchButton handleClick={handleSearch} />
                     </Box>
-                </Grid>
-
-                <Grid container
-                alignItems={'center'}
-                marginBottom={'1rem'}
-                xs={12} md={3} xl={4}>
-                    <Box>
+                    <Box sx={{ ml: 6 }}>
                         <CreateButton />
                     </Box>
                 </Grid>
@@ -216,3 +225,11 @@ function FilterMainScreen() {
     );
 }
 export default FilterMainScreen;
+
+
+
+
+
+
+
+

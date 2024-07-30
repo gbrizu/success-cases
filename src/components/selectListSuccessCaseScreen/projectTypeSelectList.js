@@ -22,13 +22,14 @@ export default function ProjectTypeSelectList({ value, onChange, options }) {
   const theme = useTheme();
   return (
     <div
-      style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
-    >
+    style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+    
       <Typography variant="h6" style={{ marginRight: "2.1rem" }}>
         Project Type
       </Typography>
       <FormControl sx={{ m: 1,
           width: 300,
+          height: 50,
           border: '2px #BFD52E',
           '& .Mui-focused': {
             borderColor: '#BFD52E',
@@ -54,11 +55,11 @@ export default function ProjectTypeSelectList({ value, onChange, options }) {
           input={<OutlinedInput label="Select Project Type" />}
           MenuProps={MenuProps}
         >
-          {options.map((option) => (
+          {(options?.length > 0) && (options?.map((option) => (
             <MenuItem key={option.id} value={option.id}>
               {option.name}
             </MenuItem>
-          ))}
+          )))}
         </Select>
       </FormControl>
     </div>

@@ -31,6 +31,7 @@ export default function IndustrySelectList({ value, onChange, options }) {
       </Typography>
       <FormControl sx={{ m: 1,
           width: 300,
+          height: 50,
           
           '& .MuiOutlinedInput-root': {
             '&.Mui-focused fieldset': {
@@ -56,11 +57,11 @@ export default function IndustrySelectList({ value, onChange, options }) {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {options.map((option) => (
+          {(options?.length > 0) && (options?.map((option) => (
             <MenuItem key={option.id} value={option.id}>
-              {option.name}
+              {option?.name}
             </MenuItem>
-          ))}
+          )))}
         </Select>
       </FormControl>
     </div>
