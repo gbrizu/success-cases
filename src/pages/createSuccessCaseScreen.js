@@ -32,7 +32,6 @@ import {
   getIndustries,
   getProyectsTypes,
 } from "../services/successCaseServerCalls";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const initialPage = {
   text: "",
@@ -59,7 +58,6 @@ export default function CreateSuccessCaseScreen() {
   const [projectType, setProjectType] = useState([]);
 
   const submitHandler = () => {
-
     setSuccessCase({
       title: projectTitleValue,
       offeringId: selectedOffering,
@@ -168,7 +166,6 @@ export default function CreateSuccessCaseScreen() {
         getProjectTypeInit();
       }, []);  */
 
-  
   useEffect(() => {
     if (finishDateValue < startDateValue) {
       alert("El valor Seleccionado es menor a la fecha inicial");
@@ -176,21 +173,9 @@ export default function CreateSuccessCaseScreen() {
     }
   }, [startDateValue, finishDateValue]);
 
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
-
-  const [token, setToken] = useState(null);
-  
   useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      getContacts().then((result) => setContacts(result));
-    }
-    else {
-      setContacts(undefined);
-      if (isAuthenticated) {
-        setToken(getAccessTokenSilently());
-      }
-    }
-  }, [isAuthenticated, token]);
+    getContacts().then((result) => setContacts(result));
+  }, []);
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>

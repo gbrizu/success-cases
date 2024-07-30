@@ -20,7 +20,7 @@ const MenuProps = {
   },
 };
 
-export default function SelectListIndustry({ options, value, onChange}) {
+export default function MultipleSelect({ options, value, onChange}) {
   const handleChange = (event) => {
     const {
       target: { value },
@@ -41,14 +41,14 @@ export default function SelectListIndustry({ options, value, onChange}) {
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
-          {(options?.length > 0) && (options?.map((item) => (
+          {options.map((item) => (
             <MenuItem
               key={item.id}
               value={item.id}
             >
               {item.name}
             </MenuItem>
-          )))}
+          ))}
         </Select>
       </FormControl>
     </div>

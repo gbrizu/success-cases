@@ -74,7 +74,7 @@ export default function OfferingSelectList({ value, onChange, options = [] }) {
             },
           }}
         >
-          {options?.map((option) => (
+          {options.map((option) => (
             <MenuItem
               key={option.id}
               value={option.id}
