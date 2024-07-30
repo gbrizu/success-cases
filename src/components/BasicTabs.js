@@ -64,21 +64,19 @@ export default function BasicTabs() {
               margin: '0 24px', 
               
             },
-            
-
-              
             }
             
           }>
 
-          <Tab label="success Case" {...a11yProps(0)} />
+          <Tab label="success Case" {...a11yProps(0)} /> 
           <Tab label="challenges" {...a11yProps(1)} />
           <Tab label="improvements" {...a11yProps(2)} />
           <Tab label="technologies" {...a11yProps(3)} />
           
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0}>
+      
+      <CustomTabPanel value={value} index={0}> 
         <SuccessCaseEditionMode/>
       </CustomTabPanel>
 

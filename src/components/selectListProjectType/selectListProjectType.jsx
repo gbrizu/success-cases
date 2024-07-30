@@ -49,14 +49,14 @@ export default function SelectListProjectType({ options, value, onChange }) {
           input={<OutlinedInput label="Type" />}
           MenuProps={MenuProps}
         >
-          {(options?.length > 0) && (options?.map((item) => (
+          {options.map((item) => (
             <MenuItem
               key={item.id}
               value={item.id}
             >
               {item.name}
             </MenuItem>
-          )))}
+          ))}
         </Select>
       </FormControl>
     </div>
