@@ -2,9 +2,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import FormInfoInput from "../BasicFormInfo";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import Grid from "@mui/system/Unstable_Grid/Grid";
-import SelectListClients from "../selectListClients/selectListClients";
 import MultipleSelect from "../selectListIndustry";
-import SelectListProjectType from "../selectListProjectType/selectListProjectType";
 import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCasesByFilter } from "../../services/successCaseServerCalls";
 import { useContext, useState, useEffect } from 'react';
 import { CaseViewContextProvider } from '../../context/casesView.context';
@@ -12,6 +10,8 @@ import SearchButton from '../button/searchButton';
 import { Box, MenuItem, OutlinedInput, Select, FormControl, InputLabel, Typography } from "@mui/material";
 import CreateButton from '../button/createButton';
 import { siLK } from '@mui/material/locale';
+import SelectListGeneric from '../selectList/SelectListGeneric';
+
 function FilterMainScreen() {
     const { setSuccessCasesList } = useContext(CaseViewContextProvider);
     const [clients, setClients] = useState([]);
@@ -89,10 +89,10 @@ function FilterMainScreen() {
             >
                 <Grid item xs={6} md={3.5}>
                     {(clients.length > 0) && (
-                        <SelectListClients options={clients} value={clientSelected} onChange={setClientSelected}>
-                        </SelectListClients>
+                        <SelectListGeneric options={clients} value={clientSelected} onChange={setClientSelected} label= "Client" />
                     )}
                 </Grid>
+
                 <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
                     <FormInfoInput
                         marginRight={'2.3rem'}
@@ -101,6 +101,17 @@ function FilterMainScreen() {
                         customInput={
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
+                                sx={{
+                                    border: '2px #BFD52E',
+                                    '& .Mui-focused': {
+                                      borderColor: '#BFD52E',
+                                    },
+                                    '& .MuiOutlinedInput-root': {
+                                      '&.Mui-focused fieldset': {
+                                        borderColor: '#BFD52E',
+                                      },
+                                    },
+                                  }}
                                     label="From"
                                     value={dateFrom}
                                     onChange={(newValue) => setDateFrom(newValue)}
@@ -109,14 +120,15 @@ function FilterMainScreen() {
                         }
                     />
                 </Grid>
+
                 <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
-                    <SelectListProjectType options={type} value={typeSelected} onChange={setTypeSelected}>
-                    </SelectListProjectType>
+                    <SelectListGeneric options={type} value={typeSelected} onChange={setTypeSelected} label= "Project Type" />
                 </Grid>
+
                 <Grid item xs={6} md={3.5}>
-                    <MultipleSelect options={industries} value={industrySelected} onChange={setIndustrySelected}>
-                    </MultipleSelect>
+                    <SelectListGeneric options={industries} value={industrySelected} onChange={setIndustrySelected} label= "Industry"/>
                 </Grid>
+
                 <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
                     <FormInfoInput
                         marginRight={'3.8rem'}
@@ -133,6 +145,7 @@ function FilterMainScreen() {
                         }
                     />
                 </Grid>
+
                 <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
                     <FormInfoInput
                         id="projectContactsAutoComplete"
@@ -165,6 +178,7 @@ function FilterMainScreen() {
                         }
                     />
                 </Grid>
+
                 <Grid item xs={12} display="flex" justifyContent="center" marginBottom="1rem" marginTop="-2.8rem" marginRight={"5rem"}>
                     <Box>
                         <SearchButton handleClick={handleSearch} />

@@ -32,6 +32,7 @@ import {
   getIndustries,
   getProyectsTypes,
 } from "../services/successCaseServerCalls";
+import SelectListGeneric from "../components/selectList/SelectListGeneric";
 
 const initialPage = {
   text: "",
@@ -269,19 +270,11 @@ export default function CreateSuccessCaseScreen() {
               </Grid>
 
               <Grid item xs={12} sx={{ marginBottom: '0.01rem' }}>
-                <OfferingSelectList
-                  value={selectedOffering}
-                  onChange={handleOfferingChange}
-                  options={offerings}
-                ></OfferingSelectList>
+                <SelectListGeneric options={offerings} value= {selectedOffering} onChange={handleOfferingChange} label= "Offering" />
               </Grid>
 
               <Grid item xs={12} sx={{ marginBottom: '0.5rem' }}>
-                <ClientSelectList
-                  value={selectedClient}
-                  onChange={handleClientChange}
-                  options={clients}
-                />
+               <SelectListGeneric options={clients} value= {selectedClient} onChange={handleClientChange} label= "Clients" />
               </Grid>
 
 
@@ -341,22 +334,12 @@ export default function CreateSuccessCaseScreen() {
 
 
               <Grid item xs={12} sx={{ marginBottom: '0.2rem' }}>
-                <ProjectTypeSelectList
-                  value={selectedProjectType}
-                  onChange={handleProjectTypeChange}
-                  options={projectType}
-                ></ProjectTypeSelectList>
+                <SelectListGeneric options={projectType} value= {selectedProjectType} onChange={handleProjectTypeChange} label= "Project Type" />
               </Grid>
 
               <Grid item xs={12} sx={{ marginBottom: '0.2rem' }}>
-                <IndustrySelectList
-                  value={selectedIndustry}
-                  onChange={handleIndustryChange}
-                  options={industry}
-                ></IndustrySelectList>
+                <SelectListGeneric options={industry} value= {selectedIndustry} onChange={handleIndustryChange} label= "Industry" />
               </Grid>
-
-
 
               <Grid item xs={12} sx={{ marginBottom: '0.2rem' }}>
                 <FormInfoInput
