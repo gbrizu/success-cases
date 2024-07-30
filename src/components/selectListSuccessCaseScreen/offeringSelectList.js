@@ -58,7 +58,7 @@ export default function OfferingSelectList({ value, onChange, options = [] }) {
           input={<OutlinedInput label="Select Offering" />}
           MenuProps={MenuProps}
         >
-          {options.map((option) => (
+          {options?.map((option) => (
             <MenuItem
               key={option.id}
               value={option.id}

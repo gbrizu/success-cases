@@ -32,6 +32,7 @@ import {
   getIndustries,
   getProyectsTypes,
 } from "../services/successCaseServerCalls";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const initialPage = {
   text: "",
@@ -39,7 +40,7 @@ const initialPage = {
 };
 
 export default function CreateSuccessCaseScreen() {
-  // const { navigate, setSuccessCase } = useContext(ProcessContextProvider);
+
   const [projectTitleValue, setProjectTitleValue] = useState("");
   const [selectedOffering, setSelectedOffering] = useState("");
   const [selectedProjectType, setSelectedProjectType] = useState([]);
@@ -57,29 +58,26 @@ export default function CreateSuccessCaseScreen() {
   const [industry, setIndustry] = useState([]);
   const [projectType, setProjectType] = useState([]);
 
-  // const submitHandler = () => {
-  //   setSuccessCase({
-  //     title: projectTitleValue,
-  //     offeringId: selectedOffering,
-  //     clientId: selectedClient,
-  //     industryId: selectedIndustry,
-  //     projectTypeId: selectedProjectType,
-  //     startDate: startDateValue,
-  //     finishDate: finishDateValue,
-  //     contactId: projectContactValue,
-  //     teamSize: parseInt(avgTeamSizeValue),
-  //     isPublic: isPublic,
-  //     successCase: [initialPage],
-  //     challenge: [initialPage],
-  //     improvements: [initialPage],
-  //     technologie: [initialPage],
-  //   });
-  //   navigate("successCase");
-  // };
+  const submitHandler = () => {
 
-  const { navigate, screen, submitSuccessCaseHandler } = useContext(
-    ProcessContextProvider
-);
+    setSuccessCase({
+      title: projectTitleValue,
+      offeringId: selectedOffering,
+      clientId: selectedClient,
+      industryId: selectedIndustry,
+      projectTypeId: selectedProjectType,
+      startDate: startDateValue,
+      finishDate: finishDateValue,
+      contactId: projectContactValue,
+      teamSize: parseInt(avgTeamSizeValue),
+      isPublic: isPublic,
+      successCase: [initialPage],
+      challenge: [initialPage],
+      improvements: [initialPage],
+      technologie: [initialPage],
+    });
+    navigate("successCase");
+  };
 
   const handleProjectTitleChange = (event) => {
     setProjectTitleValue(event.target.value);
@@ -169,6 +167,7 @@ export default function CreateSuccessCaseScreen() {
         getProjectTypeInit();
       }, []);  */
 
+  
   useEffect(() => {
     if (finishDateValue < startDateValue) {
       alert("El valor Seleccionado es menor a la fecha inicial");
@@ -176,9 +175,21 @@ export default function CreateSuccessCaseScreen() {
     }
   }, [startDateValue, finishDateValue]);
 
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+
+  const [token, setToken] = useState(null);
+  
   useEffect(() => {
-    getContacts().then((result) => setContacts(result));
-  }, []);
+    if (localStorage.getItem("accessToken")) {
+      getContacts().then((result) => setContacts(result));
+    }
+    else {
+      setContacts(undefined);
+      if (isAuthenticated) {
+        setToken(getAccessTokenSilently());
+      }
+    }
+  }, [isAuthenticated, token]);
 
   return (
     <Container maxWidth="lg" sx={{ bgcolor: "white", minHeight: "100vh" }}>
