@@ -449,9 +449,9 @@ export default function CreateSuccessCaseScreen() {
              
               height: "4rem", 
               width: "8rem",
-              marginTop: "-12rem",
+              marginTop: "-16rem",
               marginLeft: "52.5rem",
-              marginBottom: "80px",
+              marginBottom: "10px",
               background:'#BFD52E',
                 '&:hover': {
                     backgroundColor: '#6A8B06',
@@ -462,10 +462,6 @@ export default function CreateSuccessCaseScreen() {
             Create
           </Button>
         </Grid>
-
-        
-
-
       </Grid>
     </Container>
   );

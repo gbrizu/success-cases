@@ -8,6 +8,9 @@ import ImprovementsEditionMode from '../pages/improvementsEditionMode';
 import TechnologiesEditionMode from '../pages/technologiesEditionMode';
 import ChallengesEditionMode from '../pages/challengesEditionMode';
 
+
+
+
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -64,9 +67,6 @@ export default function BasicTabs() {
               margin: '0 24px', 
               
             },
-            
-
-              
             }
             
           }>
