@@ -9,6 +9,8 @@ import LoginButton from "../components/button/LoginButton";
 import LogoutButton from "../components/button/LogoutButton";
 import { useAuth0 } from '@auth0/auth0-react';
 import Authentication from "../components/button/Authentication";
+import TopBar from "../components/TopBar";
+import UserProfile from "../components/UserProfile";
 
 function MainScreen() {
 
@@ -50,12 +52,14 @@ function MainScreen() {
   }, [successCasesList]);
 
   return (
-    <Container maxWidth='l' sx={{ bgcolor: '#ffffff'}}>
+    <Container maxWidth='xl'     sx={{ bgcolor: '#ffffff', padding: '0 !important'}}>
+     <TopBar  />
+     
+     
+     
       <div id='TITLE' style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
         <BasicTitle basictitle={"Success cases"} />
-        <div style={{marginTop: '1rem', marginRight: '1rem'}}>
-          <img src='/globant_logo.png' alt='' width='190' height='60'/>
-        </div>
+       
       </div>
 
       <Grid container spacing={2} xs={12}>
@@ -74,9 +78,6 @@ function MainScreen() {
         <Box sx={{}} >
           <DataTable rows={data} />
         </Box>
-      </div>
-      <div>
-       <Authentication></Authentication>
       </div>
     </Container>
   );
