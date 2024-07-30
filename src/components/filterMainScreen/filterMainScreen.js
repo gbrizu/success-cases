@@ -36,10 +36,6 @@ function FilterMainScreen() {
 
     const [contact, setContact] = useState(undefined);
 
-    const [offering, setOffering] = useState(undefined);
-
-    const [offeringSelected, setOfferingSelected] = useState(undefined);
-
     const [contactSelected, setContactSelected] = useState(undefined);
 
     const [dateFrom, setDateFrom] = useState();
@@ -98,15 +94,12 @@ function FilterMainScreen() {
             getContacts().then((result) => {
                 setContact(result);
             });
-            getOfferings().then((result) => {
-                setOffering(result);
-            });
+           
         } else {
             setClients(undefined);
             setProjectType(undefined);
             setIndustries(undefined);
             setContact(undefined);
-            setOffering(undefined);
             if (isAuthenticated) {
                 setToken(getAccessTokenSilently());
             }
