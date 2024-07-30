@@ -5,6 +5,8 @@ import Grid from "@mui/system/Unstable_Grid/Grid";
 import SelectListClients from "../selectListClients/selectListClients";
 import MultipleSelect from "../selectListIndustry";
 import SelectListProjectType from "../selectListProjectType/selectListProjectType";
+import { getClients, getIndustries, getProyectsTypes, getContacts, getSuccessCasesByFilter, getOfferings} from "../../services/successCaseServerCalls";
+import { useContext, useState, useEffect } from 'react';
 import { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { CaseViewContextProvider } from '../../context/casesView.context';
