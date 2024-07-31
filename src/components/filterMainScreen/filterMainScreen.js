@@ -11,7 +11,6 @@ import { Box, MenuItem, OutlinedInput, Select, FormControl, InputLabel, Typograp
 import CreateButton from '../button/createButton';
 import { siLK } from '@mui/material/locale';
 import SelectListGeneric from '../selectList/SelectListGeneric';
-import { getSuccessCasesByFilter } from '../../services/successCaseServerCalls';
 
 function FilterMainScreen() {
     const { setSuccessCasesList } = useContext(CaseViewContextProvider);
