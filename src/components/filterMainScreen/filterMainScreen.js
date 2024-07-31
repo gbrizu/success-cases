@@ -39,16 +39,16 @@ function FilterMainScreen() {
     };
 
     const handleSearch = async () => {
-            let successCasesFiltered = await getSuccessCasesByFilter({
-                startdate: dateFrom,
-                finishdate: dateTo,
-                industryid: industrySelected,
-                clientid: clientSelected,
-                projecttypeid: typeSelected,
-                contactid: contactSelected
-            });
-            setSuccessCasesList(successCasesFiltered);
-        } 
+        let successCasesFiltered = await getSuccessCasesByFilter({
+            startdate: dateFrom,
+            finishdate: dateTo,
+            industryid: industrySelected,
+            clientid: clientSelected,
+            projecttypeid: typeSelected,
+            contactid: contactSelected
+        });
+        setSuccessCasesList(successCasesFiltered);
+    }
 
     useEffect(() => {
         if (dateTo < dateFrom && dateTo !== null) {
@@ -58,7 +58,7 @@ function FilterMainScreen() {
     }, [dateTo]);
     useEffect(() => {
         if (dateTo < dateFrom && dateFrom !== null) {
-           alert("El valor Seleccionado es mayor a la fecha final");
+            alert("El valor Seleccionado es mayor a la fecha final");
             setDateFrom(null);
         }
     }, [dateFrom]);
@@ -86,7 +86,7 @@ function FilterMainScreen() {
         ]);
     }, [])
     return (
-        <div>
+        <div style={{ display: 'flex', display: 'flex', marginRight: '8rem' }}>
             <Grid
                 container
                 spacing={1}
@@ -94,7 +94,7 @@ function FilterMainScreen() {
             >
                 <Grid item xs={6} md={3.5}>
                     {(clients.length > 0) && (
-                        <SelectListGeneric options={clients} value={clientSelected} onChange={setClientSelected} label= "Client" />
+                        <SelectListGeneric options={clients} value={clientSelected} onChange={setClientSelected} label="Client" />
                     )}
                 </Grid>
 
@@ -106,17 +106,17 @@ function FilterMainScreen() {
                         customInput={
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
-                                sx={{
-                                    border: '2px #BFD52E',
-                                    '& .Mui-focused': {
-                                      borderColor: '#BFD52E',
-                                    },
-                                    '& .MuiOutlinedInput-root': {
-                                      '&.Mui-focused fieldset': {
-                                        borderColor: '#BFD52E',
-                                      },
-                                    },
-                                  }}
+                                    sx={{
+                                        border: '2px #BFD52E',
+                                        '& .Mui-focused': {
+                                            borderColor: '#BFD52E',
+                                        },
+                                        '& .MuiOutlinedInput-root': {
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#BFD52E',
+                                            },
+                                        },
+                                    }}
                                     label="From"
                                     value={dateFrom}
                                     onChange={(newValue) => setDateFrom(newValue)}
@@ -127,12 +127,21 @@ function FilterMainScreen() {
                 </Grid>
 
                 <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
-                    <SelectListGeneric options={type} value={typeSelected} onChange={setTypeSelected} label= "Project Type" />
+                    <SelectListGeneric options={type} value={typeSelected} onChange={setTypeSelected} label="Project Type" />
                 </Grid>
 
-                <Grid item xs={6} md={3.5}>
-                    <SelectListGeneric options={industries} value={industrySelected} onChange={setIndustrySelected} label= "Industry"/>
+                <Grid item xs={6} md={3.5} >
+                    <SelectListGeneric
+                        options={industries}
+                        value={industrySelected}
+                        onChange={setIndustrySelected}
+                        label="Industry"
+                        labelMarginRight='1rem'
+        
+                       
+                    />
                 </Grid>
+
 
                 <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
                     <FormInfoInput
@@ -183,16 +192,13 @@ function FilterMainScreen() {
                         }
                     />
                 </Grid>
-                <Grid item xs={12} display="flex" justifyContent="center" marginBottom="1rem" marginTop="-2.8rem" marginRight={"5rem"}>
+                <Grid item xs={12} display="flex" justifyContent="center" marginBottom="1rem" marginBlockEnd={"2rem"} marginRight={"5rem"}>
                     <Box>
                         <SearchButton handleClick={handleSearch} />
                     </Box>
-                </Grid>
+                
 
-                <Grid container
-                    alignItems={'center'}
-                    marginBottom={'1rem'}
-                    xs={12} md={3} xl={4}>
+               
                     <Box>
                         <CreateButton />
                     </Box>
@@ -202,11 +208,3 @@ function FilterMainScreen() {
     );
 }
 export default FilterMainScreen;
-
-
-
-
-
-
-
-
