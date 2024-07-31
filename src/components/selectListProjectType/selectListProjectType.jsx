@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { Theme, useTheme } from '@mui/material/styles';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Grid } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import { Typography } from '@mui/material';
+import * as React from "react";
+import { Theme, useTheme } from "@mui/material/styles";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
-
 const MenuProps = {
   PaperProps: {
     style: {
@@ -20,17 +20,25 @@ const MenuProps = {
   },
 };
 
-export default function MultipleSelect({ options, value, onChange}) {
+export default function SelectListProjectType({ options, value, onChange }) {
+  const theme = useTheme();
+  const [projectType, SetProjectType] = React.useState([]);
+
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
     onChange(value);
   };
+  
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <Typography variant="h6" style={{ marginRight: '4rem' }}>Industry</Typography>
+    <div
+      style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}
+    >
+      <Typography variant="h6" style={{ marginRight: "2rem" }}>
+        Project Type
+      </Typography>
       <FormControl 
         sx={{ m: 1, 
           width: 300, 
@@ -40,21 +48,20 @@ export default function MultipleSelect({ options, value, onChange}) {
             },
           },}}>
         <InputLabel 
-          id="demo-multiple-name-label"
+          id="demo-multiple-name-label" 
           sx={{ 
             '&.Mui-focused': { 
               color: '#6A8B06' 
-            }
-          }}
-        >
-        Name
+            } 
+          }}>
+          Type
         </InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           value={value}
           onChange={handleChange}
-          input={<OutlinedInput label="Name" />}
+          input={<OutlinedInput label="Type" />}
           MenuProps={MenuProps}
         >
           {options.map((item) => (
@@ -69,4 +76,5 @@ export default function MultipleSelect({ options, value, onChange}) {
       </FormControl>
     </div>
   );
-};
+}
+

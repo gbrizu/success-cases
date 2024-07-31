@@ -1,16 +1,15 @@
-import * as React from 'react';
-import { Theme, useTheme } from '@mui/material/styles';
+import React, { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Grid } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
+import './selectListClients.css'
 import { Typography } from '@mui/material';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
-
 const MenuProps = {
   PaperProps: {
     style: {
@@ -20,7 +19,9 @@ const MenuProps = {
   },
 };
 
-export default function MultipleSelect({ options, value, onChange}) {
+export default function SelectListClients({ options, value, onChange }) {
+  const theme = useTheme();
+  const [personName, setPersonName] = useState(value || []);
   const handleChange = (event) => {
     const {
       target: { value },
@@ -29,8 +30,10 @@ export default function MultipleSelect({ options, value, onChange}) {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-      <Typography variant="h6" style={{ marginRight: '4rem' }}>Industry</Typography>
+    <div style={{ display: "flex", alignItems: "center", marginBottom: '10px' }}>
+      <Typography variant="h6" style={{ marginRight: "5.3rem"}}>
+        Client
+      </Typography>
       <FormControl 
         sx={{ m: 1, 
           width: 300, 
@@ -47,7 +50,7 @@ export default function MultipleSelect({ options, value, onChange}) {
             }
           }}
         >
-        Name
+          Name
         </InputLabel>
         <Select
           labelId="demo-multiple-name-label"
@@ -69,4 +72,5 @@ export default function MultipleSelect({ options, value, onChange}) {
       </FormControl>
     </div>
   );
-};
+}
+

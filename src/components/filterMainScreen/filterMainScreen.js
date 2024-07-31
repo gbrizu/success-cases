@@ -11,6 +11,7 @@ import { Box, MenuItem, OutlinedInput, Select, FormControl, InputLabel, Typograp
 import CreateButton from '../button/createButton';
 import { siLK } from '@mui/material/locale';
 import SelectListGeneric from '../selectList/SelectListGeneric';
+import { getSuccessCasesByFilter } from '../../services/successCaseServerCalls';
 
 function FilterMainScreen() {
     const { setSuccessCasesList } = useContext(CaseViewContextProvider);
@@ -120,6 +121,16 @@ function FilterMainScreen() {
                                     label="From"
                                     value={dateFrom}
                                     onChange={(newValue) => setDateFrom(newValue)}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                          '&.Mui-focused fieldset': {
+                                            borderColor: '#BFD52E',
+                                          }
+                                        },
+                                      '& .MuiInputLabel-root.Mui-focused': {
+                                        color: '#6A8B06',
+                                      }
+                                    }}   
                                 />
                             </LocalizationProvider>
                         }
@@ -145,6 +156,16 @@ function FilterMainScreen() {
                                     label="To"
                                     value={dateTo}
                                     onChange={(newValue) => setDateTo(newValue)}
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                          '&.Mui-focused fieldset': {
+                                            borderColor: '#BFD52E',
+                                          }
+                                        },
+                                      '& .MuiInputLabel-root.Mui-focused': {
+                                        color: '#6A8B06',
+                                      }
+                                    }}   
                                 />
                             </LocalizationProvider>
                         }
@@ -158,8 +179,24 @@ function FilterMainScreen() {
                         style={{ display: 'box' }}
                         label={"Project contact"}
                         customInput={
-                            <FormControl sx={{ m: 1, width: 300 }}>
-                                <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+                            <FormControl 
+                                sx={{ m: 1, 
+                                    width: 300, 
+                                    '& .MuiOutlinedInput-root': {
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#BFD52E',
+                                    },
+                                    },}}>
+                                <InputLabel 
+                                id="demo-multiple-name-label"
+                                    sx={{ 
+                                    '&.Mui-focused': { 
+                                        color: '#6A8B06' 
+                                    }
+                                    }}
+                                >
+                                Name
+                                </InputLabel>
                                 <Select
                                     labelId="projectContactsAutoComplete-label"
                                     id="Name"
