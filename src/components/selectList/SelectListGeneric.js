@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, FormControl, Select, MenuItem } from '@mui/material';
+import { Typography, FormControl, InputLabel, Select, MenuItem, OutlinedInput } from '@mui/material';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -20,30 +20,36 @@ export default function SelectListGeneric({ label, value, onChange, options, mar
         const { target: { value } } = event;
         setSelectedValue(typeof value === "string" ? value.split(" ") : value);
         onChange && onChange(event);
-    };
+      };
 
     return (
         <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
-            <Typography variant="h6" style={{ marginRight: marginRight || "6rem" }}>
+            <Typography variant="h6" style={{ marginRight: marginRight}}>
                 {label}
             </Typography>
             <FormControl sx={{ m: 1, width: 300, '& .MuiOutlinedInput-root': {
-                '&.Mui-focused fieldset': { borderColor: '#BFD52E' },
-            }}}>
-                <Select
-                    labelId={`${label}-selectListLabelId`}
-                    id={`${label}-selectListId`}
-                    value={selectedValue}
-                    onChange={handleChange}
-                    MenuProps={MenuProps}
-                >
-                    {options.map((option) => (
-                        <MenuItem key={option.id} value={option.id}>
-                            {option.name}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-        </div>
-    );
+            '&.Mui-focused fieldset': { borderColor: '#BFD52E' },
+         }}}>
+         
+        {/* <InputLabel id={`${id}-label`} sx={{ '&.Mui-focused': { color: '#6A8B06' } }}>
+            {nameLabel}
+        </InputLabel> */}
+
+        <Select
+            labelId= {`${label}-selectListLabelId`}
+            id= {`${label}-selectListId`}
+            value= {selectedValue}
+            onChange= {handleChange}
+            MenuProps= {MenuProps}
+        >
+
+        {options.map((option) => (
+            <MenuItem key={option.id} value={option.id}>
+              {option.name}
+            </MenuItem>
+          ))}
+        </Select>
+        </FormControl>
+    </div>
+  );
 }
