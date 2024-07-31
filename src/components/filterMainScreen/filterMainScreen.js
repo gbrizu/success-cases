@@ -15,7 +15,6 @@ import SelectListGeneric from '../selectList/SelectListGeneric';
 function FilterMainScreen() {
     const { setSuccessCasesList } = useContext(CaseViewContextProvider);
     const [clients, setClients] = useState([]);
-
     const [clientSelected, setClientSelected] = useState(null);
     const [type, setProjectType] = useState([]);
     const [typeSelected, setTypeSelected] = useState(null);
@@ -25,10 +24,8 @@ function FilterMainScreen() {
     const [contactSelected, setContactSelected] = useState(null);
     const [dateFrom, setDateFrom] = useState();
     const [dateTo, setDateTo] = useState();
-
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
-
     const MenuProps = {
         PaperProps: {
             style: {
@@ -37,19 +34,17 @@ function FilterMainScreen() {
             },
         },
     };
-
     const handleSearch = async () => {
-            let successCasesFiltered = await getSuccessCasesByFilter({
-                startdate: dateFrom,
-                finishdate: dateTo,
-                industryid: industrySelected,
-                clientid: clientSelected,
-                projecttypeid: typeSelected,
-                contactid: contactSelected
-            });
-            setSuccessCasesList(successCasesFiltered);
-        } 
-
+        let successCasesFiltered = await getSuccessCasesByFilter({
+            startdate: dateFrom,
+            finishdate: dateTo,
+            industryid: industrySelected,
+            clientid: clientSelected,
+            projecttypeid: typeSelected,
+            contactid: contactSelected
+        });
+        setSuccessCasesList(successCasesFiltered);
+    }
     useEffect(() => {
         if (dateTo < dateFrom && dateTo !== null) {
             alert("El valor Seleccionado es menor a la fecha inicial");
@@ -58,7 +53,7 @@ function FilterMainScreen() {
     }, [dateTo]);
     useEffect(() => {
         if (dateTo < dateFrom && dateFrom !== null) {
-           alert("El valor Seleccionado es mayor a la fecha final");
+            alert("El valor Seleccionado es mayor a la fecha final");
             setDateFrom(null);
         }
     }, [dateFrom]);
@@ -94,7 +89,7 @@ function FilterMainScreen() {
             >
                 <Grid item xs={6} md={3.5}>
                     {(clients.length > 0) && (
-                        <SelectListGeneric options={clients} value={clientSelected} onChange={setClientSelected} label= "Client" />
+                        <SelectListGeneric options={clients} value={clientSelected} onChange={setClientSelected} label= "Client" marginRight="1.3rem" />
                     )}
                 </Grid>
 
@@ -127,7 +122,7 @@ function FilterMainScreen() {
                 </Grid>
 
                 <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
-                    <SelectListGeneric options={type} value={typeSelected} onChange={setTypeSelected} label= "Project Type" />
+                    <SelectListGeneric options={type} value={typeSelected} onChange={setTypeSelected} label= "Project Type" marginRight="2.3rem"/>
                 </Grid>
 
                 <Grid item xs={6} md={3.5}>
@@ -183,19 +178,19 @@ function FilterMainScreen() {
                         }
                     />
                 </Grid>
-                <Grid item xs={12} display="flex" justifyContent="center" marginBottom="1rem" marginTop="-2.8rem" marginRight={"5rem"}>
+
+                <Grid item xs={8} display="flex" justifyContent="center" marginBottom="1rem" marginTop="-2.8rem" marginLeft="8rem">
                     <Box>
                         <SearchButton handleClick={handleSearch} />
                     </Box>
-                </Grid>
-
-                <Grid container
-                    alignItems={'center'}
-                    marginBottom={'1rem'}
-                    xs={12} md={3} xl={4}>
-                    <Box>
-                        <CreateButton />
-                    </Box>
+                        <Grid container
+                        alignItems={'center'}
+                        marginBottom={'1rem'}
+                        xs={8} md={1} xl={4}>
+                        <Box>
+                            <CreateButton />
+                        </Box>
+                    </Grid>
                 </Grid>
             </Grid>
         </div>
