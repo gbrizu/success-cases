@@ -31,8 +31,24 @@ export default function MultipleSelect({ options, value, onChange}) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
       <Typography variant="h6" style={{ marginRight: '4rem' }}>Industry</Typography>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+      <FormControl 
+        sx={{ m: 1, 
+          width: 300, 
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: '#BFD52E',
+            },
+          },}}>
+        <InputLabel 
+          id="demo-multiple-name-label"
+          sx={{ 
+            '&.Mui-focused': { 
+              color: '#6A8B06' 
+            }
+          }}
+        >
+        Name
+        </InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"

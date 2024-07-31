@@ -39,8 +39,23 @@ export default function SelectListProjectType({ options, value, onChange }) {
       <Typography variant="h6" style={{ marginRight: "2rem" }}>
         Project Type
       </Typography>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Type</InputLabel>
+      <FormControl 
+        sx={{ m: 1, 
+          width: 300, 
+          '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+              borderColor: '#BFD52E',
+            },
+          },}}>
+        <InputLabel 
+          id="demo-multiple-name-label" 
+          sx={{ 
+            '&.Mui-focused': { 
+              color: '#6A8B06' 
+            } 
+          }}>
+          Type
+        </InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"

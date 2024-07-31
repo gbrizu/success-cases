@@ -12,6 +12,10 @@ export default function CreateButton() {
           height: '3rem',
           marginTop: '2rem',
           marginLeft: '2rem',
+          background:'#BFD52E',
+          '&:hover': { 
+            backgroundColor: '#6A8B06',
+          }
         }}
       >
         Create new Success Case
