@@ -270,17 +270,28 @@ export default function CreateSuccessCaseScreen() {
               </Grid>
 
               <Grid item xs={12} sx={{ marginBottom: '0.01rem' }}>
-                <SelectListGeneric options={offerings} value= {selectedOffering} onChange={handleOfferingChange} label= "Offering" />
+                <SelectListGeneric 
+                options={offerings} 
+                value= {selectedOffering} 
+                onChange={handleOfferingChange} 
+                label= "Offering" 
+                marginRight="4.8rem"
+                />
               </Grid>
 
               <Grid item xs={12} sx={{ marginBottom: '0.5rem' }}>
-               <SelectListGeneric options={clients} value= {selectedClient} onChange={handleClientChange} label= "Clients" />
+               <SelectListGeneric 
+                options={clients} 
+                value= {selectedClient} 
+                onChange={handleClientChange} 
+                label= "Clients" 
+                marginRight="5.4rem"/>
               </Grid>
 
 
               <Grid item xs={12} sx={{ marginBottom: '0.5rem' }}>
                 <FormInfoInput
-                  marginRight={"7rem"}
+                  marginRight={"7.1rem"}
                   customStyleClass={"form-margin"}
                   label={"Date"}
                   customInput={
@@ -334,11 +345,21 @@ export default function CreateSuccessCaseScreen() {
 
 
               <Grid item xs={12} sx={{ marginBottom: '0.2rem' }}>
-                <SelectListGeneric options={projectType} value= {selectedProjectType} onChange={handleProjectTypeChange} label= "Project Type" />
+                <SelectListGeneric 
+                  options={projectType} 
+                  value= {selectedProjectType} 
+                  onChange={handleProjectTypeChange} 
+                  label= "Project Type"
+                  marginRight="2.1rem" />
               </Grid>
 
               <Grid item xs={12} sx={{ marginBottom: '0.2rem' }}>
-                <SelectListGeneric options={industry} value= {selectedIndustry} onChange={handleIndustryChange} label= "Industry" />
+                <SelectListGeneric 
+                  options={industry} 
+                  value= {selectedIndustry} 
+                  onChange={handleIndustryChange} 
+                  label= "Industry" 
+                  marginRight="4.6rem"/>
               </Grid>
 
               <Grid item xs={12} sx={{ marginBottom: '0.2rem' }}>

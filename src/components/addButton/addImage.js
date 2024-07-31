@@ -85,16 +85,9 @@ export default function AddImage() {
                     tabIndex={- 1}
                     startIcon={< CloudUploadIcon />}
                 >
-                    {
-                        media ? 'Cambiar imagen' :
-                            screen === 'successCase' ? 'Agregar imagen de caso de éxito' :
-                                screen === 'challenge' ? 'Agregar imagen de reto' :
-                                    screen === 'improvement' ? 'Agregar imagen de mejora' :
-                                        screen === 'technologies' ? 'Agregar imagen de tecnología' : ''
-                    }
-                    < VisuallyHiddenInput
+                    Upload Image
+                    <VisuallyHiddenInput
                         type="file"
-                        accept="image/*"
                         onChange={setFile}
                     />
                 </Button>

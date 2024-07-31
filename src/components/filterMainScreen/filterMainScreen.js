@@ -15,6 +15,7 @@ import SelectListGeneric from '../selectList/SelectListGeneric';
 function FilterMainScreen() {
     const { setSuccessCasesList } = useContext(CaseViewContextProvider);
     const [clients, setClients] = useState([]);
+
     const [clientSelected, setClientSelected] = useState(null);
     const [type, setProjectType] = useState([]);
     const [typeSelected, setTypeSelected] = useState(null);
@@ -24,8 +25,10 @@ function FilterMainScreen() {
     const [contactSelected, setContactSelected] = useState(null);
     const [dateFrom, setDateFrom] = useState();
     const [dateTo, setDateTo] = useState();
+
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
+
     const MenuProps = {
         PaperProps: {
             style: {
@@ -34,17 +37,19 @@ function FilterMainScreen() {
             },
         },
     };
+
     const handleSearch = async () => {
-        let successCasesFiltered = await getSuccessCasesByFilter({
-            startdate: dateFrom,
-            finishdate: dateTo,
-            industryid: industrySelected,
-            clientid: clientSelected,
-            projecttypeid: typeSelected,
-            contactid: contactSelected
-        });
-        setSuccessCasesList(successCasesFiltered);
-    }
+            let successCasesFiltered = await getSuccessCasesByFilter({
+                startdate: dateFrom,
+                finishdate: dateTo,
+                industryid: industrySelected,
+                clientid: clientSelected,
+                projecttypeid: typeSelected,
+                contactid: contactSelected
+            });
+            setSuccessCasesList(successCasesFiltered);
+        } 
+
     useEffect(() => {
         if (dateTo < dateFrom && dateTo !== null) {
             alert("El valor Seleccionado es menor a la fecha inicial");
@@ -53,7 +58,7 @@ function FilterMainScreen() {
     }, [dateTo]);
     useEffect(() => {
         if (dateTo < dateFrom && dateFrom !== null) {
-            alert("El valor Seleccionado es mayor a la fecha final");
+           alert("El valor Seleccionado es mayor a la fecha final");
             setDateFrom(null);
         }
     }, [dateFrom]);
@@ -178,12 +183,17 @@ function FilterMainScreen() {
                         }
                     />
                 </Grid>
-
                 <Grid item xs={12} display="flex" justifyContent="center" marginBottom="1rem" marginTop="-2.8rem" marginRight={"5rem"}>
                     <Box>
                         <SearchButton handleClick={handleSearch} />
                     </Box>
-                    <Box sx={{ ml: 6 }}>
+                </Grid>
+
+                <Grid container
+                    alignItems={'center'}
+                    marginBottom={'1rem'}
+                    xs={12} md={3} xl={4}>
+                    <Box>
                         <CreateButton />
                     </Box>
                 </Grid>
