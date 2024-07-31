@@ -57,22 +57,6 @@ export default function OfferingSelectList({ value, onChange, options = [] }) {
           onChange={onChange}
           input={<OutlinedInput label="Select Offering" />}
           MenuProps={MenuProps}
-          sx={{
-            '.MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: '#BFD52E',
-              },
-              '&:hover fieldset': {
-                borderColor: '#6a8b06',
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: '#6a8b06',
-              },
-            },
-            '.MuiSvgIcon-root': {
-              color: '#BFD52E',
-            },
-          }}
         >
           {options?.map((option) => (
             <MenuItem
