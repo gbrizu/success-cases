@@ -12,8 +12,8 @@ import CaseViewContext from "./context/casesView.context";
 import CaseViewProcessScreen from "./pages/caseViewProcessScreen";
 import ErrorScreen from "./pages/errorScreen";
 import { Auth0Provider } from "@auth0/auth0-react";
-import ProtectedRoute from "./components/button/ProtectedRoute";
 import ChatbotScreen from "./pages/chatbotScreen";
+import ProtectRoute from "./components/Authentication/ProtectRoute";
 export const UserContext = createContext();
 
 function App() {
@@ -31,17 +31,17 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={<ProtectedRoute component={MainScreen} />}
+                element={<ProtectRoute component={MainScreen} />} 
               />
               <Route
                 path="NewSuccessCases"
-                element={<ProtectedRoute component={<SuccessCaseProcessCreationScreen />} />}
+                element={<ProtectRoute component={<SuccessCaseProcessCreationScreen />} />}
               />
               <Route
                 path="succesCase/:id"
-                element={<ProtectedRoute component={<CaseViewProcessScreen />} />}
+                element={<ProtectRoute component={<CaseViewProcessScreen />} />}
               />
-              <Route path="chatbot" element={<ProtectedRoute component={<ChatbotScreen />} />} />
+              <Route path="chatbot" element={<ProtectRoute component={<ChatbotScreen />} />} />
               <Route path='*' element={<ErrorScreen />} />
             </Routes>
           </BrowserRouter>

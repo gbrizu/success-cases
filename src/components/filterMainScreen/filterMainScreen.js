@@ -45,6 +45,7 @@ function FilterMainScreen() {
         });
         setSuccessCasesList(successCasesFiltered);
     }
+    
     useEffect(() => {
         if (dateTo < dateFrom && dateTo !== null) {
             alert("El valor Seleccionado es menor a la fecha inicial");
@@ -81,7 +82,7 @@ function FilterMainScreen() {
         ]);
     }, [])
     return (
-        <div>
+        <div style={{ display: 'flex', display: 'flex', marginRight: '8rem' }}>
             <Grid
                 container
                 spacing={1}
@@ -89,7 +90,7 @@ function FilterMainScreen() {
             >
                 <Grid item xs={6} md={3.5}>
                     {(clients.length > 0) && (
-                        <SelectListGeneric options={clients} value={clientSelected} onChange={setClientSelected} label= "Client" marginRight="1.3rem" />
+                        <SelectListGeneric options={clients} value={clientSelected} onChange={setClientSelected} label="Client" />
                     )}
                 </Grid>
 
@@ -101,17 +102,17 @@ function FilterMainScreen() {
                         customInput={
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
-                                sx={{
-                                    border: '2px #BFD52E',
-                                    '& .Mui-focused': {
-                                      borderColor: '#BFD52E',
-                                    },
-                                    '& .MuiOutlinedInput-root': {
-                                      '&.Mui-focused fieldset': {
-                                        borderColor: '#BFD52E',
-                                      },
-                                    },
-                                  }}
+                                    sx={{
+                                        border: '2px #BFD52E',
+                                        '& .Mui-focused': {
+                                            borderColor: '#BFD52E',
+                                        },
+                                        '& .MuiOutlinedInput-root': {
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#BFD52E',
+                                            },
+                                        },
+                                    }}
                                     label="From"
                                     value={dateFrom}
                                     onChange={(newValue) => setDateFrom(newValue)}
@@ -122,12 +123,21 @@ function FilterMainScreen() {
                 </Grid>
 
                 <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
-                    <SelectListGeneric options={type} value={typeSelected} onChange={setTypeSelected} label= "Project Type" marginRight="2.3rem"/>
+                    <SelectListGeneric options={type} value={typeSelected} onChange={setTypeSelected} label="Project Type" />
                 </Grid>
 
-                <Grid item xs={6} md={3.5}>
-                    <SelectListGeneric options={industries} value={industrySelected} onChange={setIndustrySelected} label= "Industry"/>
+                <Grid item xs={6} md={3.5} >
+                    <SelectListGeneric
+                        options={industries}
+                        value={industrySelected}
+                        onChange={setIndustrySelected}
+                        label="Industry"
+                        labelMarginRight='1rem'
+        
+                       
+                    />
                 </Grid>
+
 
                 <Grid item xs={6} md={3.5} style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}>
                     <FormInfoInput
@@ -178,30 +188,19 @@ function FilterMainScreen() {
                         }
                     />
                 </Grid>
-
-                <Grid item xs={8} display="flex" justifyContent="center" marginBottom="1rem" marginTop="-2.8rem" marginLeft="8rem">
+                <Grid item xs={12} display="flex" justifyContent="center" marginBottom="1rem" marginBlockEnd={"2rem"} marginRight={"5rem"}>
+                  
                     <Box>
                         <SearchButton handleClick={handleSearch} />
                     </Box>
-                        <Grid container
-                        alignItems={'center'}
-                        marginBottom={'1rem'}
-                        xs={8} md={1} xl={4}>
-                        <Box>
-                            <CreateButton />
-                        </Box>
-                    </Grid>
+
+                     <Box>
+                        <CreateButton />
+                    </Box>
+
                 </Grid>
             </Grid>
         </div>
     );
 }
 export default FilterMainScreen;
-
-
-
-
-
-
-
-
