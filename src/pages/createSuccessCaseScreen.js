@@ -244,7 +244,7 @@ export default function CreateSuccessCaseScreen() {
         <Grid container spacing={25} >
           <Grid item xs={6}>
             <Grid container spacing={2} direction="column" sx={{ marginTop: '-5rem' }}>
-              <Grid item xs={12} sx={{ marginBottom: '0.5rem' }}>
+              <Grid item xs={12} sx={{ marginBottom: '0.9rem' }}>
                 <FormInfoInput
                   marginRight={"7.4rem"}
                   marginLeft={"-1rem"}
@@ -279,7 +279,7 @@ export default function CreateSuccessCaseScreen() {
                 />
               </Grid>
 
-              <Grid item xs={12} sx={{ marginBottom: '0.5rem' }}>
+              <Grid item xs={12} sx={{ marginBottom: '0.1rem' }}>
                <SelectListGeneric 
                 options={clients} 
                 value= {selectedClient} 
@@ -467,10 +467,6 @@ export default function CreateSuccessCaseScreen() {
             Create
           </Button>
         </Grid>
-
-
-
-
       </Grid>
     </Container>
   );
