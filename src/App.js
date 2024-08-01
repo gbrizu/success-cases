@@ -41,9 +41,9 @@ function App() {
                 path="succesCase/:id"
                 element={<ProtectRoute component={<CaseViewProcessScreen />} />}
               />
-              <Route path="chatbot" element={<ProtectRoute component={<ChatbotScreen />} />} />
+              <Route path="chatbot" element={<ChatbotScreen />} />
               <Route path='*' element={<ErrorScreen />} />
-            </Routes>
+            </Routes> 
           </BrowserRouter>
         </CaseViewContext>
       </ProcessContext>
