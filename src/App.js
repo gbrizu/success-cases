@@ -43,7 +43,7 @@ function App() {
               />
               <Route path="chatbot" element={<ChatbotScreen />} />
               <Route path='*' element={<ErrorScreen />} />
-            </Routes>
+            </Routes> 
           </BrowserRouter>
         </CaseViewContext>
       </ProcessContext>
