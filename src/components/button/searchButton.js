@@ -11,6 +11,8 @@ export default function SearchButton({handleClick}) {
                 marginTop: '2rem',
                 marginLeft: '2rem',
                 minWidth: '17rem',
+                backgroundColor:'#bfd732',
+                color: 'black',
             }}
             onClick={handleClick}
         >

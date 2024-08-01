@@ -5,6 +5,8 @@ import FilterMainScreen from "../components/filterMainScreen/filterMainScreen";
 import BasicTitle from "../components/basicTitle/basicTitle";
 import { getSuccessCase } from "../services/successCaseServerCalls";
 import { CaseViewContextProvider } from "../context/casesView.context";
+import { useAuth0 } from '@auth0/auth0-react';
+import NavegateBar from "../components/Authentication/NavegateBar";
 
 function MainScreen() {
 
@@ -13,11 +15,21 @@ function MainScreen() {
     CaseViewContextProvider
   );
 
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [token, setToken] = useState(undefined);
+
   useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
     getSuccessCase().then(result => {
-      setSuccessCasesList(result);
-    });
-  }, [])
+      setSuccessCasesList(result)
+    })}
+    else {
+      setSuccessCasesList([])
+      if (isAuthenticated){
+        setToken(getAccessTokenSilently())
+      }
+    }
+  }, [isAuthenticated, token]);
 
   useEffect(() => {
     if (successCasesList && successCasesList.length > 0) {
@@ -36,12 +48,14 @@ function MainScreen() {
   }, [successCasesList]);
 
   return (
-    <Container maxWidth='l' sx={{ bgcolor: '#ffffff'}}>
-      <div id='TITLE' style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+    <Container maxWidth='xl'     sx={{ bgcolor: '#ffffff', padding: '0 !important'}}>
+     <NavegateBar />
+     
+     
+     
+      <div id='TITLE' style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between',marginLeft:'2.5rem'}}>
         <BasicTitle basictitle={"Success cases"} />
-        <div style={{marginTop: '1rem', marginRight: '1rem'}}>
-          <img src='/globant_logo.png' alt='' width='190' height='60'/>
-        </div>
+       
       </div>
 
       <Grid container spacing={2} xs={12}>
